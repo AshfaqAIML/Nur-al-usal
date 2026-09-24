@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { usePlatform, useT } from "@/lib/store";
 import { apiGet, parseJson, type BankCluster, type BankDetailResponse, type BankListItem, type BankListResponse } from "@/lib/api";
+import { useLoc, type Loc } from "@/lib/use-loc";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { EmptyState, NicheMarker, SectionHeading } from "@/components/platform/architectural";
 import { DetailBreadcrumb } from "@/components/platform/detail-chrome";
@@ -43,6 +44,7 @@ interface BankSourceJson {
 }
 
 export function BankView({ slug }: { slug?: string | null }) {
+  if (slug?.startsWith("cluster/")) return <BankClusterPage clusterSlug={slug.slice("cluster/".length)} />;
   return slug ? <BankDetail slug={slug} /> : <BankLanding />;
 }
 
@@ -51,6 +53,7 @@ export function BankView({ slug }: { slug?: string | null }) {
 function BankLanding() {
   const t = useT();
   const { setView, lang } = usePlatform();
+  const loc = useLoc();
   useDocTitle(t("bankTitle"));
 
   const [data, setData] = useState<BankListResponse | null>(null);
@@ -182,7 +185,7 @@ function BankLanding() {
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {data.questions.map((item) => (
-              <BankCard key={item.id} item={item} catName={catName(item.category)} />
+              <BankCard key={item.id} item={item} catName={catName(item.category)} loc={loc} />
             ))}
           </div>
           {data.pages > 1 && (
@@ -201,35 +204,162 @@ function BankLanding() {
 
       {/* Clusters */}
       {clusters && clusters.length > 0 && !activeFilters && (
-        <section className="mt-10">
+        <section className="mt-10" aria-labelledby="bank-clusters">
           <SectionHeading title={t("bankClustersTitle")} />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {clusters.map((c) => (
-              <Card key={c.id} className="group overflow-hidden transition-shadow hover:shadow-subtle">
-                <CardContent className="p-4">
-                  <button
-                    className="w-full text-start"
-                    onClick={() => { setQ(c.titleEn); setPage(1); window.scrollTo({ top: 0 }); }}
-                    aria-label={c.titleEn}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-scholarly text-sm font-semibold group-hover:text-emerald-800 dark:group-hover:text-emerald-300">{c.titleEn}</h3>
-                      <Badge variant="outline" className="shrink-0 text-[10px] tabular-nums">{c.count}</Badge>
-                    </div>
-                    {c.descriptionEn && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{c.descriptionEn}</p>}
-                    <ul className="mt-2 space-y-1">
-                      {c.questions.slice(0, 3).map((qq) => (
-                        <li key={qq.slug} className="line-clamp-1 text-[11px] text-muted-foreground">· {qq.text}</li>
-                      ))}
-                      {c.count > 3 && <li className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400">+{c.count - 3} {t("bankMoreInCluster")}</li>}
-                    </ul>
-                  </button>
-                </CardContent>
-              </Card>
-            ))}
+            {clusters.map((c) => {
+              const cTitle = loc.title(c.titleEn, c.titleUr, c.titleAr);
+              return (
+                <Card key={c.id} className="group overflow-hidden transition-shadow hover:shadow-subtle">
+                  <CardContent className="p-4">
+                    <button
+                      className="w-full text-start"
+                      onClick={() => { setView("bank", `cluster/${c.slug}`); window.scrollTo({ top: 0 }); }}
+                      aria-label={cTitle}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 dir="auto" className="font-scholarly text-sm font-semibold group-hover:text-emerald-800 dark:group-hover:text-emerald-300">{cTitle}</h3>
+                        <Badge variant="outline" className="shrink-0 text-[10px] tabular-nums">{c.count}</Badge>
+                      </div>
+                      {c.descriptionEn && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{c.descriptionEn}</p>}
+                      <ul className="mt-2 space-y-1">
+                        {c.questions.slice(0, 3).map((qq) => (
+                          <li key={qq.slug} dir="auto" className="line-clamp-1 text-[11px] text-muted-foreground">· {loc.text(qq)}</li>
+                        ))}
+                        {c.count > 3 && <li className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400">+{c.count - 3} {t("bankMoreInCluster")}</li>}
+                      </ul>
+                    </button>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </section>
       )}
+    </div>
+  );
+}
+
+/* ══════════════════════════ CLUSTER PAGE ══════════════════════════ */
+
+function BankClusterPage({ clusterSlug }: { clusterSlug: string }) {
+  const t = useT();
+  const { setView } = usePlatform();
+  const loc = useLoc();
+  const [clusters, setClusters] = useState<BankCluster[] | null>(null);
+  const [notFound, setNotFound] = useState(false);
+
+  const [prevSlug, setPrevSlug] = useState(clusterSlug);
+  if (prevSlug !== clusterSlug) {
+    // React-recommended derived-state reset when the route slug changes.
+    setPrevSlug(clusterSlug);
+    setClusters(null);
+    setNotFound(false);
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+    apiGet<{ clusters: BankCluster[] }>("/api/bank/clusters")
+      .then((d) => {
+        if (cancelled) return;
+        setClusters(d.clusters);
+        if (!d.clusters.some((c) => c.slug === clusterSlug)) setNotFound(true);
+      })
+      .catch(() => { if (!cancelled) setNotFound(true); });
+    return () => { cancelled = true; };
+  }, [clusterSlug]);
+
+  const idx = clusters?.findIndex((c) => c.slug === clusterSlug) ?? -1;
+  const cluster = idx >= 0 ? clusters![idx] : null;
+  const prev = idx > 0 ? clusters![idx - 1] : null;
+  const next = idx >= 0 && clusters && idx < clusters.length - 1 ? clusters![idx + 1] : null;
+  const cTitle = cluster ? loc.title(cluster.titleEn, cluster.titleUr, cluster.titleAr) : "";
+  useDocTitle(cluster ? cTitle : null);
+
+  if (notFound) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16">
+        <EmptyState title={t("bankNotFound")} hint={t("bankNotFoundHint")}>
+          <Button size="sm" variant="outline" onClick={() => setView("bank")}>{t("bankBackToLibrary")}</Button>
+        </EmptyState>
+      </div>
+    );
+  }
+  if (!cluster) {
+    return (
+      <div className="mx-auto max-w-4xl space-y-4 px-4 py-8">
+        <Skeleton className="h-8 w-64" />
+        <Skeleton className="h-40 rounded-xl" />
+        <Skeleton className="h-64 rounded-xl" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+      <DetailBreadcrumb sectionLabel={t("bankTitle")} sectionView="bank" current={cTitle} />
+
+      {/* Cluster header */}
+      <Card className="arch-top overflow-hidden border">
+        <div className="pattern-girih border-b bg-card px-5 pb-6 pt-7 sm:px-7">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-800 dark:text-emerald-300">{t("bankClustersTitle")}</p>
+          <h1 dir="auto" className="mt-1.5 font-scholarly text-2xl font-bold tracking-tight sm:text-3xl">{cTitle}</h1>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <Badge variant="outline" className="text-[10px] tabular-nums">{t("bankStatQuestions", { n: cluster.count })}</Badge>
+            <span className="text-[11px] text-muted-foreground">{t("bankClusterOrderedHint")}</span>
+          </div>
+          {cluster.descriptionEn && (
+            <p dir="auto" className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{cluster.descriptionEn}</p>
+          )}
+        </div>
+      </Card>
+
+      {/* Ordered member questions */}
+      <ol className="mt-6 space-y-2.5">
+        {cluster.questions.map((qq, i) => (
+          <li key={qq.slug}>
+            <button
+              onClick={() => qq.slug && setView("bank", qq.slug)}
+              className="group flex w-full items-start gap-3 rounded-xl border bg-card p-4 text-start transition-all hover:-translate-y-0.5 hover:border-emerald-300/60 hover:shadow-subtle dark:hover:border-emerald-800"
+              aria-label={loc.text(qq)}
+            >
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-amber-600/40 bg-secondary text-[11px] font-semibold tabular-nums text-amber-800 dark:text-amber-300" aria-hidden>
+                {i + 1}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span dir="auto" className="line-clamp-2 block font-scholarly text-[14.5px] font-semibold leading-snug group-hover:text-emerald-800 dark:group-hover:text-emerald-300">
+                  {loc.text(qq)}
+                </span>
+                {qq.difficulty && (
+                  <span className="mt-1.5 inline-block">
+                    <Badge variant="outline" className={cn("text-[10px]", DIFFICULTY_STYLE[qq.difficulty] ?? "")}>
+                      {t(DIFFICULTY_KEY[qq.difficulty] ?? qq.difficulty)}
+                    </Badge>
+                  </span>
+                )}
+              </span>
+              <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground rtl-flip transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" aria-hidden />
+            </button>
+          </li>
+        ))}
+      </ol>
+
+      {/* Prev / next cluster navigation */}
+      <nav className="mt-8 flex flex-wrap items-center justify-between gap-2 border-t pt-4" aria-label={t("bankClustersTitle")}>
+        {prev ? (
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setView("bank", `cluster/${prev.slug}`)}>
+            <ChevronLeft className="h-4 w-4 rtl-flip" aria-hidden />
+            <span className="max-w-[180px] truncate">{loc.title(prev.titleEn, prev.titleUr, prev.titleAr)}</span>
+          </Button>
+        ) : <span />}
+        <Button variant="ghost" size="sm" onClick={() => setView("bank")}>{t("bankBackToLibrary")}</Button>
+        {next ? (
+          <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setView("bank", `cluster/${next.slug}`)}>
+            <span className="max-w-[180px] truncate">{loc.title(next.titleEn, next.titleUr, next.titleAr)}</span>
+            <ChevronRight className="h-4 w-4 rtl-flip" aria-hidden />
+          </Button>
+        ) : <span />}
+      </nav>
     </div>
   );
 }
@@ -261,23 +391,24 @@ function FilterSelect({ value, onChange, placeholder, options }: {
 
 /* ══════════════════════════ CARD ══════════════════════════ */
 
-function BankCard({ item, catName }: { item: BankListItem; catName: string }) {
+function BankCard({ item, catName, loc }: { item: BankListItem; catName: string; loc: Loc }) {
   const t = useT();
   const { setView } = usePlatform();
   const TypeIcon = TYPE_ICON[item.questionType ?? ""] ?? BookOpen;
+  const qText = loc.text(item);
   return (
     <Card className="group relative h-full overflow-hidden pt-5 transition-all hover:-translate-y-0.5 hover:shadow-subtle">
       <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-700/70 via-amber-600/50 to-emerald-700/70" aria-hidden />
       <CardContent className="flex h-full flex-col p-4 pt-1">
-        <button onClick={() => setView("bank", item.slug)} className="flex-1 text-start" aria-label={item.text}>
+        <button onClick={() => setView("bank", item.slug)} className="flex-1 text-start" aria-label={qText}>
           <div className="flex items-start gap-2">
             <NicheMarker className="mt-0.5 shrink-0" />
             <h3 dir="auto" className="line-clamp-3 font-scholarly text-[15px] font-semibold leading-snug group-hover:text-emerald-800 dark:group-hover:text-emerald-300">
-              {item.text}
+              {qText}
             </h3>
           </div>
-          {item.shortAnswer && (
-            <p dir="auto" className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{item.shortAnswer}</p>
+          {loc.short(item) && (
+            <p dir="auto" className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{loc.short(item)}</p>
           )}
         </button>
         <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t pt-2.5">
@@ -308,10 +439,11 @@ function BankCard({ item, catName }: { item: BankListItem; catName: string }) {
 function BankDetail({ slug }: { slug: string }) {
   const t = useT();
   const { setView } = usePlatform();
+  const loc = useLoc();
   const [data, setData] = useState<BankDetailResponse | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [citeOpen, setCiteOpen] = useState<number | null>(null);
-  useDocTitle(data ? data.question.text : null);
+  useDocTitle(data ? loc.text(data.question) : null);
 
   const [prevSlug, setPrevSlug] = useState(slug);
   if (prevSlug !== slug) {
@@ -357,9 +489,9 @@ function BankDetail({ slug }: { slug: string }) {
   return (
     <article className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
       <DetailBreadcrumb
-        sectionLabel={question.category ? `${question.category.nameEn}` : t("bankTitle")}
+        sectionLabel={question.category ? loc.title(question.category.nameEn, question.category.nameUr, question.category.nameAr) : t("bankTitle")}
         sectionView="bank"
-        current={question.text}
+        current={loc.text(question)}
       />
 
       {/* Question header */}
@@ -368,7 +500,7 @@ function BankDetail({ slug }: { slug: string }) {
           <div className="flex items-start gap-3">
             <NicheMarker className="mt-1.5 hidden shrink-0 sm:block" />
             <div className="min-w-0">
-              <h1 dir="auto" className="font-scholarly text-2xl font-bold leading-snug tracking-tight sm:text-[1.7rem]">{question.text}</h1>
+              <h1 dir="auto" className="font-scholarly text-2xl font-bold leading-snug tracking-tight sm:text-[1.7rem]">{loc.text(question)}</h1>
               <div className="mt-3 flex flex-wrap items-center gap-1.5">
                 {question.difficulty && (
                   <Badge variant="outline" className={cn("text-[10px]", DIFFICULTY_STYLE[question.difficulty])}>
@@ -383,7 +515,7 @@ function BankDetail({ slug }: { slug: string }) {
                   </Badge>
                 )}
                 {question.category && (
-                  <Badge variant="outline" className="text-[10px] text-muted-foreground">{question.category.nameEn}</Badge>
+                  <Badge variant="outline" className="text-[10px] text-muted-foreground">{loc.title(question.category.nameEn, question.category.nameUr, question.category.nameAr)}</Badge>
                 )}
                 {question.isDisputed && (
                   <Badge variant="outline" className="gap-1 text-[10px] text-yellow-800 dark:text-yellow-300"><Scale className="h-3 w-3" aria-hidden />{t("bankDisputedShort")}</Badge>
@@ -415,7 +547,7 @@ function BankDetail({ slug }: { slug: string }) {
           {/* Direct answer */}
           <section className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-5 dark:border-emerald-900 dark:bg-emerald-950/30" aria-labelledby="bank-direct">
             <h2 id="bank-direct" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-800 dark:text-emerald-300">{t("bankDirectAnswer")}</h2>
-            <p dir="auto" className="mt-2 text-[15px] font-medium leading-relaxed">{answer.directAnswer}</p>
+            <p dir="auto" className="mt-2 text-[15px] font-medium leading-relaxed">{loc.short(question) ?? answer.directAnswer}</p>
           </section>
 
           {/* Hanafi position */}
@@ -542,8 +674,8 @@ function BankDetail({ slug }: { slug: string }) {
 
           {/* Footer actions */}
           <div className="flex flex-wrap items-center gap-2 border-t pt-4">
-            <BookmarkButton kind="question" keyId={question.id} title={question.text} withLabel />
-            <ShareBar title={question.text} section={t("bankTitle")} sourceRef={question.category?.nameEn ?? ""} compact pathOverride={`bank/${question.slug}`} />
+            <BookmarkButton kind="question" keyId={question.id} title={loc.text(question)} withLabel />
+            <ShareBar title={loc.text(question)} section={t("bankTitle")} sourceRef={question.category?.nameEn ?? ""} compact pathOverride={`bank/${question.slug}`} />
           </div>
         </div>
       )}
@@ -561,7 +693,7 @@ function BankDetail({ slug }: { slug: string }) {
               >
                 <NicheMarker className="mt-0.5 shrink-0" />
                 <span className="min-w-0">
-                  <span dir="auto" className="line-clamp-2 block text-[13px] font-medium leading-snug group-hover:text-emerald-800 dark:group-hover:text-emerald-300">{r.text}</span>
+                  <span dir="auto" className="line-clamp-2 block text-[13px] font-medium leading-snug group-hover:text-emerald-800 dark:group-hover:text-emerald-300">{loc.text(r)}</span>
                   <span className="mt-0.5 block text-[10px] text-muted-foreground">
                     {[r.clusterTitle, r.difficulty ? t(DIFFICULTY_KEY[r.difficulty] ?? r.difficulty) : null].filter(Boolean).join(" · ")}
                   </span>

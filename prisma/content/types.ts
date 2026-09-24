@@ -45,6 +45,10 @@ export interface BankQuestion {
   /** Unique kebab-case slug, prefixed by category, e.g. "salah-ameen-quiet". */
   slug: string;
   question: string;
+  /** Urdu translation of `question` (faithful scholarly rendering). */
+  questionUr?: string;
+  /** Arabic translation of `question`. */
+  questionAr?: string;
   /** Category slug — must match a category created in seed-bank.ts. */
   category: string;
   /** Free-text subcategory within the category, e.g. "Wudu". */
@@ -55,6 +59,10 @@ export interface BankQuestion {
   isDisputed?: boolean;
   /** 1–3 sentence direct answer. Mandatory for every question. */
   shortAnswer: string;
+  /** Urdu translation of `shortAnswer`. */
+  shortAnswerUr?: string;
+  /** Arabic translation of `shortAnswer`. */
+  shortAnswerAr?: string;
   /** Full explanation — how the sources relate to the question. */
   detailedAnswer?: string;
   /** The recognized Hanafi position (1–3 sentences). */

@@ -342,6 +342,8 @@ model ScholarlyView {
 model Question {
   id            String     @id @default(cuid())
   text          String
+  textUr       String?
+  textAr       String?
   language      String     @default("EN")
   slug          String?    @unique
   categoryId    String?
@@ -354,6 +356,8 @@ model Question {
   isDisputed    Boolean    @default(false)
   isSensitive   Boolean    @default(false)
   shortAnswer   String?
+  shortAnswerUr String?
+  shortAnswerAr String?
   intent        String?
   clusterId     String?
   cluster       QuestionCluster? @relation(fields: [clusterId], references: [id])

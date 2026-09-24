@@ -28,7 +28,7 @@ export async function GET() {
         where: { isCommon: true, featured: true },
         take: 6,
         orderBy: { clusterOrder: "asc" },
-        select: { slug: true, text: true, shortAnswer: true, difficulty: true, isDisputed: true, category: { select: { nameEn: true, nameUr: true, nameAr: true } }, cluster: { select: { titleEn: true } } },
+        select: { slug: true, text: true, textUr: true, textAr: true, shortAnswer: true, shortAnswerUr: true, shortAnswerAr: true, difficulty: true, isDisputed: true, category: { select: { nameEn: true, nameUr: true, nameAr: true } }, cluster: { select: { titleEn: true, titleUr: true, titleAr: true } } },
       }),
       db.questionCluster.findMany({
         orderBy: { order: "asc" }, take: 12,

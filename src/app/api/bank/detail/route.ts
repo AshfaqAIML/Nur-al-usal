@@ -27,24 +27,24 @@ export async function GET(req: NextRequest) {
   const answer = question.answers[0] ?? null;
 
   // Related questions: relatedSlugs first, then cluster siblings fallback
-  let related: { slug: string; text: string; difficulty: string | null; clusterTitle: string | null }[] = [];
+  let related: { slug: string; text: string; textUr: string | null; textAr: string | null; difficulty: string | null; clusterTitle: string | null }[] = [];
   let relatedSlugs: string[] = [];
   try { relatedSlugs = JSON.parse(question.relatedSlugs ?? "[]") as string[]; } catch { /* noop */ }
   if (relatedSlugs.length > 0) {
     const rows = await db.question.findMany({
       where: { slug: { in: relatedSlugs } },
-      select: { slug: true, text: true, difficulty: true, cluster: { select: { titleEn: true } } },
+      select: { slug: true, text: true, textUr: true, textAr: true, difficulty: true, cluster: { select: { titleEn: true } } },
     });
-    related = rows.map((r) => ({ slug: r.slug!, text: r.text, difficulty: r.difficulty, clusterTitle: r.cluster?.titleEn ?? null }));
+    related = rows.map((r) => ({ slug: r.slug!, text: r.text, textUr: r.textUr, textAr: r.textAr, difficulty: r.difficulty, clusterTitle: r.cluster?.titleEn ?? null }));
   }
   if (related.length < 4 && question.clusterId) {
     const siblings = await db.question.findMany({
       where: { clusterId: question.clusterId, id: { not: question.id }, slug: { notIn: relatedSlugs } },
-      select: { slug: true, text: true, difficulty: true, cluster: { select: { titleEn: true } } },
+      select: { slug: true, text: true, textUr: true, textAr: true, difficulty: true, cluster: { select: { titleEn: true } } },
       take: 6 - related.length,
       orderBy: { clusterOrder: "asc" },
     });
-    related = [...related, ...siblings.map((r) => ({ slug: r.slug!, text: r.text, difficulty: r.difficulty, clusterTitle: r.cluster?.titleEn ?? null }))];
+    related = [...related, ...siblings.map((r) => ({ slug: r.slug!, text: r.text, textUr: r.textUr, textAr: r.textAr, difficulty: r.difficulty, clusterTitle: r.cluster?.titleEn ?? null }))];
   }
 
   // Citations with book deep-links
@@ -59,6 +59,8 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     question: {
       id: question.id, slug: question.slug, text: question.text, language: question.language,
+      textUr: question.textUr, textAr: question.textAr,
+      shortAnswerUr: question.shortAnswerUr, shortAnswerAr: question.shortAnswerAr,
       subcategory: question.subcategory, questionType: question.questionType, difficulty: question.difficulty,
       isMisconception: question.isMisconception, isDisputed: question.isDisputed, isSensitive: question.isSensitive,
       shortAnswer: question.shortAnswer, intent: question.intent, views: question.views, featured: question.featured,

@@ -6,6 +6,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-raf-yadayn-why",
     question: "Why do Hanafis not raise their hands before and after ruku'?",
+    questionUr: "حنفی رکوع سے پہلے اور بعد ہاتھ کیوں نہیں اٹھاتے؟",
+    questionAr: "لماذا لا يرفع الحنفية أيديهم قبل الركوع وبعده؟",
     category: "salah-differences",
     subcategory: "Raf' al-Yadayn",
     type: "FIQH",
@@ -16,6 +18,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "The difference is over reconciliation of authentic raising-reports with authentic later-practice reports (abrogation/preference vs. no abrogation) — not over hadith authenticity.",
     shortAnswer:
       "The school's documented position is that the Prophet's ﷺ later regular practice was to raise the hands only at the opening takbir, and its jurists reconcile the raising reports with that through their usul of abrogation assessment and preference.",
+    shortAnswerUr: "مذہب کی مستند رائے یہ ہے کہ نبی کریم ﷺ کا مستقل بعد کا عمل صرف تکبیرِ تحریمیہ پر ہاتھ اٹھانا تھا، اور مذہب کے فقہاء نے اٹھانے والی روایات کو اپنے اصولِ نسخ کی جانچ اور ترجیح کے ذریعے اس کے ساتھ ہم آہنگ کیا ہے۔",
+    shortAnswerAr: "الموقف المتقدم في المدرسة أن المتواتر المتأخر من عمل النبي ﷺ كان رفع اليدين عند تكبيرة الإحرام فقط، وقد وفّق فقهاء المدرسة بين روايات الرفع وبين ذلك وفق أصولهم في تقدير النسخ والترجيح.",
     detailedAnswer:
       "Both camps quote Bukhari and Muslim material. The Hanafi case rests on the description-cluster of Bara' ibn 'Azib (in Sahih Muslim), which narrates the Prophet's ﷺ prayer beginning to end and mentions raising the hands only at the opening takbir, alongside reports of the later prayer stating he would not repeat the raising. The raising reports (e.g. of Wa'il ibn Hujr and Ibn 'Umar) describe an earlier or occasional practice; the school reads them as superseded (naskh) or as outweighed by the description of the settled practice. Shafi'i scholars respond that no abrogation of the raising reports is proven and practice follows them. Both are documented evidential methodologies — the disagreement is in interpretation, not in hadith authenticity.",
     hanafiPosition:
@@ -32,6 +36,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-raf-yadayn-hadith",
     question: "Do Hanafis reject the hadith about raising hands before ruku'?",
+    questionUr: "کیا حنفی رکوع سے پہلے ہاتھ اٹھانے والی حدیث کو رد کرتے ہیں؟",
+    questionAr: "هل يرفض الحنفية حديث رفع اليدين قبل الركوع؟",
     category: "salah-differences",
     subcategory: "Raf' al-Yadayn",
     type: "MISCONCEPTION",
@@ -41,6 +47,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     isMisconception: true,
     shortAnswer:
       "No — the authenticity of the raising narrations is agreed upon; the Hanafi school differs over their interpretation and reconciliation, not over their authenticity.",
+    shortAnswerUr: "نہیں — رفع یدین کی روایات کی صحت پر سب کا اتفاق ہے؛ حنفی مذہب ان کی تاویل اور تدارک میں اختلاف رکھتا ہے، ان کی صحت میں نہیں۔",
+    shortAnswerAr: "لا — صحت روايات الرفع محل اتفاق؛ واختلاف المدرسة الحنفية في تأويلها وجمعها بينها، لا في صحتها.",
     commonObjection: "\"Hanafis reject Bukhari because they don't raise their hands.\"",
     scholarlyResponse:
       "Abu Hanifa was a hadith scholar a century before Bukhari compiled his Sahih; Hanafi hadith masters (like Mulla Ali al-Qari in Umdat al-Qari) wrote commentaries on Bukhari itself. The raf' al-yadayn difference is an intra-evidential reading.",
@@ -56,6 +64,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-raf-yadayn-bara",
     question: "What does the hadith of Bara' ibn 'Azib say about raising hands?",
+    questionUr: "براء بن عازب رضی اللہ عنہ کی حدیث ہاتھ اٹھانے کے بارے میں کیا بیان کرتی ہے؟",
+    questionAr: "ماذا يذكر حديث البراء بن عازب رضي الله عنه عن رفع اليدين؟",
     category: "salah-differences",
     subcategory: "Raf' al-Yadayn",
     type: "HADITH",
@@ -64,6 +74,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "source-lookup",
     shortAnswer:
       "Bara' (RA) narrates a complete description of the Prophet's ﷺ prayer in Sahih Muslim that mentions raising the hands only at the opening takbir — a core pillar of the Hanafi argument.",
+    shortAnswerUr: "براء رضی اللہ عنہ صحیح مسلم میں نبی کریم ﷺ کی نماز کا مکمل تقریر کا بیان روایت کرتے ہیں جس میں ہاتھ صرف تکبیرِ تحریمیہ پر اٹھائے جانے کا ذکر ہے — یہ حنفی استدلال کا ایک بنیادی ستون ہے۔",
+    shortAnswerAr: "روى البراء رضي الله عنه في صحيح مسلم وصفًا كاملًا لصلاة النبي ﷺ يذكر رفع اليدين عند تكبيرة الإحرام فقط — وهو ركن من ركائز الاستدلال الحنفي.",
     detailedAnswer:
       "The narration walks through the prayer: takbir, recitation, ruku', rising, sujud — and states the hands were raised at the commencement. Hanafi jurists combine it with reports of the Prophet's ﷺ later prayer and with the narration that he 'used to raise his hands at the first takbir and not repeat it'. Critics note the Bara' description does not explicitly deny later raising; the school's argument is cumulative, combining the description-cluster with abrogation reports. This is exactly how madhhab methodology works — assembling a body of reports into a coherent practice.",
     sources: [
@@ -76,6 +88,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-takbir-opening",
     question: "Do Hanafis raise their hands at the opening takbir?",
+    questionUr: "کیا حنفی تکبیرِ تحریمیہ پر ہاتھ اٹھاتے ہیں؟",
+    questionAr: "هل يرفع الحنفية أيديهم عند تكبيرة الإحرام؟",
     category: "salah-differences",
     subcategory: "Raf' al-Yadayn",
     type: "BEGINNER",
@@ -84,6 +98,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — all four schools agree the hands are raised to the shoulders/ears at takbir al-tahrimah (the opening takbir); the dispute is only about later raising.",
+    shortAnswerUr: "جی ہاں — چاروں مکاتبِ فکر متفق ہیں کہ تکبیرِ تحریمیہ (ابتدائی تکبیر) پر ہاتھ کندھوں/کانوں تک اٹھائے جاتے ہیں؛ اختلاف صرف اس کے بعد کے رفع یدین میں ہے۔",
+    shortAnswerAr: "نعم — اتفقت المذاهب الأربعة على أن اليدين ترفعان إلى الكتفين/الأذنين عند تكبيرة الإحرام (التكبيرة الأولى)، والنزاع فقط في الرفع بعد ذلك.",
     hanafiPosition: "Raised to the ears at the opening takbir, then lowered.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari", number: "739", translation: "paraphrased translation — raising opposite the ears at the commencement of prayer (Wa'il ibn Hujr)", status: "PARTIALLY_VERIFIED", note: "authenticity agreed" },
@@ -95,6 +111,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-arms-other-takbirs",
     question: "What is the Hanafi position on raising the hands during the other takbirs of prayer?",
+    questionUr: "نماز کی دوسری تکبیر کے وقت ہاتھ اٹھانے میں حنفی مذہب کیا ہے؟",
+    questionAr: "ما هو المذهب الحنفي في رفع اليدين عند التكبيرات الأخرى في الصلاة؟",
     category: "salah-differences",
     subcategory: "Raf' al-Yadayn",
     type: "FIQH",
@@ -103,6 +121,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school's practice is to raise the hands at the opening takbir only; the additional takbirs of Eid prayer are discussed in the school's books, with the dominant practice being raising without the full opening-style motion.",
+    shortAnswerUr: "مذہب کا عمل یہ ہے کہ ہاتھ صرف تکبیرِ تحریمیہ پر اٹھائے جائیں؛ عید کی نماز کی زائد تکبیریں مذہب کی کتب میں بحث کی گئی ہیں، اور غالب عمل یہ ہے کہ ہاتھ اٹھائے جائیں مگر ابتدائی تکبیر جیسے مکمل انداز کے بغیر۔",
+    shortAnswerAr: "عمل المدرسة أن ترفع اليدين عند تكبيرة الإحرام فقط؛ وتكبيرات صلاة العيد مذكورة في كتب المدرسة، والغالب في العمل رفع اليدين دون تمام ما في التكبيرة الأولى.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Salah — Eid prayer", translation: "The Eid takbirs are discussed within the prayer manual.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -112,6 +132,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-ameen-quiet",
     question: "Why do Hanafis recite Ameen quietly?",
+    questionUr: "حنفی آمین آہستہ کیوں کہتے ہیں؟",
+    questionAr: "لماذا يقول الحنفية آمين همسًا؟",
     category: "salah-differences",
     subcategory: "Ameen",
     type: "FIQH",
@@ -122,6 +144,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "The dispute is only over AUDIBILITY: both schools hold Ameen is sunnah — Shafi'is read the commands as encouraging audible Ameen; Hanafis read them as addressed to followers saying it after the imam's recitation.",
     shortAnswer:
       "The school holds the command of Ameen addresses the followers responding to the imam's recitation — a response is said quietly like any 'ameen' response in dua — and combines it with narrations indicating the Prophet's ﷺ recitation-based practice.",
+    shortAnswerUr: "مذہب کی رائے ہے کہ آمین کا حکم مقتدیوں سے خطاب ہے جو امام کی تلاوت پر جواب کہتے ہیں — اور جواب دعا کے کسی آمین کی طرح آہستہ کہا جاتا ہے — اور اسے ان روایات کے ساتھ ملا لیا جاتا ہے جو نبی کریم ﷺ کا تلاوت کے تابع عمل ظاہر کرتی ہیں۔",
+    shortAnswerAr: "ترى المدرسة أن حكم الآمين موجَّه إلى المأمومين المجيبين لتلاوة الإمام — والجواب يقال همسًا كسائر جواب آمين في الدعاء — ويقرن هذا بالروايات الدالة على عمل النبي ﷺ المرتبط بالتلاوة.",
     detailedAnswer:
       "The hadith 'when the imam says Ameen, say Ameen' (Bukhari 780; Muslim 410) is accepted by the school — the dispute is application: does 'imam says Ameen' imply the imam SAYS it aloud? Hanafi jurists argue the followers' Ameen follows the recitation (as the Prophet's ﷺ teaching to respond to the reciter), and responses to recitation are quiet. They add the narration that the Companions' Ameen was not audible two rows away, and the general principle that invocations in salah are quiet. Shafi'i scholars read the hadith as encouraging loud Ameen in the audible prayers. Both readings are documented; neither invalidates the other's prayer.",
     hanafiPosition: "Ameen is said quietly by imam and followers.",
@@ -137,6 +161,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-ameen-evidence",
     question: "What is the Hanafi evidence for quiet Ameen?",
+    questionUr: "آمین آہستہ کہنے پر حنفی استدلال کیا ہے؟",
+    questionAr: "ما هو الدليل الحنفي على قول آمين همسًا؟",
     category: "salah-differences",
     subcategory: "Ameen",
     type: "HADITH",
@@ -145,6 +171,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "evidence",
     shortAnswer:
       "The school assembles: the Ameen-response hadiths read as follower-responses, the report that the Companions' Ameen was inaudible two rows away, the quietness of all invocations in salah, and the practice of the generations after the Prophet ﷺ in Kufa.",
+    shortAnswerUr: "مذہب ان باتوں کو جمع کرتا ہے: آمین کے جواب والی احادیث کی تاویل بطور مقتدیوں کا جواب، یہ روایت کہ صحابہ کا آمین دو صفوں کے فاصلے سے نہ سنا جاتا تھا، نماز کی تمام دعاؤں کا آہستہ ہونا، اور نبی کریم ﷺ کے بعد کوفہ میں آنے والی نسلوں کا عمل۔",
+    shortAnswerAr: "تجمع المدرسة بين: أحاديث جواب الآمين مقروءة بوصفها جوابًا للمأموم، ورواية أن آمين الصحابة لم يُسمع على صفين، وهمس جميع الدعاء في الصلاة، وعمل الأجيال بعد النبي ﷺ في الكوفة.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Adhan (Ameen hadiths)", translation: "The command hadiths are engaged and applied to followers.", status: "PARTIALLY_VERIFIED", note: "number per common edition: Bukhari 780" },
       { kind: "BOOK", ref: "Sharh Ma'ani al-Athar (al-Tahawi)", translation: "Hadith-reconciliation chapters covering the Ameen dispute.", status: "PARTIALLY_VERIFIED" },
@@ -156,6 +184,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-ameen-loud-invalid",
     question: "Is saying Ameen loudly invalid according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق بلند آواز سے آمین کہنا نماز کو باطل کرتا ہے؟",
+    questionAr: "هل قول آمين بجهر مبطل للصلاة في الفقه الحنفي؟",
     category: "salah-differences",
     subcategory: "Ameen",
     type: "FIQH",
@@ -164,6 +194,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "No — loud Ameen does not invalidate salah; the school classifies it as contrary to its preferred practice (makruh tanzihi in its framework) and prayers across the madhhabs remain valid by the scholars' agreement.",
+    shortAnswerUr: "نہیں — بلند آمین نماز کو باطل نہیں کرتا؛ مذہب اسے اپنے مرغوب عمل کے خلاف قرار دیتا ہے (اپنے نظام میں مکروہ تنزیہاً) اور علما کے اتفاق سے تمام مذہبوں کی نمازیں صحیح رہتی ہیں۔",
+    shortAnswerAr: "لا — الجهر بالآمين لا يبطل الصلاة؛ وتصنفه المدرسة خلافًا لعملها المرغوب (كروه تنزيهًا في نظامها)، وتبقى صلوات المذاهب كلها صحيحة باتفاق العلماء.",
     hanafiPosition: "Quiet Ameen is the school's practice; loud Ameen is not an invalidator.",
     practicalInfo: "Followers follow their imam; validity is not affected by the madhhab difference.",
     sources: [
@@ -175,6 +207,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-recitation-behind-imam",
     question: "Why do Hanafis not recite behind the Imam?",
+    questionUr: "حنفی امام کے پیچھے تلاوت کیوں نہیں کرتے؟",
+    questionAr: "لماذا لا يقرأ الحنفية خلف الإمام؟",
     category: "salah-differences",
     subcategory: "Recitation behind the imam",
     type: "FIQH",
@@ -185,6 +219,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "The dispute is over whether the imam's recitation fulfills the followers' obligation, or whether reciting Fatiha is personally wajib on every worshipper.",
     shortAnswer:
       "The school reads the Qur'anic statement 'when the Qur'an is recited, listen and be silent' (Al-A'raf 7:204) as applying to the follower listening to the imam's recitation, making the imam's recitation cover the congregation.",
+    shortAnswerUr: "مذہب الاعراف ۷: ۲۰۴ کے اس قرآنی فرمان کو — کہ جب قرآن پڑھا جائے تو اسے سنا اور خاموش رہا جائے — مقتدی کے امام کی تلاوت سننے پر منطبق کرتا ہے، اور اسی سے امام کی تلاوت پوری جماعت پر حاوی ہو جاتی ہے۔",
+    shortAnswerAr: "تحمل المدرسة آية الأعراف 7:204 — وفيها الأمر بالاستماع والانصات إذا قُرئ القرآن — على المأموم المستمع لتلاوة إمامه، فتشمل تلاوة الإمام الجماعة كلها.",
     detailedAnswer:
       "Hanafi jurists cite Al-A'raf 7:204 together with the hadith 'he who has an imam, the imam's recitation is his recitation' (recorded with chains in the collections — cited without number) to hold that in loud prayers the follower listens. In silent prayers, recitation returns to the follower since the imam's recitation is not heard. The four-judge story of 'Ata and others, and the report of Ibn Mas'ud driving off those reciting behind him, are discussed in the school's evidence books. Shafi'i scholars read the 'no prayer without Fatiha' hadith as making Fatiha personally obligatory, resolving the listening verses as applying to the imam or outside salah. Both methodologies are documented and internally consistent.",
     hanafiPosition: "In loud prayers the follower listens; in silent prayers he recites (at least Fatiha).",
@@ -199,6 +235,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-fatiha-behind-imam",
     question: "Is reciting Surah al-Fatihah behind the Imam wajib in Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ میں امام کے پیچھے سورہ فاتحہ کی تلاوت واجب ہے؟",
+    questionAr: "هل قراءة سورة الفاتحة خلف الإمام واجبة في الفقه الحنفي؟",
     category: "salah-differences",
     subcategory: "Recitation behind the imam",
     type: "FIQH",
@@ -209,6 +247,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "Dispute is whether Fatiha is wajib on the follower in every rak'ah (Shafi'i) or covered by the imam's recitation in loud prayers (Hanafi).",
     shortAnswer:
       "In the Hanafi framework the follower's recitation obligation in loud prayers is discharged by the imam's recitation; in silent prayers the follower recites Fatiha himself. In the Shafi'i framework Fatiha remains personally wajib behind the imam.",
+    shortAnswerUr: "حنفی نظام میں جہری نمازوں میں مقتدی کی تلاوت کی ذمہ داری امام کی تلاوت سے ادا ہو جاتی ہے؛ سری نمازوں میں مقتدی خود فاتحہ پڑھتا ہے۔ شافعی نظام میں امام کے پیچھے بھی فاتحہ شخصاً واجب رہتی ہے۔",
+    shortAnswerAr: "في النظام الحنفي تؤدَّى واجب تلاوة المأموم في الصلوات الجهرية بتلاوة الإمام؛ وفي السرية يقرأ المأموم الفاتحة بنفسه. وفي النظام الشافعي تبقى الفاتحة واجبة شخصًا خلف الإمام.",
     hanafiPosition: "Fatiha behind a reciting imam is not an independent obligation; listening replaces it.",
     otherViews: "Shafi'i/Hanbali: Fatiha is required personally in every rak'ah.",
     sources: [
@@ -221,6 +261,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-imam-recitation-loud-silent",
     question: "What is the Hanafi position on loud versus silent recitation?",
+    questionUr: "جہری اور سری تلاوت میں حنفی مذہب کیا ہے؟",
+    questionAr: "ما هو المذهب الحنفي في الجهر والإسرار في التلاوة؟",
     category: "salah-differences",
     subcategory: "Recitation",
     type: "BEGINNER",
@@ -229,6 +271,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Recitation is aloud in Fajr, Maghrib, Isha (and Jumu'ah/Eid) and silent in Zuhr and 'Asr — this agrees across the schools; the Hanafi distinctive is that the follower listens in the loud ones.",
+    shortAnswerUr: "تلاوت فجر، مغرب، عشا (اور جمعہ/عید) میں بلند اور ظہر و عصر میں آہستہ ہوتی ہے — اس پر سب مکاتبِ فکر کا اتفاق ہے؛ حنفی امتیاز یہ ہے کہ جہری نمازوں میں مقتدی سنتا ہے۔",
+    shortAnswerAr: "القراءة جهرية في الفجر والمغرب والعشاء (والجمعة/العيد) وسرية في الظهر والعصر — وهذا محل اتفاق المذاهب؛ والخاص بالحنفية أن المأموم يستمع في الجهريات.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "Loud vs silent prayer distribution.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -238,6 +282,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-hands-below-navel",
     question: "Why do Hanafis place their hands below the navel?",
+    questionUr: "حنفی ہاتھ ناف کے نیچے کیوں باندھتے ہیں؟",
+    questionAr: "لماذا يضع الحنفية أيديهم تحت السرة؟",
     category: "salah-differences",
     subcategory: "Hand placement",
     type: "FIQH",
@@ -248,6 +294,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "The dispute concerns the location of hand placement in qiyam; all schools agree on placing the RIGHT over the LEFT — the difference is only navel vs chest level.",
     shortAnswer:
       "The school relies on narrations describing the Prophet's ﷺ placing his right hand over the left on his chest-below area, transmitted within the Companions' description reports, and holds it is the more modest posture of standing before Allah.",
+    shortAnswerUr: "مذہب ان روایات پر تکیہ کرتا ہے جو نبی کریم ﷺ کے دائیں ہاتھ کو بائیں پر سینے سے نیچے کی جگہ رکھنے کا بیان کرتی ہیں اور صحابہ کرام کے تقریری بیانات میں منقول ہیں، اور اسے اللہ کے سامنے کھڑے ہونے کا زیادہ حیا دار انداز سمجھتا ہے۔",
+    shortAnswerAr: "تعتمد المدرسة روايات تصف وضع النبي ﷺ يده اليمنى على اليسرى في موضع ما تحت الصدر، منقولة في كتب أوصاف الصحابة، وترى أنه الوضع الأكثر حياءً عند الوقوف بين يدي الله.",
     detailedAnswer:
       "Narrations from 'Ali (RA) describing placing the hand below the navel are transmitted in the school's evidence books (e.g. Musannaf Ibn Abi Shaybah contains multiple placement reports). Scholars of the school note that modesty of posture is the operative wisdom and that the placement reports vary across the schools' chains — Hanafi works accept the below-navel reports while Shafi'i works rely on Wa'il's chest-placement report. The disagreement is over which reports bind, with all acknowledging the right-over-left is agreed.",
     hanafiPosition: "Hands placed below the navel, right over left.",
@@ -262,6 +310,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-hands-navel-established",
     question: "Is placing the hands below the navel established in Hanafi sources?",
+    questionUr: "کیا ناف کے نیچے ہاتھ باندھنا حنفی مصادر میں ثابت ہے؟",
+    questionAr: "هل وضع اليدين تحت السرة ثابت في مصادر الحنفية؟",
     category: "salah-differences",
     subcategory: "Hand placement",
     type: "HADITH",
@@ -270,6 +320,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "source-lookup",
     shortAnswer:
       "Yes — the school's manuals record it as the settled position, drawing on placement narrations in works like Musannaf Ibn Abi Shaybah and the transmitted practice of the Kufan jurists.",
+    shortAnswerUr: "جی ہاں — مذہب کی کتب اسے مستقر موقف کے طور پر قلمبند کرتی ہیں، اور سہارا مسنف ابن ابی شیبہ جیسی کتب کی وضع کی روایات اور کوفہ کے فقہاء کا منتقل عمل ہے۔",
+    shortAnswerAr: "نعم — تدوّن كتب المدرسة ذلك موضعًا مستقرًّا، مستندة إلى روايات الوضع في كتب كالمصنف لابن أبي شيبة، وإلى العمل المنقول عن فقهاء الكوفة.",
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah (al-Fatawa al-'Alamgiriyyah), Kitab al-Salah", translation: "Below-navel placement recorded as the madhhab position.", status: "PARTIALLY_VERIFIED" },
       { kind: "BOOK", ref: "Maraqi al-Falah (al-Shurunbulali)", translation: "Prayer manual records the placement.", status: "PARTIALLY_VERIFIED" },
@@ -280,6 +332,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-hands-chest",
     question: "Do Hanafi sources contain reports of placing the hands on the chest?",
+    questionUr: "کیا حنفی مصادر میں سینے پر ہاتھ رکھنے کی روایات موجود ہیں؟",
+    questionAr: "هل توجد في مصادر الحنفية روايات عن وضع اليدين على الصدر؟",
     category: "salah-differences",
     subcategory: "Hand placement",
     type: "COMPARISON",
@@ -288,6 +342,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Chest-placement narrations exist (e.g. from Wa'il ibn Hujr) and later Hanafi-era discussion acknowledges them, but the school's settled fiqh position remains below the navel; both postures are treated as valid scholarly differences, not invalidators.",
+    shortAnswerUr: "سینے پر ہاتھ رکھنے کی روایات موجود ہیں (مثلاً وائل بن حجر سے) اور متاخر حنفی دور کی بحث ان کا اعتراف کرتی ہے، مگر مذہب کا مستقر فقہی موقف ناف کے نیچے ہی رہتا ہے؛ دونوں صورتیں معتبر علمی اختلاف شمار ہوتی ہیں، نماز باطل کرنے والی نہیں۔",
+    shortAnswerAr: "توجد روايات الوضع على الصدر (كرواية وائل بن حجر) وتقرّها الكتابة الحنفية المتأخرة، لكن الموقف الفقهي المستقر للمدرسة يبقى تحت السرة؛ وتُعدّ الصورتان خلافًا فقهيًا معتبرًا لا مبطلًا للصلاة.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari? — the Wa'il report on chest placement is transmitted in the raising narration corpus", translation: "The Wa'il description mentions the chest placement in some transmissions.", status: "UNVERIFIED", note: "transmission wording varies by edition" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "Discussion of placement reports and the school's selection.", status: "PARTIALLY_VERIFIED" },
@@ -298,6 +354,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-witr-wajib",
     question: "Is Witr wajib according to Hanafi scholars?",
+    questionUr: "کیا حنفی علما کے نزدیک وتر واجب ہے؟",
+    questionAr: "هل الوتر واجب عند علماء الحنفية؟",
     category: "salah",
     subcategory: "Witr",
     type: "FIQH",
@@ -306,6 +364,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — the school classifies Witr as wajib (obligatory at a level below fard), which is its distinctive position among the four schools.",
+    shortAnswerUr: "جی ہاں — مذہب وتر کو واجب شمار کرتا ہے (فرض سے نیچے درجے کی وجوب)؛ یہی چاروں مکاتبِ فکر میں اس کا امتیازی موقف ہے۔",
+    shortAnswerAr: "نعم — تصنف المدرسة الوتر واجبًا (بمرتبة وجوب أدنى من الفرض)، وهذا موقفها المميز بين المذاهب الأربعة.",
     detailedAnswer:
       "Hanafi usul maintains a wajib category between fard and sunnah: commanded but supported by less decisive proof than fard. Witr falls here — the command narratives and the practice of the Prophet ﷺ never leaving it establish its obligation at the wajib level. Shafi'i scholars hold it sunnah mu'akkadah; missing it (for a Hanafi) entails qada and, per the school, sajdah sahw for the forgetful omission is discussed in the manuals.",
     hanafiPosition: "Witr is wajib; deliberately missed Witr is made up (qada).",
@@ -320,6 +380,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-witr-three",
     question: "Why do Hanafis perform three rak'ahs for Witr?",
+    questionUr: "حنفی وتر میں تین رکعت کیوں پڑھتے ہیں؟",
+    questionAr: "لماذا يصلي الحنفية الوتر ثلاث ركعات؟",
     category: "salah",
     subcategory: "Witr",
     type: "BEGINNER",
@@ -328,6 +390,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "The transmitted practice the school codifies is a single three-rak'ah Witr concluded with one salam and the qunut before ruku' of the final rak'ah — versus other schools' two-plus-one method.",
+    shortAnswerUr: "وہ منتقل شدہ عمل جسے مذہب مدوّن کرتا ہے تین رکعت کا ایک مسلسل وتر ہے جو ایک سلام سے ختم ہوتا ہے اور قنوت آخری رکعت کے رکوع سے پہلے ہوتا ہے — جبکہ دوسرے مکاتبِ فکر کا طریقہ دو بہ ایک ہے۔",
+    shortAnswerAr: "العمل المنقول الذي تُقنّنه المدرسة وتر ثلاث ركعات متصلة يُختم بسلمة واحدة ويكون القنوت قبل ركوع الركعة الأخيرة — في مقابل طريقة المذاهب الأخرى: ركعتان ثم ركعة منفصلة.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Witr (narration of 'Aisha on the Prophet's ﷺ three-rak'ah Witr)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Witr", translation: "Three-rak'ah Witr with one salam recorded as the school's method.", status: "PARTIALLY_VERIFIED" },
@@ -338,6 +402,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-witr-method",
     question: "What is the Hanafi method of Witr?",
+    questionUr: "وتر کا حنفی طریقہ کیا ہے؟",
+    questionAr: "ما هي طريقة الوتر في المذهب الحنفي؟",
     category: "salah",
     subcategory: "Witr",
     type: "PRACTICAL",
@@ -346,6 +412,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Three rak'ahs performed together: after tashahhud of the third rak'ah, stand for the third, recite Fatiha + surah, then raise hands and say Allahu Akbar, recite du'a al-qunut, bow, complete with one salam.",
+    shortAnswerUr: "تین رکعتیں باہم ادا کی جاتی ہیں: تیسری رکعت کے تشہد کے بعد تیسری رکعت کے لیے کھڑے ہوں، فاتحہ اور سورہ پڑھیں، پھر ہاتھ اٹھا کر اللہ اکبر کہیں، دعائے قنوت پڑھیں، رکوع کریں اور ایک سلام سے نماز مکمل کریں۔",
+    shortAnswerAr: "ثلاث ركعات تؤدى متصلة: بعد تشهد الركعة الثالثة يُقوم للثالثة، فتُقرأ الفاتحة وسورة، ثم تُرفع اليدين ويقال الله أكبر، وتُقرأ دعاء القنوت، ثم يُركع، ويُختم بسلمة واحدة.",
     practicalInfo: "This is the school's codified method; those following other imams/practices should follow their own school's books — both prayers are valid.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Witr", translation: "Step-by-step Witr method of the school.", status: "PARTIALLY_VERIFIED" },
@@ -356,6 +424,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-witr-shafii-difference",
     question: "What is the difference between Hanafi and Shafi'i Witr?",
+    questionUr: "حنفی اور شافعی وتر میں کیا فرق ہے؟",
+    questionAr: "ما هو الفرق بين وتر الحنفية ووتر الشافعية؟",
     category: "salah",
     subcategory: "Witr",
     type: "COMPARISON",
@@ -364,6 +434,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Hanafi: three connected rak'ahs, one salam, qunut before ruku', status wajib. Shafi'i: two rak'ahs + one separate rak'ah (two salams), qunut after rising from ruku' in the second half of Ramadan, status sunnah.",
+    shortAnswerUr: "حنفی: تین متصل رکعتیں، ایک سلام، رکوع سے پہلے قنوت، حکم واجب۔ شافعی: دو رکعتیں اور ایک الگ رکعت (دو سلام)، رمضان کے دوسرے نصف میں رکوع سے اٹھنے کے بعد قنوت، حکم سنت۔",
+    shortAnswerAr: "الحنفي: ثلاث ركعات متصلة، سلمة واحدة، القنوت قبل الركوع، والحكم الوجوب. الشافعي: ركعتان ثم ركعة منفصلة (سلمتان)، القنوت بعد الرفع من الركوع في النصف الثاني من رمضان، والحكم السنة.",
     sources: [
       { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Witr", translation: "The school's Witr framework and its contrast with other transmitted methods.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -373,6 +445,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-qunut-witr",
     question: "What is Qunut in Witr according to the Hanafi madhhab?",
+    questionUr: "حنفی مذہب کے مطابق وتر کے قنوت سے کیا مراد ہے؟",
+    questionAr: "ما هو القنوت في الوتر عند المذهب الحنفي؟",
     category: "salah",
     subcategory: "Qunut",
     type: "FIQH",
@@ -381,6 +455,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Qunut is the du'a recited in Witr after standing from the ruku'-preparatory takbir of the third rak'ah (before ruku'), with hands raised — the school's fixed position for Witr qunut.",
+    shortAnswerUr: "قنوت وہ دعا ہے جو وتر میں تیسری رکعت کی رکوع کی طرف جانے والی تکبیر سے کھڑے ہونے کے بعد (رکوع سے پہلے) ہاتھ اٹھا کر پڑھی جاتی ہے — وتر کے قنوت کے لیے یہی مذہب کا مستقر موقف ہے۔",
+    shortAnswerAr: "القنوت دعاء يُقال في الوتر بعد القيام من تكبيرة الانتقال إلى الركعة الثالثة (قبل الركوع) برفع اليدين — وهذا موضع المدرسة الثابت لقنوت الوتر.",
     detailedAnswer:
       "The school transmits the qunut from Hasan ibn 'Ali's (RA) narration (recorded in Abu Dawud's Sunan with the Prophet ﷺ teaching it) — cited without number. Qunut before ruku' is the school's distinctive practice; the Shafi'i school places qunut in the second half of Ramadan after rising from ruku'. The Zaydis/others differ further. These are documented methodological differences within worship.",
     hanafiPosition: "Qunut before ruku' in the third rak'ah of Witr, throughout the year.",
@@ -395,6 +471,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-qunut-text",
     question: "What do Hanafis recite in the Qunut of Witr?",
+    questionUr: "حنفی وتر کے قنوت میں کیا پڑھتے ہیں؟",
+    questionAr: "ماذا يقرأ الحنفية في قنوت الوتر؟",
     category: "salah",
     subcategory: "Qunut",
     type: "PRACTICAL",
@@ -403,6 +481,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "The transmitted qunut du'a beginning 'Allahumma inna nasta'inuka…' — taught to Hasan ibn 'Ali (RA); a shorter or alternative qunut is permissible by the school's books.",
+    shortAnswerUr: "وہ منتقل شدہ دعائے قنوت جس کا آغاز اللھم انا نستعینک سے ہوتا ہے — جو حسن بن علی رضی اللہ عنہما کو سکھائی گئی؛ مذہب کی کتب کے مطابق مختصر یا دوسرا قنوت بھی جائز ہے۔",
+    shortAnswerAr: "دعاء القنوت المنقول الذي يبدأ باللهم إنا نستعينك — الذي عُلّم الحسن بن علي رضي الله عنهما؛ ويجوز عند كتب المدرسة قنوت أوجز أو بديل.",
     sources: [
       { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Witr (Hasan ibn 'Ali)", translation: "The du'a text the Prophet ﷺ taught.", status: "UNVERIFIED", note: "number pending verification" },
     ],
@@ -412,6 +492,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-qunut-fajr",
     question: "Why don't Hanafis recite Qunut in Fajr?",
+    questionUr: "حنفی فجر میں قنوت کیوں نہیں پڑھتے؟",
+    questionAr: "لماذا لا يقرأ الحنفية القنوت في الفجر؟",
     category: "salah",
     subcategory: "Qunut",
     type: "FIQH",
@@ -420,6 +502,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school reads the qunut narrations as establishing Witr qunut and the calamity-qunut (qunut al-nazilah) as case-based; the regular Fajr qunut of other schools is not adopted because the school's transmission pairs qunut with Witr.",
+    shortAnswerUr: "مذہب قنوت کی روایات کو وتر کے قنوت کے ثابت کرنے والی اور قنوتِ نازلہ کو واقعے کے تابع سمجھتا ہے؛ دوسرے مکاتبِ فکر کا باقاعدہ فجر کا قنوت نہیں اپنایا جاتا کیونکہ مذہب کی روایت قنوت کو وتر سے جوڑتی ہے۔",
+    shortAnswerAr: "تفهم المدرسة روايات القنوت على أنها تثبت قنوت الوتر، وتجعل قنوت النازلة موقوفًا على الحادثة؛ أما قنوت الفجر المعتاد عند المذاهب الأخرى فلا يؤخذ لأن رواية المدرسة تقرن القنوت بالوتر.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "Qunut placements across prayers compared within the school.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -429,6 +513,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-sajdah-sahw",
     question: "What is Sajdah Sahw?",
+    questionUr: "سجدہ سہو کیا ہے؟",
+    questionAr: "ما هو سجود السهو؟",
     category: "salah",
     subcategory: "Sajdah Sahw",
     type: "BEGINNER",
@@ -437,6 +523,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Two prostrations performed at the end of salah to compensate for a forgotten sunnah or wajib element, or for a delay/early action — the Prophet's ﷺ taught compensation for forgetfulness.",
+    shortAnswerUr: "نماز کے اختتام پر ادا کیے جانے والے دو سجدے جو کسی بھولی ہوئی سنت یا واجب رکن، یا کسی تاخیر یا قبل از وقت عمل کے ازالے کے لیے ہوتے ہیں — نبی کریم ﷺ نے بھول چوک کے ازالے کی تعلیم دی۔",
+    shortAnswerAr: "سجدتان تؤدَّى في آخر الصلاة جبرًا لسنة أو واجب منسيين، أو لتأخير عمل أو تقديمه — وقد علّم النبي ﷺ جبر السهو.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Sahw", translation: "The Prophet ﷺ performed two prostrations for forgetfulness in prayer.", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Sahw", translation: "The dedicated chapter on forgetfulness prostration.", status: "PARTIALLY_VERIFIED" },
@@ -447,6 +535,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-sajdah-sahw-when",
     question: "When is Sajdah Sahw wajib according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق سجدہ سہو کب واجب ہوتا ہے؟",
+    questionAr: "متى يوجب الفقه الحنفي سجود السهو؟",
     category: "salah",
     subcategory: "Sajdah Sahw",
     type: "FIQH",
@@ -455,6 +545,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "It becomes wajib when a wajib of salah is forgotten/left (e.g. missing a surah after Fatiha, sitting for tashahhud in the first sitting), or a fard/sunnah is delayed — the school categorizes the triggers into advance, delay, and omission.",
+    shortAnswerUr: "یہ تب واجب ہوتا ہے جب نماز کا کوئی واجب بھول جائے یا چھوٹ جائے (مثلاً فاتحہ کے بعد سورہ چھوٹ جانا، پہلی بیٹھک میں تشہد کے لیے بیٹھ جانا)، یا کوئی فرض/سنت مؤخر کر دی جائے — مذہب ان اسباب کو تین اقسام میں رکھتا ہے: تقدم، تاخیر، اور ترک۔",
+    shortAnswerAr: "يوجب إذا تُرك واجب من واجبات الصلاة منسيًّا (كترك سورة بعد الفاتحة، أو ترك الجلوس للتشهد في الجلوس الأول)، أو أُخِّر فرض أو سنة — وتصنف المدرسة هذه الأسباب إلى تقديم وتأخير وترك.",
     detailedAnswer:
       "The school's framework: (1) taqdim — doing an action before its time (e.g. prostrating before recitation completion); (2) ta'khir — delaying a wajib (e.g. forgetting the first sitting); (3) tark — leaving a wajib (e.g. missing qunut). Each triggers sajdah sahw; leaving a fard voids the prayer instead (it must be repeated). The manuals give the case lists.",
     hanafiPosition: "Sajdah sahw compensates forgotten wajibat and timing errors; missed fara'id void the prayer.",
@@ -467,6 +559,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-wajib-forgotten",
     question: "Does forgetting a wajib invalidate salah?",
+    questionUr: "کیا واجب بھول جانے سے نماز باطل ہو جاتی ہے؟",
+    questionAr: "هل يبطل نسيان الواجب الصلاة؟",
     category: "salah",
     subcategory: "Sajdah Sahw",
     type: "FIQH",
@@ -475,6 +569,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "No — forgetting a wajib is compensated by sajdah sahw; only the omission of a fard (pillar) invalidates the prayer, and it must then be repeated.",
+    shortAnswerUr: "نہیں — واجب بھولنے کا ازالہ سجدہ سہو سے ہوتا ہے؛ صرف کسی فرض (ستون) کے چھوٹ جانے سے نماز باطل ہوتی ہے، اور اس کے بعد اسے دہرانا ضروری ہوتا ہے۔",
+    shortAnswerAr: "لا — جبر نسيان الواجب سجود السهو؛ ولا تبطل الصلاة إلا بترك فرض (ركن)، وعندها تُعاد الصلاة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Sahw", translation: "Wajib omission compensated; fard omission invalidates.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -484,6 +580,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-masbuq",
     question: "What is the Hanafi ruling for a Masbuq (person who joins the Imam late)?",
+    questionUr: "مسبوق (جو امام سے دیر سے جا ملتا ہے) کے بارے میں حنفی حکم کیا ہے؟",
+    questionAr: "ما هو حكم المسبوق (من لحق بالإمام متأخرًا) في المذهب الحنفي؟",
     category: "salah",
     subcategory: "Masbuq",
     type: "PRACTICAL",
@@ -492,6 +590,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Join during bowing or before rising from ruku' to catch a rak'ah; a late joiner completes what he missed after the imam's salam, using the first rak'ah he prays alone as the standing one.",
+    shortAnswerUr: "رکوع کے دوران یا رکوع سے اٹھنے سے پہلے شامل ہو جائے تاکہ ایک رکعت مل جائے؛ مسبوق امام کے سلام کے بعد جو چھوٹ گیا اسے پورا کرتا ہے، اور جو پہلی رکعت وہ اکیلے پڑھتا ہے اسے کھڑی ہونے والی رکعت کے طور پر لیتا ہے۔",
+    shortAnswerAr: "يلحق في الركوع أو قبل الرفع منه ليحصل على ركعة؛ ويتم المسبوق ما فاته بعد تسليم الإمام، ويتخذ أول ركعة يصليها منفردًا موضعًا للركعة القيامية.",
     detailedAnswer:
       "The school counts a rak'ah for the follower only if he catches the imam in ruku' (or has bowed himself before the imam rises). The masbuq stands after the imam's salam and completes the missed rak'ahs — the first of his own counted as the one where the 'standing' applies, which is why the school's rule about the masbuq's first completed rak'ah being treated as his first standing rak'ah matters for recitation and sitting. The manuals walk through each joining point.",
     practicalInfo: "If unsure how many rak'ahs you caught, follow the manuals' guidance: count what you bowed in, complete the remainder.",
@@ -504,6 +604,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-masbuq-rakah",
     question: "When does a rak'ah count as caught behind the Imam in Hanafi fiqh?",
+    questionUr: "حنفی فقہ میں امام کے پیچھے رکعت کب ملنے والی شمار ہوتی ہے؟",
+    questionAr: "متى تعد الركعة لاحقًا خلف الإمام في الفقه الحنفي؟",
     category: "salah",
     subcategory: "Masbuq",
     type: "FIQH",
@@ -512,6 +614,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "A rak'ah counts if the follower bows for ruku' before the imam rises from it — even if he missed part of the standing and recitation.",
+    shortAnswerUr: "رکعت اُس وقت شمار ہوتی ہے جب مقتدی امام کے اٹھنے سے پہلے رکوع کے لیے جھک جائے — چاہے اسے قیام اور تلاوت کا کچھ حصہ نہ ملے۔",
+    shortAnswerAr: "تُعد الركعة إذا انحنى المأموم للركوع قبل أن يرفع الإمام منها — ولو فاته بعض القيام والتلاوة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "The ruku'-catch rule for followers.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -521,6 +625,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-faraid",
     question: "What are the fara'id (pillars) of salah according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق نماز کے فرائض (ستون) کیا ہیں؟",
+    questionAr: "ما هي فرائض الصلاة (أركانها) في الفقه الحنفي؟",
     category: "salah",
     subcategory: "Fara'id & Wajibat",
     type: "BEGINNER",
@@ -529,6 +635,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Six: takbir al-tahrimah, qiyam (standing), qira'ah (recitation), ruku', sujud, and the final sitting duration — omitting any voids the prayer.",
+    shortAnswerUr: "چھ: تکبیرِ تحریمیہ، قیام، قراءت (تلاوت)، رکوع، سجدہ، اور آخری بیٹھک کی مدت — کوئی ایک بھی چھوٹ جائے تو نماز باطل ہو جاتی ہے۔",
+    shortAnswerAr: "ستة: تكبيرة الإحرام، والقيام، والقراءة، والركوع، والسجود، ومدة الجلوس الأخير — وترك أيٍّ منها يبطل الصلاة.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah", translation: "The six pillars listed in the school's manuals.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -538,6 +646,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-wajibat",
     question: "What are the wajibat of salah according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق نماز کے واجبات کیا ہیں؟",
+    questionAr: "ما هي واجبات الصلاة في الفقه الحنفي؟",
     category: "salah",
     subcategory: "Fara'id & Wajibat",
     type: "FIQH",
@@ -546,6 +656,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Around eighteen — including reciting Fatiha, joining a surah to it, order, calm, tashahhud, the imam's qunut in Witr and both Eids, the Eid takbirs, and quiet/loud recitation in their prayers; a forgotten wajib is repaired by sajdah sahw.",
+    shortAnswerUr: "تقریباً اٹھارہ — جن میں فاتحہ کی تلاوت، اس کے ساتھ سورہ ملانا، ترتیب، طمانیت، تشہد، وتر اور دونوں عیدوں میں امام کا قنوت، عید کی تکبیریں، اور نمازوں میں سری/جہری تلاوت شامل ہے؛ بھولا ہوا واجب سجدہ سہو سے درست ہو جاتا ہے۔",
+    shortAnswerAr: "نحو ثمانية عشر — منها قراءة الفاتحة، ووصل سورة بها، والترتيب، والطمأنينة، والتشهد، وقنوت الإمام في الوتر والعيدين، وتكبيرات العيد، والإسرار والجهر في صلواتهما؛ وجبر الواجب المنسي سجود السهو.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "The wajibat list and its repair mechanism.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -555,6 +667,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-fard-wajib-sunnah",
     question: "What is the difference between fard, wajib and sunnah in Hanafi fiqh?",
+    questionUr: "حنفی فقہ میں فرض، واجب اور سنت میں کیا فرق ہے؟",
+    questionAr: "ما هو الفرق بين الفرض والواجب والسنة في الفقه الحنفي؟",
     category: "salah",
     subcategory: "Fara'id & Wajibat",
     type: "TERMINOLOGY",
@@ -563,6 +677,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Fard = decisively proven obligation, denying it is grave; wajib = commanded but through less decisive proof, denying it is error but not disbelief; sunnah = the Prophet's ﷺ regular practice, leaving it habitually is blameworthy but not sinful at the wajib level.",
+    shortAnswerUr: "فرض = قطعی دلیل سے ثابت شدہ حکم، اس کا انکار سنگین امر ہے؛ واجب = حکم ہے مگر کم قطعی دلیل سے، اس کا انکار غلطی ہے مگر کفر نہیں؛ سنت = نبی کریم ﷺ کا مستقل عمل، اسے موصوف بہ چھوڑنا مذموم ہے مگر واجب کے درجے میں گناہ نہیں۔",
+    shortAnswerAr: "الفرض = حكم ثابت بدليل قطعي، وإنكاره أمر خطير؛ والواجب = مأمور فيه لكن بدليل أقل قطعًا، وإنكاره خطأ لا كفر؛ والسنة = عمل النبي ﷺ الدائم، وتركها موصوفًا به مذموم لكنه ليس بمعصية في مرتبة الواجب.",
     detailedAnswer:
       "This tiered vocabulary is one of the school's signatures: the manuals define each ruling category (fard, wajib, sunnah mu'akkadah, mustahabb, mubah, makruh tanzihi, makruh tahrimi, haram). Practical effect: a missed wajib is repaired by sajdah sahw, a missed sunnah is not repaired (there is no qada for sunnah of salah), and a missed fard voids the prayer.",
     sources: [
@@ -575,6 +691,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-congregation-why",
     question: "What is the Hanafi position on congregational prayer?",
+    questionUr: "جماعت کی نماز میں حنفی مذہب کیا ہے؟",
+    questionAr: "ما هو المذهب الحنفي في صلاة الجماعة؟",
     category: "salah",
     subcategory: "Congregation",
     type: "FIQH",
@@ -583,6 +701,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school holds congregational prayer is wajib on adult men (for the five daily prayers), based on the repeated commands and the Companions' practice — while women's congregation is permissible and rewarded without obligation.",
+    shortAnswerUr: "مذہب کی رائے ہے کہ جماعت بالغ مردوں پر واجب ہے (پانچ فرض نمازوں کے لیے)، بار بار آنے والے اوامر اور صحابہ کرام کے عمل کی بنا پر — جبکہ عورتوں کی جماعت بغیر وجوب کے جائز اور ثواب والی ہے۔",
+    shortAnswerAr: "ترى المدرسة أن صلاة الجماعة واجبة على الرجال البالغين (في الصلوات الخمس)، استنادًا إلى الأوامر المتكررة وعمل الصحابة — أما جماعة النساء فمباحة مأجورة دون وجوب.",
     detailedAnswer:
       "The school reads the 'call them to the rows' command and the threatened boycott language of narrations as establishing obligation (wujub) for men capable of attending, differing from Shafi'i scholars who grade it emphatic sunnah. The practical difference is narrow: both schools hold congregation is the enormously superior and expected practice; for Hanafis deliberate abandonment is sinful at the wajib level.",
     hanafiPosition: "Wajib on men; women's attendance is rewarded without obligation.",
@@ -597,6 +717,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-following-imam-rules",
     question: "What are the rules of following the Imam in prayer?",
+    questionUr: "نماز میں امام کی اقتدا کے احکام کیا ہیں؟",
+    questionAr: "ما هي أحكام الاقتداء بالإمام في الصلاة؟",
     category: "salah",
     subcategory: "Congregation",
     type: "PRACTICAL",
@@ -605,6 +727,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The follower matches the imam's major actions (not being ahead of him in bowing/prostrating), recitation is covered in loud prayers, and intention of following (for the follower) is discussed in the school — the manuals detail each.",
+    shortAnswerUr: "مقتدی امام کے بڑے افعال کے مطابق چلتا ہے (رکوع/سجدہ میں اس سے آگے نہیں ہوتا)، جہری نمازوں میں تلاوت امام سے ادا ہو جاتی ہے، اور (مقتدی کے لیے) اقتدا کی نیت مذہب میں بحث شدہ ہے — کتبِ فقہ ہر ایک کی تفصیل بیان کرتی ہیں۔",
+    shortAnswerAr: "يطابق المأموم إمامه في الأفعال الكبرى (بأن لا يتقدمه في الركوع والسجود)، وتغني تلاوة الإمام في الجهريات، ونية الاقتداء (للمأموم) محل كلام في المدرسة — وتفصّل الكتب كلًّا منها.",
     sources: [
       { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Salah", translation: "Iqtida' (following) rules chapter.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -614,6 +738,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-invalidates",
     question: "What invalidates salah according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق نماز کن چیزوں سے باطل ہوتی ہے؟",
+    questionAr: "ما الذي يبطل الصلاة في الفقه الحنفي؟",
     category: "salah",
     subcategory: "Fara'id & Wajibat",
     type: "PRACTICAL",
@@ -622,6 +748,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Omitting a pillar, breaking wudu, speaking to people, eating/drinking, excessive movement, turning the chest away from the qiblah, laughing aloud, and losing intention — the manuals list them.",
+    shortAnswerUr: "کسی رکن کا چھوٹ جانا، وضو ٹوٹنا، لوگوں سے بات کرنا، کھانا/پینا، زیادہ حرکت، سینہ قبلہ سے پھیر لینا، بلند آواز سے ہنسنا، اور نیت کا جاتا رہنا — کتبِ فقہ ان کی فہرست دیتے ہیں۔",
+    shortAnswerAr: "ترك ركن، وحدوث الحدث، والكلام مع الناس، والأكل والشرب، والحركة الزائدة، وتحويل الصدر عن القبلة، والضحك الجهر، وزوال النية — تعدّد الكتب هذه المبطلات.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah (mubtilat)", translation: "The invalidators list.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -631,6 +759,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-taraweeh-20",
     question: "How many rak'ahs of Taraweeh are established in Hanafi sources?",
+    questionUr: "حنفی مصادر میں ترویح کی کتنی رکعتیں ثابت ہیں؟",
+    questionAr: "كم ركعة في التراويح ثبتت في مصادر الحنفية؟",
     category: "salah",
     subcategory: "Taraweeh",
     type: "FIQH",
@@ -641,6 +771,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "The 20-vs-8/11 discussion is a documented practice difference: the school cites the organized congregational practice; others cite the Prophet's ﷺ personal night practice. Neither side treats the other's prayer as invalid.",
     shortAnswer:
       "The school's codified practice is 20 rak'ahs in congregation (after 'Isha in Ramadan), following the practice Caliph 'Umar organized — while the Prophet's ﷺ personal night-prayer length varied, and other schools' 8/11 practice is also documented.",
+    shortAnswerUr: "مذہب کا مدوّن عمل یہ ہے کہ رمضان میں عشاء کے بعد جماعت کے ساتھ ۲۰ رکعتیں پڑھی جاتی ہیں، امیر المومنین عمر رضی اللہ عنہ کے منظم کردہ عمل کے تابع — جبکہ نبی کریم ﷺ کا ذاتی قیام اللیل کی مقدار مختلف رہی، اور دوسرے مکاتبِ فکر کا ۸/۱۱ کا عمل بھی مستند ہے۔",
+    shortAnswerAr: "عمل المدرسة المدوَّن عشرون ركعة جماعية (بعد العشاء في رمضان) على عمل الخليفة عمر رضي الله عنه الذي نظّمه — في حين تفاوت طول قيام النبي ﷺ الليلي الذاتي، وعمل المذاهب الأخرى 8/11 موثق أيضًا.",
     detailedAnswer:
       "The 20-rak'ah congregational practice is documented from 'Umar's era via the report of Sa'ib ibn Yazid (in Musannaf Ibn Abi Shaybah) and became the settled practice of the school (and, per the school's books, the consensus practice of that generation). Shafi'i scholars hold the sunnah is 8 (the Prophet's ﷺ personal practice) while acknowledging the historical congregational 20. Both worship formats are valid by the schools' agreement; the platform records the difference without scoring.",
     hanafiPosition: "20 rak'ahs in congregation, with witr after.",
@@ -656,6 +788,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-taraweeh-evidence",
     question: "What is the evidence for 20 rak'ahs of Taraweeh?",
+    questionUr: "ترویح کی ۲۰ رکعتوں کا استدلال کیا ہے؟",
+    questionAr: "ما هو الدليل على عشرين ركعة في التراويح؟",
     category: "salah",
     subcategory: "Taraweeh",
     type: "HADITH",
@@ -664,6 +798,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "evidence",
     shortAnswer:
       "The school argues from the uninterrupted congregational practice of the Companions' generation (documented reports of 'Umar's organization with 20 rak'ahs), holding ijma'-level practice outweighs individual variant lengths.",
+    shortAnswerUr: "مذہب صحابہ کرام کی ناقابلِ انقطاع جماعتی عمل سے استدلال کرتا ہے (عمر رضی اللہ عنہ کے ۲۰ رکعتوں والے انتظام کی مستند روایات)، اور سمجھتا ہے کہ اجماع کے درجے کا عمل انفرادی متغیر مقداروں پر غالب آتا ہے۔",
+    shortAnswerAr: "يستدل المذهب بعمل جماعي متصل في جيل الصحابة (روايات موثقة عن تنظيم عمر رضي الله عنه لعشرين ركعة)، ويحمل أن العمل بمستوى الإجماع يغلب الأطوال الفردية المتنوعة.",
     sources: [
       { kind: "HADITH", ref: "Musannaf Ibn Abi Shaybah (Sa'ib ibn Yazid)", translation: "Congregational 20 rak'ahs under 'Umar.", status: "PARTIALLY_VERIFIED" },
       { kind: "BOOK", ref: "Fath al-Qadir (Ibn al-Humam), Kitab al-Salah — Taraweeh", translation: "The evidence assembly for the congregational practice.", status: "PARTIALLY_VERIFIED" },
@@ -674,6 +810,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-taraweeh-witr",
     question: "Is Witr prayed after Taraweeh in the Hanafi madhhab?",
+    questionUr: "کیا حنفی مذہب میں ترویح کے بعد وتر پڑھا جاتا ہے؟",
+    questionAr: "هل يصلى الوتر بعد التراويح في المذهب الحنفي؟",
     category: "salah",
     subcategory: "Taraweeh",
     type: "PRACTICAL",
@@ -682,6 +820,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — the school's practice places Witr after the taraweeh congregation in Ramadan, and Witr remains wajib in the school's classification.",
+    shortAnswerUr: "جی ہاں — مذہب کا عمل رمضان میں وتر کو ترویح کی جماعت کے بعد رکھتا ہے، اور مذہب کی درجہ بندی میں وتر واجب ہی رہتا ہے۔",
+    shortAnswerAr: "نعم — يضع عمل المدرسة الوتر بعد جماعة التراويح في رمضان، ويبقى الوتر واجبًا في تصنيف المدرسة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "Ramadan night-prayer sequence.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -691,6 +831,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "salah-istiftah-dua",
     question: "What is the opening dua (du'a al-istiftah) in salah and is it required?",
+    questionUr: "نماز میں دعائے استفتاح کیا ہے اور کیا اس کا حکم ہے؟",
+    questionAr: "ما هو دعاء الاستفتاح في الصلاة وهل هو مطلوب؟",
     category: "salah",
     subcategory: "Sunnah elements",
     type: "BEGINNER",
@@ -699,6 +841,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "It is the quiet praise recited after the opening takbir (e.g. 'Subhanak-Allahumma…'); in the school it is a sunnah, not a pillar — omitting it does not require repair.",
+    shortAnswerUr: "یہ تکبیرِ تحریمیہ کے بعد کی آہستہ ثنا ہے (مثلاً سبحانک اللھم...)؛ مذہب میں یہ سنت ہے، رکن نہیں — اس کا چھوٹ جانا کسی درستگی کا محتاج نہیں۔",
+    shortAnswerAr: "هو الثناء المهموس الذي يقال بعد تكبيرة الإحرام (كـ: سبحانك اللهم...)؛ وهو في المدرسة سنة لا ركن — وتركه لا يستلزم جبرًا.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah", translation: "The istiftah as sunnah element.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -710,6 +854,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-wudu-faraid",
     question: "What are the fara'id (obligatory parts) of wudu according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق وضو کے فرائض کیا ہیں؟",
+    questionAr: "ما هي فرائض الوضوء في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "BEGINNER",
@@ -718,6 +864,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Four: washing the whole face, both arms to the elbows, wiping a quarter of the head, and washing both feet to the ankles — the school counts four, not seven.",
+    shortAnswerUr: "چار: پورے چہرے کا دھلنا، دونوں بازو کہنیوں سمیت دھلنا، سر کے چوتھائی حصے کا مسح، اور دونوں پاؤں ٹخنوں سمیت دھلنا — مذہب چار گنتا ہے، سات نہیں۔",
+    shortAnswerAr: "أربعة: غسل الوجه كله، والذراعين إلى المرفقين، ومسح ربع الرأس، وغسل القدمين إلى الكعبين — وتعدّ المدرسة أربعة لا سبعة.",
     detailedAnswer:
       "The school reads the wudu verse (Al-Ma'idah 5:6) literally: 'wash your faces and your arms… wipe your heads… (and) your feet (to the ankles)' — reading the feet's washing under the command structure that makes it washing, while the Shafi'i school reads the feet as joined to the wiping verb (needing a wet wipe). The other elements (niyyah, order, washing between parts, sunnah quantities) are conditions/sunnahs at different levels in the school's framework.",
     hanafiPosition: "4 fara'id; order and continuity are wajib in the school.",
@@ -732,6 +880,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-wudu-niyyah",
     question: "Is intention (niyyah) required for wudu in the Hanafi madhhab?",
+    questionUr: "کیا حنفی مذہب میں وضو کے لیے نیت شرط ہے؟",
+    questionAr: "هل تشترط النية للوضوء في المذهب الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "FIQH",
@@ -742,6 +892,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "Shafi'i fiqh makes intention a pillar of wudu; the Hanafi school makes it a condition for the prayer's validity, not for the washing's bodily effect.",
     shortAnswer:
       "Intention is a condition (for the salah to be valid), not one of the four bodily pillars — so a wudu done without intention is defective for prayer but the school does not require intention at the very first wash specifically.",
+    shortAnswerUr: "نیت شرط ہے (نماز کی صحت کے لیے)، چاروں جسمانی ارکان میں سے نہیں — لہٰذا بغیر نیت کیے وضو نماز کے لیے ناقص ہے مگر مذہب نیت کو خاص طور پر پہلی ہی دھلائی کے وقت طے نہیں کرتا۔",
+    shortAnswerAr: "النية شرط (لصحة الصلاة)، وليست من الأركان الأربعة الجسمانية — فالوضوء بلا نية ناقص للصلاة، لكن المدرسة لا تقيّد النية بأول الغسلة على الخصوص.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Intention's place in the school's wudu framework.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -751,6 +903,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-touching-woman",
     question: "Does touching a woman break wudu according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق عورت کو چھونے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بلمس المرأة في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "FIQH",
@@ -761,6 +915,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "Shafi'i fiqh breaks wudu on skin contact with an unrelated woman; the Hanafi school does not.",
     shortAnswer:
       "No — in the school's fiqh touching a woman does not break wudu; the school reads the verse's phrase 'or touching women' as euphemism for intercourse (a reading discussed by the classical commentators).",
+    shortAnswerUr: "نہیں — مذہب کی فقہ میں عورت کو چھونے سے وضو نہیں ٹوٹتا؛ مذہب آیت کے اس اشارے کو کہ عورتوں کا چھونا ذکر ہوا ہے، جماع کے کنایے کے طور پر لیتا ہے (یہ تاویل متقدم مفسرین میں بحث شدہ ہے)۔",
+    shortAnswerAr: "لا — في فقه المدرسة لا ينتقض الوضوء بلمس المرأة؛ وتحمل المدرسة قوله تعالى في الآية أو لامستم النساء على أنه كناية عن الجماع (وهو وجه ذكره المفسرون المتقدمون).",
     hanafiPosition: "Skin contact with women does not nullify wudu.",
     otherViews: "Shafi'i/Hanbali: skin-to-skin contact with a marriageable woman nullifies wudu.",
     sources: [
@@ -773,6 +929,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-touching-private",
     question: "Does touching the private part break wudu?",
+    questionUr: "کیا شرمگاہ کو چھونے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بلمس العورة؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "BEGINNER",
@@ -781,6 +939,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "In the school's dominant position, touching the private part with the bare palm does not break wudu; the school reconciles the touching-narrations by restricting them or preferring the counter-reports.",
+    shortAnswerUr: "مذہب کے غالب موقف میں شرمگاہ کو کھلی ہتھیلی سے چھونے سے وضو نہیں ٹوٹتا؛ مذہب چھونے والی روایات کو تقیید یا مخالف روایات کی ترجیح کے ذریعے ہم آہنگ کرتا ہے۔",
+    shortAnswerAr: "في الموقف الغالب للمدرسة لا ينتقض الوضوء بلمس العورة بالكف المجرد؛ وتوفق المدرسة روايات اللمس بتقييدها أو بترجيح الروايات المخالفة.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The private-part touching discussion.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -790,6 +950,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-vomiting",
     question: "Does vomiting break wudu according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق قے کرنے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بالقيء في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "BEGINNER",
@@ -798,6 +960,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "A mouthful of vomit (what cannot be held back) breaks wudu in the school; a mouthful is defined by what pours out without effort.",
+    shortAnswerUr: "منہ بھر قے (جو روکی نہ جا سکے) مذہب میں وضو توڑ دیتی ہے؛ منہ بھر سے مراد وہ ہے جو بغیر کوشش کے باہر نکل آئے۔",
+    shortAnswerAr: "لقمة القيء (ما لا يُكتف عليه) تنقض الوضوء في المدرسة؛ وتُعرَّف اللقمة بأنها ما يفيض دون كد.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Vomit quantity rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -807,6 +971,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-nosebleed",
     question: "Does a nosebleed break wudu?",
+    questionUr: "کیا ناک سے خون بہنے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بنزيف الأنف؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "BEGINNER",
@@ -815,6 +981,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Blood flowing to a place requiring washing (out of the nostril) breaks wudu in the school; blood that stays inside or exits without flowing does not.",
+    shortAnswerUr: "مذہب میں خون کا دھونے کی ضرورت والی جگہ (ناک کی نالی سے باہر) بہہ کر نکلنا وضو توڑتا ہے؛ جو خون اندر رہے یا بغیر بہے نکلے وہ نہیں توڑتا۔",
+    shortAnswerAr: "الدم الجاري إلى موضع يستلزم الغسل (إلى خارج المنخر) ينقض الوضوء في المدرسة؛ أما الدم الذي يبقى في الداخل أو يخرج من غير جريان فلا.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Blood flow rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -824,6 +992,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-sleep",
     question: "Does sleeping break wudu according to the Hanafi madhhab?",
+    questionUr: "کیا حنفی مذہب کے مطابق سونے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بالنوم في المذهب الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "BEGINNER",
@@ -832,6 +1002,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Deep sleep (lying down or unconscious of surroundings) breaks wudu; light dozing seated where one senses surroundings does not — the school grades sleep by depth, not merely by occurring.",
+    shortAnswerUr: "گہری نیند (لیٹ کر سونا یا اطراف سے بے خبر ہونا) وضو توڑتی ہے؛ بیٹھے ہلکی اونگھ جس میں اطراف کا شعور باقی ہو نہیں توڑتی — مذہب نیند کا درجہ گہرائی سے متعین کرتا ہے، محض ہونے سے نہیں۔",
+    shortAnswerAr: "النوم العميق (الاستلقاء أو انعدام الإحساس بالمحيط) ينقض الوضوء؛ أما التغفيق الخفيف جالسًا مع بقاء الإحساس فلا — وتدرّج المدرسة النوم بعمقه لا بمجرد وقوعه.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "Sleep grading for wudu.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -841,6 +1013,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-doubt",
     question: "What do I do if I doubt whether I have wudu?",
+    questionUr: "اگر مجھے شک ہو کہ میرا وضو ہے یا نہیں تو کیا کروں؟",
+    questionAr: "ماذا أفعل إذا شككت في وجود وضوئي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "PRACTICAL",
@@ -849,6 +1023,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Certainty is not removed by doubt: one who knows he had wudu and doubts breaking it remains pure — and the school adds the anti-waswas principle that repeating wudu repeatedly for baseless doubt is discouraged.",
+    shortAnswerUr: "یقین کو شک زائل نہیں کرتا: جو شخص جانتا ہو کہ اس کا وضو تھا اور ٹوٹنے میں شک کرے وہ پاک ہی رہتا ہے — اور مذہب یہ اصول بھی شامل کرتا ہے کہ بے بنیاد شک کے ساتھ بار بار وضو کرنا (وسوسے کے خلاف) ناپسندیدہ ہے۔",
+    shortAnswerAr: "اليقين لا يزيله الشك: من علم أن له وضوءًا وشك في انتقاضه فهو طاهر — وتضيف المدرسة مبدأ المنع من الوسواس بأن تكرار الوضوء مرارًا لشك بلا أساس مكروه.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Certainty/doubt rules and the waswas caution.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -858,6 +1034,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-unconscious",
     question: "Does fainting or loss of consciousness break wudu?",
+    questionUr: "کیا بیہوشی یا شعور ختم ہونے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بالإغماء أو فقدان الوعي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "FIQH",
@@ -866,6 +1044,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — full unconsciousness invalidates wudu in the school (it exceeds deep sleep); brief dozing with awareness does not.",
+    shortAnswerUr: "جی ہاں — مکمل بیہوشی مذہب میں وضو باطل کرتی ہے (یہ گہری نیند سے بھی بڑھ کر ہے)؛ مختصر اونگھ جس میں شعور باقی ہو نہیں توڑتی۔",
+    shortAnswerAr: "نعم — الإغماء الكامل يبطل الوضوء في المدرسة (وهو أبلغ من النوم العميق)؛ أما التغفيق الخفيف مع بقاء الإحساس فلا.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Unconsciousness rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -875,6 +1055,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-laughing-salah",
     question: "Does laughing aloud in salah break wudu according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق نماز میں بلند آواز سے ہنسنے سے وضو ٹوٹ جاتا ہے؟",
+    questionAr: "هل ينتقض الوضوء بالضحك الجهر في الصلاة في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "FIQH",
@@ -883,6 +1065,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — this is a distinctive Hanafi position: laughing aloud in prayer breaks both the prayer and the wudu, based on the school's reconciliation of the narrations; it also requires repetition of the prayer.",
+    shortAnswerUr: "جی ہاں — یہ حنفی مذہب کا امتیازی موقف ہے: نماز میں بلند آواز سے ہنسنا مذہب کی روایات کی ہم آہنگی کی بنا پر نماز اور وضو دونوں کو توڑتا ہے؛ اور اس کے ساتھ نماز دہرانا بھی لازم آتا ہے۔",
+    shortAnswerAr: "نعم — هذا موقف حنفي مميز: الضحك الجهر في الصلاة يبطل الصلاة والوضوء معًا، استنادًا إلى توفق المدرسة بين الروايات؛ ويقتضي إعادة الصلاة أيضًا.",
     hanafiPosition: "Laughing aloud in salah voids salah and wudu (adults, aware).",
     otherViews: "Shafi'i: laughter voids the prayer but not wudu.",
     sources: [
@@ -894,6 +1078,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-madhi",
     question: "What is the ruling on madhi (pre-seminal fluid)?",
+    questionUr: "مذی کا حکم کیا ہے؟",
+    questionAr: "ما هو حكم المذي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "BEGINNER",
@@ -902,6 +1088,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Madhi is impure and requires washing the affected area and wudu, but it does not require ghusl — unlike mani (semen) which is pure in the school yet triggers ghusl.",
+    shortAnswerUr: "مذی ناپاک ہے، متعلقہ جگہ دھونا اور وضو لازم ہے، مگر غسل ضروری نہیں — برخلاف منی کے جو مذہب کے نزدیک پاک ہے مگر غسل کو لازم کرتی ہے۔",
+    shortAnswerAr: "المذي نجس ويقتضي غسل موضعه والوضوء، لكنه لا يقتضي الغسل — خلافًا للمني الذي هو طاهر في المدرسة لكنه يوجب الغسل.",
     detailedAnswer:
       "This is a signature madhhab difference: the school holds semen (mani) is pure (its exit obligates ghusl, not washing of clothes), while madhi/wadi are impure requiring washing + wudu. Shafi'i fiqh treats both as impure. Practical effect: clothes stained with madhi must be washed before prayer; stains of dried semen need not be.",
     hanafiPosition: "Madhi: impure, wash + wudu, no ghusl. Mani: pure, but ghusl obligatory.",
@@ -915,6 +1103,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-ghusl-when",
     question: "When is ghusl (full bath) obligatory according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق غسل کب فرض ہوتا ہے؟",
+    questionAr: "متى يكون الغسل واجبًا في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Ghusl",
     type: "BEGINNER",
@@ -923,6 +1113,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Four causes: ejaculation of semen (with desire or not), insertion of the private parts, menstruation ending, and post-natal bleeding ending — plus ghusl for the deceased.",
+    shortAnswerUr: "چار اسباب: منی کا اخراج (شہوت کے ساتھ ہو یا اس کے بغیر)، شرمگاہوں کا داخل ہونا، حیض کا ختم ہونا، اور نفاس کا ختم ہونا — اس کے علاوہ میت کے غسل کا اضافہ۔",
+    shortAnswerAr: "أربعة أسباب: خروج المني (بشهوة أو بغيرها)، وإدخال الخِلاَفين، وانقطاع الحيض، وانقطاع النفاس — ويضاف إليها غسل المائت.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "The ghusl causes list.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -932,6 +1124,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-ghusl-jumuah",
     question: "Is ghusl for Jumu'ah obligatory or sunnah according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق جمعہ کا غسل فرض ہے یا سنت؟",
+    questionAr: "هل غسل الجمعة واجب أم سنة في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Ghusl",
     type: "BEGINNER",
@@ -940,6 +1134,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "It is sunnah mu'akkadah (emphasized sunnah) in the school — strongly recommended for everyone attending, but not obligatory.",
+    shortAnswerUr: "مذہب میں یہ سنت مؤکدہ ہے — ہر شرکت کرنے والے کے لیے بہت زیادہ ترغیب دی جاتی ہے، مگر فرض نہیں۔",
+    shortAnswerAr: "هو سنة مؤكدة في المدرسة — يُوصى بها شدة لكل من يحضرها، لكنها ليست واجبة.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Salah — Jumu'ah", translation: "Ghusl of Jumu'ah as emphasized sunnah.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -949,6 +1145,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-tayammum-when",
     question: "When is tayammum valid according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق تیمم کب صحیح ہوتا ہے؟",
+    questionAr: "متى يكون التيمم صحيحًا في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Tayammum",
     type: "BEGINNER",
@@ -957,6 +1155,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "When water is unavailable within roughly a mile, or using it would harm (illness, cold with no heating), or the only water is needed for drinking — tayammum substitutes until water is found.",
+    shortAnswerUr: "جب تقریباً ایک میل کے فاصلے تک پانی دستیاب نہ ہو، یا پانی کے استعمال میں ضرر ہو (بیماری، سردی جہاں گرمی کا انتظام نہ ہو)، یا پانی صرف پینے کے لیے درکار ہو — پانی ملنے تک تیمم قائم مقام رہتا ہے۔",
+    shortAnswerAr: "إذا تعذر الماء في نحو ميل، أو كان استعماله يضر (بمرض أو برد بلا تدفئة)، أو كان الماء الوحيد مطلوبًا للشرب — يكون التيمم مقامًا حتى يوجد الماء.",
     sources: [
       { kind: "QURAN", ref: "Al-Ma'idah 5:6", translation: "…then wipe your faces and hands with pure earth — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "Tayammum causes.", status: "PARTIALLY_VERIFIED" },
@@ -967,6 +1167,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-tayammum-surface",
     question: "What surfaces can tayammum be performed on?",
+    questionUr: "تیمم کن سطحوں پر ہو سکتا ہے؟",
+    questionAr: "على أي أسطح يجوز التيمم؟",
     category: "taharah",
     subcategory: "Tayammum",
     type: "BEGINNER",
@@ -975,6 +1177,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Anything of the earth's dust-category: soil, sand, stone, and even dust on walls/objects — the school permits striking the hands on any earthen surface; not on wood, metal, cloth, or food.",
+    shortAnswerUr: "ہر وہ چیز جو زمین کی مٹی کے درجے میں ہو: مٹی، ریت، پتھر، اور حتیٰ کہ دیواروں/اشیاء پر جمی دھول — مذہب کسی بھی خاکی سطح پر ہاتھ مارنے کی اجازت دیتا ہے؛ لکڑی، دھات، کپڑے یا کھانے کی چیز پر نہیں۔",
+    shortAnswerAr: "كل ما في مرتبة تراب الأرض: التراب والرمل والحجر، وحتى الغبار على الحيطان والأشياء — تُبيح المدرسة ضرب الكفين على أي سطح ترابي؛ لا على الخشب ولا المعدن ولا القماش ولا الطعام.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Tayammum surfaces.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -984,6 +1188,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-tayammum-covers",
     question: "What does tayammum cover according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق تیمم کس کس چیز کا قائم مقام ہوتا ہے؟",
+    questionAr: "ما الذي يشمله التيمم في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Tayammum",
     type: "FIQH",
@@ -992,6 +1198,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "One tayammum covers all minor impurities (like wudu) for the obligatory prayer and everything else wudu covers — unlike the Shafi'i school which ties each tayammum to one prayer.",
+    shortAnswerUr: "ایک تیمم تمام حدثِ اصغر کا قائم مقام ہوتا ہے (وضو کی طرح) فرض نماز کے لیے اور ہر اس چیز کے لیے جس کے لیے وضو کافی ہو — برخلاف شافعی مذہب کے جو ہر تیمم کو ایک نماز سے جوڑتا ہے۔",
+    shortAnswerAr: "التيمم الواحد يشمل جميع الأحداث الأصغر (كالوضوء) للصلاة المفروضة وكل ما يشمله الوضوء — خلافًا للمدرسة الشافعية التي تربط كل تيمم بصلاة واحدة.",
     hanafiPosition: "One tayammum = substitute wudu, reusable until broken.",
     otherViews: "Shafi'i: one tayammum per fard prayer.",
     sources: [
@@ -1003,6 +1211,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-khuff-conditions",
     question: "What are the conditions for wiping over khuffs (leather socks) in Hanafi fiqh?",
+    questionUr: "حنفی فقہ میں خفین (چمڑے کے موزوں) پر مسح کی شرائط کیا ہیں؟",
+    questionAr: "ما هي شروط المسح على الخفين في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Masah",
     type: "FIQH",
@@ -1011,6 +1221,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The khuff must have been put on in complete purity, be strong enough to stand walking in (without slipping down), and cover the foot up to the ankles — then wiping over them replaces foot-washing for a day and night (resident) or three (traveller).",
+    shortAnswerUr: "خف مکمل پاکی کی حالت میں پہنا گیا ہو، پاؤں میں چلنے کے قابل مضبوط ہو (کہ پاؤں سے نہ جھک جائے)، اور ٹخنوں تک پاؤں کو ڈھانپے — پھر ان پر مسح ایک دن رات (مقیم کے لیے) یا تین دن رات (مسافر کے لیے) پاؤں دھونے کا قائم مقام ہے۔",
+    shortAnswerAr: "أن يُلبس الخُف على طهارة تامة، وأن يكون متينًا يثبت على القدم في المشي (من غير أن يسقط)، وأن يغطي القدم إلى الكعبين — فيكون المسح عليهما مقامًا لغسل القدمين يومًا وليلة (للمقيم) أو ثلاثة (للمسافر).",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "Khuff conditions and durations.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1020,6 +1232,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-khuff-duration",
     question: "How long can masah over khuffs be continued?",
+    questionUr: "خفوں پر مسح کب تک جاری رکھا جا سکتا ہے؟",
+    questionAr: "كم يستمر المسح على الخفين؟",
     category: "taharah",
     subcategory: "Masah",
     type: "BEGINNER",
@@ -1028,6 +1242,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "A resident: one day and night (24h); a traveller: three days and nights (72h) — counted from first breaking of wudu after wearing them in purity.",
+    shortAnswerUr: "مقیم کے لیے: ایک دن رات (۲۴ گھنٹے)؛ مسافر کے لیے: تین دن رات (۷۲ گھنٹے) — شمار پاکی کے ساتھ پہننے کے بعد وضو کے پہلے ٹوٹنے سے ہوتا ہے۔",
+    shortAnswerAr: "للمقيم: يوم وليلة (24 ساعة)؛ وللمسافر: ثلاثة أيام ولياليها (72 ساعة) — يُحسب من أول حدث بعد لبسهما على طهارة.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Masah durations.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1037,6 +1253,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-masah-socks",
     question: "Can masah be done over ordinary (non-leather) socks according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق عام (غیر چمڑے کے) موزوں پر مسح ہو سکتا ہے؟",
+    questionAr: "هل يجوز المسح على الجوارب العادية (غير الجلدية) في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Masah",
     type: "FIQH",
@@ -1047,6 +1265,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     disputedNote: "Shafi'i fiqh restricts masah to leather khuffs; the Hanafi school permits thick opaque socks under conditions.",
     shortAnswer:
       "Yes — the school permits wiping over thick, opaque socks that hold to the feet like khuffs, based on the school's reading of the Companions' practice reports; thin transparent socks are excluded.",
+    shortAnswerUr: "جی ہاں — مذہب ایسے موٹے، غیر شفاف موزوں پر مسح کی اجازت دیتا ہے جو خفوں کی طرح پاؤں سے لگے رہیں، صحابہ کرام کے عمل کی روایات کے مذہب کے فہم کی بنا پر؛ پتلے شفاف موزے مستثنیٰ ہیں۔",
+    shortAnswerAr: "نعم — تبيح المدرسة المسح على الجوارب الغليظة الكاتمة التي تثبت على القدم كالخفين، بناءً على فهم المدرسة لروايات عمل الصحابة؛ وتستثنى الجوارب الرقيقة الشفافة.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Masah over non-leather socks — the school's evidence.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1056,6 +1276,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-blood",
     question: "Is blood impure (najis) in Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ میں خون ناپاک (نجس) ہے؟",
+    questionAr: "هل الدم نجس في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Najasah",
     type: "BEGINNER",
@@ -1064,6 +1286,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Flowing blood of humans and animals is impure and must be washed off clothes/body; the small blood of fleas and the like is excused, and fish/insect blood is not najis.",
+    shortAnswerUr: "انسان اور جانوروں کا بہنے والا خون ناپاک ہے اور کپڑوں/جسم سے دھلنا ضروری ہے؛ پچھو اور اس جیسے چھوٹے کیڑوں کا کم مقدار کا خون معاف ہے، اور مچھلی/حشرات کا خون نجس نہیں۔",
+    shortAnswerAr: "الدم الجاري من الإنسان والحيوان نجس ويجب إزالته من الثياب/الجسم؛ ويُعفى القليل من دم البرغوث ونحوه، ودم السمك/الحشرات ليس نجسًا.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Blood impurity rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1073,6 +1297,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-urine-baby-boy",
     question: "What is the ruling on the urine of a baby boy according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق شیر خوار بچے کے پیشاب کا حکم کیا ہے؟",
+    questionAr: "ما هو حكم بول الغلام الرضيع في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Najasah",
     type: "FIQH",
@@ -1081,6 +1307,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school holds a nursing boy's urine is impure but its removal is by sprinkling (nadh) rather than full washing — an ease provision from the narration of the washing/sprinkling contrast between boys and girls; the urine itself is still najis in the school's books.",
+    shortAnswerUr: "مذہب کی رائے ہے کہ شیر خوار لڑکے کا پیشاب ناپاک ہے مگر اس کا ازالہ چھڑکاؤ (ندح) سے ہوتا ہے، مکمل دھلائی سے نہیں — یہ سہولت اس روایت سے ہے جس میں لڑکے اور لڑکی کے پیشاب میں دھونے اور چھڑکانے کا فرق مذکور ہے؛ مگر پیشاب خود مذہب کی کتب میں نجس ہی رہتا ہے۔",
+    shortAnswerAr: "ترى المدرسة بول الغلام الرضيع نجس لكن إزالته بالرش (الندح) لا بالغسل التام — تسهيلاً مأخوذًا من رواية التفريق بين غسل بول الصبي ورش بول الصغيرة؛ ويبقى البول نفسه نجسًا في كتب المدرسة.",
     hanafiPosition: "Sprinkle (nadh) suffices for a nursing boy's urine; a girl's is washed.",
     otherViews: "Shafi'i: baby boy's urine still washed normally (impurity same).",
     sources: [
@@ -1093,6 +1321,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-dog-saliva",
     question: "What is the Hanafi ruling on dogs and dog saliva?",
+    questionUr: "کتے اور کتے کی لار کا حنفی حکم کیا ہے؟",
+    questionAr: "ما هو الحكم الحنفي في الكلاب ولعابها؟",
     category: "taharah",
     subcategory: "Najasah",
     type: "PRACTICAL",
@@ -1101,6 +1331,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Dog saliva and its sweat are impure in the school and washed seven times (one with earth) when they contaminate a vessel — while the dog's body/hair is treated as impure too in the school's dominant reading, with practical ease for necessity (hunting, guarding, assistance).",
+    shortAnswerUr: "مذہب کے نزدیک کتے کی لار اور پسینہ ناپاک ہیں اور برتن آلودہ ہونے پر سات بار دھویا جاتا ہے (ایک بار مٹی سے) — جبکہ کتے کا جسم/بال بھی مذہب کے غالب فہم میں ناپاک شمار ہوتا ہے، ضرورت (شکار، پہرہ، معاونت) میں عملی سہولت کے ساتھ۔",
+    shortAnswerAr: "لعاب الكلب وعرقه نجسان في المدرسة، ويُغسل الإناء إذا أصابه سبع مرات إحداها بالتراب — بينما يُعد جسم الكلب/شعره نجسًا أيضًا في الوجه الغالب للمدرسة، مع تسهيل عملي للحاجة (الصيد والحراسة والمعاونة).",
     detailedAnswer:
       "The school distinguishes: vessels licked by dogs are washed seven times including once with earth, based on the vessel-washing narration (in Bukhari/Muslim material — cited without number). The Shafi'i school extends washing to the dog's entire body; the Hanafi school's dominant position treats the dog's body as impure but focuses the seven-wash rule on vessels. Keeping dogs for necessity (guarding, farming, service) is permitted with the impurity managed.",
     sources: [
@@ -1113,6 +1345,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-water-large",
     question: "When does a large body of water remain pure despite impurities falling in?",
+    questionUr: "بڑا پانی (جسمِ آب) کب ناپاکی کے گرنے کے باوجود پاک رہتا ہے؟",
+    questionAr: "متى يبقى الماء الكبير طاهرًا رغم وقوع النجاسات فيه؟",
     category: "taharah",
     subcategory: "Water purity",
     type: "FIQH",
@@ -1121,6 +1355,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Water connected to the earth/sky (rivers, seas, large tanks) does not become impure unless one of its three qualities — colour, taste, or smell — changes; small stagnant pools become impure if any impurity falls, unless moving/flowing.",
+    shortAnswerUr: "زمین/آسمان سے جڑا ہوا پانی (دریائیں، سمندر، بڑے حوض) ناپاک نہیں ہوتا جب تک اس کی تین صفات میں سے کوئی — رنگ، ذائقہ یا بو — نہ بدل جائے؛ چھوٹے جمے ہوئے تالاب اگر کوئی ناپاکی گرے تو ناپاک ہو جاتے ہیں، جب تک رواں/بہتے نہ ہوں۔",
+    shortAnswerAr: "الماء المتصل بالأرض/السماء (الأنهار والبحار والصهاريج الكبيرة) لا ينجس ما لم تتغير إحدى صفاته الثلاث — اللون أو الطعم أو الرائحة؛ أما البرك الصغيرة الساكنة فتنجس إذا وقعت فيها نجاسة، ما لم تكن جارية.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The two-category water framework and the three-qualities test.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1130,6 +1366,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-water-leftover",
     question: "What is the ruling on the leftover water (of animals) according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق (جانوروں کے) بچے ہوئے پانی کا حکم کیا ہے؟",
+    questionAr: "ما هو حكم بقايا مياه (الحيوانات) في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Water purity",
     type: "PRACTICAL",
@@ -1138,6 +1376,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school categorizes leftover water: human, horse, and edible-animal leftovers are pure; dog, pig, and predatory leftovers are impure; cat leftover is pure by an ease provision; donkey/mule leftovers are discussed (doubtful — washing preferred).",
+    shortAnswerUr: "مذہب بچے ہوئے پانی کی درجہ بندی کرتا ہے: انسان، گھوڑے اور کھانے والے جانور کا بچا ہوا پانی پاک؛ کتے، خنزیر اور درندے کا ناپاک؛ بلی کا ایک سہولتی رعایت سے پاک؛ گدھے/خچر کا محلِ بحث (مشکوک — دھونا بہتر)۔",
+    shortAnswerAr: "تصنف المدرسة المتبقي: متبقي الإنسان والفرس والبهائم المأكولة اللحم طاهر؛ ومتبقي الكلب والخنزير والسبع نجس؛ ومتبقي القطة طاهر بتيسير؛ ومتبقي الحمار والبغل محل كلام (مشكوك — والغسل أولى).",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "The leftover-water categories.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1147,6 +1387,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-toilet-etiquette",
     question: "What is the Islamic toilet etiquette (istinja) according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق خلا کا اسلامی آداب (استنجا) کیا ہے؟",
+    questionAr: "ما هي آداب الخلاء (الاستنجاء) في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Istinja",
     type: "BEGINNER",
@@ -1155,6 +1397,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Cleaning with water (or stones if water unavailable) of the two exits, using the left hand, not facing the qiblah, and concealing oneself — istinja with water is mustahabb, and stones (takhalli) suffice when nothing wet remains.",
+    shortAnswerUr: "دونوں راستوں کا پانی سے صاف کرنا (اگر پانی دستیاب نہ ہو تو پتھر سے)، بائیں ہاتھ سے کام لینا، قبلہ کی سمت منہ نہ کرنا، اور پردے میں رہنا — پانی سے استنجا مستحب ہے، اور پتھر (تخلی) اس وقت کافی ہیں جب کوئی رطوبت باقی نہ رہے۔",
+    shortAnswerAr: "تنظيف الخلفين بالماء (أو بالحجارة إن تعذر الماء)، واستعمال اليسرى، وعدم الاستقبال للقبلة، والاستتار — والاستنجاء بالماء مستحب، وتجزي الحجارة (التخلي) إذا لم يبق رطوبة.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Istinja rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1164,6 +1408,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-najasah-types",
     question: "What are the types of impurities (najasah) in Hanafi fiqh?",
+    questionUr: "حنفی فقہ میں نجاست کی اقسام کیا ہیں؟",
+    questionAr: "ما هي أنواع النجاسات في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Najasah",
     type: "FIQH",
@@ -1172,6 +1418,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "The school divides into heavy (ghalizah — urine, faeces, flowing blood, pig, dog saliva, intoxicants) requiring washing, and light (khafifah — urine of livestock, droppings of lawful birds) excused when less than a quarter of a garment.",
+    shortAnswerUr: "مذہب تقسیم کرتا ہے: بھاری نجاست (غلظہ — پیشاب، فضلہ، بہنے والا خون، خنزیر، کتے کی لار، نشہ آور اشیاء) جن کا دھونا لازم ہے، اور ہلکی نجاست (خفیفہ — چوپائے کا پیشاب، حلال پرندوں کی لت) جو کپڑے کے چوتھائی حصے سے کم ہو تو معاف ہے۔",
+    shortAnswerAr: "تقسم المدرسة إلى نجاسة غليظة (البول والغائط والدم الجاري والخنزير ولعاب الكلب والمسكرات) تستلزم الغسل، ونجاسة خفيفة (بول الدواب المأكولة اللحم وفرث الطيور الحلال) تُعفى إذا كانت أقل من ربع الثوب.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Heavy vs light impurity framework.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -1181,6 +1429,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
   {
     slug: "taharah-madhur",
     question: "What is the ruling for someone with chronic incontinence (ma'dhur) according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق معذور (مسلسل بہنے والے مرض والے شخص) کا حکم کیا ہے؟",
+    questionAr: "ما هو حكم المعذور (صاحب العرض المزمن) في الفقه الحنفي؟",
     category: "taharah",
     subcategory: "Wudu",
     type: "PRACTICAL",
@@ -1189,6 +1439,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "One whose impurity (or breaking of wudu) recurs continuously takes a fresh wudu for each fard prayer once its time enters, and prays without interruption being blamed — the excused person's ease is documented in the manuals.",
+    shortAnswerUr: "جس کی ناپاکی (یا وضو کا ٹوٹنا) مسلسل دہرائی جائے وہ ہر فرض نماز کے وقت داخل ہوتے ہی نئی وضو کرتا ہے اور بغیر ٹوٹنے کے کلام کے نماز ادا کرتا ہے — معذور کی سہولت کتبِ فقہ میں مدوّن ہے۔",
+    shortAnswerAr: "من تكرر حدثه (أو انتقاض وضوئه) باستمرار يتوضأ لكل صلاة فرض عند دخول وقتها ويصلي دون أن يُعاب عليه انتقاضه — وتسهيل المعذور مدوَّن في الكتب.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The ma'dhur rulings.", status: "PARTIALLY_VERIFIED" },
     ],

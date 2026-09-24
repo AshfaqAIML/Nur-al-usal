@@ -43,12 +43,12 @@ export async function GET(req: NextRequest) {
   if (q) {
     const rows = await db.question.findMany({
       where: { isCommon: true },
-      select: { id: true, text: true, shortAnswer: true, variantWordings: true, subcategory: true },
+      select: { id: true, text: true, textUr: true, textAr: true, shortAnswer: true, shortAnswerUr: true, shortAnswerAr: true, variantWordings: true, subcategory: true },
       take: 1000,
     });
     const terms = q.split(/\s+/).filter((t) => t.length > 1).slice(0, 8);
     const matches = rows.filter((r) => {
-      const hay = `${r.text} ${r.shortAnswer ?? ""} ${r.subcategory ?? ""} ${r.variantWordings ?? ""}`.toLowerCase();
+      const hay = `${r.text} ${r.textUr ?? ""} ${r.textAr ?? ""} ${r.shortAnswer ?? ""} ${r.shortAnswerUr ?? ""} ${r.shortAnswerAr ?? ""} ${r.subcategory ?? ""} ${r.variantWordings ?? ""}`.toLowerCase();
       return terms.every((t) => hay.includes(t)) || terms.some((t) => hay.includes(t) && t.length > 4);
     });
     const idFilter = matches.map((m) => m.id);
@@ -87,6 +87,7 @@ export async function GET(req: NextRequest) {
     total, page, limit, pages: Math.ceil(total / limit),
     questions: questions.map((q) => ({
       id: q.id, slug: q.slug, text: q.text, shortAnswer: q.shortAnswer,
+      textUr: q.textUr, textAr: q.textAr, shortAnswerUr: q.shortAnswerUr, shortAnswerAr: q.shortAnswerAr,
       subcategory: q.subcategory, questionType: q.questionType, difficulty: q.difficulty,
       isMisconception: q.isMisconception, isDisputed: q.isDisputed, isSensitive: q.isSensitive,
       featured: q.featured, views: q.views,

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlatform, useT } from "@/lib/store";
 import { apiGet, BootstrapData, QuranVerse } from "@/lib/api";
+import { useLoc } from "@/lib/use-loc";
 import { ClassificationBadge, SourceClassBadge, VerificationBadge } from "@/components/platform/badges";
 import { UrduText } from "@/components/platform/text";
 import { clearReadingHistory, loadReadingHistory, ReadingItem, timeAgo } from "@/lib/reading-history";
@@ -20,6 +21,7 @@ import { cn } from "@/lib/utils";
 export function HomeView() {
   const t = useT();
   const { setView, setLibraryOpen } = usePlatform();
+  const loc = useLoc();
   const [data, setData] = useState<BootstrapData | null>(null);
   const [ayah, setAyah] = useState<QuranVerse | null>(null);
   const [ayahLoading, setAyahLoading] = useState(true);
@@ -173,11 +175,11 @@ export function HomeView() {
                   className="card-lift group flex w-72 shrink-0 flex-col rounded-xl border bg-card p-3.5 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
                 >
                   <span dir="auto" className="line-clamp-2 font-scholarly text-[13px] font-semibold leading-snug group-hover:text-emerald-800 dark:group-hover:text-emerald-300">
-                    {q.text}
+                    {loc.text(q)}
                   </span>
-                  {q.shortAnswer && <span className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{q.shortAnswer}</span>}
+                  {loc.short(q) && <span className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{loc.short(q)}</span>}
                   <span className="mt-auto pt-2 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                    {[q.cluster?.titleEn, q.difficulty ? t(`diff${q.difficulty.charAt(0)}${q.difficulty.slice(1).toLowerCase()}`) : null].filter(Boolean).join(" · ")}
+                    {[q.cluster ? loc.title(q.cluster.titleEn, q.cluster.titleUr, q.cluster.titleAr) : null, q.difficulty ? t(`diff${q.difficulty.charAt(0)}${q.difficulty.slice(1).toLowerCase()}`) : null].filter(Boolean).join(" · ")}
                   </span>
                 </button>
               ))}

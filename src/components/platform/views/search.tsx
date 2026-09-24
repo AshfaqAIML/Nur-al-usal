@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlatform, useT } from "@/lib/store";
+import { useLoc } from "@/lib/use-loc";
 import { apiGet, SearchHit } from "@/lib/api";
 import { SOURCE_TYPE_META } from "@/lib/ai.client";
 import { EmptyState, ManuscriptPanel, BookSpine } from "@/components/platform/architectural";
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 export function SearchView({ param }: { param?: string | null }) {
   const t = useT();
   const { setView } = usePlatform();
+  const loc = useLoc();
   const [q, setQ] = useState("");
   const [type, setType] = useState("");
   const [hits, setHits] = useState<SearchHit[] | null>(null);
@@ -127,7 +129,7 @@ export function SearchView({ param }: { param?: string | null }) {
                     <BookSpine />
                     <CardContent className="p-4 ps-5">
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-sm font-semibold">{h.title}</span>
+                        <span dir="auto" className="text-sm font-semibold">{loc.title(h.title, h.titleUr, h.titleAr)}</span>
                         <div className="flex items-center gap-1.5">
                           <Badge variant="outline" className="text-[10px]">{meta?.label ?? h.entityType}</Badge>
                           <span className="text-[10px] text-muted-foreground">score {h.score}</span>

@@ -37,7 +37,7 @@ export interface BootstrapData {
   comparisons: { id: string; issue: string }[];
   bank?: {
     total: number; disputed: number; misconceptions: number; clusters: number; fatawaRazvia: number;
-    featured: { slug: string; text: string; shortAnswer: string | null; difficulty: string | null; isDisputed: boolean; category?: { nameEn: string; nameUr: string; nameAr: string } | null; cluster?: { titleEn: string } | null }[];
+    featured: { slug: string; text: string; textUr: string | null; textAr: string | null; shortAnswer: string | null; shortAnswerUr: string | null; shortAnswerAr: string | null; difficulty: string | null; isDisputed: boolean; category?: { nameEn: string; nameUr: string; nameAr: string } | null; cluster?: { titleEn: string; titleUr: string | null; titleAr: string | null } | null }[];
     topClusters: { slug: string; titleEn: string; titleUr: string | null; titleAr: string | null; descriptionEn: string | null; count: number }[];
   };
 }
@@ -133,6 +133,7 @@ export interface SearchHit {
 // ─── Common Questions Library ───
 export interface BankListItem {
   id: string; slug: string | null; text: string; shortAnswer: string | null;
+  textUr: string | null; textAr: string | null; shortAnswerUr: string | null; shortAnswerAr: string | null;
   subcategory: string | null; questionType: string | null; difficulty: string | null;
   isMisconception: boolean; isDisputed: boolean; isSensitive: boolean; featured: boolean; views: number;
   category?: { slug: string; nameEn: string; nameUr: string; nameAr: string } | null;
@@ -160,11 +161,12 @@ export interface BankAnswerDetail {
   helpfulUp: number; helpfulDown: number; citations: BankCitation[];
 }
 export interface BankRelated {
-  slug: string; text: string; difficulty: string | null; clusterTitle: string | null;
+  slug: string; text: string; textUr: string | null; textAr: string | null; difficulty: string | null; clusterTitle: string | null;
 }
 export interface BankDetailResponse {
   question: {
     id: string; slug: string | null; text: string; language: string; subcategory: string | null;
+    textUr: string | null; textAr: string | null; shortAnswerUr: string | null; shortAnswerAr: string | null;
     questionType: string | null; difficulty: string | null; isMisconception: boolean; isDisputed: boolean;
     isSensitive: boolean; shortAnswer: string | null; intent: string | null; views: number; featured: boolean;
     category?: { slug: string; nameEn: string; nameUr: string; nameAr: string; type: string } | null;
@@ -177,7 +179,7 @@ export interface BankDetailResponse {
 export interface BankCluster {
   id: string; slug: string; titleEn: string; titleUr: string | null; titleAr: string | null;
   descriptionEn: string | null; count: number;
-  questions: { slug: string | null; text: string; difficulty: string | null }[];
+  questions: { slug: string | null; text: string; textUr?: string | null; textAr?: string | null; difficulty: string | null }[];
 }
 
 export function parseJson<T>(s: string | null | undefined, fallback: T): T {

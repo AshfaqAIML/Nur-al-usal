@@ -78,7 +78,7 @@ const NEW_CATEGORIES: CatDef[] = [
   { slug: "history-usul", nameEn: "History & Usul", nameUr: "تاریخ و اصول", nameAr: "التاريخ والأصول", type: "HISTORY_METHODOLOGY", icon: "Landmark",
     descriptionEn: "Imam Abu Hanifa's biography, the school's transmission, and its legal methodology.",
     topics: [{ slug: "hanafi-history", titleEn: "Hanafi history", titleUr: "حنفی تاریخ", titleAr: "تاريخ الحنفية", summaryEn: "The school's formation and corpus." }] },
-  { slug: "terminology", nameEn: "Terminology", nameUr: "اصطلاحات", titleAr: undefined, nameAr: "المصطلحات", type: "TERMINOLOGY", icon: "BookOpen",
+  { slug: "terminology", nameEn: "Terminology", nameUr: "اصطلاحات", nameAr: "المصطلحات", type: "TERMINOLOGY", icon: "BookOpen",
     descriptionEn: "The vocabulary of fiqh — from fard/wajib to fatwa and maslak.",
     topics: [{ slug: "fiqh-vocabulary", titleEn: "Fiqh vocabulary", titleUr: "فقهی اصطلاحات", titleAr: "مصطلحات الفقه", summaryEn: "The ruling tiers and key terms." }] },
   { slug: "comparative", nameEn: "Madhhab Comparisons", nameUr: "مذاہب کا موازنہ", nameAr: "مقارنة المذاهب", type: "COMPARATIVE", icon: "Scale",
@@ -87,7 +87,7 @@ const NEW_CATEGORIES: CatDef[] = [
   { slug: "misconceptions", nameEn: "Common Misconceptions", nameUr: "مشہور غلط فہمیاں", nameAr: "المفاهيم الخاطئة", type: "MISCONCEPTIONS", icon: "ShieldQuestion",
     descriptionEn: "Investigated claims about Hanafi belief and practice — each checked against the sources.",
     topics: [{ slug: "investigated-claims", titleEn: "Investigated claims", titleUr: "تحقیق شدہ دعوے", titleAr: "ادعاءات محققة", summaryEn: "Claims examined against the literature." }] },
-  { slug: "books-scholars", nameEn: "Books & Scholars", nameUr: "کتابیں و علماء", titleAr: undefined, nameAr: "الكتب والعلماء", type: "REFERENCE", icon: "Library",
+  { slug: "books-scholars", nameEn: "Books & Scholars", nameUr: "کتابیں و علماء", nameAr: "الكتب والعلماء", type: "REFERENCE", icon: "Library",
     descriptionEn: "The school's library — from al-Hidayah to Fatawa Razvia — and its scholars.",
     topics: [{ slug: "hanafi-library", titleEn: "The Hanafi library", titleUr: "حنفی لائبریری", titleAr: "مكتبة الحنفية", summaryEn: "The works that carry the school." }] },
   { slug: "south-asian", nameEn: "South Asian Practice", nameUr: "برصغیر کی عملی روایت", nameAr: "ممارسات جنوب آسيا", type: "CULTURE", icon: "Map",
@@ -227,11 +227,13 @@ async function main() {
     const question = await prisma.question.create({
       data: {
         text: q.question, language: "EN", slug: q.slug,
+        textUr: q.questionUr ?? null, textAr: q.questionAr ?? null,
         categoryId, subcategory: q.subcategory ?? null,
         questionType: q.type, difficulty: q.difficulty,
         isCommon: true, isMisconception: q.isMisconception ?? false,
         isDisputed: q.isDisputed ?? false, isSensitive: sensitive,
         shortAnswer: q.shortAnswer, intent: q.intent ?? null,
+        shortAnswerUr: q.shortAnswerUr ?? null, shortAnswerAr: q.shortAnswerAr ?? null,
         clusterId: q.cluster ? (clusterBySlug.get(q.cluster) ?? null) : null,
         clusterOrder: created,
         variantWordings: j(q.variants ?? []),
@@ -296,7 +298,11 @@ async function main() {
     return {
       entityType: "QUESTION", entityId: q.id,
       title: q.text,
-      body: `${q.shortAnswer ?? ""} ${ans?.detailedAnswer ?? ""} ${ans?.hanafiPosition ?? ""} ${variants.join(" ")} ${q.subcategory ?? ""}`.trim(),
+      titleUr: q.textUr ?? null,
+      titleAr: q.textAr ?? null,
+      body: `${q.shortAnswer ?? ""} ${q.shortAnswerUr ?? ""} ${q.shortAnswerAr ?? ""} ${ans?.detailedAnswer ?? ""} ${ans?.hanafiPosition ?? ""} ${variants.join(" ")} ${q.subcategory ?? ""} ${q.questionUr ?? ""} ${q.questionAr ?? ""}`.trim(),
+      bodyUr: q.shortAnswerUr ?? null,
+      bodyAr: q.shortAnswerAr ?? null,
       route: `bank/${q.slug}`,
       weight: q.featured ? 1.5 : 1.3,
     };
@@ -314,6 +320,7 @@ async function main() {
   console.log("With variants:", ALL_QUESTIONS.filter((q) => (q.variants ?? []).length > 0).length);
   console.log("Disputed:", ALL_QUESTIONS.filter((q) => q.isDisputed).length, "| Misconception-flagged:", ALL_QUESTIONS.filter((q) => q.isMisconception).length);
   console.log("With detailedAnswer:", ALL_QUESTIONS.filter((q) => q.detailedAnswer).length, "| With hanafiPosition:", ALL_QUESTIONS.filter((q) => q.hanafiPosition).length);
+  console.log("Translated Ur/Ar:", ALL_QUESTIONS.filter((q) => q.questionUr && q.questionAr && q.shortAnswerUr && q.shortAnswerAr).length, "/", ALL_QUESTIONS.length);
   console.log("Personal-fatwa warnings:", stats.sensitive);
   console.log("Clusters:", clusterSlugs.length, "| Search docs:", docs.length);
   console.log("\n══════ CITATION STATISTICS ══════");

@@ -9,6 +9,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "taqlid-what-is",
     question: "What is taqlid?",
+    questionUr: "تقلید کیا ہے؟",
+    questionAr: "ما هو التقليد؟",
     category: "taqlid-madhhab",
     subcategory: "Definition",
     type: "TERMINOLOGY",
@@ -17,6 +19,8 @@ export const exemplarQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Taqlid means accepting the ruling of a qualified scholar without independently re-deriving it from the primary evidence — the ordinary way non-specialists practise any field of knowledge.",
+    shortAnswerUr: "تقلید سے مراد کسی اہلِ عالم کے حکم کو بغیر اپنی طرف سے اصل ادلّہ سے دوبارہ اخذ کیے قبول کرنا ہے — یہی غیر متخصص لوگوں کا علم کے ہر شعبے میں عمل کرنے کا عام طریقہ ہے۔",
+    shortAnswerAr: "التقليد هو قبول حكم العالم المتأهل دون إعادة اشتقاقه بنفسه من الأدلة الأصلية — وهو الطريق المعتاد الذي يسلكه غير المتخصصين في كل فرع من فروع العلم.",
     detailedAnswer:
       "Linguistically taqlid comes from 'taklid' — placing a collar (qiladah) around the neck, i.e. accepting someone's authority. Technically, Hanafi usul works define it as accepting the statement of another without knowing its evidence (hujjah). This is the norm in medicine, engineering and every technical discipline: the layman asks the expert. Islamic law treats ordinary believers the same way — they follow those who devoted their lives to the Qur'an, Sunnah and the inherited practice of the ummah. The Qur'an commands: 'Ask the people of remembrance/knowledge if you do not know' (Al-Nahl 16:43), and the Sunnah records that when a Companion was injured he asked others what to do about his ghusl, showing that laymen follow qualified judgement.",
     hanafiPosition:
@@ -31,6 +35,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "taqlid-blind-following",
     question: "Is taqlid blind following?",
+    questionUr: "کیا تقلید اندھی پیروی ہے؟",
+    questionAr: "هل التقليد اتباع أعمى؟",
     category: "taqlid-madhhab",
     subcategory: "Definition",
     type: "MISCONCEPTION",
@@ -40,6 +46,8 @@ export const exemplarQuestions: BankQuestion[] = [
     isMisconception: true,
     shortAnswer:
       "No — taqlid is not 'blind' because it is restricted to qualified, trustworthy scholars whose rulings cite evidence, and the layman remains free to ask the reasoning behind any ruling.",
+    shortAnswerUr: "نہیں — تقلید اندھی پیروی نہیں کیونکہ یہ صرف اہلِ علم، معتبر عالموں تک محدود ہے جن کے احکام کے ساتھ دلائل بھی ہوتے ہیں، اور عام آدمی کسی بھی حکم کے استدلال کو پوچھنے کے لیے آزاد رہتا ہے۔",
+    shortAnswerAr: "لا — التقليد ليس اتباعًا أعمى، لأنه مقصور على العلماء المتأهلين الموثوقين الذين يستندون في أحكامهم إلى الأدلة، ويظل العامي حرًّا في أن يستفسر عن الاستدلال لأي حكم.",
     detailedAnswer:
       "The charge of 'blind following' assumes taqlid means accepting whatever anyone says. Classical Hanafi usul restricts taqlid: (1) it must be of a qualified scholar meeting documented conditions (knowledge of the Qur'an, Sunnah, previous fiqh, usul); (2) the layman may request the evidence; (3) if the layman learns the evidence, following remains valid but he is not required to re-derive it. Imam al-Sarakhsi, in the introduction to his Usul, explains the division between the mujtahid who derives and the muqallid who follows — a division of labour, not blindness. The same objection would condemn patients who 'blindly follow' doctors; knowledge is accessed through qualified transmitters.",
     hanafiPosition:
@@ -58,6 +66,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "taqlid-necessary",
     question: "Is following a madhhab necessary?",
+    questionUr: "کیا کسی مذہب پر عمل کرنا ضروری ہے؟",
+    questionAr: "هل اتباع مذهب معين ضروري؟",
     category: "taqlid-madhhab",
     subcategory: "Obligation",
     type: "METHODOLOGY",
@@ -69,6 +79,8 @@ export const exemplarQuestions: BankQuestion[] = [
       "Whether taqlid shakhsi (of one specific madhhab) is required, or taqlid ghayr mutlaq (of qualified scholars generally) suffices — a documented intra-Sunni disagreement.",
     shortAnswer:
       "Following qualified scholarship is obligatory for every non-scholar; binding oneself to one madhhab (taqlid shakhsi) is the disciplined path most Hanafi scholars recommend, though some later scholars allowed principled switching in specific rulings.",
+    shortAnswerUr: "ہر غیر عالم پر اہلِ علم کی پیروی واجب ہے؛ کسی ایک مذہب سے وابستہ رہنا (تقلیدِ شخصی) وہ منظم طریقہ ہے جس کی اکثر حنفی علما توصیه کرتے ہیں، اگرچہ بعض متاخر علما نے مخصوص مسائل میں اصول کے مطابق مذہب کی تبدیلی کی اجازت دی ہے۔",
+    shortAnswerAr: "اتباع أهل العلم واجب على كل غير العالِم؛ وارتباط المرء بمذهب واحد (التقليد الشخصي) هو الطريق المنضبط الذي توصي به أكثر فقهاء الحنفية، مع أن بعض المتأخرين أجازوا الانتقال المبني على قاعدة في أحكام معينة.",
     detailedAnswer:
       "Every Muslim either practises fiqh by personal derivation or by following someone. Personal derivation (ijtihad) requires mastery of Arabic, usul, hundreds of thousands of narrations and the disagreements of earlier generations — the classical books state the conditions in detail. For everyone else the options are: follow a qualified scholar (taqlid), or leave the commands of Allah unpractised. Hanafi works from al-Quduri's era onward treat layman-compliance as operating through taqlid. The narrower question — must one stick to a SINGLE madhhab in all rulings? — is where scholars differ, and the platform records that difference rather than collapsing it.",
     hanafiPosition:
@@ -85,6 +97,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "madhhab-what-is",
     question: "What is the Hanafi madhhab?",
+    questionUr: "حنفی مذہب کیا ہے؟",
+    questionAr: "ما هو المذهب الحنفي؟",
     category: "taqlid-madhhab",
     subcategory: "Definition",
     type: "BEGINNER",
@@ -93,6 +107,8 @@ export const exemplarQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "The Hanafi madhhab is the oldest of the four Sunni schools of law: a codified methodology of Qur'an, Sunnah, ijma' and qiyas transmitted from Imam Abu Hanifa (d. 150 AH) through his students Abu Yusuf and al-Shaybani, followed today by the largest share of Sunni Muslims.",
+    shortAnswerUr: "حنفی مذہب چاروں اہلِ سنت فقہی مذاهب میں سب سے قدیم ہے: قرآن، سنت، اجماع اور قیاس پر مبنی ایک مدوّن منہج جو امام ابو حنیفہ (متوفی ۱۵۰ھ) سے ان کے شاگردوں ابو یوسف اور شیبانی کے ذریعے منتقل ہوا، اور آج اہلِ سنت مسلمانوں کی سب سے بڑی تعداد اسی پر عمل پیرا ہے۔",
+    shortAnswerAr: "المذهب الحنفي هو أقدم المذاهب الفقهية الأربعة عند أهل السنة: منهج مدوَّن في القرآن والسنة والإجماع والقياس انتقل من الإمام أبي حنيفة (ت 150هـ) عن طريق تلميذي أبي يوسف والشيباني، وعليه اليوم أكبر شريحة من مسلمي أهل السنة.",
     detailedAnswer:
       "A madhhab is not a sect but a scholarly tradition of reading the sources. The Hanafi school descends from the juristic tradition of Kufa (linked to 'Abdullah ibn Mas'ud and 'Ali ibn Abi Talib), which Imam Abu Hanifa systematized through rigorous qiyas (analogical reasoning) and istihsan (juristic preference). His two great students, Imam Abu Yusuf (first Chief Qadi of the Abbasids) and Imam Muhammad al-Shaybani (codifier of the Zahir al-Riwaya corpus), transmitted it in writing. The school became the law of the Abbasid, Ottoman and Mughal courts and dominates Turkey, the Balkans, Central Asia, Afghanistan, Pakistan, India and Bangladesh, with large communities across the Arab world.",
     hanafiPosition:
@@ -107,6 +123,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "madhhab-sect-or-school",
     question: "Is Hanafi a sect or a school of fiqh?",
+    questionUr: "کیا حنفی ایک فرقہ ہے یا فقہ کا مکتبِ فکر؟",
+    questionAr: "هل الحنفية فرقة أم مذهب فقهي؟",
     category: "taqlid-madhhab",
     subcategory: "Definition",
     type: "MISCONCEPTION",
@@ -116,6 +134,8 @@ export const exemplarQuestions: BankQuestion[] = [
     isMisconception: true,
     shortAnswer:
       "A school of fiqh (law), not a sect: Hanafis share the Sunni creed, pray behind non-Hanafi imams, and the four schools intermarried legally for over a millennium.",
+    shortAnswerUr: "یہ فقہ (قانون) کا مکتبِ فکر ہے، فرقہ نہیں: حنفی اہلِ سنت کے عقیدے میں شریک ہیں، غیر حنفی اماموں کے پیچھے نماز پڑھتے ہیں، اور چاروں مکاتبِ فکر کے درمیان ایک ہزار سال سے زیادہ عرصے تک شادی بیاہ شرعاً روا رہا ہے۔",
+    shortAnswerAr: "إنه مذهب فقهي (قانوني)، لا فرقة: فالحنفية يشتركون في عقيدة أهل السنة، ويصلّون خلف أئمة من غير مذهبهم، وتعاقبت الأنكاح بين المذاهب الأربعة شرعًا لأكثر من ألف عام.",
     detailedAnswer:
       "Sects divide on creed; madhhabs differ on legal derivation within one creed. Al-'Aqidah al-Tahawiyyah — written by the Hanafi Imam al-Tahawi — is the creed most widely accepted across all four Sunni schools, showing their shared theology. Classical Hanafi fiqh explicitly permits prayer behind a Shafi'i imam and vice versa, and scholars across schools cite one another. Differences like hand-placement in salah are legal-interpretive, not creedal.",
     commonObjection: "\"Hanafi is a separate religion/sect founded by a man.\"",
@@ -131,6 +151,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "taqlid-hadith-objection",
     question: "Why should Muslims follow scholars when Hadith exists?",
+    questionUr: "جب حدیث موجود ہے تو مسلمانوں کو علما کی پیروی کی ضرورت کیوں ہے؟",
+    questionAr: "لماذا يتبع المسلمون العلماء والأحاديث موجودة؟",
     category: "taqlid-madhhab",
     subcategory: "Objections",
     type: "OBJECTION",
@@ -140,6 +162,8 @@ export const exemplarQuestions: BankQuestion[] = [
     isMisconception: true,
     shortAnswer:
       "Because hadith must be authenticated, compared with other hadith, checked for abrogation, reconciled with established practice, and matched to conditions — expertise the Prophet ﷺ commanded the ummah to seek from its scholars.",
+    shortAnswerUr: "اس لیے کہ حدیث کی تخریج و تصحیح، دوسری احادیث سے موازنہ، ناسخ و منسوخ کی جانچ، مستقر عمل سے تطبیق اور شرائط سے مطابقت کی مہارت درکار ہے — اور نبی کریم ﷺ نے امت کو حکم دیا کہ یہ مہارت اپنے علما سے حاصل کرے۔",
+    shortAnswerAr: "لأن الحديث يلزم تحقيق سنده، ومقارنته بغيره، وفحصه من وجه النسخ، ومواءمته مع العمل المستقر، وملاءمته للشروط — وهي خبرة أمر النبي ﷺ الأمة أن يتخذها من علمائها.",
     detailedAnswer:
       "The objection assumes hadith reach us raw. In reality each narration has a chain (isnad) to evaluate, variants to compare, possible abrogation to weigh, and specifications/qualifications that other narrations add. Hanafi works like Sharh Ma'ani al-Athar walk through exactly this process on disputed narrations. The Prophet ﷺ warned that 'whoever interprets the Qur'an by his own opinion...' (recorded with variant chains in the collections) — the safe path is trained scholarship. Laymen do not self-perform surgery from textbooks; similarly, hadith application is a discipline.",
     commonObjection: "\"The Qur'an and Hadith are enough; scholars are intermediaries.\"",
@@ -155,6 +179,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "ijtihad-ordinary-muslim",
     question: "Can an ordinary Muslim perform ijtihad?",
+    questionUr: "کیا ایک عام مسلمان اجتہاد کر سکتا ہے؟",
+    questionAr: "هل يستطيع المسلم العادي أن يجتهد؟",
     category: "taqlid-madhhab",
     subcategory: "Methodology",
     type: "METHODOLOGY",
@@ -163,6 +189,8 @@ export const exemplarQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Ijtihad requires documented qualifications — mastery of Arabic, the Qur'an, Sunnah with its chains, usul and prior madhhab discourse — so the classical books restrict the title of mujtahid and direct others to follow.",
+    shortAnswerUr: "اجتہاد کے لیے مستند شرائط درکار ہیں — عربی، قرآن، اسانید کے ساتھ سنت، اصولِ فقہ اور سابق مذہبی خطاب پر گہری دسترس — اسی لیے متقدمہ کتب مجتہد کا لقب ان شرائط تک محدود رکھتی ہیں اور دوسروں کو تقلید کی ہدایت دیتی ہیں۔",
+    shortAnswerAr: "الاجتهاد يشترط مؤهلات موثقة — إتقان العربية، والقرآن، والسنة بأسانيدها، والأصول، والخطاب المذهبي السابق — ولذلك قصرت الكتب المتقدمة لقب المجتهد على من تجتمع فيه، ووجهت غيره إلى التقليد.",
     detailedAnswer:
       "Usul manuals define tiers: mujtahid mutlaq (like the four imams), mujtahid within a madhhab, mujtahid in single issues, down to the mufti and the layman. Al-Hidayah's discussion of who may derive rulings, and al-Sarakhsi's Usul, catalogue the qualifications. The point is not elitism but safety: derivative error in worship and contracts carries real consequences, so the tradition channels it through trained competence.",
     hanafiPosition:
@@ -177,6 +205,8 @@ export const exemplarQuestions: BankQuestion[] = [
   {
     slug: "madhhab-pray-behind-other-imam",
     question: "Can a Hanafi pray behind a non-Hanafi imam?",
+    questionUr: "کیا حنفی غیر حنفی امام کے پیچھے نماز پڑھ سکتا ہے؟",
+    questionAr: "هل يصلي الحنفي خلف إمام من غير مذهبه؟",
     category: "taqlid-madhhab",
     subcategory: "Ecumenical practice",
     type: "PRACTICAL",
@@ -185,6 +215,8 @@ export const exemplarQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — classical Hanafi fiqh regards prayer behind a pious, correctly-praying imam of another Sunni madhhab as valid; the follower simply follows the imam's actions.",
+    shortAnswerUr: "جی ہاں — متقدمہ حنفی فقہ ایک عابد و صالح، صحیح انداز سے نماز پڑھنے والے دوسرے اہلِ سنت امام کے پیچھے نماز کو صحیح گردانتا ہے؛ مقتدی محض امام کے افعال کی اقتدا کرتا ہے۔",
+    shortAnswerAr: "نعم — ترى الفقه الحنفي المتقدم أن الصلاة خلف إمام بار يصلي صحيحًا من مذهب سني آخر صحيحة، ويقتدي مأمومه بأفعال إمامه فقط.",
     detailedAnswer:
       "The school's books discuss following imams who differ in legal details: the follower's own salah validity attaches to the imam's actions while the imam leads. Differences like raf' al-yadayn or audible Ameen do not invalidate salah by scholarly agreement, so crossing madhhab lines in congregation is fine. Al-Kasani's Bada'i' and later fatawa collections treat this under following imams in prayer. Where a school considers an act invalidating (a minority edge case), the follower's status is discussed in the detailed books.",
     practicalInfo:

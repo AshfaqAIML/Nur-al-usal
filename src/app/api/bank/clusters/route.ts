@@ -8,7 +8,7 @@ export async function GET() {
     include: {
       questions: {
         where: { isCommon: true },
-        select: { slug: true, text: true, difficulty: true },
+        select: { slug: true, text: true, textUr: true, textAr: true, difficulty: true },
         orderBy: { clusterOrder: "asc" },
       },
     },

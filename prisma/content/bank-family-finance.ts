@@ -9,6 +9,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "nikah-conditions-valid",
     question: "What conditions make a nikah valid according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق نکاح کی صحت کے شرائط کیا ہیں؟",
+    questionAr: "ما شروط صحة النكاح وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Nikah conditions",
     type: "FIQH",
@@ -17,6 +19,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Offer and acceptance (ijab/qabul) in one gathering before two competent witnesses, the parties being legally capable (no impediments), and in the school the absence of invalidating conditions — mahr is an obligation that follows, not a validity pillar.",
+    shortAnswerUr: "ایک ہی مجلس میں دو اہل گواہوں کے سامنے ایجاب و قبول، دونوں فریقین کا شرعاً اہل ہونا (کوئی مانع نہ ہونا)، اور مذہب کے نزدیک صحت باطل کرنے والی شرائط کا نہ ہونا — مہر ایک واجب ہے جو نکاح کے تابع آتا ہے، نکاح کی صحت کا رکن نہیں۔",
+    shortAnswerAr: "الإيجاب والقبول في مجلس واحد أمام شاهدين أهلين، وأن يكون الطرفان شرعاً قادرين على التعاقد (بلا موانع)، وحسب المذهب انتفاء الشروط المبطلة للعقد — والمهر واجب لاحق للعقد، وليس ركناً من أركان صحته.",
     detailedAnswer:
       "The school's framework: the contract's essence is the mutual consent expression; witnesses are validity conditions per the verse and hadith; the wali (guardian) role differs by school (see the wali question). Written/verbal formats and the imam/officiant are customs, not pillars — though community practice uses them for documentation.",
     sources: [
@@ -29,6 +33,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "nikah-wali",
     question: "Does a woman's nikah require a wali (guardian) according to Hanafi fiqh?",
+    questionUr: "کیا عورت کے نکاح کے لیے حنفی فقہ کے مطابق ولی کا ہونا ضروری ہے؟",
+    questionAr: "هل يشترط في نكاح المرأة وجود الولي وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Nikah conditions",
     type: "FIQH",
@@ -39,6 +45,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "A major madhhab difference: Hanafi fiqh gives a pubescent sane woman contractual capacity in nikah; Shafi'i/Maliki/Hanbali fiqh require the wali for validity.",
     shortAnswer:
       "No — the school holds an adult, sane woman may contract her own nikah (the 'previously-married woman has more right over herself' hadith read literally), while the other three schools require a wali; the school's books still treat the wali's consent as a right of family honour (kafa'ah discussions).",
+    shortAnswerUr: "نہیں — مذہب کے نزدیک بالغ و عاقل عورت اپنا نکاح خود کر سکتی ہے (حدیثِ «ثیّب أحقّ بحقّ نفسها» کے ظاہری مفہوم کے مطابق)، جبکہ دیگر تینوں مذاہب کے نزدیک ولی شرط ہے؛ البتہ مذہب کی کتابیں بھی ولی کی رضامندی کو خاندانی عزت کا حق سمجھتی ہیں (بحثِ کفاءت کے ضمن میں)۔",
+    shortAnswerAr: "لا — يرى المذهب أن المرأة البالغة العاقلة يجوز لها أن تعقد نكاحها بنفسها (بحسب الظاهر من حديث «الثيب أحق بحق نفسها»)، بينما تشترط المدارس الثلاث الأخرى وجود الولي؛ ومع ذلك تعتبر كتب المذهب موافقة الولي حقاً من حقوق مروءة الأسرة (في مسائل الكفاءة).",
     hanafiPosition: "Adult woman's self-contracted nikah is valid (with mahr and witnesses).",
     otherViews: "Shafi'i/Maliki/Hanbali: no nikah without a wali.",
     sources: [
@@ -51,6 +59,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "nikah-witnesses",
     question: "How many witnesses are required for nikah according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق نکاح کے لیے کتنے گواہ ضروری ہیں؟",
+    questionAr: "كم عدد الشهود المطلوب لعقد النكاح وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Nikah conditions",
     type: "BEGINNER",
@@ -59,6 +69,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Two competent Muslim witnesses (male or one man + two women per the school's witness rules) are required for validity — a nikah without witnesses is invalid in the school.",
+    shortAnswerUr: "صحت کے لیے دو اہل مسلمان گواہ (مرد، یا مذہب کے اصولِ شہادت کے مطابق ایک مرد اور دو عورتیں) شرط ہیں — مذہب کے نزدیک بغیر گواہوں کے نکاح باطل ہے۔",
+    shortAnswerAr: "يشترط للصحة شاهدان من المسلمين أهلين (رجلان، أو رجل وامرأتان بحسب قواعد الشهادة في المذهب) — والنكاح بلا شهود باطل عند الحنفية.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Witness requirement.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -68,6 +80,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "mahr-obligatory",
     question: "Is mahr (dowry) obligatory and what is its minimum according to Hanafi fiqh?",
+    questionUr: "کیا مہر واجب ہے اور حنفی فقہ کے مطابق اس کی کم از کم مقدار کیا ہے؟",
+    questionAr: "هل المهر واجب، وما حدّه الأدنى وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Mahr",
     type: "BEGINNER",
@@ -76,6 +90,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Mahr is the wife's binding right from the verse — its minimum in the school is 10 dirhams (~30.618g silver) or its value; its amount, form and timing (immediate/deferred) are negotiated, with fairness emphasized.",
+    shortAnswerUr: "مہر آیت کے مطابق زوجہ کا لازم الاداء حق ہے — مذہب میں اس کی کم از کم مقدار دس دراہم (تقریباً 30.618 گرام چاندی) یا اس کی قیمت ہے؛ اس کی مقدار، صورت اور وقت (معجّل/مؤجّل) باہم گفتگو سے طے ہوتے ہیں، اور انصاف کی رعایت پر تاکید کی گئی ہے۔",
+    shortAnswerAr: "المهر حق لازم للزوجة بموجب الآية — وحدّه الأدنى في المذهب عشرة دراهم (نحو 30.618 غراماً من الفضة) أو قيمتها؛ ويُتفق في مقداره وصورته ووقته (معجّلاً أو مؤجّلاً)، مع التأكيد على العدل.",
     sources: [
       { kind: "QURAN", ref: "Al-Nisa 4:4", translation: "Give women their dowry as an obligation — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Nikah", translation: "Mahr minimums and types.", status: "PARTIALLY_VERIFIED" },
@@ -86,6 +102,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "mahr-immediate-deferred",
     question: "What is the difference between immediate and deferred mahr according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق معجّل (فوری) اور مؤجّل (التوا والا) مہر میں کیا فرق ہے؟",
+    questionAr: "ما الفرق بين المهر المعجّل والمؤجّل وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Mahr",
     type: "FIQH",
@@ -94,6 +112,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Mu'ajjal (immediate) is due at contract/ consummation; muwajjal (deferred) becomes due on death or divorce — a portion is commonly split between both, and the deferred portion remains a debt on the husband.",
+    shortAnswerUr: "معجّل (فوری) مہر عقد یا دخول پر واجب الاداء ہوتا ہے؛ مؤجّل (التوا والا) مہر وفات یا طلاق پر واجب الاداء ہوتا ہے — عموماً ایک حصہ دونوں میں تقسیم کیا جاتا ہے، اور مؤجّل حصہ شوہر پر قرض کے طور پر باقی رہتا ہے۔",
+    shortAnswerAr: "المعجّل يستحق وقت العقد أو الدخول؛ والمؤجّل يستحق عند الوفاة أو الطلاق — والغالب أن جزءاً يُقسم بينهما، ويبقى الجزء المؤجّل ديناً على عاتق الزوج.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Mahr timing categories.", status: "PARTIALLY_VERIFIED" },
@@ -104,6 +124,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "talaq-triple-one-sitting",
     question: "Does triple talaq in one sitting count as three according to Hanafi fiqh?",
+    questionUr: "کیا ایک ہی مجلس میں تین طلاقیں (ثلثہ) حنفی فقہ کے مطابق تین شمار ہوتی ہیں؟",
+    questionAr: "هل تُعدّ الطلاق الثلاث في مجلس واحد ثلاثاً وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Talaq",
     type: "FIQH",
@@ -114,6 +136,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "A heavily disputed divergence: the school's dominant jurists count three-in-one-sitting as three (bid'i talaq, sinful though effective); Ibn Taymiyyah's line and contemporary reformers count it one; Ibn al-Qayyim's reading also differs. The platform records the disagreement without scoring.",
     shortAnswer:
       "In the school's dominant position, yes — three pronouncements in one sitting constitute three (making reunion impossible without an intervening marriage), though the pronouncer is sinful for the forbidden form.",
+    shortAnswerUr: "مذہب کے غالب موقف کے مطابق، ہاں — ایک ہی مجلس میں تین مرتبہ کہی گئی طلاقیں تین شمار ہوتی ہیں (جس سے درمیانی نکاح کے بغیر دوبارہ ملنا ممکن نہیں رہتا)، البتہ کہنے والا اس ممنوع طریقے کی بنا پر گناہگار ہوتا ہے۔",
+    shortAnswerAr: "عند الموقف الغالب في المذهب، نعم — ثلاث صيغ في مجلس واحد تعدّ ثلاثاً (بحيث يستحيل الاجتماع بينهما إلا بزواج آخر)، ومع ذلك يكون القائل آثماً في الصيغة المنهي عنها.",
     detailedAnswer:
       "The school reads the verse 'when they have completed their term' (2:229-230) and the Ibn 'Umar triple-in-one-sitting narration (where the Prophet ﷺ 'allowed' the separation, i.e. made it effective though sinful) as fixing three-as-three. Others read the narration as one-effective-three-sinful. Both camps cite genuine evidence chains; consequences differ drastically for families, which is why honest representation matters here.",
     hanafiPosition: "Three in one sitting = three effective (sinful bid'i form).",
@@ -130,6 +154,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "talaq-anger",
     question: "Does talaq given in anger count according to Hanafi fiqh?",
+    questionUr: "کیا غصے کی حالت میں دی گئی طلاق حنفی فقہ کے مطابق واقع ہوتی ہے؟",
+    questionAr: "هل تقع الطلاق في حال الغضب وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Talaq",
     type: "PRACTICAL",
@@ -138,6 +164,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes in ordinary anger (with choice) it counts; only overwhelming rage that erases awareness entirely (ghalabat al-hal) can void it in the school's books — a high bar; and coerced talaq is void.",
+    shortAnswerUr: "ہاں، عام غصے میں (جب اختیار باقی ہو) طلاق واقع ہو جاتی ہے؛ مذہب کی کتابوں میں صرف وہ شدید جوشِ غضب جو شعور کو مکمل طور پر زائل کر دے (غلبتِ حال) اسے ساقط کر سکتا ہے — اور یہ انتہائی مشکل شرط ہے؛ اور جبر کے تحت دی گئی طلاق واقع نہیں ہوتی۔",
+    shortAnswerAr: "نعم، في الغضب العادي (مع بقاء الاختيار) تقع؛ ولا يُبطلها في كتب المذهب إلا الغليان الشديد الذي يزيل الوعي كلية (غلبة الحال) — وهذا حدّ عالٍ؛ والطلاق المُكرَه لا يقع.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Talaq", translation: "Anger grading in talaq.", status: "PARTIALLY_VERIFIED" },
@@ -148,6 +176,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "talaq-conditional",
     question: "What is conditional talaq according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق تعلیقی طلاق کیا ہے؟",
+    questionAr: "ما هو الطلاق المعلّق (الشرطي) وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Talaq",
     type: "FIQH",
@@ -156,6 +186,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school enforces conditional talaq: 'if you do X you are divorced' takes effect when the condition occurs — unlike the Hanbali school which voids it and counts it a vow (nadhr); the school also discusses conditional talaq that contradicts the marriage's purpose (talaq al-umra) as void.",
+    shortAnswerUr: "مذہب تعلیقی طلاق کو نافذ کرتا ہے: «اگر تم نے فلاں کام کیا تو تم طلاق یہ ہو» شرط کے وقوع پر واقع ہو جاتی ہے — برخلاف حنبلی مذہب کے، جو اسے ساقط سمجھ کر اسے نذر شمار کرتا ہے؛ اور مذہب نکاح کے مقصد کے منافی تعلیقی طلاق (طلاقِ عمرہ) پر بھی بحث کرتے ہوئے اسے ساقط قرار دیتا ہے۔",
+    shortAnswerAr: "يلتزم المذهب بتنفيذ الطلاق المعلّق: «إن فعلتَ كذا فأنت طالق» يقع عند تحقق الشرط — بخلاف المذهب الحنبلي الذي يُبطله ويعدّه نذراً؛ ويبحث المذهب أيضاً في الطلاق المعلّق الذي يخالف مقصود النكاح (طلاق العُمرة) فيعدّه باطلاً.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Talaq", translation: "Conditional talaq framework.", status: "PARTIALLY_VERIFIED" },
@@ -166,6 +198,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "talaq-iddah",
     question: "What is the iddah and how long is it according to Hanafi fiqh?",
+    questionUr: "عدت کیا ہے اور حنفی فقہ کے مطابق اس کی مدت کتنی ہے؟",
+    questionAr: "ما هي العدة وما مدتها وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Iddah",
     type: "FIQH",
@@ -174,6 +208,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Three menstrual cycles (or three months for non-menstruating women), delivery for a pregnant woman, and four months and ten days for a widow — during which reconciliation is possible in revocable divorce.",
+    shortAnswerUr: "تین حیض کے دور (یا حیض نہ آنے والی عورتوں کے لیے تین مہینے)، حاملہ کے لیے وضعِ حمل، اور بیوہ کے لیے چار مہینے دس دن — جس دوران رجعی طلاق میں رجوع ممکن ہے۔",
+    shortAnswerAr: "ثلاثة أطوار من الحيض (أو ثلاثة أشهر لمن لا تحيض)، والوضع للحامل، وأربعة أشهر وعشرة أيام للأرملة — وخلالها يجوز الرجوع في الطلاق الرجعي.",
     sources: [
       { kind: "QURAN", ref: "Al-Baqarah 2:228", translation: "Divorced women wait three cycles — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "QURAN", ref: "Al-Baqarah 2:234", translation: "Widows: four months and ten days — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
@@ -185,6 +221,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "talaq-remarriage-halala",
     question: "What does the Qur'an say about remarriage after a third talaq?",
+    questionUr: "قرآن مجید تیسری طلاق کے بعد دوبارہ نکاح کے بارے میں کیا فرماتا ہے؟",
+    questionAr: "ماذا يقول القرآن عن الزواج بعد الطلاق الثالث؟",
     category: "nikah-talaq",
     subcategory: "Talaq",
     type: "FIQH",
@@ -193,6 +231,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "After the third talaq she may not remarry her former husband until she marries another man genuinely, and that marriage ends or he dies — with the intent-to-divorce arrangement (the 'halala' scheme) prohibited in the school's books and cursed in the narrations.",
+    shortAnswerUr: "تیسری طلاق کے بعد وہ اپنے سابق شوہر سے اس وقت تک نہیں نکاح کر سکتی جب تک وہ کسی دوسرے مرد سے حقیقی نکاح نہ کر لے اور وہ نکاح ختم نہ ہو جائے یا وہ فوت نہ ہو جائے — طلاق کی نیت سے رچایا گیا یہ انتظام («حلالہ» منصوبہ) مذہب کی کتابوں میں ممنوع ہے اور روایات میں اس پر لعنت کی گئی ہے۔",
+    shortAnswerAr: "بعد الطلاق الثالث لا تحلّ لزوجها السابق حتى تتزوج زوجاً آخر زواجاً حقيقياً، ثم ينتهي ذلك الزواج أو يموت — وترتيب الزواج بقصد الطلاق (خطة «الحلالة») محظور في كتب المذهب، وقد لُعن في الروايات.",
     detailedAnswer:
       "The verse (Al-Baqarah 2:230) is the base text; the school prohibits the arranged 'interim marriage' scheme while affirming that a genuine second marriage followed by genuine divorce restores eligibility. The platform states the law without celebrating it, and notes the polemical space around the topic deserves careful, non-sensational treatment.",
     practicalInfo: FATWA_NOTE,
@@ -207,6 +247,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "khula-ruling",
     question: "What is khula and how does it differ from talaq according to Hanafi fiqh?",
+    questionUr: "خلع کیا ہے اور حنفی فقہ کے مطابق یہ طلاق سے کیسے مختلف ہے؟",
+    questionAr: "ما هو الخلع وكيف يختلف عن الطلاق وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Khula",
     type: "PRACTICAL",
@@ -215,6 +257,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Khula is separation at the wife's initiative with compensation (returning mahr or other agreed amount) — in the school it is treated as a talaq-type dissolution (ba'in) once accepted, and (in the dominant jurists' view) it does not return via raj'ah.",
+    shortAnswerUr: "خلع عورت کی طرف سے عوض دے کر (مہر واپس کر کے یا طے شدہ دیگر رقم دے کر) جدائی طلب کرنا ہے — مذہب میں قبول ہوتے ہی اسے طلاق کی طرز کی جدائی (بائن) سمجھا جاتا ہے، اور (غالب فقہاء کے نزدیک) اس میں رجوع کا راستہ نہیں ہوتا۔",
+    shortAnswerAr: "الخلع هو الفراق بمبادرة الزوجة مع العوض (ردّ المهر أو مبلغ آخر متفق عليه) — ويعتبر في المذهب عند قبوله فسخاً على طريقة الطلاق (بائناً)، ولا يُرجع عنه بالرجعة (عند رأي الفقهاء الغالب).",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "QURAN", ref: "Al-Baqarah 2:229", translation: "…no blame on her to redeem something — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
@@ -226,6 +270,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "nafaqah-maintenance",
     question: "Is a husband required to pay maintenance (nafaqah) according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق شوہر پر نفقہ ادا کرنا لازم ہے؟",
+    questionAr: "هل يجب على الزوج إنفاق النفقة وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Maintenance",
     type: "BEGINNER",
@@ -234,6 +280,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes — food, clothing, housing, and service needs according to his means and her standard are his binding obligation while the marriage stands and during iddah of revocable divorce.",
+    shortAnswerUr: "ہاں — خوراک، لباس، رہائش اور خدمت کی ضروریات، اس کی وسعت اور اس کے معیار کے مطابق، نکاح کے قائم رہنے اور رجعی طلاق کی عدت کے دوران اس پر لازم الاداء ہیں۔",
+    shortAnswerAr: "نعم — الطعام والكساء والمسكن وحوائج الخدمة على قدر وسعه وعلى قدر مستواها واجبة عليه ما دام النكاح قائماً وفي عدة الطلاق الرجعي.",
     sources: [
       { kind: "QURAN", ref: "Al-Talaq 65:7", translation: "Let the wealthy spend from his wealth… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nafaqat", translation: "Maintenance obligations.", status: "PARTIALLY_VERIFIED" },
@@ -244,6 +292,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "inheritance-basics",
     question: "How are inheritance shares determined according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق وراثت کے حصص کیسے متعین ہوتے ہیں؟",
+    questionAr: "كيف تُقدَّر أنصبة الميراث وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Inheritance",
     type: "FIQH",
@@ -252,6 +302,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "After debts and bequests (max one-third), the fixed-share heirs (spouse, parents, daughters etc.) take their Qur'anic portions and the remainder passes to the residuary male-line class ('asabah) — with the daughter-share being half the son's as per the verse, within a system where male heirs bear the maintenance duties.",
+    shortAnswerUr: "قرضوں اور وصیت (حدودِ تہائی تک) کے بعد ذو الفروض (شریک حیات، والدین، بیٹیاں وغیرہ) اپنے قرآنی حصے لیتے ہیں اور باقی مال مرد جانب کے وارثوں (عصبات) کے لیے رہتا ہے — آیت کے مطابق بیٹی کا حصہ بیٹے کے نصف ہے، ایسے نظام میں جس میں مرد وارثوں پر نفقات کی ذمہ داریاں عائد ہوتی ہیں۔",
+    shortAnswerAr: "بعد الديون والوصية (بحد الثلث)، يأخذ أصحاب الفروض (الزوجان، الوالدان، البنات وغيرهم) أنصبتهم القرآنية، ويؤول الباقي إلى العصبات من جهة الذكور — ونصيب البنت بحسب الآية نصف نصيب الابن، في نظام تقع فيه على الورثة من الذكور أعباء الإنفاق.",
     detailedAnswer:
       "Al-Nisa 4:11-12 fixes the portions; the fiqh manuals systematize the residual rules ('ul, radd, etc.). Wasiyyah (bequests) beyond one-third need heirs' permission. The school follows the same verse-based framework as the other schools with mechanical differences in edge cases.",
     practicalInfo: FATWA_NOTE + " Estate division should be done with a qualified scholar — errors here are serious.",
@@ -265,6 +317,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "wasseeah-bequest",
     question: "What are the rules of wasiyyah (bequest) according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق وصیت کے احکام کیا ہیں؟",
+    questionAr: "ما أحكام الوصية وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Inheritance",
     type: "PRACTICAL",
@@ -273,6 +327,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Up to one-third of the estate may be bequest to non-heirs (or charity); bequests to existing heirs beyond that share need the other heirs' consent, and the Prophet's ﷺ rule 'no bequest to an heir' is a school condition.",
+    shortAnswerUr: "ترکہ کی تہائی تک غیر وارثوں (یا خیرات) کے لیے وصیت جائز ہے؛ اس حصے سے زائد موجودہ وارثوں کے لیے وصیت کو دیگر وارثوں کی رضامندی درکار ہے، اور نبی کریم ﷺ کا قول «وارث کے لیے وصیت نہیں» مذہب میں شرط ہے۔",
+    shortAnswerAr: "يجوز أن تكون الوصية لغير الورثة (أو للصدقة) بحدّ الثلث من التركة؛ والوصية للوارث فوق ذلك الحدّ تحتاج إلى موافقة سائر الورثة، وقول النبي ﷺ «لا وصية لوارث» شرط عند المذهب.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Wasaya (narration of Abu Umamah? — one-third narration)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
@@ -284,6 +340,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "custody-hadhanah",
     question: "Who gets custody of children after divorce according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق طلاق کے بعد بچوں کی حضانت کس کے پاس رہتی ہے؟",
+    questionAr: "من تأخذ حضانة الأطفال بعد الطلاق وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Custody",
     type: "FIQH",
@@ -292,6 +350,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Custody (hadhanah) follows the child's interest: for boys until discernment/age seven, for girls until puberty, starting with the mother then her female relatives — while the father remains the legal guardian (wilayah) and maintainer throughout.",
+    shortAnswerUr: "حضانت بچے کی مصلحت کے تابع ہے: لڑکوں کے لیے تمیز/سات برس کی عمر تک اور لڑکیوں کے لیے بلوغت تک، اس کا آغاز ماں سے پھر اس کی خواتین رشتہ داروں سے ہوتا ہے — جبکہ باپ پورے عرصے میں شرعی سرپرست (ولایت) اور نفقہ دینے والا رہتا ہے۔",
+    shortAnswerAr: "الحضانة تتبع مصلحة الطفل: للصبيان حتى التمييز/سن السبع، وللبنات حتى البلوغ، تبدأ بالأم ثم قراباتها من النساء — ويظل الأب وليّاً شرعياً (الولاية) ومنفقاً طوال ذلك.",
     practicalInfo: FATWA_NOTE + " Courts and muftis weigh the specific case.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Nikah — hadhanah", translation: "Custody order and durations.", status: "PARTIALLY_VERIFIED" },
@@ -302,6 +362,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "nikah-kufu",
     question: "What is kafa'ah (compatibility) in nikah according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق نکاح میں کفاءت (ہم سطحی) کیا ہے؟",
+    questionAr: "ما هي الكفاءة في النكاح وفقاً لفقه الحنفية؟",
     category: "nikah-talaq",
     subcategory: "Nikah conditions",
     type: "FIQH",
@@ -310,6 +372,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Kafa'ah is the family-honour compatibility (lineage, piety, profession, freedom) that in the school gives male paternal relatives of equal standing a right to object to a below-their-standard match — a right of honour, not a validity condition of the contract itself.",
+    shortAnswerUr: "کفاءت خاندانی عزت و وقار سے متعلق ہم سطحی ہے (نسب، تقویٰ، پیشہ، آزادی) جو مذہب میں ہم مرتبہ پُردرو (باپ کی جانب کے) رشتہ داروں کو اس سے کم درجے کی شادی پر اعتراض کا حق دیتی ہے — یہ عزت و وقار کا حق ہے، نہ کہ عقد کی صحت کی شرط۔",
+    shortAnswerAr: "الكفاءة هي التوافق المرتبط بمروءة الأسرة (النسب، التقوى، المهنة، الحرية) التي تمنح في المذهب الأقارب من جهة الأب ممن هم في مستواها حق الاعتراض على الزواج دون مستواهم — وهو حق من العِرض، لا شرط من شروط صحة العقد نفسه.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Kafa'ah framework.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -321,6 +385,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-riba-prohibition",
     question: "Why is interest (riba) prohibited according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق سود (ربا) حرام کیوں ہے؟",
+    questionAr: "لماذا حُرّمت الفائدة (الربا) وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Riba",
     type: "FIQH",
@@ -329,6 +395,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The Qur'an prohibits riba emphatically (condemning it while permitting trade) and the hadiths enumerate the riba categories (fudul-in-loans and six-commodity exchanges) — the jurists derive the prohibition's structure from these texts.",
+    shortAnswerUr: "قرآن مجید نے ربا پر سخت پابندی لگائی ہے (اس کی مذمت کرتے ہوئے بیع کی اجازت دی) اور احادیث نے ربا کی اقسام بیان کی ہیں (قرض میں فاضل رقم اور چھ اجناس کے تبادلے) — فقہاء انہی نصوص سے تحریم کا نظام مستنبط کرتے ہیں۔",
+    shortAnswerAr: "يحرّم القرآن الربا تحريماً صريحاً (ذمّاً له مع إباحة البيع)، وتفصّل الأحاديث أقسام الربا (الفضل في القروض ومبادلات السلع الست) — ويستنبط الفقهاء بنية التحريم من هذه النصوص.",
     detailedAnswer:
       "Al-Baqarah 2:275-279 establishes the prohibition's gravity ('war from Allah and His Messenger'); the six-commodity narration (gold, silver, wheat, barley, dates, salt) grounds the classical riba al-fadl/riba al-nasi'ah framework, which fiqh extends to currency by analogy. Modern banking interest is analysed within this framework — most Hanafi scholars hold conventional interest is riba al-nasi'ah; the contemporary 'profit-sharing' alternatives are the industry's response.",
     sources: [
@@ -342,6 +410,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-bank-interest",
     question: "Is bank interest riba according to Hanafi fiqh?",
+    questionUr: "کیا بینک کا سود حنفی فقہ کے مطابق ربا ہے؟",
+    questionAr: "هل فائدة البنك ربا وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Riba",
     type: "PRACTICAL",
@@ -350,6 +420,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The mainstream school position (including South Asian fatawa literature) treats fixed bank interest as riba — prohibited to take; taking it from necessity is discussed with the instruction to dispose of it to charity (not to one's own use).",
+    shortAnswerUr: "مذہب کا غالب موقف (جنوبی ایشیا کے فتاویٰ کی کتابوں سمیت) مقرر بینک سود کو ربا سمجھتا ہے — جسے لینا حرام ہے؛ ضرورت میں لینے کی صورت پر بحث ہے اور ہدایت یہ ہے کہ اسے خیرات میں خرچ کر دیا جائے (اپنے استعمال میں نہ لایا جائے)۔",
+    shortAnswerAr: "يعتبر الموقف الغالب في المذهب (بما في ذلك مؤلفات فتاوى جنوب آسيا) فائدة البنك الثابتة رباً — محرّماً الأخذ؛ ويناقش أخذها عند الاضطرار مع التوجيه بصرفها في الصدقة (لا في الاستعمال الشخصي).",
     practicalInfo: FATWA_NOTE + " Sharia-compliant banking products should be reviewed by scholars.",
     sources: [
       { kind: "BOOK", ref: "Fatawa Razvia (Ahmad Raza Khan) — interest discussions", translation: "Conventional interest analysed as riba.", status: "PARTIALLY_VERIFIED" },
@@ -361,6 +433,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-mortgage",
     question: "What do Hanafi scholars say about mortgages according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق مورٹگیج (رہن) کے بارے میں حنفی علما کیا فرماتے ہیں؟",
+    questionAr: "ماذا يقول علماء الحنفية عن الرهون العقارية وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Riba",
     type: "FIQH",
@@ -371,6 +445,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "Contemporary boards differ: many hold conventional mortgages impermissible except in defined necessity; Islamic financing structures are discussed case-by-case — consult a qualified scholar for your jurisdiction's specifics.",
     shortAnswer:
       "Conventional interest-bearing mortgages fall under the riba framework in the mainstream school position; scholars discuss necessity-based exceptions and alternative structures (diminishing musharakah etc.) with varying rulings.",
+    shortAnswerUr: "سود پر مبنی روایتی مورٹگیج مذہب کے غالب موقف کے مطابق ربا کے نظام کے تحت آتے ہیں؛ علما ضرورت پر مبنی استثنائیں اور متبادل ڈھانچوں (تنزلی شراکت وغیرہ) پر مختلف احکام کے ساتھ گفتگو کرتے ہیں۔",
+    shortAnswerAr: "تقع الرهون العقارية الاعتيادية الفائدة في إطار الربا عند الموقف الغالب للمذهب؛ ويناقش العلماء الاستثناءات المرتكزة على الضرورة والهياكل البديلة (الشراكة التنازلية وغيرها) بأحكام متفاوتة.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Buyu'", translation: "Loan/interest framework applied by contemporary councils.", status: "PARTIALLY_VERIFIED" },
@@ -381,6 +457,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-loans-writing",
     question: "Does Islam require writing down loans according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق اسلام قرض تحریر کروانا ضروری قرار دیتا ہے؟",
+    questionAr: "هل يشترط الإسلام تدوين القروض وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Muamalat",
     type: "BEGINNER",
@@ -389,6 +467,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Yes — the Qur'an commands documenting deferred debts (the longest verse in the Qur'an, Al-Baqarah 2:282), with ease for in-person charity-style lending; documentation protects everyone's rights.",
+    shortAnswerUr: "ہاں — قرآن مجید مؤجل قرضوں کو تحریر میں لانے کا حکم دیتا ہے (قرآن کی سب سے طویل آیت، البقرہ 282)، حاضر (فوری ادائیگی والے) صدقہ طرز قرض پر رعایت ہے؛ تحریر سب کے حقوق کی حفاظت کرتی ہے۔",
+    shortAnswerAr: "نعم — يأمر القرآن بتدوين الديون المؤجلة (أطول آية في القرآن، البقرة 282)، مع التخفيف في القرض الحاضر على طريقة الصدقة؛ والتدوين يحمي حقوق الجميع.",
     sources: [
       { kind: "QURAN", ref: "Al-Baqarah 2:282", translation: "Write it down… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Buyu'", translation: "Loan documentation.", status: "PARTIALLY_VERIFIED" },
@@ -399,6 +479,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-halal-earning",
     question: "What kinds of earning are impermissible according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق کمائی کی کون سی صورتیں ناجائز ہیں؟",
+    questionAr: "ما هي صور الكسب غير المشروعة وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Muamalat",
     type: "BEGINNER",
@@ -407,6 +489,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Interest, gambling, sales of impure/harmful items (alcohol, pork), deception (ghabn fahish with concealment), and unjustly taking others' property — while ordinary trade, services, agriculture, and honest profit are fully permitted.",
+    shortAnswerUr: "سود، جوا، نجس/مضر اشیاء کی فروخت (شراب، خنزیر)، فریب دہی (چھپا کر بڑا غبن — غبنِ فاحش)، اور دوسروں کی املاک کا ناحق حصول — جبکہ عام تجارت، خدمات، زراعت اور دیانتدارانہ منافع مکمل طور پر جائز ہیں۔",
+    shortAnswerAr: "الربا، والقمار، وبيع النجاسات/الضارات (الخمر، الخنزير)، والغش (الغبن الفاحش مع التكتم)، وأخذ أموال الناس ظلماً — بينما التجارة العادية والخدمات والزراعة والربح الصادق مباحة تماماً.",
     sources: [
       { kind: "QURAN", ref: "Al-Nisa 4:29", translation: "Do not consume one another's wealth unjustly, but by trade with mutual consent — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Buyu'", translation: "Sale-invalidity causes.", status: "PARTIALLY_VERIFIED" },
@@ -417,6 +501,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-selling-alcohol",
     question: "Can a Muslim sell alcohol or work in its trade according to Hanafi fiqh?",
+    questionUr: "کیا مسلمان حنفی فقہ کے مطابق شراب بیچ سکتا ہے یا اس کی تجارت میں کام کر سکتا ہے؟",
+    questionAr: "هل يجوز للمسلم بيع الخمر أو العمل في تجارتها وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Muamalat",
     type: "FIQH",
@@ -427,6 +513,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "The classical Hanafi jurists recorded two transmissions on selling alcohol to non-Muslims in their lands; the codified madhhab position and later fatawa prohibit it, aligning with the other schools — income from it is impermissible.",
     shortAnswer:
       "The school's settled codified position prohibits selling alcohol; delivery/cashier roles in it are treated by scholars under the same prohibition with necessity nuances — earnings from it are not halal.",
+    shortAnswerUr: "مذہب کا مدوّن مستقر موقف شراب کی فروخت کو روکتا ہے؛ اس میں ڈیلیوری/کیشیئر کے فرائض کو علما اسی حکم کے تحت، ضرورت کی باریکیوں کے ساتھ، دیکھتے ہیں — اس سے ہونی والی کمائی حلال نہیں۔",
+    shortAnswerAr: "الموقف المدوَّن المستقر في المذهب يحظر بيع الخمر؛ ويعالج العلماء وظائف التوصيل/الدفع فيها تحت الحظر نفسه مع فروق الضرورة — والكسب منها ليس حلالاً.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Buyu'", translation: "Khamr trade discussions including the zahir al-riwaya transmissions.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -436,6 +524,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-credit-cards",
     question: "What is the ruling on credit cards according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق کریڈٹ کارڈ کا حکم کیا ہے؟",
+    questionAr: "ما حكم بطاقات الائتمان وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Modern applications",
     type: "PRACTICAL",
@@ -444,6 +534,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Using a credit card as a payment tool (paying the full balance within the grace period) is permitted by contemporary school scholars; carrying a balance incurs riba and is impermissible — plus the school adds a caution about intending riba-bearing arrangements.",
+    shortAnswerUr: "کریڈٹ کارڈ کو بطور ادائیگی کے ذریعے استعمال کرنا (مہلت کی مدت کے اندر پورا بقایا ادا کر دینا) مذہب کے معاصر علما کے نزدیک جائز ہے؛ بقایا جما کر رکھنے پر ربا عائد ہوتا ہے اور یہ ناجائز ہے — مزید یہ کہ مذہب ربا لانے والے انتظامات کی نیت پر احتیاط کی تنبیہ بھی کرتا ہے۔",
+    shortAnswerAr: "استعمال بطاقة الائتمان كأداة دفع (بتسديد كامل الرصيد خلال فترة السماح) جائز عند علماء المذهب المعاصرين؛ وحمل الرصيد يستلزم ربا وهو غير جائز — ويضيف المذهب تحذيراً من قصد الترتيبات الحاملة للربا.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Buyu'", translation: "Loan frameworks applied by analogy in contemporary fatawa.", status: "PARTIALLY_VERIFIED" },
@@ -454,6 +546,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-insurance",
     question: "What do Hanafi scholars say about insurance according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق بیمہ (انشورنس) کے بارے میں حنفی علما کیا فرماتے ہیں؟",
+    questionAr: "ماذا يقول علماء الحنفية عن التأمين وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Modern applications",
     type: "FIQH",
@@ -464,6 +558,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "Conventional insurance involves gharar/riba elements for most school scholars; takaful (mutual) models are widely preferred; compulsory state insurance is handled by necessity rules — a documented contemporary disagreement.",
     shortAnswer:
       "Conventional insurance is generally treated as containing impermissible elements; takaful alternatives are preferred where available; compulsory cover (car) is handled with necessity reasoning.",
+    shortAnswerUr: "روایتی بیمہ عمومی طور پر ناجائز عناصر پر مشتمل سمجھا جاتا ہے؛ جہاں دستیاب ہو تکافل کے متبادل کو ترجیح دی جاتی ہے؛ لازمی بیمہ (گاڑی) اضطرار کے استدلال کے تحت معاملہ کیا جاتا ہے۔",
+    shortAnswerAr: "يُعتبر التأمين التقليدي عموماً متضمناً عناصر غير مشروعة؛ وتُقدَّم بدائل التكافل عند توفرها؛ ويُعالج التأمين الإلزامي (السيارة) باستدلال الضرورة.",
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Buyu'", translation: "Gharar sale prohibitions applied by analogy.", status: "PARTIALLY_VERIFIED" },
@@ -474,6 +570,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-shirkah",
     question: "What are the forms of partnership (shirkah) according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق شراکت (شرکۃ) کی صورتیں کیا ہیں؟",
+    questionAr: "ما هي صور الشركة وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Muamalat",
     type: "FIQH",
@@ -482,6 +580,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "The school systematizes shirkah al-milk (co-ownership), 'aqd (contractual), 'amal (labour), and wuqu' (capital-shared-both) — with profit-sharing mandatory and loss sharing proportional to capital; the modern musharakah/mudarabah products draw on these.",
+    shortAnswerUr: "مذہب شرکۃ الملک (مشترکہ ملکیت)، شرکۃ العقد (معاہدہ)، شرکۃ العمل (مشترکہ کار) اور شرکۃ الوقوع (دونوں کا مشترکہ سرمایہ) کو مرتب کرتا ہے — منافع میں شراکت لازم ہے اور نقصان کی تقسیم سرمایے کے تناسب سے ہوتی ہے؛ عصر حاضر کی مشرکہ/مضاربہ مصنوعات انہی پر مبنی ہیں۔",
+    shortAnswerAr: "ينظّم المذهب شركة الملك (الملكية المشتركة)، وشركة العقد، وشركة العمل، وشركة الوقوع (رأس مال مشترك من الطرفين) — وتقاسم الأرباح إلزامي وتوزيع الخسارة بنسبة رأس المال؛ وتستمد منتجات المشاركة/المضاربة الحديثة من هذه.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Shirkah", translation: "Partnership types.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -491,6 +591,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-khiyar",
     question: "What is khiyar (option) in sales according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق بیع میں خیار (اختیار) کیا ہے؟",
+    questionAr: "ما هو الخيار في البيوع وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Muamalat",
     type: "PRACTICAL",
@@ -499,6 +601,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Khiyar is the right to cancel a sale — in the school: khiyar al-majlis (three-day option while still in the session, the school's distinctive position), al-shart (agreed period), and al-'ayb (defect discovery).",
+    shortAnswerUr: "خیار بیع کو فسخ کرنے کا حق ہے — مذہب میں: خیارِ مجلس (تین روز کا خیار جب تک مجلس برقرار ہو، اور یہ مذہب کا امتیازی موقف ہے)، خیارِ شرط (طے شدہ مدت) اور خیارِ عیب (عیب کے ظاہر ہونے پر)۔",
+    shortAnswerAr: "الخيار هو حق إفساد البيع — في المذهب: خيار المجلس (خيار ثلاثة أيام ما دام في المجلس، وهو الموقف المميز للمذهب)، وخيار الشرط (المدة المتفق عليها)، وخيار العيب (عند اكتشاف العيب).",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Buyu'", translation: "The khiyar types.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -508,6 +612,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "fin-gift-hibah",
     question: "What are the rules of gifts (hibah) according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق ہبہ (تحفہ) کے احکام کیا ہیں؟",
+    questionAr: "ما أحكام الهبة وفقاً لفقه الحنفية؟",
     category: "financial",
     subcategory: "Muamalat",
     type: "PRACTICAL",
@@ -516,6 +622,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "A gift is perfected by offer and acceptance plus (in the school) separation of hands or documented transfer — withdrawal before separation is permitted (except in reward-expecting gifts and parental gifts which are discouraged to revoke).",
+    shortAnswerUr: "ہبہ ایجاب و قبول اور (مذہب کے نزدیک) مفارقہ یا دستاویزی قبضہ/منتقلی سے مکمل ہوتی ہے — مفارقے سے پہلے واپس لینا جائز ہے (سوائے ثواب کی توقع پر دیے گئے تحفوں اور والدین کے دیے ہوئے تحفوں کے، جن کی واپسی ناپسندیدہ سمجھی جاتی ہے)۔",
+    shortAnswerAr: "تكتمل الهبة بالإيجاب والقبول مع (في المذهب) المفارقة أو الانتقال الموثق — والرجوع قبل المفارقة جائز (إلا في الهبة ابتغاء الأجر وهداية الوالدين اللتين يُكره الرجوع فيهما).",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Hibah", translation: "Gift completion rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -527,6 +635,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "janazah-when-someone-dies",
     question: "What should I do when someone dies according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق کسی کے انتقال پر مجھے کیا کرنا چاہیے؟",
+    questionAr: "ماذا ينبغي أن أفعل عند وفاة شخص وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Procedure",
     type: "PRACTICAL",
@@ -535,6 +645,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Close the eyes, make du'a, cover the body, begin the ghusl/shrouding arrangements promptly, notify relatives, and prepare for the janazah prayer and burial — with debts and wills handled according to the school's books.",
+    shortAnswerUr: "آنکھیں بند کریں، دعا کریں، جسم ڈھانپ دیں، فوراً غسل/کفن کی تیاریاں شروع کریں، رشتہ داروں کو اطلاع دیں، اور نماز جنازہ و تدفین کی تیاری کریں — قرضوں اور وصیتوں کا معاملہ مذہب کی کتابوں کے مطابق کیا جائے۔",
+    shortAnswerAr: "غمض العينين، وادعُ له، وغطِّ الجسد، وابدأ فوراً بترتيبات الغسل والتكفين، وأخبر الأقارب، واستعد لصلاة الجنازة والدفن — مع معالجة الديون والوصايا وفقاً لكتب المذهب.",
     practicalInfo: "Local imams and janazah committees walk families through each step — contact your mosque.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Janazah", translation: "Death procedures.", status: "PARTIALLY_VERIFIED" },
@@ -545,6 +657,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "janazah-ghusl",
     question: "Who washes the deceased and how according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق میت کو کون غسل دیتا ہے اور کیسے؟",
+    questionAr: "من يغسل الميت وكيف يُغسل وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Procedure",
     type: "BEGINNER",
@@ -553,6 +667,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "A same-gender relative/spouse or qualified washer performs the ghusl (with the spouse case discussed), covering the private parts, washing odd numbers of times, then shrouding in the prescribed cloths.",
+    shortAnswerUr: "ہم جنس رشتہ دار/شریک حیات یا ماہر غسل دینے والا غسل دیتا ہے (شریک حیات کی صورت پر گفتگو کی گئی ہے)، ستر ڈھانپ کر، غسل طاق تعداد میں دہرائے جاتے ہوئے، پھر مقررہ کپڑوں میں کفن دیا جاتا ہے۔",
+    shortAnswerAr: "يغسل الميت قريب من جنسه/الزوج أو مغسّل مؤهل (ومسألة الزوجة موضع بحث)، مع ستر العورة، والغسل عدداً فردياً من المرات، ثم التكفين بالأثواب المشروعة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Janazah", translation: "Washing rules.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -562,6 +678,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "janazah-prayer-method",
     question: "What is the Hanafi method of janazah prayer?",
+    questionUr: "نماز جنازہ کا حنفی طریقہ کیا ہے؟",
+    questionAr: "ما هي طريقة صلاة الجنازة عند الحنفية؟",
     category: "janazah",
     subcategory: "Prayer",
     type: "PRACTICAL",
@@ -570,6 +688,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Four takbirs standing (no ruku/sujud): after each takbir a du'a — thana, salawat, du'a for the deceased, then the closing — concluding with salam; it is fard al-kifayah upon the community.",
+    shortAnswerUr: "کھڑے ہو کر چار تکبیریں (رکوع و سجدہ کے بغیر): ہر تکبیر کے بعد ایک دعا — ثنا، صلوٰۃ (درود)، میت کے لیے دعا، پھر اختتامی دعا — اور سلام پر ختم؛ یہ امت پر فرضِ کفایہ ہے۔",
+    shortAnswerAr: "أربع تكبيرات قائماً (بلا ركوع ولا سجود): بعد كل تكبير دعاء — الثناء، والصلاة على النبي، والدعاء للميت، ثم الختام — ويُختم بالسلام؛ وهي فرض كفاية على الجماعة.",
     detailedAnswer:
       "The school structures the prayer around the four-takbir narration corpus; the Shafi'i school adds an opening takbir distinction (seven takbirs in some transmissions); both are documented. The du'a texts used by the school are the transmitted ones (Allahumma-ghfir lahu etc.).",
     sources: [
@@ -581,6 +701,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "janazah-mosque",
     question: "Is janazah prayer in the mosque permissible according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق مسجد میں نماز جنازہ ادا کرنا جائز ہے؟",
+    questionAr: "هل تجوز صلاة الجنازة في المسجد وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Prayer",
     type: "PRACTICAL",
@@ -589,6 +711,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Yes in the school — the 'do not make your houses graves' narration is read as prohibiting turning homes into neglected prayer-less places, and the school permits (even prefers for large gatherings) the mosque janazah, differing from Shafi'i texts.",
+    shortAnswerUr: "ہاں، مذہب میں — «اپنے گھروں کو قبرستان نہ بناؤ» والی روایت کو گھروں کو بے نماز اور متروک جگہ بنانے کی ممانعت سمجھا جاتا ہے، اور مذہب مسجد میں جنازہ کی اجازت دیتا ہے (بڑے اجتماع کے لیے اسے مقدم بھی جانتا ہے) — جو شافعی متون سے مختلف ہے۔",
+    shortAnswerAr: "نعم عند المذهب — تُقرأ رواية «لا تجعلوا بيوتكم مقابر» بأنها تحظر تحويل البيوت أماكن مهملة بلا صلاة، ويجيز المذهب صلاة الجنازة في المسجد (بل يقدّمها للجموع الكبيرة)، مخالفاً بذلك نصوص الشافعية.",
     hanafiPosition: "Permissible/preferable in the mosque.",
     otherViews: "Shafi'i: outside the mosque.",
     sources: [
@@ -600,6 +724,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "graves-visiting-etiquette",
     question: "What is the etiquette of visiting graves according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق قبروں کی زیارت کا آداب کیا ہے؟",
+    questionAr: "ما هي آداب زيارة القبور وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Graves",
     type: "BEGINNER",
@@ -608,6 +734,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Visit with salam and du'a for the deceased, walking respectfully — the school holds the visit benefits the visitor's remembrance and the deceased's du'a; avoid sitting on graves, stepping on them, or treating them as shrines of worship.",
+    shortAnswerUr: "سلام اور میت کے لیے دعا کے ساتھ، باادب چلتے ہوئے زیارت کی جائے — مذہب کے نزدیک یہ زیارت زائر کے لیے یادِ آخرت اور میت کے لیے دعا کے اعتبار سے نفع دیتی ہے؛ قبروں پر بیٹھنے، ان پر قدم رکھنے یا انہیں عبادت کی جگہ بنانے سے بچا جائے۔",
+    shortAnswerAr: "تُزار القبور بالسلام والدعاء للميت، والمشي بأدب — يرى المذهب أن الزيارة تنفع الزائر بالتذكّر والميت بالدعاء؛ فتُجتنب الجلوس على القبور والخطو عليها أو اتخاذها معابد للعبادة.",
     sources: [
       { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Janaiz (narration of Buraydah — 'I had forbidden you from visiting graves; visit them')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Janazah", translation: "Visitation etiquette.", status: "PARTIALLY_VERIFIED" },
@@ -618,6 +746,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "graves-dua-fatiha",
     question: "Is reciting Fatiha at graves and gifting its reward permitted according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق قبروں پر فاتحہ پڑھنا اور اس کا ثواب پہنچانا جائز ہے؟",
+    questionAr: "هل يجوز تلاوة الفاتحة عند القبور وتهدي ثوابها وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Graves",
     type: "PRACTICAL",
@@ -626,6 +756,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school affirms du'a at graves and treats recitation-gifting (isal al-thawab) as permitted by the school's scholars (reward reaching the deceased by Allah's permission) — while some other Sunni scholars restrict recitation-gifting to du'a/sadaqah; the disagreement is documented.",
+    shortAnswerUr: "مذہب قبروں پر دعا کی تصدیق کرتا ہے اور تلاوت کا ثواب پہنچانا (ایصالِ ثواب) مذہب کے علما کے نزدیک جائز سمجھتا ہے (اللہ کی اجازت سے ثواب میت تک پہنچتا ہے) — جبکہ کچھ دیگر سنی علما تلاوت کا ثواب پہنچانا دعا/صدقے تک محدود کرتے ہیں؛ اختلاف محفوظ کیا گیا ہے۔",
+    shortAnswerAr: "يقرّ المذهب بالدعاء عند القبور ويعتبر هدية الثواب (إيصال الثواب) جائزة عند علماء المذهب (يصل الثواب للميت بإذن الله) — بينما يقيّد بعض العلماء السنة الآخرين هدية الثواب بالدعاء/الصدقة؛ والخلاف موثق.",
     isDisputed: true,
     disputedNote: "The dispute is over the REACH of isal al-thawab: du'a/sadaqah benefit is agreed; recitation-gifting is affirmed by Hanafi scholarship and disputed by others.",
     sources: [
@@ -638,6 +770,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "isal-thawab-methods",
     question: "How can reward be sent to the deceased according to Hanafi fiqh?",
+    questionUr: "حنفی فقہ کے مطابق میت تک ثواب کیسے پہنچایا جا سکتا ہے؟",
+    questionAr: "كيف يمكن إيصال الثواب إلى الميت وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Graves",
     type: "PRACTICAL",
@@ -646,6 +780,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "Du'a for them, sadaqah on their behalf, paying their debts, performing Hajj/'Umrah for them, and recitation-gifting per the school's position — all reach the deceased by Allah's permission in the school's framework.",
+    shortAnswerUr: "ان کے لیے دعا، ان کی طرف سے صدقہ، ان کے قرضوں کی ادائیگی، ان کے لیے حج/عمرہ ادا کرنا، اور مذہب کے موقف کے مطابق تلاوت کا ثواب پہنچانا — یہ سب اللہ کی اجازت سے میت تک پہنچتے ہیں، مذہب کے نظام میں۔",
+    shortAnswerAr: "الدعاء لهم، والصدقة عنهم، وقضاء ديونهم، وحج/عمرة عنهم، وهدية الثواب بحسب موقف المذهب — كل ذلك يصل إلى الميت بإذن الله في إطار المذهب.",
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Janazah", translation: "Reward-transfer channels.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -655,6 +791,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "graves-women-visit",
     question: "Can women visit graves according to Hanafi fiqh?",
+    questionUr: "کیا حنفی فقہ کے مطابق عورتیں قبروں کی زیارت کر سکتی ہیں؟",
+    questionAr: "هل يجوز للنساء زيارة القبور وفقاً لفقه الحنفية؟",
     category: "janazah",
     subcategory: "Graves",
     type: "PRACTICAL",
@@ -663,6 +801,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "fiqh",
     shortAnswer:
       "The school's scholars permitted elderly women to visit for benefit while discouraging visits that risk trial; contemporary scholars discuss general permissibility with conditions — the range is documented within the school itself.",
+    shortAnswerUr: "مذہب کے علما نے بوڑھی عورتوں کو نفع کے لیے زیارت کی اجازت دی، جبکہ فتنے کا خطرہ رکھنے والی زیارتوں سے روکا ہے؛ معاصر علما شرائط کے ساتھ عمومی جواز پر گفتگو کرتے ہیں — یہ اختلاف کی حد خود مذہب کے اندر محفوظ ہے۔",
+    shortAnswerAr: "أجاز علماء المذهب لكِبار السن من النساء الزيارة للانتفاع مع الزجر عن الزيارات المعرّضة للفتنة؛ ويناقش العلماء المعاصرون الجواز العام بشروط — والمجال موثق داخل المذهب نفسه.",
     isDisputed: true,
     disputedNote: "An intra-Hanafi range: older texts restrict to elderly women; later scholars discuss wider permission with etiquette conditions.",
     sources: [
@@ -674,6 +814,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "barzakh-what",
     question: "What is barzakh according to Sunni aqeedah?",
+    questionUr: "سنی عقیدے کے مطابق برزخ کیا ہے؟",
+    questionAr: "ما هو البرزخ وفقاً للعقيدة السنية؟",
     category: "aqeedah",
     subcategory: "Barzakh",
     type: "AQEEDAH",
@@ -682,6 +824,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Barzakh is the interval between death and resurrection, in which souls experience the questioning of Munkar and Nakir, comfort or pressure — affirmed in the Qur'an (Al-Mu'minun 23:100) and the Sunni creeds.",
+    shortAnswerUr: "برزخ موت اور بعث کے درمیان کا وقفہ ہے، جس میں ارواح منکر و نکیر کے سوالات اور آرام یا تنگی کا تجربہ کرتی ہیں — قرآن (المؤمنون 23:100) اور سنی عقائد میں اس کی تصدیق ہے۔",
+    shortAnswerAr: "البرزخ هو الفترة بين الموت والبعث، تعيش فيها الأرواح سؤال منكر ونكير والنعيم أو الضغط — وهو ثابت في القرآن (المؤمنون 23:100) وفي عقايد السنة.",
     sources: [
       { kind: "QURAN", ref: "Al-Mu'minun 23:100", translation: "…behind them is a barzakh until the day they are raised — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-'Aqidah al-Tahawiyyah", translation: "Grave-punishment and questioning affirmed within the creed.", status: "VERIFIED" },
@@ -692,6 +836,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "barzakh-dead-hear",
     question: "Can the dead hear the living according to Sunni scholarship?",
+    questionUr: "کیا سنی علماء کے نزدیک میت زندہ لوگوں کی باتیں سن سکتے ہیں؟",
+    questionAr: "هل يسمع الموتى الأحياء بحسب أهل العلم من السنة؟",
     category: "aqeedah",
     subcategory: "Barzakh",
     type: "AQEEDAH",
@@ -702,6 +848,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "The range: the Prophet's ﷺ hearing of salam is affirmed by major scholars; the ordinary dead's hearing is disputed (affirmed by many, restricted by others) — the platform records the range.",
     shortAnswer:
       "The Prophet's ﷺ hearing of the salam of those who greet him is affirmed in the school's scholarship ('no one sends salam upon me except Allah returns my soul…'); the ordinary dead's hearing is discussed with both positions documented among Sunni scholars.",
+    shortAnswerUr: "نبی کریم ﷺ کا سلام بھیجنے والوں کے سلام کا سننا مذہب کی علمی روایت میں ثابت ہے («مجھ پر کوئی سلام نہیں بھیجتا مگر اللہ میری روح کو واپس کر دیتا ہے...»)؛ عام میت کا سننا زیرِ بحث ہے اور دونوں مواقف سنی علما میں محفوظ ہیں۔",
+    shortAnswerAr: "ثابت في المذهب سماع النبي ﷺ سلام من يُسلّم عليه («ما من أحد يُسلّم عليّ إلا ردّ الله عليّ روحي...»)؛ وسماع الأموات العاديين موضع بحث وكلتا النظرتين موثقتان بين علماء السنة.",
     sources: [
       { kind: "HADITH", ref: "Musnad Ahmad (narration of Abu Huraira — salam returned to the Prophet ﷺ)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-'Aqidah al-Tahawiyyah", translation: "Creed's statements on the grave life.", status: "VERIFIED" },
@@ -712,6 +860,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
   {
     slug: "janazah-crying-wailing",
     question: "Is crying for the dead allowed while wailing is prohibited?",
+    questionUr: "کیا میت کے لیے رونا جائز ہے جبکہ چنگھاڑ (نیحہ) ممنوع ہے؟",
+    questionAr: "هل يجوز البكاء على الميت مع تحريم النواح؟",
     category: "janazah",
     subcategory: "Procedure",
     type: "BEGINNER",
@@ -720,6 +870,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     intent: "informational",
     shortAnswer:
       "Yes — natural grief and tears (including the Prophet's ﷺ tears for his son) are permitted; wailing (niyahah), loud lamentation, and tearing clothes are prohibited by the narrations.",
+    shortAnswerUr: "ہاں — قدرتی غم اور آنسو (بشمول نبی کریم ﷺ کے اپنے بیٹے پر آنسو) جائز ہیں؛ نیحہ (چنگھاڑ)، بلند آواز سے نوحہ اور کپڑے پھاڑنا روایات میں منع ہیں۔",
+    shortAnswerAr: "نعم — الحزن الطبيعي والدموع (منها دموع النبي ﷺ على ابنه) مباحة؛ أما النياحة والنواح بصوت عالٍ وشق الثياب فمحرّمة في الروايات.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (narration of Usamah ibn Zayd — tears and the heart's grief)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
     ],

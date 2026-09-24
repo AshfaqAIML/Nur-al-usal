@@ -370,3 +370,110 @@ Stage Summary:
 - The platform is now a large searchable Hanafi Q&A knowledge base: 241 curated questions across 22 categories and 60 interconnected clusters, every answer carrying real chapter-level citations with honest verification states (82 VERIFIED / 248 PARTIALLY_VERIFIED / 33 UNVERIFIED-pending), variants for duplicate-wording coverage, and the full research pipeline (search analytics → AI suggestion → admin approval → research queue) closing the "continuously expandable" loop from the brief.
 - Question → Answer → Evidence → Citation → Original Source → Related Questions is now a complete on-site path (citation dialog deep-links into the manuscript source viewer).
 - Remaining candidates: Urdu/Arabic translations of question texts (data layer ready via language field), canonical-variant Question records (schema ready), cluster detail pages, per-question search-volume ranking, OCR page attachments for citations.
+
+---
+Task ID: 16-d
+Agent: general-purpose (translation batch d)
+Task: Translate theology batch (bank-theology.ts) into Urdu/Arabic.
+
+Work Log:
+- Read worklog (Task 15 context) + prisma/content/types.ts contract + full bank-theology.ts. NOTE: file contains 42 question objects (worklog's "48" was the round-15 plan figure; actual seeded theology batch = 42: aqeedah 9, prophethood 9, tawassul/awliya 11, bidah 6, mawlid 5, graves/barzakh 2). All 42 covered — none skipped.
+- Added the 4 fields to every question: questionUr, questionAr (single-line, immediately after `question`), shortAnswerUr, shortAnswerAr (two-line style matching `shortAnswer`, immediately after its value). Only bank-theology.ts touched; no other file, no db:push, no server restart.
+- Translation register: scholarly Islamic Urdu (مکتب، تصدیق، تشبیہ/تعطیل، عطائی علم، توسل، استغاثہ، اولیاء اللہ، کرامات، بدعت/بدعت حسنہ، اِصالِ ثواب، برزخ) and fuṣḥā Arabic (التنزيه، التأويل/التفويض، التوسل، الاستغاثة، الكرامات، الكشف، الإيصال الثواب، البرزخ). Honorifics preserved: ﷺ، رضی اللہ عنه/رضي الله عنه. "Tasdiq/kasb/'ata'i/tafwid/tanzih" rendered with the established kalam terms.
+- DISPUTED-TOPIC PRECISION: tawassul-permissible/after-death, istighatha, tawassul-vs-istighatha, bidah-hasanah, bidah-dua-after-salah, bidah-loud-dhikr, mawlid-ruling, mawlid-fast-monday, graves-fatiha-dispute, graves-shrine-buildings, nubuwwah-knowledge (Barelvi/Deobandi 'ilm al-ghayb) — translations mirror the English's dual-position wording exactly: "scholars differ"→علما مختلف ہیں / يختلف العلماء, permissive/restricted/critical ranges kept as ranges, no strengthening of either side, no added rulings; Barelvi/Deobandi/Ahl-e-Hadith named exactly as the English does.
+- Quotes kept as plain prose (e.g. blind-man du'a in Ur/Ar as reported wording, "نعمت البدعة" in both languages); no double quotes introduced inside strings (single quotes only) — no escaping issues.
+- VALIDATION: rg counts questionUr=42 questionAr=42 shortAnswerUr=42 shortAnswerAr=42. Mandatory bun script: `total=42 missing=0 latinUr=0 latinAr=0` exit 0. tsc --noEmit: zero errors in prisma/content (grep empty); remaining 49 project errors are pre-existing in seed.ts/seed-bank.ts/src views/examples/skills — untouched.
+
+Stage Summary:
+- Theology batch (the platform's most sensitive material) is now fully trilingual at question+shortAnswer level: 42/42 questions carry faithful Urdu/Arabic without scoring any side of the tawassul/istighatha/Mawlid/Barelvi-Deobandi debates; ready for the seeder's language field.
+- Next: same treatment for remaining batches (a/b/c/e), then reseed and spot-check Urdu/Arabic rendering in the bank detail view (RTL, Nastaliq/Naskh).
+
+---
+Task ID: 16-c
+Agent: general-purpose (translation batch c)
+Task: Translate family/finance batch (bank-family-finance.ts) into Urdu/Arabic.
+
+Work Log:
+- Read worklog.md context (Task 15 trilingual round) and confirmed BankQuestion interface already declares questionUr/questionAr/shortAnswerUr/shortAnswerAr (types.ts lines 49/51/63/65).
+- Counted the batch: bank-family-finance.ts contains 38 question objects (slugs verified by rg — NOT 42 as stated in task; all 38 translated).
+- Edited ONLY bank-family-finance.ts via 5 MultiEdit calls (16+16+16+16+12 = 76 edits): after every `question:` line inserted `questionUr` + `questionAr`, after every shortAnswer value inserted `shortAnswerUr` + `shortAnswerAr`, at 4-space field indent, preserving all other fields/formatting exactly. FATWA_NOTE const untouched; no other files touched; no db:push, no server restart.
+- Translations: scholarly Islamic Urdu register (نکاح، مہر، ولایت/ولی، طلاق، خلع، عدت، رجعی، بائن، ثلاثہ، غلبتِ حال، ربا، قرض، بیع، شراکت، مرابحہ، جنازہ، غسل، کفن، فرضِ کفایہ، ایصالِ ثواب، برزخ، عذاب/فشار قبر) and clear fuṣḥā Arabic (النكاح، المهر، الولي، الطلاق، الخلع، العدة، الرجعي، البائن، قبض، الربا، الإجارة، الشركة، المرابحة، الجنازة، الغسل، الكفن، صلاة الجنازة، البرزخ). Honorifics ﷺ preserved wherever the English had them; hadith paraphrase quotes kept plain prose in «» guillemets (no escaping issues); sensitive legal statements (triple talaq = three in the school's dominant position, khula as ba'in, daughter-share = half of son's, halala prohibition, hadhanah order) translated scope-exact.
+- Verified counts as edits progressed (16 → 32 → 64 → 152 field occurrences total = 38 × 4).
+
+Stage Summary:
+- Validation script output: `total=38 missing=0 latinUr=0 latinAr=0` (exit 0) — every question object has all 4 new fields, no Latin contamination in Urdu/Arabic question strings.
+- `bunx tsc --noEmit` shows zero errors referencing prisma/content/bank-family-finance.ts (grep for "prisma/content" returns nothing); remaining tsc output is pre-existing unrelated errors (examples/websocket, prisma/seed-bank.ts titleAr/CatDef, prisma/seed.ts).
+- Batch c (38/38 questions) now carries Urdu + Arabic question and shortAnswer fields, ready for the trilingual UI round; note for the orchestrator: this file had 38 questions, not 42 — the 4-question delta vs the task description is pre-existing in the source file, not a translation gap.
+
+---
+Task ID: 16-e
+Agent: general-purpose (translation batch e)
+Task: Translate madhab/misc batch (bank-madhab-misc.ts) into Urdu/Arabic.
+
+Work Log:
+- Read worklog Task 15 entry + prisma/content/types.ts (confirmed BankQuestion optional fields questionUr/questionAr/shortAnswerUr/shortAnswerAr at lines 49-65).
+- Read bank-madhab-misc.ts fully; enumerated slugs via rg: file contains 50 questions (task brief said 51 — actual count 50, all translated; none skipped).
+- Added 4 fields to every question object (200 new field values total): questionUr + questionAr inserted immediately after each `question:` line; shortAnswerUr + shortAnswerAr inserted immediately after each shortAnswer value (two-line key/value style matching the file's existing shortAnswer formatting). All other fields, sources, variants, related, formatting preserved byte-for-byte.
+- Edits done via 5 MultiEdit calls (~20 edits each, 2 edits per question), matched on unique English question lines and unique English shortAnswer value lines — no other file touched, no db:push, no server restart.
+- Translation register: scholarly Islamic Urdu (تقلید/مذہب/اصول الفقہ/مجتہد/مفتی/فتویٰ/حدیث/اثر/صحابہ/تابعین/فقہاء) and fuṣḥā Arabic (التقليد/المذهب/أصول الفقه/المجتهد/المفتي/الفتوى/الحديث/الأثر/الصحابة/التابعون/الفقهاء). Honorifics preserved (ﷺ، رضی اللہ عنہ/رضي الله عنه). School names rendered neutrally in all four comparative/misconception questions (حنفی/شافعی/مالکی/حنبلی — الحنفي/الشافعي/المالكي/الحنبلي), every madhhab's position represented exactly as the English does (e.g. Witr comparison keeps all four schools verbatim-equivalent; Barelvi/Deobandi/Ahl-e-Hadith descriptions kept factual, no scoring). Book names in standard forms (الہدایہ/الهداية، صحیح بخاری/صحيح البخاري، رد المحتار، فتاویٰ رضویہ/فتاوى رضوية، بہشتی زیور، نور الایضاح/نور الإيضاح). Quotations kept as plain prose; no double quotes inside strings (curly '…' in Urdu, «…» in Arabic), no TS escaping needed.
+- Validation: rg counts = 200 (50 × 4 fields). bun validation script printed `total=50 missing=0 latinUr=0 latinAr=0` exit 0. `bunx tsc --noEmit -p tsconfig.json` output contains ZERO matches for prisma/content / bank-madhab-misc (49 error lines all pre-existing in prisma/seed.ts, prisma/seed-bank.ts, examples/, skills/, src/ files — untouched by this task).
+
+Stage Summary:
+- bank-madhab-misc.ts is fully trilingual: all 50 taqlid/madhhab, history/usul, terminology, comparative-fiqh, misconception, books/scholars and South-Asian-practice questions now carry Urdu + Arabic question and shortAnswer fields with faithful, fair-to-all-schools renderings; file type-checks clean. Data layer (types.ts) already supported the fields, so seeding can pick them up without schema changes.
+
+---
+Task ID: 16-b
+Agent: general-purpose (translation batch b)
+Task: Translate fiqh-life batch (bank-fiqh-life.ts) into Urdu/Arabic.
+
+Work Log:
+- Read worklog Task 15 entry + prisma/content/types.ts (BankQuestion already supports questionUr/questionAr/shortAnswerUr/shortAnswerAr) + the full bank-fiqh-life.ts before editing.
+- COUNT NOTE: assignment brief said 51 questions, but the file actually exports 40 (13 sawm + 10 zakah + 10 hajj/umrah + 7 jumuah/eid = 40; the "+ misc" items from the Task 15 worklog are not present in this file — evidently moved to other bank files during Task 15). All 40 questions in the file were translated — none skipped, nothing added.
+- Added 4 fields per question per the placement convention: questionUr + questionAr on the lines immediately after `question: "..."`; shortAnswerUr + shortAnswerAr immediately after the shortAnswer value (split key/value format matching the file's long-string style). All other fields/formatting preserved exactly; only this file edited; no db:push, no server restart.
+- Translation quality: faithful scholarly register, no rulings added/softened. Urdu Islamic fiqh register (مذہب، فرضِ عین، واجب، سنتِ مؤکدہ بالکفایہ، قضا، کفارہ، فدیہ، نصاب، عروض التجارة، رمی، دم، حجِ بدل، طوافِ وداع، مؤلفۃ القلوب…); Arabic clear fuṣḥā fiqh register (المذهب، الصوم، القضاء، الكفارة، الفدية، النصاب، عروض التجارة، الرمي، الدم، الحج بالنيابة، طواف الوداع، صلاة الجمعة…). ﷺ kept where the English has it; hadith paraphrases rendered as plain prose with «…» (no invented Qur'an quote markers); native fiqh terms used over transliteration (استقاء for the vomiting hadith, الريق for saliva, إدخال الحِجر في الدائرة, المقطَّر/المسقي for 'ushr, دين قوي/ضعيف for strong/weak debt).
+- Edits: 4 MultiEdit batches of 20 edits each (80 total = 40 question insertions + 40 shortAnswer insertions). Two Arabic shortAnswer strings initially landed without a trailing comma (sawm-missed-fasts, sawm-kaffarah-intercourse) — caught in batch diff review and fixed immediately; final syntax clean.
+- Validation (bun script): total=40 missing=0 latinUr=0 latinAr=0 → exit 0. Field counts verified: 40/40/40/40; array imports cleanly (last slug jumuah-excuses, closing `];` intact).
+- tsc: `bunx tsc --noEmit -p tsconfig.json 2>&1 | grep -i "prisma/content"` → empty output (no type errors in prisma/content files).
+
+Stage Summary:
+- bank-fiqh-life.ts is now fully trilingual: every question (40/40) carries questionUr/questionAr/shortAnswerUr/shortAnswerAr, ready for ur/ar rendering via the language field (seed layer already reads these optional fields).
+- Discrepancy documented for the main agent: this file contains 40 questions (not 51); if the 11 misc questions from Task 15 still exist, they live in other bank files covered by other 16-x translation batches.
+- No other files touched; no schema/db changes.
+
+---
+Task ID: 16-a
+Agent: general-purpose (translation batch a)
+Task: Translate exemplar + worship batches (bank-exemplar.ts, bank-fiqh-worship.ts) into Urdu/Arabic.
+
+Work Log:
+- Read worklog Task 15 entry + prisma/content/types.ts contract (BankQuestion already had optional questionUr/questionAr/shortAnswerUr/shortAnswerAr).
+- NOTE: task brief said 8 + 59 = 67 questions, but bank-fiqh-worship.ts has grown to 63 questions since the Task 15 note (salah now 36, not 32) — actual total = 71. All 71 translated; nothing skipped.
+- bank-exemplar.ts (8 questions): added questionUr/questionAr immediately after each question line and shortAnswerUr/shortAnswerAr immediately after each shortAnswer value (placement convention kept; all other fields/formatting untouched). 32 new field lines.
+- bank-fiqh-worship.ts (63 questions: 36 salah + 27 taharah): same convention via 7 MultiEdit batches (18 edits each, last batch 18). 252 new field lines. No other files touched, no db:push, no server restart.
+- Translation register: scholarly Islamic Urdu (نماز، وضو، تیمم، روزہ، زکوٰۃ، حج، نکاح، طلاق، تقلید، مجتہد، مذہب، قیاس، اجتہاد، سنت، فرض، واجب، مستحب، مکروہ، حرام؛ تکبیر تحریمیہ، مسبوق، قنوتِ نازلہ، سجدہ سہو…) and fuṣḥā Arabic (صلاة، وضوء، تيمم، صوم، زكاة، تقليد، مجتهد؛ تكبيرة الإحرام، سجود السهو، القنوت، المسبوق…). Honorifics preserved: ﷺ stays ﷺ; RA → رضی اللہ عنہ / رضي الله عنه (عنہما for Hasan ibn Ali). Technical terms kept native where English transliterates.
+- Faithfulness: Qur'anic phrases quoted in English shortAnswers rendered as indirect speech without quote markers (e.g. Al-A'raf 7:204, "or touching women"); no rulings added/softened; disputed content stays disputed; hadith-number notes untouched (English source fields unchanged).
+- Validation: bun import check → total=71 missing=0 latinUr=0 latinAr=0, exit 0 (validation asserts no missing fields and no ≥10-char Latin runs in Urdu/Arabic questions). bunx tsc --noEmit: zero errors mentioning prisma/content or the two edited files (49 pre-existing errors elsewhere: examples/websocket, prisma/seed-bank.ts, prisma/seed.ts — not this task's scope).
+- Spot-verified rendered sample (salah-ameen-quiet) in both scripts; field counts per file confirmed (8×4=32, 63×4=252).
+
+Stage Summary:
+- Trilingual round a complete: exemplar (taqlid/madhhab) + worship (salah/taharah) question bank now carries Urdu + Arabic for every question and short answer — 71 questions, 284 new translation strings, 0 validation failures.
+- Data layer ready for the platform's language-switched rendering; remaining translation batches for later rounds: bank-fiqh-life.ts, bank-family-finance.ts, bank-theology.ts, bank-madhab-misc.ts (detailedAnswer/hanafiPosition/otherViews still EN-only, as scoped).
+---
+Task ID: 16 (trilingual question texts + cluster detail pages)
+Agent: main (Z.ai Code, session resume + cron webDevReview)
+Task: Resume after context limit — verify Task 15 state, recreate the webDevReview cron (previous job lost), then advance the top Task-15 remaining candidate: Urdu/Arabic translations of the 241 question texts + shortAnswers, and cluster detail pages.
+
+Work Log:
+- RESUME VERIFICATION: todo showed 15-0..15-8 complete; content files present (6 files, ~4.7k lines); dev server 200; worklog Task 15 entry confirmed everything shipped. Cron job list was EMPTY → recreated as job 411168 (0 */15 * * * ? 6-field expr, tz Asia/Calcutta). Fresh browser tour: home/bank/detail/citation-dialog all working, zero console errors → phase stable, proceeded to feature round.
+- SCHEMA (16-0): Question gains textUr/textAr/shortAnswerUr/shortAnswerAr (String?); BankQuestion contract gains questionUr/questionAr/shortAnswerUr/shortAnswerAr; prisma validate + db:push OK.
+- TRANSLATION (16-a..e, 5 parallel general-purpose agents): faithful scholarly Urdu/Arabic renderings of question + shortAnswer for EVERY bank question, inserted per convention (Ur/Ar right after question:, shortAnswerUr/Ar after shortAnswer). Per-file validation scripts (bun -e import + missing/latin-check): 16-a exemplar+worship 71/71, 16-b fiqh-life 40/40, 16-c family-finance 38/38, 16-d theology 42/42, 16-e madhab-misc 50/50 → 241/241 total, missing=0, latinUr=0, latinAr=0 everywhere. Quality controls: Islamic Urdu register (نماز/وضو/تقلید/استغاثہ…), fuṣḥā Arabic (التقليد/التوسل/البرزخ…), honorifics preserved, disputed positions mirrored exactly (no side strengthened), quotes as plain prose, no other fields touched.
+- SEEDER (16-2): question create now writes textUr/textAr/shortAnswerUr/shortAnswerAr; SearchDocuments gain titleUr/titleAr + bodyUr/bodyAr (trilingual search); stats report prints "Translated Ur/Ar: 241 / 241". Fixed 2 pre-existing tsc errors (stray `titleAr: undefined` on terminology + books-scholars category objects). Re-seeded: 241 questions, 363 citations, translated 241/241.
+- APIS (16-3): /api/bank returns + keyword-searches translations (Ur/Ar queries like "روزہ" → sawm hits, "التوسل" → tawassul hits); /api/bank/detail returns translations + localized related rows; /api/bank/clusters selects textUr/textAr; /api/bootstrap featured strip + cluster titles localized.
+- FRONTEND (16-4): new shared hook src/lib/use-loc.ts (text/short/title helpers, EN fallback) used by bank view, home strip, search hits (dir=auto preserved everywhere). NEW BankClusterPage (#/bank/cluster/{slug}): arch-top girih header (localized title, count badge, "ordered as a study path" hint, description), numbered brass-medallion ordered question list (localized text + difficulty badges, hover lift), prev/next cluster navigation, back-to-library, doc-title; landing cluster cards now link to it (previously set a search query) with localized titles/previews. Bank detail: localized h1/breadcrumb/category-badge/direct-answer (falls back to EN detailed sections), localized Bookmark/Share titles, related cards localized. React derived-state reset pattern kept lint-clean (no setState-in-effect).
+- i18n: bankClusterOrderedHint ×3 (en/ur/ar).
+- QA (16-5, agent-browser): dev-server restart required once (stale Prisma client after db:push → "Unknown field textUr" 500s, same as Task 15). Verified: Urdu bank landing (all cards + shortAnswers Urdu), Urdu cluster page (taqlid — breadcrumb/title/ordered list RTL), Urdu detail (h1 + direct answer Urdu), Arabic dark cluster (tawassul) + detail (localized category badge), Arabic mobile 390 dark bank landing (chips/cards/filters RTL correct), EN dark desktop cluster page (numbered study path), trilingual API search (Ur/Ar keywords), global search returning titleUr. Fixed en route: detail category badge was nameEn-only → now localized. Zero console errors across fresh sessions; dev.log clean; lint clean.
+
+Stage Summary:
+- The 241-question library is now genuinely trilingual at the content level: question + direct answer render in Urdu/Arabic (detailed sections remain English originals — honest, documented scope for a future pass), and Urdu/Arabic SEARCH now reaches the translated texts (bank keyword search + global SearchDocuments with titleUr/titleAr/bodyUr/bodyAr).
+- Clusters became navigable study paths: every cluster card opens a dedicated #/bank/cluster/{slug} page with ordered, numbered questions and prev/next cluster traversal — the research-graph story from the original brief is now browsable end-to-end.
+- Remaining candidates: Urdu/Arabic translations of detailedAnswer/hanafiPosition/otherViews sections (data layer + UI pattern now proven); cluster descriptionUr/descriptionAr; canonical-variant Question records; per-question search-volume ranking in admin; OCR page attachments for citations.
