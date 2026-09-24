@@ -91,3 +91,9 @@ export function libraryRoute(item: LibraryItem): { view: "misconceptions" | "obj
     case "claim": return { view: "claims", param: item.key };
   }
 }
+
+/** Hash-path for citations / share links, e.g. "misconceptions/tawassul". */
+export function libraryPath(item: LibraryItem): string {
+  const route = libraryRoute(item);
+  return `${route.view}/${route.param}`;
+}

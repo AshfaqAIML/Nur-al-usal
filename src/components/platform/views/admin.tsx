@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import {
-  BookMarked, CheckCircle2, FileText, GitCompare, Landmark, RefreshCw,
-  ScrollText, ShieldAlert, Sparkles, Users, Eye, Star, Send, Undo2, MessageCircleQuestion,
+  BookMarked, CheckCircle2, FileText, GitCompare, Landmark, MessagesSquare, RefreshCw,
+  ScrollText, ShieldAlert, Sparkles, Users, Eye, Star, Send, ThumbsDown, ThumbsUp, Undo2, MessageCircleQuestion,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,6 +28,7 @@ interface AdminStats {
   misconceptionStatuses: { status: string; count: number }[];
   recentQuestions: (Question & { category?: { nameEn: string } | null })[];
   recentClaims: ClaimRecord[];
+  topFeedback: { questionId: string; text: string; up: number; down: number; status: string | null }[];
 }
 
 const CONTENT_GRID: { key: string; labelKey: string; icon: typeof Landmark }[] = [
@@ -96,12 +97,12 @@ export function AdminView() {
   const s = data.stats;
   const totalMisc = data.misconceptionStatuses.reduce((a, b) => a + b.count, 0) || 1;
   const workflow = [
-    { label: "Pending questions", value: s.pendingQuestions, warn: s.pendingQuestions > 0 },
-    { label: "AI-generated answers", value: s.aiAnswers, warn: false },
-    { label: "Published answers", value: s.publishedAnswers, warn: false },
-    { label: "Sensitive questions", value: s.sensitiveQuestions, warn: s.sensitiveQuestions > 0 },
-    { label: "Verified books", value: s.verifiedBooks, warn: false },
-    { label: "OCR-processed books", value: s.ocrBooks, warn: false },
+    { labelKey: "wfPending", value: s.pendingQuestions, warn: s.pendingQuestions > 0 },
+    { labelKey: "wfAiAnswers", value: s.aiAnswers, warn: false },
+    { labelKey: "wfPublished", value: s.publishedAnswers, warn: false },
+    { labelKey: "wfSensitive", value: s.sensitiveQuestions, warn: s.sensitiveQuestions > 0 },
+    { labelKey: "wfVerifiedBooks", value: s.verifiedBooks, warn: false },
+    { labelKey: "wfOcrBooks", value: s.ocrBooks, warn: false },
   ];
 
   return (
@@ -121,10 +122,24 @@ export function AdminView() {
       <section aria-label="Editorial workflow">
         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {workflow.map((w) => (
-            <Card key={w.label} className={cn("border", w.warn ? "border-amber-300 dark:border-amber-800" : "")}>
+            <Card
+              key={w.labelKey}
+              className={cn(
+                "group border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md",
+                w.warn ? "border-amber-300 dark:border-amber-800" : ""
+              )}
+            >
               <CardContent className="p-4">
-                <p className="text-2xl font-bold tabular-nums">{w.value}</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">{w.label}</p>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-2xl font-bold tabular-nums">{w.value}</p>
+                  {w.warn && (
+                    <span className="relative flex h-2 w-2" aria-hidden>
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-60" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+                    </span>
+                  )}
+                </div>
+                <p className="mt-0.5 text-xs text-muted-foreground">{t(w.labelKey)}</p>
               </CardContent>
             </Card>
           ))}
@@ -167,6 +182,51 @@ export function AdminView() {
                 </div>
               ))}
             </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Reader feedback signals */}
+      <section aria-label="Reader feedback signals">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">{t("feedbackSignals")}</h2>
+        <Card>
+          <CardContent className="p-5">
+            <p className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground">
+              <MessagesSquare className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden />
+              {t("feedbackSignalsHint")}
+            </p>
+            {data.topFeedback.length === 0 ? (
+              <p className="py-4 text-center text-sm text-muted-foreground">{t("feedbackNone")}</p>
+            ) : (
+              <div className="space-y-3">
+                {data.topFeedback.map((f) => {
+                  const total = f.up + f.down || 1;
+                  const upPct = Math.round((f.up / total) * 100);
+                  return (
+                    <div key={f.questionId} className="rounded-lg border p-3 transition-colors hover:border-emerald-300 dark:hover:border-emerald-800">
+                      <div className="flex items-start justify-between gap-2">
+                        <p className="line-clamp-1 min-w-0 text-sm font-medium">{f.text}</p>
+                        <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-muted/60 px-2 py-0.5 text-[10px] font-semibold tabular-nums text-muted-foreground">
+                          {f.up + f.down} {t("votesShort")}
+                        </span>
+                      </div>
+                      <div className="mt-2 flex items-center gap-2">
+                        <ThumbsUp className="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
+                        <div className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted" role="img" aria-label={`${t("helpful")} ${upPct}%`}>
+                          <div className="h-full rounded-full bg-emerald-500 transition-all duration-500" style={{ width: `${upPct}%` }} />
+                        </div>
+                        <span className="w-6 shrink-0 text-end text-[11px] font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">{f.up}</span>
+                        <ThumbsDown className="ms-2 h-3 w-3 shrink-0 text-rose-600 dark:text-rose-400" aria-hidden />
+                        <div className="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-muted">
+                          <div className="h-full rounded-full bg-rose-500 transition-all duration-500" style={{ width: `${100 - upPct}%` }} />
+                        </div>
+                        <span className="w-6 shrink-0 text-end text-[11px] font-semibold tabular-nums text-rose-700 dark:text-rose-400">{f.down}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </CardContent>
         </Card>
       </section>

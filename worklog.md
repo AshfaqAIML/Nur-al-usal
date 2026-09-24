@@ -266,3 +266,29 @@ Stage Summary:
 - My Library now has three entry points (navbar badge button, mobile menu, home strip) sharing one store-driven dialog — personal research continuity is a first-class surface.
 - Multi-draft answers present an editorial story (latest = authoritative, earlier = auditable history) instead of a confusing stack.
 - Remaining candidates: admin row click→edit, feedback trend widget on admin dashboard, library export (copy list as citations), real-device SW offline test, claim-verdict print target id.
+
+---
+Task ID: 12 (cron round — library export as citations, admin row-click edit, reader feedback signals)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; library export (copy citations / copy list / download .txt), admin row click→edit, admin feedback signals widget with vote ranking; i18n gap fix + styling details.
+
+Work Log:
+- QA smoke first: 12-view tour, all languages/RTL/dark — zero console errors, dev.log clean, no pre-existing bugs → feature round.
+- Library export (flagship — closes the "library export" candidate from Task 11):
+  * bookmarks.ts: new libraryPath(item) → hash-path per kind (misconceptions/{slug}, compare/{id}, claims/{id}, …) for citation URLs.
+  * LibraryDialog footer gains an emerald "Export" dropdown (DropdownMenu): Copy citations (buildCitation per item, blank-line separated), Copy as list (bulleted · section), Download .txt (numbered scholarly export file, nur-al-usul-library-YYYY-MM-DD.txt via Blob + programmatic <a> click). Disabled when empty.
+  * E2E verified: clipboard capture hook → 3 citations with correct deep-link paths + localized section labels + accessed date; list copy OK; downloaded .txt inspected — numbered entries with dates + full citations. Verified in Urdu RTL dark + English dark + mobile light Arabic.
+- Admin row click→edit: row body (title+preview) is now a button opening the edit dialog prefilled (title hover → emerald tint, title attr + aria-label from new clickToEdit key, focus-visible ring); checkbox/actions remain separate. E2E: clicked misconception row → edit dialog opened with claim/status/textareas populated (Urdu RTL).
+- Reader feedback signals (admin dashboard, closes the votes→triage visualization):
+  * /api/admin/stats: topFeedback = answers groupBy questionId (votes>0), sum helpfulUp/Down, rank by total desc, take 5, join question text+status.
+  * views/admin.tsx: new section between verification breakdown and recent grid — ranked cards with per-question dual-bar viz (emerald up% vs rose down%, transition-all width, ThumbsUp/Down icons, total-votes pill, aria-label %). Empty state (feedbackNone) when no votes yet. E2E with seeded votes: ranking 4→3→2 rendered correctly in Urdu RTL dark (bars mirrored); votes reset to 0 after test.
+- i18n gap fix: admin workflow stat labels were hardcoded English ("Pending questions" etc.) — now 6 new keys (wfPending/wfAiAnswers/wfPublished/wfSensitive/wfVerifiedBooks/wfOcrBooks) ×3 languages; admin dashboard fully localized.
+- Styling details: workflow cards hover lift + shadow + amber ping-pulse dot on attention states; export menu colored item icons (emerald/teal/amber); feedback rows hover border tint; library footer split layout (clear left, export right, RTL-mirrored).
+- i18n: 19 new keys ×3 (exportLibrary, exportCitations, copyCitations, copyAsList, downloadTxt, citationsCopied {n}, listCopied, libraryExported, clickToEdit, feedbackSignals, feedbackSignalsHint, feedbackNone, votesShort, wf* ×6).
+- Cleanup: test votes reset to 0 (DB pristine); test bookmarks cleared from headless profile; tool-results/ + skills/ added to .gitignore (ephemeral harness artifacts were previously tracked).
+- lint clean; full 12-view regression tour 0 console errors; dev.log clean.
+
+Stage Summary:
+- My Library becomes a portable research output: saved items export as formatted scholarly citations (clipboard or .txt file) with deep-linkable paths — the citation-first story now extends to the personal collection.
+- Admin editor is fully localized + faster: one click on any row opens the edit form (keyboard accessible), and the dashboard gains a ranked reader-feedback visualization (up/down split bars) that makes triage decisions instant.
+- Remaining candidates: real-device SW offline test, claim-verdict print target id, question attach-image storage, admin dashboard trend sparkline over time (needs timestamped data), library sort/search for large collections.

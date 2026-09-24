@@ -9,17 +9,22 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
-import { Bookmark, BookmarkCheck, BookMarked, CheckCircle2, GitCompare, ScrollText, MessageSquareText, ScanSearch, Trash2 } from "lucide-react";
+import { Bookmark, BookmarkCheck, BookMarked, CheckCircle2, ClipboardList, Download, FileText, GitCompare, MessageSquareText, ScanSearch, ScrollText, Share2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
+  DropdownMenuSeparator, DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { usePlatform, useT } from "@/lib/store";
 import {
-  clearLibrary, isBookmarked, libraryRoute, LIBRARY_EVENT,
+  clearLibrary, isBookmarked, libraryPath, libraryRoute, LIBRARY_EVENT,
   LibraryItem, LibraryKind, loadLibrary, removeBookmark, toggleBookmark,
 } from "@/lib/bookmarks";
 import { timeAgo } from "@/lib/reading-history";
+import { buildCitation, copyToClipboard } from "@/lib/cite";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -149,6 +154,40 @@ export function LibraryDialog() {
     onOpenChange(false);
   };
 
+  /* Export helpers — every saved item becomes a scholarly citation or a plain list. */
+  const sectionOf = (item: LibraryItem) => t(KIND_LABEL[item.kind]);
+  const buildCitations = () =>
+    items.map((item) => buildCitation({ title: item.title, section: sectionOf(item), path: libraryPath(item) }));
+
+  const onCopyCitations = async () => {
+    const ok = await copyToClipboard(buildCitations().join("\n\n"));
+    toast({ title: ok ? t("citationsCopied").replace("{n}", String(items.length)) : t("listCopied") });
+  };
+
+  const onCopyList = async () => {
+    const ok = await copyToClipboard(items.map((i) => `• ${i.title} (${sectionOf(i)})`).join("\n"));
+    toast({ title: t("listCopied"), description: ok ? undefined : t("libraryHint") });
+  };
+
+  const onDownloadTxt = () => {
+    const header = `Nur al-Usul — ${t("myLibrary")}\n${new Date().toLocaleString()}\n${"=".repeat(48)}\n\n`;
+    const body = items
+      .map((item, i) => `${i + 1}. ${item.title}\n   ${sectionOf(item)} · ${new Date(item.ts).toLocaleDateString()}\n   ${buildCitation({ title: item.title, section: sectionOf(item), path: libraryPath(item) })}\n`)
+      .join("\n");
+    const blob = new Blob([header + body + "\n"], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `nur-al-usul-library-${new Date().toISOString().slice(0, 10)}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast({ title: t("libraryExported") });
+  };
+
+  const exportDisabled = items.length === 0;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md p-0" dir={undefined}>
@@ -204,7 +243,7 @@ export function LibraryDialog() {
                 );
               })}
             </div>
-            <div className="border-t px-4 py-2.5">
+            <div className="border-t px-4 py-2.5 flex items-center justify-between gap-2">
               <Button
                 variant="ghost"
                 size="sm"
@@ -213,6 +252,31 @@ export function LibraryDialog() {
               >
                 <Trash2 className="h-3 w-3" aria-hidden /> {t("clearLibrary")}
               </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-7 gap-1.5 px-2.5 text-[11px] text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                    disabled={exportDisabled}
+                  >
+                    <Share2 className="h-3 w-3" aria-hidden /> {t("exportLibrary")}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-52">
+                  <DropdownMenuLabel className="text-[11px] text-muted-foreground">{t("exportCitations")}</DropdownMenuLabel>
+                  <DropdownMenuItem onClick={onCopyCitations} className="gap-2 text-xs">
+                    <FileText className="h-3.5 w-3.5 text-emerald-600" aria-hidden /> {t("copyCitations")}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={onCopyList} className="gap-2 text-xs">
+                    <ClipboardList className="h-3.5 w-3.5 text-teal-600" aria-hidden /> {t("copyAsList")}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={onDownloadTxt} className="gap-2 text-xs">
+                    <Download className="h-3.5 w-3.5 text-amber-600" aria-hidden /> {t("downloadTxt")}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </>
         )}

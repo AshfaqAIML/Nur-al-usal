@@ -430,12 +430,19 @@ export function EntityEditor() {
                     onCheckedChange={(c) => toggleSelect(r.id, c === true)}
                     aria-label={`Select ${String(r[entity.titleKey] ?? r.id)}`}
                   />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">{String(r[entity.titleKey] ?? r.id)}</p>
+                  {/* Row body doubles as an edit trigger (checkbox + action buttons stop propagation). */}
+                  <button
+                    type="button"
+                    onClick={() => setEditing({ mode: "edit", rec: r })}
+                    className="group min-w-0 flex-1 cursor-pointer rounded-md text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+                    title={t("clickToEdit")}
+                    aria-label={`${t("clickToEdit")}: ${String(r[entity.titleKey] ?? r.id)}`}
+                  >
+                    <p className="truncate text-sm font-medium group-hover:text-emerald-800 dark:group-hover:text-emerald-300">{String(r[entity.titleKey] ?? r.id)}</p>
                     <p className="mt-0.5 line-clamp-1 text-[11px] text-muted-foreground">
                       {String(r[entity.fields.find((f) => f.type === "textarea")?.key ?? ""] ?? "")}
                     </p>
-                  </div>
+                  </button>
                   {entity.feedback && (() => {
                     const v = voteSums(r);
                     return (
