@@ -35,3 +35,24 @@ Stage Summary:
 - Platform is now FULLY WIRED and browser-verified end-to-end. All 12 views functional; AI features (claim checker, answer generation) work against seeded KB (32 topics, 12 misconceptions, 18 objections, 16 books, 23 scholars, 15 Quran, 10 hadith, 7 fatwas, 7 comparisons).
 - Fonts self-hosted via next/font; theme/lang persistence via localStorage; RTL verified.
 - Remaining candidates for next rounds: admin CRUD forms UI (entity editor), OCR upload flow, comparison detail deep-links, objection detail pages, pagination, SEO metadata per view, PWA manifest.
+
+---
+Task ID: 2 (cron round — objection details, citation UX, PWA, styling pass)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA smoke pass; then extend feature set + styling details.
+
+Work Log:
+- QA smoke: GET / 200, health 200, no browser console errors.
+- Objection DETAIL pages: /api/objections?id= (with topic include + views increment); ObjectionsView rebuilt with detail mode (back nav, badges, scholarly answer, hanafiPosition callout, evidence blockquotes via .evidence-quote, disputed box, topic link, ShareBar, views count) + list items now deep-link (#/objections/{id}); home objections + search openHit now route objections/{id}.
+- Citation-first UX: src/lib/cite.ts (buildCitation scholarly format + copyToClipboard w/ legacy fallback) + ShareBar component (Copy Citation w/ "Copied" state, Copy Link, Print) wired into objection detail, misconception detail, Q&A AnswerCard.
+- Per-view SEO: src/lib/use-doc-title.ts hook — objection detail, misconception detail, Q&A now set document.title to the entity being read (verified: "Why do Hanafis not raise their hands before every ruku'? · Nur al-Usul…").
+- "Verse of the Visit" home widget: /api/quran?random=1 + ayah-card (Amiri Arabic, translation, surah badge, Another-verse refresh w/ spinner, ornament divider header).
+- Styling details: .card-lift hover lift+glow on all clickable cards (home misconceptions/questions/categories/comparisons/books, knowledge topics, search hits, objections, misconceptions); .prose-scholarly reading rhythm; .evidence-quote Arabic-first blockquote; print stylesheet (@media print: hide chrome, print-area isolation via data-print-target).
+- PWA: manifest.webmanifest + PIL-generated icons (192/512/apple-touch/favicon — emerald book + amber 8-point star) + metadata icons/themeColor.
+- Bugfixes found in QA: misconception detail endless-skeleton on bad slug → undefined=loading + i18n not-found state (3 langs); objection listing headers i18n-ified (objectionsTitle/Subtitle/openResearchTopic etc., ~20 new keys x3).
+- lint clean; browser-verified: home ayah widget, objection deep-link + title, citation copy state, misconception detail + bad-slug fallback, manifest/icon served 200.
+
+Stage Summary:
+- Every major entity now has a shareable, printable, citable detail page — the "citation-first" requirement of the MASTER PROMPT is now fully realized in UX.
+- PWA installable (manifest + icons + theme color); per-view titles improve SEO/UX.
+- Remaining candidates: admin entity CRUD editor UI, OCR upload flow, comparison deep-links from home chips (currently all go to compare view top), pagination for large lists, service-worker offline shell, per-view meta description updates.

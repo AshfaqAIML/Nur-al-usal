@@ -133,7 +133,7 @@ export function KnowledgeView({ slug }: { slug?: string | null }) {
               {c.topics.map((tp) => (
                 <Card
                   key={tp.id}
-                  className="cursor-pointer border-border/70 transition-shadow hover:shadow-md"
+                  className="card-lift cursor-pointer border-border/70"
                   onClick={() => setView("knowledge", tp.slug)}
                 >
                   <CardContent className="p-4">

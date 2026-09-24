@@ -28,10 +28,24 @@ export const metadata: Metadata = {
   description:
     "A source-based, citation-first Islamic research platform: Hanafi fiqh, Sunni aqeedah, scholarly sources library (classical & later South Asian incl. Fatawa Razvia), misconception database, 'Is This Really Hanafi?' claim checker, objection database, comparison engine, and multilingual English/Urdu/Arabic research.",
   keywords: ["Hanafi", "fiqh", "aqeedah", "misconceptions", "tawassul", "Fatawa Razvia", "Islamic research", "Urdu", "Arabic"],
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     title: "Nur al-Usul — Hanafi Research Platform",
     description: "Understand Hanafi Islam through reliable sources.",
     type: "website",
+  },
+  viewport: {
+    themeColor: [
+      { media: "(prefers-color-scheme: light)", color: "#065f46" },
+      { media: "(prefers-color-scheme: dark)", color: "#022c22" },
+    ],
   },
 };
 

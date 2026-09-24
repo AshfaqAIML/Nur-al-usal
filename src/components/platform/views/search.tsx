@@ -49,6 +49,7 @@ export function SearchView({ param }: { param?: string | null }) {
     else if (h.route.startsWith("knowledge/")) setView("knowledge", h.route.split("/")[1]);
     else if (h.route.startsWith("sources/book/")) setView("sources", `book/${h.route.split("/")[2]}`);
     else if (h.route.startsWith("sources/scholar/")) setView("sources", `scholar/${h.route.split("/")[2]}`);
+    else if (h.route.startsWith("objections/")) setView("objections", h.route.split("/")[1]);
     else if (h.route === "compare") setView("compare");
     else if (h.route.startsWith("qa/")) setView("qa", h.route.split("/")[1]);
     else if (h.route.startsWith("quran-hadith/")) setView("quran");
@@ -104,7 +105,7 @@ export function SearchView({ param }: { param?: string | null }) {
               {hits.map((h) => {
                 const meta = SOURCE_TYPE_META[h.entityType];
                 return (
-                  <Card key={`${h.entityType}-${h.entityId}`} className="cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => openHit(h)}>
+                  <Card key={`${h.entityType}-${h.entityId}`} className="card-lift cursor-pointer border-border/70" onClick={() => openHit(h)}>
                     <CardContent className="p-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <span className="text-sm font-semibold">{h.title}</span>

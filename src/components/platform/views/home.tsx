@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ArrowRight, BookMarked, Building2, CheckCircle2, GitCompare, Landmark, ScrollText, Sparkles, Users } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { ArrowRight, BookMarked, Building2, CheckCircle2, GitCompare, Landmark, RefreshCw, ScrollText, Sparkles, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlatform, useT } from "@/lib/store";
-import { apiGet, BootstrapData } from "@/lib/api";
+import { apiGet, BootstrapData, QuranVerse } from "@/lib/api";
 import { ClassificationBadge, SourceClassBadge, VerificationBadge } from "@/components/platform/badges";
 import { UrduText } from "@/components/platform/text";
 import { cn } from "@/lib/utils";
@@ -16,10 +16,25 @@ export function HomeView() {
   const t = useT();
   const { setView } = usePlatform();
   const [data, setData] = useState<BootstrapData | null>(null);
+  const [ayah, setAyah] = useState<QuranVerse | null>(null);
+  const [ayahLoading, setAyahLoading] = useState(true);
 
   useEffect(() => {
     apiGet<BootstrapData>("/api/bootstrap").then(setData).catch(() => setData(null));
   }, []);
+
+  const loadAyah = useCallback(() => {
+    setAyahLoading(true);
+    apiGet<{ verses: QuranVerse[] }>("/api/quran?random=1")
+      .then((d) => setAyah(d.verses[0] ?? null))
+      .catch(() => setAyah(null))
+      .finally(() => setAyahLoading(false));
+  }, []);
+
+  useEffect(() => {
+    const id = setTimeout(loadAyah, 0);
+    return () => clearTimeout(id);
+  }, [loadAyah]);
 
   if (!data) {
     return (
@@ -78,6 +93,48 @@ export function HomeView() {
         </div>
       </section>
 
+      {/* ─── VERSE OF THE VISIT ─── */}
+      <section aria-label={t("verseOfVisit")} className="border-b bg-background">
+        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+          <Card className="ayah-card border-emerald-200/70 bg-gradient-to-b from-emerald-50/60 to-background dark:border-emerald-900/70 dark:from-emerald-950/30">
+            <CardContent className="p-6 text-center sm:p-8">
+              <div className="ornament-divider justify-center">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-emerald-800 dark:text-emerald-300">
+                  {t("verseOfVisit")}
+                </span>
+              </div>
+              {ayahLoading ? (
+                <div className="space-y-3 py-2">
+                  <Skeleton className="mx-auto h-8 w-3/4" />
+                  <Skeleton className="mx-auto h-4 w-1/2" />
+                </div>
+              ) : ayah ? (
+                <>
+                  <p className="font-arabic mt-4 text-2xl leading-[2.2] sm:text-3xl">{ayah.arabic}</p>
+                  <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{ayah.translationEn}</p>
+                  <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                    <Badge variant="outline" className="text-[11px]">
+                      {ayah.surahNameEn} {ayah.surah}:{ayah.ayah} · {ayah.surahNameAr}
+                    </Badge>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="no-print h-7 gap-1.5 text-[11px] text-muted-foreground"
+                      onClick={loadAyah}
+                    >
+                      <RefreshCw className={cn("h-3 w-3", ayahLoading && "animate-spin")} /> {t("refreshVerse")}
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <p className="py-3 text-sm text-muted-foreground">—</p>
+              )}
+              <p className="mt-3 text-[10px] italic text-muted-foreground/70">{t("verseOfVisitNote")}</p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* ─── STATS ─── */}
       <section aria-label={t("stats")} className="border-b bg-muted/30">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px overflow-hidden px-4 py-6 sm:grid-cols-4 sm:px-6 lg:grid-cols-8">
@@ -98,7 +155,7 @@ export function HomeView() {
             <SectionHeader title={t("commonMisconceptions")} onMore={() => setView("misconceptions")} />
             <div className="space-y-3">
               {data.featuredMisconceptions.map((m) => (
-                <Card key={m.id} className="group cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => setView("misconceptions", m.slug)}>
+                <Card key={m.id} className="card-lift group cursor-pointer border-border/70" onClick={() => setView("misconceptions", m.slug)}>
                   <CardContent className="p-4">
                     <p className="text-sm font-medium leading-snug">“{m.claim}”</p>
                     <div className="mt-2 flex items-center justify-between gap-2">
@@ -114,7 +171,7 @@ export function HomeView() {
             <SectionHeader title={t("popularQuestions")} onMore={() => setView("qa")} />
             <div className="space-y-3">
               {data.featuredQuestions.map((q) => (
-                <Card key={q.id} className="group cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => setView("qa", q.id)}>
+                <Card key={q.id} className="card-lift group cursor-pointer border-border/70" onClick={() => setView("qa", q.id)}>
                   <CardContent className="p-4">
                     <p className="text-sm font-medium leading-snug">{q.text}</p>
                     <div className="mt-2 flex items-center gap-2">
@@ -135,7 +192,7 @@ export function HomeView() {
           <SectionHeader title={t("openKnowledgeBase")} onMore={() => setView("knowledge")} />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {data.categories.map((c) => (
-              <Card key={c.id} className="cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => setView("knowledge", c.slug)}>
+              <Card key={c.id} className="card-lift cursor-pointer border-border/70" onClick={() => setView("knowledge", c.slug)}>
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between">
                     <span className="font-arabic text-xl text-emerald-800 dark:text-emerald-300">{c.nameAr}</span>
@@ -155,7 +212,7 @@ export function HomeView() {
           <SectionHeader title={t("comparePositions")} onMore={() => setView("compare")} />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {data.comparisons.map((c) => (
-              <button key={c.id} onClick={() => setView("compare")} className="rounded-xl border bg-card p-4 text-start transition-shadow hover:shadow-md">
+              <button key={c.id} onClick={() => setView("compare")} className="card-lift rounded-xl border bg-card p-4 text-start">
                 <GitCompare className="h-4 w-4 text-emerald-700 dark:text-emerald-400" aria-hidden />
                 <p className="mt-2 text-sm font-semibold leading-snug">{c.issue}</p>
                 <p className="mt-1 text-[11px] text-muted-foreground">Hanafi · Shafi'i · Maliki · Hanbali · Other</p>
@@ -169,7 +226,7 @@ export function HomeView() {
           <SectionHeader title={t("featuredSources")} onMore={() => setView("sources")} />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {data.featuredBooks.slice(0, 8).map((b) => (
-              <Card key={b.id} className="cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => setView("sources", `book/${b.slug}`)}>
+              <Card key={b.id} className="card-lift cursor-pointer border-border/70" onClick={() => setView("sources", `book/${b.slug}`)}>
                 <CardContent className="p-4">
                   <div className={cn("flex h-24 items-center justify-center rounded-lg border", coverClass(b.coverColor))}>
                     <span className="font-arabic px-3 text-center text-lg leading-snug" dir="rtl">{b.titleAr ?? b.titleEn}</span>
@@ -196,7 +253,7 @@ export function HomeView() {
             <SectionHeader title={t("objectionsLabel")} onMore={() => setView("objections")} />
             <div className="space-y-2">
               {data.objectionsTop.slice(0, 6).map((o) => (
-                <button key={o.id} onClick={() => setView("objections")} className="flex w-full items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3 text-start transition-colors hover:bg-accent/50">
+                <button key={o.id} onClick={() => setView("objections", o.id)} className="flex w-full items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3 text-start transition-colors hover:bg-accent/50">
                   <span className="text-sm font-medium leading-snug">{o.question}</span>
                   <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground rtl-flip" aria-hidden />
                 </button>

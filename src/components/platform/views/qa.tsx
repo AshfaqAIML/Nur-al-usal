@@ -9,6 +9,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { usePlatform, useT } from "@/lib/store";
 import { apiGet, apiPost, Answer, parseJson, Question } from "@/lib/api";
+import { useDocTitle } from "@/lib/use-doc-title";
+import { ShareBar } from "@/components/platform/share-bar";
 import { FiqhAqeedahBadge } from "@/components/platform/badges";
 import { EvidenceList, ScholarlyCard } from "@/components/platform/text";
 
@@ -25,16 +27,22 @@ export function QuestionsView({ id }: { id?: string | null }) {
   const [question, setQuestion] = useState<Question | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [busy, setBusy] = useState(false);
+  useDocTitle(id ? (question?.text ?? null) : t("navQA"));
 
   useEffect(() => {
     apiGet<{ questions: Question[] }>("/api/questions").then((d) => setList(d.questions)).catch(() => setList([]));
   }, []);
 
   useEffect(() => {
-    if (!id) { setQuestion(null); setAnswers([]); return; }
-    apiGet<{ question: Question & { answers: Answer[] } }>(`/api/questions?id=${id}`)
-      .then((d) => { setQuestion(d.question); setAnswers(d.question.answers ?? []); })
-      .catch(() => setQuestion(null));
+    let cancelled = false;
+    (async () => {
+      if (!id) { if (!cancelled) { setQuestion(null); setAnswers([]); } return; }
+      try {
+        const d = await apiGet<{ question: Question & { answers: Answer[] } }>(`/api/questions?id=${id}`);
+        if (!cancelled) { setQuestion(d.question); setAnswers(d.question.answers ?? []); }
+      } catch { if (!cancelled) setQuestion(null); }
+    })();
+    return () => { cancelled = true; };
   }, [id]);
 
   async function generate() {
@@ -142,9 +150,9 @@ export function AnswerCard({ answer }: { answer: Answer }) {
   return (
     <ScholarlyCard
       title={t("answer") ?? "Answer"}
-      className={answer.status === "PUBLISHED" ? "border-emerald-300 dark:border-emerald-800" : "border-amber-300 dark:border-amber-800"}
+      className={answer.status === "PUBLISHED" ? "border-emerald-300 dark:border-emerald-800 print-area" : "border-amber-300 dark:border-amber-800 print-area"}
     >
-      <div className="space-y-4">
+      <div id="answer-card" className="space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <FiqhAqeedahBadge value={answer.aqeedahOrFiqh} />
           {answer.aiGenerated && <Badge variant="outline" className="text-[10px] border-amber-300 text-amber-800 dark:border-amber-800 dark:text-amber-300">AI-assisted — {t("aiDraftNotice")}</Badge>}
@@ -242,6 +250,14 @@ export function AnswerCard({ answer }: { answer: Answer }) {
             </div>
           </section>
         )}
+
+        <div className="border-t pt-3">
+          <ShareBar
+            title={answer.directAnswer.length > 80 ? answer.directAnswer.slice(0, 80) + "…" : answer.directAnswer}
+            section={t("navQA")}
+            printTargetId="answer-card"
+          />
+        </div>
       </div>
     </ScholarlyCard>
   );

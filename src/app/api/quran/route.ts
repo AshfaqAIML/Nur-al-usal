@@ -6,6 +6,16 @@ export async function GET(req: NextRequest) {
   const q = sp.get("q");
   const surah = sp.get("surah");
   const tag = sp.get("tag");
+  const random = sp.get("random");
+
+  // Single random verse — powers the "Verse of the Visit" home widget
+  if (random) {
+    const total = await db.quranVerse.count();
+    if (total === 0) return NextResponse.json({ verses: [] });
+    const skip = Math.floor(Math.random() * total);
+    const [verse] = await db.quranVerse.findMany({ take: 1, skip });
+    return NextResponse.json({ verses: verse ? [verse] : [] });
+  }
 
   const where: Record<string, unknown> = {};
   if (surah) where.surah = parseInt(surah);
