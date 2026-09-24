@@ -1,50 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
-  icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
-  },
+  title: "Nur al-Usul — Hanafi Aqeedah, Fiqh & Misconception Research Platform",
+  description:
+    "A source-based, citation-first Islamic research platform: Hanafi fiqh, Sunni aqeedah, scholarly sources library (classical & later South Asian incl. Fatawa Razvia), misconception database, 'Is This Really Hanafi?' claim checker, objection database, comparison engine, and multilingual English/Urdu/Arabic research.",
+  keywords: ["Hanafi", "fiqh", "aqeedah", "misconceptions", "tawassul", "Fatawa Razvia", "Islamic research", "Urdu", "Arabic"],
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "Nur al-Usul — Hanafi Research Platform",
+    description: "Understand Hanafi Islam through reliable sources.",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
-      >
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <body className="antialiased bg-background text-foreground min-h-screen flex flex-col">
         {children}
         <Toaster />
       </body>
