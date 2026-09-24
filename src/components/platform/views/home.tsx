@@ -191,9 +191,15 @@ export function HomeView() {
       <section aria-label={t("stats")} className="border-b bg-muted/30">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px overflow-hidden px-4 py-6 sm:grid-cols-4 sm:px-6 lg:grid-cols-8">
           {stats.map((s) => (
-            <div key={s.label} className="flex flex-col items-center gap-1 px-2 py-3 text-center">
-              <s.icon className="h-4 w-4 text-emerald-700 dark:text-emerald-400" aria-hidden />
-              <span className="font-scholarly text-2xl font-bold">{s.value}</span>
+            <div
+              key={s.label}
+              className="group flex flex-col items-center gap-1 px-2 py-3 text-center transition-colors hover:bg-background/60 dark:hover:bg-emerald-950/20"
+            >
+              <s.icon
+                className="h-4 w-4 text-emerald-700 transition-transform duration-200 group-hover:-translate-y-0.5 dark:text-emerald-400"
+                aria-hidden
+              />
+              <span className="font-scholarly text-2xl font-bold tabular-nums">{s.value}</span>
               <span className="text-[11px] uppercase tracking-wide text-muted-foreground">{s.label}</span>
             </div>
           ))}

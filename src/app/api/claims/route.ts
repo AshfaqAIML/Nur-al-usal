@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { llmComplete, extractJson, ANTI_HALLUCINATION_RULES, CLASSIFICATIONS } from "@/lib/ai";
 import { retrieveEvidence } from "@/lib/retrieval";
+import { rateLimitByIp, tooMany } from "@/lib/rate-limit";
 
 export async function GET(req: NextRequest) {
   const take = Math.min(parseInt(req.nextUrl.searchParams.get("take") ?? "12"), 50);
@@ -15,6 +16,8 @@ export async function GET(req: NextRequest) {
  * and shows the evidence. Never a classification without an explanation.
  */
 export async function POST(req: NextRequest) {
+  const rl = rateLimitByIp(req, "claims", 8);
+  if (!rl.ok) return tooMany(rl.retryAfter);
   try {
     const body = await req.json();
     const claim = (body.claim ?? "").toString().trim();

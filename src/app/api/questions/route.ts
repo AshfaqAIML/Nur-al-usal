@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { isSensitiveQuestion, detectLanguage } from "@/lib/retrieval";
+import { rateLimitByIp, tooMany } from "@/lib/rate-limit";
 
 export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams;
@@ -38,6 +39,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const rl = rateLimitByIp(req, "questions", 12);
+  if (!rl.ok) return tooMany(rl.retryAfter);
   try {
     const body = await req.json();
     const text = (body.text ?? "").toString().trim();

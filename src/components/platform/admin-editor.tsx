@@ -104,6 +104,8 @@ export function EntityEditor() {
   const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<{ mode: "create" | "edit"; rec?: Rec } | null>(null);
   const [deleting, setDeleting] = useState<Rec | null>(null);
+  const [bulkConfirm, setBulkConfirm] = useState(false);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
   const [busy, setBusy] = useState(false);
 
   const load = useCallback(async () => {
@@ -119,6 +121,9 @@ export function EntityEditor() {
   }, [entity]);
 
   useEffect(() => { load(); }, [load]);
+
+  // Reset selection when switching entities.
+  useEffect(() => { setSelected(new Set()); }, [entity]);
 
   const filtered = useMemo(() => {
     if (!records) return null;
@@ -148,6 +153,48 @@ export function EntityEditor() {
     } catch (e) {
       toast({ title: e instanceof Error ? e.message : "Delete failed", variant: "destructive" });
     } finally { setBusy(false); }
+  };
+
+  const toggleSelect = (id: string, on: boolean) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (on) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  };
+
+  const allPageSelected = !!pageRecords && pageRecords.length > 0 && pageRecords.every((r) => selected.has(r.id));
+  const toggleSelectPage = () => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (pageRecords && !allPageSelected) pageRecords.forEach((r) => next.add(r.id));
+      else if (pageRecords) pageRecords.forEach((r) => next.delete(r.id));
+      return next;
+    });
+  };
+
+  const onBulkDelete = async () => {
+    if (selected.size === 0) return;
+    setBusy(true);
+    let done = 0;
+    let failed = 0;
+    for (const id of selected) {
+      try {
+        await apiAdmin("/api/admin/resource", { entity: entity.value, id }, "DELETE");
+        done += 1;
+      } catch {
+        failed += 1;
+      }
+    }
+    setBulkConfirm(false);
+    setSelected(new Set());
+    toast({
+      title: failed === 0 ? `${done} ${entity.label} records deleted` : `${done} deleted · ${failed} failed`,
+      variant: failed === 0 ? "default" : "destructive",
+    });
+    await load();
+    setBusy(false);
   };
 
   return (
@@ -184,11 +231,59 @@ export function EntityEditor() {
           <p className="py-8 text-center text-sm text-muted-foreground">{t("noResults")}</p>
         )}
         {pageRecords && pageRecords.length > 0 && (
+          <div
+            className={cn(
+              "mb-2 flex min-h-9 flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-1.5 text-xs transition-colors",
+              selected.size > 0
+                ? "border-emerald-300 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/40"
+                : "bg-muted/40"
+            )}
+          >
+            <label className="flex cursor-pointer items-center gap-2 font-medium">
+              <Checkbox checked={allPageSelected} onCheckedChange={() => toggleSelectPage()} aria-label="Select page" />
+              {selected.size > 0
+                ? t("bulkSelected").replace("{n}", String(selected.size))
+                : "Select page"}
+            </label>
+            {selected.size > 0 && (
+              <div className="flex items-center gap-1.5">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 px-2 text-[11px] text-muted-foreground"
+                  onClick={() => setSelected(new Set())}
+                >
+                  {t("clearSelection")}
+                </Button>
+                <Button
+                  size="sm"
+                  className="h-7 gap-1.5 bg-red-700 px-2.5 text-[11px] text-white hover:bg-red-800"
+                  onClick={() => setBulkConfirm(true)}
+                >
+                  <Trash2 className="h-3 w-3" /> {t("bulkDelete")}
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+        {pageRecords && pageRecords.length > 0 && (
           <div className="max-h-[28rem] divide-y overflow-y-auto rounded-lg border">
             {pageRecords.map((r) => {
               const status = entity.statusKey ? String(r[entity.statusKey] ?? "") : null;
+              const isSelected = selected.has(r.id);
               return (
-                <div key={r.id} className="flex items-center gap-3 p-3 transition-colors hover:bg-accent/40">
+                <div
+                  key={r.id}
+                  className={cn(
+                    "flex items-center gap-3 p-3 transition-colors",
+                    isSelected ? "bg-emerald-50/60 dark:bg-emerald-950/30" : "hover:bg-accent/40"
+                  )}
+                >
+                  <Checkbox
+                    checked={isSelected}
+                    onCheckedChange={(c) => toggleSelect(r.id, c === true)}
+                    aria-label={`Select ${String(r[entity.titleKey] ?? r.id)}`}
+                  />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">{String(r[entity.titleKey] ?? r.id)}</p>
                     <p className="mt-0.5 line-clamp-1 text-[11px] text-muted-foreground">
@@ -273,6 +368,28 @@ export function EntityEditor() {
               onClick={(e) => { e.preventDefault(); onDelete(); }}
             >
               {t("delete")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Bulk delete confirm */}
+      <AlertDialog open={bulkConfirm} onOpenChange={setBulkConfirm}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {t("bulkSelected").replace("{n}", String(selected.size))} — {t("deleteConfirmTitle")}
+            </AlertDialogTitle>
+            <AlertDialogDescription>{t("deleteConfirmBody")}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-red-700 text-white hover:bg-red-800"
+              disabled={busy}
+              onClick={(e) => { e.preventDefault(); onBulkDelete(); }}
+            >
+              {busy ? t("saving") : t("bulkDelete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

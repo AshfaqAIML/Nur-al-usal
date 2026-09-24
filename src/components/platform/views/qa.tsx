@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ChevronRight, Eye, Loader2, Sparkles } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ChevronRight, Eye, Loader2, Search, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,6 +13,7 @@ import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { FiqhAqeedahBadge } from "@/components/platform/badges";
 import { EvidenceList, ScholarlyCard } from "@/components/platform/text";
+import { cn } from "@/lib/utils";
 
 const STATUS_LABELS: Record<string, string> = {
   PENDING: "Pending review", AI_ANSWERED: "AI draft (needs review)", REVIEWED: "Reviewed",
@@ -27,11 +28,26 @@ export function QuestionsView({ id }: { id?: string | null }) {
   const [question, setQuestion] = useState<Question | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [busy, setBusy] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("");
+  const [search, setSearch] = useState("");
   useDocTitle(id ? (question?.text ?? null) : t("navQA"));
 
   useEffect(() => {
     apiGet<{ questions: Question[] }>("/api/questions").then((d) => setList(d.questions)).catch(() => setList([]));
   }, []);
+
+  const visibleList = useMemo(() => {
+    if (!list) return null;
+    const needle = search.trim().toLowerCase();
+    return list.filter((q) => {
+      if (statusFilter && q.status !== statusFilter) return false;
+      if (needle) {
+        const hay = `${q.text} ${q.category?.nameEn ?? ""}`.toLowerCase();
+        if (!hay.includes(needle)) return false;
+      }
+      return true;
+    });
+  }, [list, statusFilter, search]);
 
   useEffect(() => {
     let cancelled = false;
@@ -123,10 +139,51 @@ export function QuestionsView({ id }: { id?: string | null }) {
         <Button className="bg-emerald-700 hover:bg-emerald-800 text-white" onClick={() => setView("ask")}>{t("askQuestion")}</Button>
       </header>
 
+      {/* Filter chips + search */}
+      <div className="mb-5 space-y-3">
+        <div className="relative">
+          <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={`${t("search")}…`}
+            aria-label={t("search")}
+            className="w-full rounded-full border bg-card py-2.5 pe-4 ps-9 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-600"
+          />
+        </div>
+        <div role="group" aria-label="Status filter" className="flex flex-wrap gap-1.5">
+          {[{ v: "", label: t("all") }, ...Object.entries(STATUS_LABELS).map(([v, label]) => ({ v, label }))].map((f) => (
+            <button
+              key={f.v}
+              onClick={() => setStatusFilter(f.v)}
+              aria-pressed={statusFilter === f.v}
+              className={cn(
+                "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600",
+                statusFilter === f.v
+                  ? "border-emerald-600 bg-emerald-600 text-white shadow-sm"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+              )}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {!list && <div className="space-y-3">{[...Array(5)].map((_, i) => <Skeleton key={i} className="h-24 rounded-xl" />)}</div>}
+      {list && visibleList && visibleList.length === 0 && (
+        <div className="rounded-xl border border-dashed p-10 text-center">
+          <p className="text-sm text-muted-foreground">{t("noEntriesMatch")}</p>
+        </div>
+      )}
+      {list && visibleList && visibleList.length > 0 && (
+        <p className="mb-3 text-[11px] text-muted-foreground">
+          {t("matching")}: <strong className="font-semibold text-foreground">{visibleList.length}</strong> / {list.length}
+        </p>
+      )}
       <div className="space-y-3">
-        {(list ?? []).map((q) => (
-          <Card key={q.id} className="cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => setView("qa", q.id)}>
+        {(visibleList ?? []).map((q) => (
+          <Card key={q.id} className="card-lift cursor-pointer border-border/70" onClick={() => setView("qa", q.id)}>
             <CardContent className="p-5">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <p className="max-w-xl text-sm font-semibold leading-snug">{q.text}</p>

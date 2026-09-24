@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import ZAI from "z-ai-web-dev-sdk";
+import { rateLimitByIp, tooMany } from "@/lib/rate-limit";
 
 /**
  * OCR — Scan & Verify.
@@ -14,6 +15,8 @@ const MAX_BASE64_CHARS = 6_000_000; // ≈ 4.5 MB binary
 const MAX_TEXT_CHARS = 8000;
 
 export async function POST(req: NextRequest) {
+  const rl = rateLimitByIp(req, "ocr", 6);
+  if (!rl.ok) return tooMany(rl.retryAfter);
   try {
     const body = await req.json();
     const imageBase64 = (body.imageBase64 ?? "").toString();

@@ -142,3 +142,23 @@ Stage Summary:
 - PWA completes its offline story: installable (manifest/icons) + offline shell with trilingual fallback page; safe-by-default caching strategy that keeps dev/HMR healthy.
 - Home now carries a personal research trail (Continue Reading) — citation-first platform gains session continuity.
 - Remaining candidates: real-device offline test, admin attachment display (if attachmentUrl ever stored), comparison chips from objection detail, admin bulk actions, question answered-count badges on home cards.
+
+---
+Task ID: 7 (cron round — rate limiting, admin bulk actions, Q&A filter+search)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA smoke; harden AI endpoints with rate limiting; admin bulk delete; Q&A status filter + search; styling details.
+
+Work Log:
+- QA smoke: 12-view tour — zero console/page errors, dev.log clean; no pre-existing bugs.
+- Rate limiting (src/lib/rate-limit.ts): in-memory sliding window per IP+scope (x-forwarded-for/x-real-ip → "local" fallback), stale-key sweep past 5000 buckets, standard 429 JSON + Retry-After header helper (tooMany). Wired: /api/claims POST 8/min, /api/ocr POST 6/min, /api/answers/generate POST 6/min, /api/questions POST 12/min. E2E verified: 13 rapid question POSTs → 12×200 then 429 retry-after:60; validation paths on claims/ocr still 400 correctly after wiring. (Single-node scope; documented swap path to shared store.)
+- Admin bulk actions (admin-editor.tsx): per-row checkboxes + select-page checkbox in a selection toolbar (emerald-tinted when active), "N selected" counter (i18n bulkSelected {n}), Clear selection, red "Delete selected" button → AlertDialog confirm → sequential DELETE per id with per-failure counting, toast summary, reload, selection resets on entity switch. Rows highlight emerald when selected. E2E verified: created 2 test misconceptions → filter ZZTEST → select page → bulk delete → "No results", count restored after cleanup.
+- Q&A status filter + search (views/qa.tsx): pill-chip status filter (All + Pending review / AI draft / Reviewed / Answered / Rejected, aria-pressed, role=group) + rounded search input (text + category match), visibleList memo, "Matching: x / y" counter line, empty state (noEntriesMatch). E2E verified: Answered chip → 2/6; +search "ruku" → 1/6; clear → 2/6; empty-state renders on impossible combos. Cards now card-lift. (One stale-HMR false alarm during testing — hard reload resolved; not a code bug.)
+- Styling details: home stat cells get group hover (icon lift + bg tint) + tabular-nums; Q&A chip focus-visible rings; bulk toolbar transition-colors; selection row tint (light/dark).
+- i18n: 3 new keys ×3 languages (bulkSelected {n}, bulkDelete, clearSelection).
+- Cleanup: deleted 12 ZZTEST probe questions via admin API (DB clean). lint clean; home + views regression clean.
+
+Stage Summary:
+- AI surfaces are now abuse-resistant (per-IP sliding windows with honest 429s + Retry-After) — production-readiness hardening for the LLM-backed endpoints.
+- Admin editor reaches bulk-ops maturity: select page → bulk delete with confirm + per-record failure reporting.
+- Q&A listing becomes filterable/searchable — completes the public Q&A experience (list → filter → detail → generate).
+- Remaining candidates: real-device offline SW test, comparison chips from detail pages, admin bulk feature/publish toggles, question attach-image storage, stream answers via SSE.

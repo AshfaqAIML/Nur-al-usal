@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { llmComplete, extractJson, ANTI_HALLUCINATION_RULES } from "@/lib/ai";
 import { retrieveEvidence, isSensitiveQuestion, detectLanguage } from "@/lib/retrieval";
+import { rateLimitByIp, tooMany } from "@/lib/rate-limit";
 
 /**
  * RAG pipeline (MASTER PROMPT Phase 7):
@@ -9,6 +10,8 @@ import { retrieveEvidence, isSensitiveQuestion, detectLanguage } from "@/lib/ret
  * Answer Generation → Citation Validation → Response
  */
 export async function POST(req: NextRequest) {
+  const rl = rateLimitByIp(req, "answers-generate", 6);
+  if (!rl.ok) return tooMany(rl.retryAfter);
   try {
     const { questionId } = await req.json();
     if (!questionId) return NextResponse.json({ error: "questionId is required" }, { status: 400 });

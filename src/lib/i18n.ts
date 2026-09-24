@@ -218,6 +218,9 @@ const en: Dict = {
   justNow: "just now",
   hoursAgo: "{n}h ago",
   daysAgo: "{n}d ago",
+  bulkSelected: "{n} selected",
+  bulkDelete: "Delete selected",
+  clearSelection: "Clear",
 };
 
 const ur: Dict = {
@@ -425,6 +428,9 @@ const ur: Dict = {
   justNow: "ابھی ابھی",
   hoursAgo: "{n} گھنٹے پہلے",
   daysAgo: "{n} دن پہلے",
+  bulkSelected: "{n} منتخب",
+  bulkDelete: "منتخب شدہ حذف کریں",
+  clearSelection: "صاف کریں",
 };
 
 const ar: Dict = {
@@ -632,6 +638,9 @@ const ar: Dict = {
   justNow: "الآن",
   hoursAgo: "قبل {n} ساعة",
   daysAgo: "قبل {n} يوم",
+  bulkSelected: "تم تحديد {n}",
+  bulkDelete: "حذف المحدد",
+  clearSelection: "مسح",
 };
 
 export const DICTS: Record<Lang, Dict> = { en, ur, ar };
