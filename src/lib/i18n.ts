@@ -179,6 +179,13 @@ const en: Dict = {
   classify: "Classification",
   whoSaid: "Source of the claim",
   statusLabel: "Status",
+  relatedResearch: "Related Research",
+  backToTop: "Back to top",
+  prev: "Previous",
+  next: "Next",
+  pageLabel: "Page",
+  recordsTotal: "Total records",
+  matching: "Matching",
 };
 
 const ur: Dict = {
@@ -347,6 +354,13 @@ const ur: Dict = {
   classify: "درجہ بندی",
   whoSaid: "دعوے کا مصدر",
   statusLabel: "درجہ",
+  relatedResearch: "متعلقہ تحقیق",
+  backToTop: "اوپر واپس جائیں",
+  prev: "پچھلا",
+  next: "اگلا",
+  pageLabel: "صفحہ",
+  recordsTotal: "کل ریکارڈز",
+  matching: "ملتے ہوئے",
 };
 
 const ar: Dict = {
@@ -515,6 +529,13 @@ const ar: Dict = {
   classify: "التصنيف",
   whoSaid: "مصدر الادعاء",
   statusLabel: "الحالة",
+  relatedResearch: "بحوث ذات صلة",
+  backToTop: "العودة إلى الأعلى",
+  prev: "السابق",
+  next: "التالي",
+  pageLabel: "صفحة",
+  recordsTotal: "إجمالي السجلات",
+  matching: "المطابقة",
 };
 
 export const DICTS: Record<Lang, Dict> = { en, ur, ar };

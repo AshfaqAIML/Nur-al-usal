@@ -11,7 +11,26 @@ export async function GET(req: NextRequest) {
     const m = await db.misconception.findUnique({ where: { slug }, include: { topic: true } });
     if (!m) return NextResponse.json({ error: "Not found" }, { status: 404 });
     await db.misconception.update({ where: { id: m.id }, data: { views: { increment: 1 } } });
-    return NextResponse.json({ misconception: m });
+    // Related research trail: same-topic misconceptions + objections.
+    const [relMisconceptions, relObjections] = await Promise.all([
+      m.topicId
+        ? db.misconception.findMany({
+            where: { topicId: m.topicId, id: { not: m.id } },
+            take: 4,
+            orderBy: { views: "desc" },
+            select: { id: true, slug: true, claim: true, verificationStatus: true, views: true },
+          })
+        : Promise.resolve([]),
+      m.topicId
+        ? db.objection.findMany({
+            where: { topicId: m.topicId },
+            take: 4,
+            orderBy: { views: "desc" },
+            select: { id: true, question: true, isAqeedah: true, views: true },
+          })
+        : Promise.resolve([]),
+    ]);
+    return NextResponse.json({ misconception: m, related: { misconceptions: relMisconceptions, objections: relObjections } });
   }
 
   const where: Record<string, unknown> = {};

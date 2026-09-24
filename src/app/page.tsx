@@ -16,6 +16,7 @@ import { SearchView } from "@/components/platform/views/search";
 import { AskView } from "@/components/platform/views/ask";
 import { QuestionsView } from "@/components/platform/views/qa";
 import { AdminView } from "@/components/platform/views/admin";
+import { BackToTop } from "@/components/platform/detail-chrome";
 
 function CurrentView() {
   const view = usePlatform((s) => s.view);
@@ -43,7 +44,12 @@ export default function Page() {
 
   useEffect(() => {
     hydrateFromHash();
-    const onHash = () => hydrateFromHash();
+    const onHash = () => {
+      hydrateFromHash();
+      // Back/forward or manual hash edits: start the new view at the top,
+      // mirroring in-app setView behavior.
+      window.scrollTo({ top: 0 });
+    };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, [hydrateFromHash]);
@@ -61,6 +67,7 @@ export default function Page() {
         <CurrentView />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

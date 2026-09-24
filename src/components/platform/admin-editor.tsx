@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -90,6 +90,8 @@ const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldD
   },
 ];
 
+const PAGE_SIZE = 15;
+
 type Rec = Record<string, unknown> & { id: string };
 
 export function EntityEditor() {
@@ -97,7 +99,9 @@ export function EntityEditor() {
   const { toast } = useToast();
   const [entity, setEntity] = useState(ENTITIES[0]);
   const [records, setRecords] = useState<Rec[] | null>(null);
+  const [total, setTotal] = useState(0);
   const [q, setQ] = useState("");
+  const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<{ mode: "create" | "edit"; rec?: Rec } | null>(null);
   const [deleting, setDeleting] = useState<Rec | null>(null);
   const [busy, setBusy] = useState(false);
@@ -105,10 +109,12 @@ export function EntityEditor() {
   const load = useCallback(async () => {
     setRecords(null);
     try {
-      const d = await apiGet<{ records: Rec[] }>(`/api/admin/resource?entity=${entity.value}`);
+      const d = await apiGet<{ records: Rec[]; total?: number }>(`/api/admin/resource?entity=${entity.value}`);
       setRecords(d.records);
+      setTotal(d.total ?? d.records.length);
     } catch {
       setRecords([]);
+      setTotal(0);
     }
   }, [entity]);
 
@@ -120,6 +126,16 @@ export function EntityEditor() {
     if (!needle) return records;
     return records.filter((r) => JSON.stringify(r).toLowerCase().includes(needle));
   }, [records, q]);
+
+  const pageCount = Math.max(1, Math.ceil((filtered?.length ?? 0) / PAGE_SIZE));
+  const safePage = Math.min(page, pageCount);
+  const pageRecords = useMemo(
+    () => filtered?.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE) ?? null,
+    [filtered, safePage]
+  );
+
+  // Reset to first page whenever entity or query changes.
+  useEffect(() => { setPage(1); }, [entity, q]);
 
   const onDelete = async () => {
     if (!deleting) return;
@@ -161,15 +177,15 @@ export function EntityEditor() {
         </div>
       </CardHeader>
       <CardContent>
-        {!filtered && (
+        {!pageRecords && (
           <div className="space-y-2">{[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 rounded-lg" />)}</div>
         )}
-        {filtered && filtered.length === 0 && (
+        {pageRecords && pageRecords.length === 0 && (
           <p className="py-8 text-center text-sm text-muted-foreground">{t("noResults")}</p>
         )}
-        {filtered && filtered.length > 0 && (
+        {pageRecords && pageRecords.length > 0 && (
           <div className="max-h-[28rem] divide-y overflow-y-auto rounded-lg border">
-            {filtered.map((r) => {
+            {pageRecords.map((r) => {
               const status = entity.statusKey ? String(r[entity.statusKey] ?? "") : null;
               return (
                 <div key={r.id} className="flex items-center gap-3 p-3 transition-colors hover:bg-accent/40">
@@ -193,6 +209,39 @@ export function EntityEditor() {
                 </div>
               );
             })}
+          </div>
+        )}
+        {pageRecords && pageRecords.length > 0 && (
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+            <span>
+              {t("recordsTotal")}: <strong className="font-semibold text-foreground">{total}</strong>
+              {q.trim() && <> · {t("matching")}: {filtered?.length}</>}
+            </span>
+            <div className="flex items-center gap-1.5">
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-7 w-7"
+                disabled={safePage <= 1}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                aria-label={t("prev")}
+              >
+                <ChevronLeft className="h-3.5 w-3.5 rtl:rotate-180" />
+              </Button>
+              <span className="px-1 tabular-nums">
+                {t("pageLabel")} {safePage} / {pageCount}
+              </span>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-7 w-7"
+                disabled={safePage >= pageCount}
+                onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+                aria-label={t("next")}
+              >
+                <ChevronRight className="h-3.5 w-3.5 rtl:rotate-180" />
+              </Button>
+            </div>
           </div>
         )}
       </CardContent>

@@ -40,6 +40,18 @@ export function Navbar() {
     return () => cancelAnimationFrame(id);
   }, []);
 
+  // Global ⌘K / Ctrl+K — opens search from anywhere (advertised in the kbd hint).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        usePlatform.getState().setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -201,6 +213,12 @@ function SearchDialog() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Enter → jump to the full search view, preserving the query + type filter.
+  const submitToSearchView = () => {
+    if (q.trim().length < 2) return;
+    setView("search", JSON.stringify({ q: q.trim(), ...(type ? { type } : {}) }));
+  };
+
   useEffect(() => {
     if (q.trim().length < 2) { setHits([]); return; }
     setLoading(true);
@@ -229,6 +247,7 @@ function SearchDialog() {
             ref={inputRef}
             value={q}
             onChange={(e) => setQ(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") submitToSearchView(); }}
             placeholder={t("searchPlaceholder")}
             className="border-0 shadow-none focus-visible:ring-0 text-base h-10"
             aria-label={t("search")}

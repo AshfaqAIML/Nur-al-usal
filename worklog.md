@@ -77,3 +77,25 @@ Stage Summary:
 - Admin can now fully manage content from the UI: editorial workflow cards + publish/unpublish + featured toggles + generic entity CRUD. No more DB-seed-only editing.
 - Deep-linked comparisons make home chips context-preserving (MASTER PROMPT: language/context preserved during navigation).
 - Remaining candidates: OCR upload flow (book PDF ingest), pagination for 100+ records, service worker offline shell, related-content cross-links on detail pages, meta description per view.
+
+---
+Task ID: 4 (cron round — related-research trail, reading UX, Ctrl+K, admin pagination)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; implement related-content cross-links, reading-progress chrome, global search shortcut, admin pagination; styling details.
+
+Work Log:
+- BUGFIX: viewport metadata warning — moved themeColor from `metadata.viewport` to a dedicated `export const viewport: Viewport` in layout.tsx (Next 16 requirement; verified warning gone from dev.log).
+- BUGFIX: Ctrl/Cmd+K advertised in navbar kbd hint but handler lived inside SearchDialog (only mounted when open) → added global keydown listener in Navbar; shortcut now works from any view.
+- BUGFIX: hashchange (browser back/forward) kept stale scroll position → page.tsx now scrollTo(0) on hashchange, mirroring setView behavior.
+- Related Research trail: /api/misconceptions?slug= and /api/objections?id= now return `related` = { misconceptions, objections } (same topicId, exclude self, take 4, order views desc). New src/components/platform/related-research.tsx renders the section on both detail pages (ornament divider header, grouped cards with badges + views, click → deep-link). Verified cross-link navigation misconception→misconception.
+- Detail-page chrome (new src/components/platform/detail-chrome.tsx): ReadingProgress (fixed 3px emerald→amber gradient bar, article-scoped, rAF-throttled, aria progressbar; verified 0%→17% at 300px), DetailBreadcrumb (Home/Section/current chip, RTL chevron flip verified in Urdu), OrnamentDivider (gradient rule + amber 8-point star), BackToTop (global, appears >300px scroll, smooth scroll verified).
+- Search: Enter in SearchDialog now jumps to full search view preserving query AND type filter (SearchView parse extended to honor {type}).
+- Admin editor pagination: /api/admin/resource GET returns `total` (Promise.all with count); editor paginates client-side (15/page) with prev/next chevrons (RTL-rotated), "Page x / y", total-records + matching-filter counters. Verified: books 16 → Page 1/2 → Next → 2/2; filter Razvia → Matching: 1.
+- i18n: 7 new keys ×3 languages (relatedResearch, backToTop, prev, next, pageLabel, recordsTotal, matching).
+- QA via agent-browser: misconception + objection detail (breadcrumb/progress/related), related-card click-through, Ctrl+K from home, Enter search → #/search/{q}, back-to-top show/click, admin pagination + filter, Urdu RTL through app language menu (relatedResearch/متعلقہ تحقیق renders, breadcrumb flipped), dark mode screenshot (ornament + related + back-to-top + progress bar all correct), home regression (8 sections), zero console errors, lint clean.
+
+Stage Summary:
+- Detail pages now form a research trail: breadcrumb → article → ornament → related same-topic misconceptions/objections → citation/share.
+- Keyboard UX complete: ⌘K anywhere, Enter submits to search view, Esc closes.
+- Admin scales past 100 records with pagination + honest total counts.
+- Remaining candidates: OCR upload flow (book PDF ingest), service worker offline shell, per-view meta descriptions, "on this page" TOC for long answers, comparison chips from objection detail.

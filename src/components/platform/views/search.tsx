@@ -22,8 +22,9 @@ export function SearchView({ param }: { param?: string | null }) {
   useEffect(() => {
     if (param && param !== "focus") {
       try {
-        const parsed = JSON.parse(param) as { q?: string };
+        const parsed = JSON.parse(param) as { q?: string; type?: string };
         if (parsed.q) setQ(parsed.q);
+        if (parsed.type) setType(parsed.type);
       } catch {
         setQ(param);
       }

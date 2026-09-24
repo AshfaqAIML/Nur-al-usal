@@ -14,7 +14,26 @@ export async function GET(req: NextRequest) {
     });
     if (!objection) return NextResponse.json({ error: "Not found" }, { status: 404 });
     await db.objection.update({ where: { id }, data: { views: { increment: 1 } } });
-    return NextResponse.json({ objection });
+    // Related research trail: same-topic objections + misconceptions.
+    const [relObjections, relMisconceptions] = await Promise.all([
+      objection.topicId
+        ? db.objection.findMany({
+            where: { topicId: objection.topicId, id: { not: objection.id } },
+            take: 4,
+            orderBy: { views: "desc" },
+            select: { id: true, question: true, isAqeedah: true, views: true },
+          })
+        : Promise.resolve([]),
+      objection.topicId
+        ? db.misconception.findMany({
+            where: { topicId: objection.topicId },
+            take: 4,
+            orderBy: { views: "desc" },
+            select: { id: true, slug: true, claim: true, verificationStatus: true, views: true },
+          })
+        : Promise.resolve([]),
+    ]);
+    return NextResponse.json({ objection, related: { objections: relObjections, misconceptions: relMisconceptions } });
   }
 
   const where: Record<string, unknown> = {};

@@ -12,13 +12,18 @@ import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { ClassificationBadge, VerificationBadge } from "@/components/platform/badges";
 import { EvidenceList, SectionFlow, UrduText } from "@/components/platform/text";
+import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
+import { RelatedResearch, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
 import { cn } from "@/lib/utils";
+
+interface RelatedPayload { misconceptions: RelatedMisconception[]; objections: RelatedObjection[] }
 
 export function MisconceptionsView({ slug }: { slug?: string | null }) {
   const t = useT();
   const { setView } = usePlatform();
   const [list, setList] = useState<Misconception[] | null>(null);
   const [detail, setDetail] = useState<Misconception | null | undefined>(undefined); // undefined = loading
+  const [related, setRelated] = useState<RelatedPayload | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>("");
 
   useEffect(() => {
@@ -31,8 +36,8 @@ export function MisconceptionsView({ slug }: { slug?: string | null }) {
     (async () => {
       if (!slug) { if (!cancelled) setDetail(null); return; }
       try {
-        const d = await apiGet<{ misconception: Misconception }>(`/api/misconceptions?slug=${encodeURIComponent(slug)}`);
-        if (!cancelled) setDetail(d.misconception);
+        const d = await apiGet<{ misconception: Misconception; related?: RelatedPayload }>(`/api/misconceptions?slug=${encodeURIComponent(slug)}`);
+        if (!cancelled) { setDetail(d.misconception); setRelated(d.related ?? null); }
       } catch { if (!cancelled) setDetail(null); }
     })();
     return () => { cancelled = true; };
@@ -41,7 +46,7 @@ export function MisconceptionsView({ slug }: { slug?: string | null }) {
   // ─── Detail ───
   if (slug) {
     return (
-      <MisconceptionDetail slug={slug} detail={detail} />
+      <MisconceptionDetail slug={slug} detail={detail} related={related} />
     );
   }
 
@@ -103,16 +108,27 @@ export function MisconceptionsView({ slug }: { slug?: string | null }) {
   );
 }
 
-function MisconceptionDetail({ slug, detail }: { slug: string; detail: Misconception | null }) {
+function MisconceptionDetail({
+  slug,
+  detail,
+  related,
+}: {
+  slug: string;
+  detail: Misconception | null;
+  related: RelatedPayload | null;
+}) {
   const t = useT();
   const { setView } = usePlatform();
   useDocTitle(detail ? `“${detail.claim}”` : null);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
-      <Button variant="ghost" size="sm" className="mb-4 no-print" onClick={() => setView("misconceptions")}>
-        <ChevronRight className="me-1 h-4 w-4 rotate-180 rtl:rotate-0" aria-hidden /> {t("misconceptionsLabel")}
-      </Button>
+      <ReadingProgress targetId="misconception-article" />
+      {!detail && (
+        <Button variant="ghost" size="sm" className="mb-4 no-print" onClick={() => setView("misconceptions")}>
+          <ChevronRight className="me-1 h-4 w-4 rotate-180 rtl:rotate-0" aria-hidden /> {t("misconceptionsLabel")}
+        </Button>
+      )}
       {!detail && detail !== undefined && (
         <div className="rounded-xl border border-dashed p-10 text-center">
           <p className="text-sm text-muted-foreground">{t("misconceptionNotFound")}</p>
@@ -123,7 +139,9 @@ function MisconceptionDetail({ slug, detail }: { slug: string; detail: Misconcep
       )}
       {detail === undefined && <Skeleton className="h-96 w-full rounded-xl" />}
       {detail && (
-        <article id="misconception-article" className="print-area space-y-6">
+        <>
+          <DetailBreadcrumb sectionLabel={t("misconceptionsLabel")} sectionView="misconceptions" current={detail.claim} />
+          <article id="misconception-article" className="print-area space-y-6">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant="outline">{t("misconceptionsLabel")}</Badge>
@@ -164,7 +182,12 @@ function MisconceptionDetail({ slug, detail }: { slug: string; detail: Misconcep
             </span>
             <ShareBar title={detail.claim} section={t("misconceptionsLabel")} printTargetId="misconception-article" />
           </div>
-        </article>
+          </article>
+
+          <div className="mt-8">
+            <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} />
+          </div>
+        </>
       )}
     </div>
   );

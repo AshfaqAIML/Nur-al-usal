@@ -43,8 +43,11 @@ export async function GET(req: NextRequest) {
     const rec = await (m as unknown as { findUnique: (a: unknown) => unknown }).findUnique({ where: { id } });
     return NextResponse.json({ record: rec });
   }
-  const records = await (m as unknown as { findMany: (a?: unknown) => unknown }).findMany({ take: 100, orderBy: { createdAt: "desc" } });
-  return NextResponse.json({ records });
+  const [records, total] = await Promise.all([
+    (m as unknown as { findMany: (a?: unknown) => Promise<unknown[]> }).findMany({ take: 100, orderBy: { createdAt: "desc" } }),
+    (m as unknown as { count: (a?: unknown) => Promise<number> }).count({}),
+  ]);
+  return NextResponse.json({ records, total });
 }
 
 /** URL-safe slug generator — required (unique) on Misconception / Book / Scholar. */

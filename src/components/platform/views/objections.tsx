@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronRight, Eye, Quote, Search } from "lucide-react";
+import { Eye, Quote, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,34 +11,38 @@ import { usePlatform, useT } from "@/lib/store";
 import { apiGet, Objection, parseJson } from "@/lib/api";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
+import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
+import { RelatedResearch, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
 import { cn } from "@/lib/utils";
 
 interface EvidenceQuote { ref: string; quote: string; translation?: string }
+interface RelatedPayload { objections: RelatedObjection[]; misconceptions: RelatedMisconception[] }
 
 export function ObjectionsView({ id }: { id?: string | null }) {
-  const detail = useObjectionDetail(id);
+  const { detail, related } = useObjectionDetail(id);
 
-  if (id) return <ObjectionDetail id={id} detail={detail} />;
+  if (id) return <ObjectionDetail id={id} detail={detail} related={related} />;
   return <ObjectionList />;
 }
 
 function useObjectionDetail(id?: string | null) {
   const [detail, setDetail] = useState<Objection | null | undefined>(undefined); // undefined = loading
+  const [related, setRelated] = useState<RelatedPayload | null>(null);
   useEffect(() => {
     let cancelled = false;
     (async () => {
       if (!id) { if (!cancelled) setDetail(null); return; }
       try {
-        const d = await apiGet<{ objection: Objection }>(`/api/objections?id=${encodeURIComponent(id)}`);
-        if (!cancelled) setDetail(d.objection);
+        const d = await apiGet<{ objection: Objection; related?: RelatedPayload }>(`/api/objections?id=${encodeURIComponent(id)}`);
+        if (!cancelled) { setDetail(d.objection); setRelated(d.related ?? null); }
       } catch { if (!cancelled) setDetail(null); }
     })();
     return () => { cancelled = true; };
   }, [id]);
-  return detail;
+  return { detail, related };
 }
 
-function ObjectionDetail({ id, detail }: { id: string; detail: Objection | null | undefined }) {
+function ObjectionDetail({ id, detail, related }: { id: string; detail: Objection | null | undefined; related: RelatedPayload | null }) {
   const t = useT();
   const { setView } = usePlatform();
   useDocTitle(detail?.question ?? null);
@@ -68,9 +72,9 @@ function ObjectionDetail({ id, detail }: { id: string; detail: Objection | null 
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-      <Button variant="ghost" size="sm" className="mb-4" onClick={() => setView("objections")}>
-        <ChevronRight className="me-1 h-4 w-4 rotate-180 rtl:rotate-0" aria-hidden /> {t("backToObjections")}
-      </Button>
+      <ReadingProgress targetId="objection-article" />
+
+      <DetailBreadcrumb sectionLabel={t("objectionsTitle")} sectionView="objections" current={detail.question} />
 
       <article id="objection-article" className="print-area">
         <Card className="border-border/70">
@@ -139,6 +143,10 @@ function ObjectionDetail({ id, detail }: { id: string; detail: Objection | null 
           </CardContent>
         </Card>
       </article>
+
+      <div className="mt-8">
+        <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} />
+      </div>
     </div>
   );
 }

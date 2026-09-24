@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Amiri, Noto_Naskh_Arabic, Noto_Nastaliq_Urdu } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
@@ -41,12 +41,13 @@ export const metadata: Metadata = {
     description: "Understand Hanafi Islam through reliable sources.",
     type: "website",
   },
-  viewport: {
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "#065f46" },
-      { media: "(prefers-color-scheme: dark)", color: "#022c22" },
-    ],
-  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#065f46" },
+    { media: "(prefers-color-scheme: dark)", color: "#022c22" },
+  ],
 };
 
 export default function RootLayout({
