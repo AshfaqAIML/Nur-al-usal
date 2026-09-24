@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ArrowRight, BookMarked, Building2, CheckCircle2, GitCompare, History, Landmark, RefreshCw, ScrollText, Sparkles, Users, X } from "lucide-react";
+import { ArrowRight, BookMarked, Building2, CheckCircle2, GitCompare, History, Landmark, Library, RefreshCw, ScrollText, Sparkles, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -149,6 +149,42 @@ export function HomeView() {
           </Card>
         </div>
       </section>
+
+      {/* ─── COMMON QUESTIONS LIBRARY — featured strip ─── */}
+      {data.bank && data.bank.featured.length > 0 && (
+        <section aria-label={t("bankTitle")} className="border-b bg-background">
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <h2 className="font-scholarly text-lg font-semibold tracking-tight">{t("bankTitle")}</h2>
+                <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold tabular-nums text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                  {t("bankCountBadge", { n: data.bank.total })}
+                </span>
+              </div>
+              <Button variant="outline" size="sm" className="h-8 gap-1.5" onClick={() => setView("bank")}>
+                <Library className="h-3.5 w-3.5" aria-hidden /> {t("bankOpenLibrary")}
+              </Button>
+            </div>
+            <div className="flex gap-2.5 overflow-x-auto pb-1 [scrollbar-width:thin]">
+              {data.bank.featured.map((q) => (
+                <button
+                  key={q.slug}
+                  onClick={() => setView("bank", q.slug)}
+                  className="card-lift group flex w-72 shrink-0 flex-col rounded-xl border bg-card p-3.5 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                >
+                  <span dir="auto" className="line-clamp-2 font-scholarly text-[13px] font-semibold leading-snug group-hover:text-emerald-800 dark:group-hover:text-emerald-300">
+                    {q.text}
+                  </span>
+                  {q.shortAnswer && <span className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{q.shortAnswer}</span>}
+                  <span className="mt-auto pt-2 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                    {[q.cluster?.titleEn, q.difficulty ? t(`diff${q.difficulty.charAt(0)}${q.difficulty.slice(1).toLowerCase()}`) : null].filter(Boolean).join(" · ")}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── MY LIBRARY (saved research) ─── */}
       {library.length > 0 && (

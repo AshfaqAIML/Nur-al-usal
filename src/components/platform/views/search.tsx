@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,6 +19,7 @@ export function SearchView({ param }: { param?: string | null }) {
   const [q, setQ] = useState("");
   const [type, setType] = useState("");
   const [hits, setHits] = useState<SearchHit[] | null>(null);
+  const [intent, setIntent] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,8 +38,9 @@ export function SearchView({ param }: { param?: string | null }) {
     if (q.trim().length < 2) { setHits(null); return; }
     setLoading(true);
     try {
-      const data = await apiGet<{ results: SearchHit[] }>(`/api/search?q=${encodeURIComponent(q.trim())}${type ? `&type=${type}` : ""}`);
+      const data = await apiGet<{ results: SearchHit[]; intent: string | null }>(`/api/search?q=${encodeURIComponent(q.trim())}${type ? `&type=${type}` : ""}&surface=search`);
       setHits(data.results);
+      setIntent(data.intent);
     } catch { setHits([]); } finally { setLoading(false); }
   }, [q, type]);
 
@@ -49,6 +52,7 @@ export function SearchView({ param }: { param?: string | null }) {
   function openHit(h: SearchHit) {
     if (h.route.startsWith("misconceptions/")) setView("misconceptions", h.route.split("/")[1]);
     else if (h.route.startsWith("knowledge/")) setView("knowledge", h.route.split("/")[1]);
+    else if (h.route.startsWith("bank/")) setView("bank", h.route.split("/")[1]);
     else if (h.route.startsWith("sources/book/")) setView("sources", `book/${h.route.split("/")[2]}`);
     else if (h.route.startsWith("sources/scholar/")) setView("sources", `scholar/${h.route.split("/")[2]}`);
     else if (h.route.startsWith("objections/")) setView("objections", h.route.split("/")[1]);
@@ -104,7 +108,17 @@ export function SearchView({ param }: { param?: string | null }) {
         {loading && <div className="space-y-3">{[...Array(4)].map((_, i) => <Skeleton key={i} className="h-20 rounded-xl" />)}</div>}
         {!loading && hits && (
           <>
-            <p className="mb-3 text-xs text-muted-foreground">{hits.length} {t("searchResults")}</p>
+            <p className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <span>{hits.length} {t("searchResults")}</span>
+              {intent && (
+                <Badge variant="outline" className="gap-1 text-[10px] font-medium">
+                  <Sparkles className="h-3 w-3" aria-hidden /> {t(`intent_${intent}`)}
+                </Badge>
+              )}
+              {intent === "misconception" && hits.length > 0 && (
+                <span className="text-[10px] italic">{t("searchIntentMisconceptionHint")}</span>
+              )}
+            </p>
             <div className="space-y-2.5">
               {hits.map((h) => {
                 const meta = SOURCE_TYPE_META[h.entityType];
@@ -127,8 +141,10 @@ export function SearchView({ param }: { param?: string | null }) {
               {hits.length === 0 && (
                 <EmptyState
                   title={t("noResults")}
-                  hint="Search spans books, fatwas, Qur'an, hadith, misconceptions, objections and answers."
-                />
+                  hint={t("searchNoResultsHint")}
+                >
+                  <Button size="sm" variant="outline" onClick={() => setView("ask")}>{t("bankAskInstead")}</Button>
+                </EmptyState>
               )}
             </div>
           </>

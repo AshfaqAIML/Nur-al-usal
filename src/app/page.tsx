@@ -6,6 +6,7 @@ import { Navbar } from "@/components/platform/navbar";
 import { Footer } from "@/components/platform/footer";
 import { HomeView } from "@/components/platform/views/home";
 import { KnowledgeView } from "@/components/platform/views/knowledge";
+import { BankView } from "@/components/platform/views/bank";
 import { MisconceptionsView } from "@/components/platform/views/misconceptions";
 import { ClaimsView } from "@/components/platform/views/claims";
 import { ObjectionsView } from "@/components/platform/views/objections";
@@ -25,6 +26,7 @@ function CurrentView() {
 
   switch (view) {
     case "knowledge": return <KnowledgeView slug={param} />;
+    case "bank": return <BankView slug={param} />;
     case "misconceptions": return <MisconceptionsView slug={param} />;
     case "claims": return <ClaimsView id={param} />;
     case "objections": return <ObjectionsView id={param} />;

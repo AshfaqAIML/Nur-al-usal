@@ -1,16 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { retrieveEvidence } from "@/lib/retrieval";
+
+/**
+ * Search-intent classification (Common Questions Library spec):
+ * informational | fiqh | misconception | evidence | source-lookup.
+ * Heuristic-first; every search is logged for the admin analytics loop.
+ */
+export function classifyIntent(q: string): string {
+  const t = q.toLowerCase();
+  if (/(show me|find|quote from|open|page of|volume of|radd al-muhtar on|hidayah on|fatawa razvia on|where in)/.test(t)) return "source-lookup";
+  if (/(proof|daleel|evidence|cite|citation|source|which hadith|what hadith|verse)/.test(t)) return "evidence";
+  if (/(is it true|do hanafis reject|don'?t hanafis|hanafis don'?t|myth|misconception|really|right\?|shirk\?|bid'?ah\?|reject hadith|blind)/.test(t)) return "misconception";
+  if (/(ruling|hukm|halal|haram|valid|invalid|break|wajib|fard|can i|do i|should i|permissible|makruh|how do|how many|when do)/.test(t)) return "fiqh";
+  return "informational";
+}
 
 export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams;
   const q = (sp.get("q") ?? "").trim();
   const type = sp.get("type");
   const lang = sp.get("lang");
+  const surface = sp.get("surface") ?? "search";
 
   if (!q) {
-    return NextResponse.json({ results: [], query: q });
+    return NextResponse.json({ results: [], query: q, intent: null });
   }
+
+  const intent = classifyIntent(q);
 
   // Unified search across the SearchDocument index (keyword + multilingual)
   const terms = q.toLowerCase().split(/\s+/).filter((t) => t.length > 1).slice(0, 10);
@@ -49,8 +65,22 @@ export async function GET(req: NextRequest) {
     if (langFiltered.length > 0) results = langFiltered;
   }
 
+  // Analytics log (fire-and-forget; no IP stored — aggregate signal only)
+  db.searchLog
+    .create({
+      data: {
+        query: q.slice(0, 300),
+        results: results.length,
+        intent,
+        language: (lang ?? "EN").toUpperCase().slice(0, 2),
+        surface: surface.slice(0, 20),
+      },
+    })
+    .catch(() => {});
+
   return NextResponse.json({
     query: q,
+    intent,
     count: results.length,
     results: results.map((r) => ({
       entityType: r.entityType,

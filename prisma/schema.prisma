@@ -16,8 +16,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ─── Users & Roles ───────────────────────────────────────────────────────────
-// roles: ADMIN | EDITOR | SCHOLAR | MODERATOR | USER
 model User {
   id          String     @id @default(cuid())
   email       String     @unique
@@ -30,10 +28,6 @@ model User {
   reviews     Review[]
 }
 
-// ─── Scholars ────────────────────────────────────────────────────────────────
-// classification: CLASSICAL_HANAFI | LATER_HANAFI | SOUTH_ASIAN_HANAFI |
-//                 BARELVI | DEOBANDI | AHL_E_HADITH | SALAFI | OTHER_SUNNI | COMPANION
-// aqeedahTradition: MATURIDI | ASHARI | ATHARI | TAFWIDI | UNSPECIFIED
 model Scholar {
   id               String        @id @default(cuid())
   slug             String        @unique
@@ -62,10 +56,6 @@ model Scholar {
   scholarlyViews   ScholarlyView[]
 }
 
-// ─── Book Library ────────────────────────────────────────────────────────────
-// classification: CLASSICAL_HANAFI | LATER_HANAFI | SOUTH_ASIAN_HANAFI |
-//                 FATAWA_COLLECTION | AQEEDAH | TAFSIR | HADITH | OTHER_SUNNI | REFERENCE
-// ocrStatus: NOT_STARTED | IN_PROGRESS | NEEDS_REVIEW | COMPLETE
 model Book {
   id             String       @id @default(cuid())
   slug           String       @unique
@@ -117,7 +107,6 @@ model BookPage {
   @@unique([bookId, volume, pageNumber])
 }
 
-// ─── Qur'an & Hadith ─────────────────────────────────────────────────────────
 model QuranVerse {
   id            String     @id @default(cuid())
   surah         Int
@@ -133,7 +122,6 @@ model QuranVerse {
   @@unique([surah, ayah])
 }
 
-// grading: SAHIH | HASAN | DAIF | MAWQUF | MARFU | DISPUTED | UNRATED
 model Hadith {
   id              String     @id @default(cuid())
   collection      String
@@ -156,9 +144,6 @@ model Hadith {
   updatedAt       DateTime   @updatedAt
 }
 
-// ─── Fatwa Database ──────────────────────────────────────────────────────────
-// verificationStatus: VERIFIED | PARTIALLY_VERIFIED | OCR_NEEDS_REVIEW |
-//                     UNVERIFIED | DISPUTED | INSUFFICIENT_EVIDENCE
 model Fatwa {
   id                 String  @id @default(cuid())
   question           String
@@ -178,8 +163,6 @@ model Fatwa {
   updatedAt          DateTime @updatedAt
 }
 
-// ─── Taxonomy: Categories → Topics ───────────────────────────────────────────
-// type: AQEEDAH | FIQH | SALAH_DIFFERENCES | TAQLID_MADHHAB
 model Category {
   id            String     @id @default(cuid())
   slug          String     @unique
@@ -197,6 +180,20 @@ model Category {
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
+
+model QuestionCluster {
+  id           String     @id @default(cuid())
+  slug         String     @unique
+  titleEn      String
+  titleUr      String?
+  titleAr      String?
+  descriptionEn String?
+  order        Int        @default(0)
+  questions    Question[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
 
 model Topic {
   id          String          @id @default(cuid())
@@ -219,9 +216,6 @@ model Topic {
   updatedAt      DateTime     @updatedAt
 }
 
-// ─── Misconception Database ──────────────────────────────────────────────────
-// verificationStatus: CORRECTLY_ATTRIBUTED | PARTIALLY_CORRECT | MISLEADING |
-//   INCORRECTLY_ATTRIBUTED | DISPUTED | UNSUPPORTED | INSUFFICIENTLY_DOCUMENTED
 model Misconception {
   id                 String  @id @default(cuid())
   slug               String  @unique
@@ -246,7 +240,6 @@ model Misconception {
   updatedAt          DateTime @updatedAt
 }
 
-// ─── Common Objection Database ───────────────────────────────────────────────
 model Objection {
   id             String  @id @default(cuid())
   question       String
@@ -262,8 +255,6 @@ model Objection {
   updatedAt      DateTime @updatedAt
 }
 
-// ─── Comparison Engine ───────────────────────────────────────────────────────
-// Each madhhab column stores JSON {position, evidence, methodology, scholars, qualifications, context}
 model Comparison {
   id       String  @id @default(cuid())
   issue    String
@@ -279,10 +270,36 @@ model Comparison {
   updatedAt DateTime @updatedAt
 }
 
-// ─── "Is This Really Hanafi?" Claim Checker ──────────────────────────────────
-// classification: CORRECTLY_ATTRIBUTED | PARTIALLY_CORRECT | MISLEADING |
-//   INCORRECTLY_ATTRIBUTED | DISPUTED | UNSUPPORTED | INSUFFICIENTLY_DOCUMENTED
-// status: PENDING | REVIEWED | PUBLISHED | REJECTED
+model SearchLog {
+  id        String   @id @default(cuid())
+  query     String
+  results   Int      @default(0)
+  intent    String?
+  language  String   @default("EN")
+  surface   String   @default("search") // search | bank | claims | qa
+  createdAt DateTime @default(now())
+
+  @@index([query])
+  @@index([createdAt])
+}
+
+model QuestionSuggestion {
+  id          String   @id @default(cuid())
+  question    String
+  rationale   String?
+  categorySlug String?
+  subcategory String?
+  difficulty  String?
+  clusterSlug String?
+  source      String   @default("AI") // AI | SEARCH_LOG | EDITOR
+  status      String   @default("PENDING")
+  reviewedNote String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+
 model ClaimCheck {
   id             String  @id @default(cuid())
   claim          String
@@ -296,8 +313,6 @@ model ClaimCheck {
   updatedAt      DateTime @updatedAt
 }
 
-// ─── Positions & Scholarly Views (Claim/Position/Practice framework) ────────
-// kind: POSITION | PRACTICE | CLAIM
 model Position {
   id         String  @id @default(cuid())
   kind       String  @default("POSITION")
@@ -312,8 +327,6 @@ model Position {
   updatedAt  DateTime @updatedAt
 }
 
-// A scholar's individual view on a contested issue — never auto-elevated to
-// unanimous Hanafi doctrine (scholarly principle from MASTER PROMPT).
 model ScholarlyView {
   id         String  @id @default(cuid())
   scholarId  String
@@ -326,20 +339,34 @@ model ScholarlyView {
   updatedAt  DateTime @updatedAt
 }
 
-// ─── Question & Answer System ────────────────────────────────────────────────
-// Question.status: PENDING | AI_ANSWERED | REVIEWED | ANSWERED | REJECTED
-// language: EN | UR | AR
 model Question {
   id            String     @id @default(cuid())
   text          String
   language      String     @default("EN")
+  slug          String?    @unique
   categoryId    String?
   category      Category?  @relation(fields: [categoryId], references: [id])
+  subcategory   String?
+  questionType  String?
+  difficulty    String?
+  isCommon      Boolean    @default(false)
+  isMisconception Boolean  @default(false)
+  isDisputed    Boolean    @default(false)
+  isSensitive   Boolean    @default(false)
+  shortAnswer   String?
+  intent        String?
+  clusterId     String?
+  cluster       QuestionCluster? @relation(fields: [clusterId], references: [id])
+  clusterOrder  Int        @default(0)
+  canonicalId   String?
+  canonical     Question?  @relation("QuestionVariants", fields: [canonicalId], references: [id])
+  variants      Question[] @relation("QuestionVariants")
+  variantWordings String? // JSON [string] — alternate phrasings of the same question
+  relatedSlugs  String? // JSON [string]
   context       String?
   claim         String?
   sourceRef     String?
   attachmentUrl String?
-  isSensitive   Boolean    @default(false)
   status        String     @default("PENDING")
   views         Int        @default(0)
   featured      Boolean    @default(false)
@@ -348,15 +375,20 @@ model Question {
   answers       Answer[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
+
+  @@index([isCommon])
+  @@index([clusterId])
 }
 
-// Answer.status (editorial workflow): DRAFT | RESEARCH | AI_ASSISTED |
-//   SOURCE_VERIFICATION | EDITORIAL_REVIEW | SCHOLARLY_REVIEW | APPROVED | PUBLISHED
+
+
+
 model Answer {
   id                String     @id @default(cuid())
   questionId        String
   question          Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
   directAnswer      String
+  detailedAnswer    String?
   hanafiPosition    String?
   aqeedahOrFiqh     String? // AQEEDAH | FIQH | BOTH | NEITHER
   quranEvidence     String? // JSON [{surah, ayah, arabic, translation}]
@@ -383,10 +415,6 @@ model Answer {
   updatedAt         DateTime   @updatedAt
 }
 
-// ─── Citations & Source Verification Layer ───────────────────────────────────
-// sourceType: QURAN | HADITH | BOOK | FATWA
-// verificationStatus: VERIFIED | PARTIALLY_VERIFIED | OCR_NEEDS_REVIEW |
-//                     UNVERIFIED | DISPUTED | INSUFFICIENT_EVIDENCE
 model Citation {
   id          String      @id @default(cuid())
   answerId    String?
@@ -413,9 +441,6 @@ model Citation {
   updatedAt   DateTime    @updatedAt
 }
 
-// ─── Editorial Workflow ──────────────────────────────────────────────────────
-// type: AI_REVIEW | EDITORIAL | SCHOLARLY | OCR | CONTENT
-// action: APPROVED | REJECTED | CHANGES_REQUESTED | COMMENT
 model Review {
   id         String   @id @default(cuid())
   type       String   @default("EDITORIAL")
@@ -428,9 +453,6 @@ model Review {
   createdAt  DateTime @default(now())
 }
 
-// ─── Unified Search Index ────────────────────────────────────────────────────
-// entityType: QUESTION | ANSWER | BOOK | SCHOLAR | HADITH | QURAN |
-//             MISCONCEPTION | OBJECTION | FATWA | TOPIC | COMPARISON
 model SearchDocument {
   id         String   @id @default(cuid())
   entityType String

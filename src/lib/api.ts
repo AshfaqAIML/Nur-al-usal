@@ -35,6 +35,11 @@ export interface BootstrapData {
   featuredBooks: Book[];
   objectionsTop: Objection[];
   comparisons: { id: string; issue: string }[];
+  bank?: {
+    total: number; disputed: number; misconceptions: number; clusters: number; fatawaRazvia: number;
+    featured: { slug: string; text: string; shortAnswer: string | null; difficulty: string | null; isDisputed: boolean; category?: { nameEn: string; nameUr: string; nameAr: string } | null; cluster?: { titleEn: string } | null }[];
+    topClusters: { slug: string; titleEn: string; titleUr: string | null; titleAr: string | null; descriptionEn: string | null; count: number }[];
+  };
 }
 
 export interface Category {
@@ -123,6 +128,56 @@ export interface ClaimRecord {
 export interface SearchHit {
   entityType: string; entityId: string; title: string; titleUr: string | null; titleAr: string | null;
   snippet: string; route: string; score: number;
+}
+
+// ─── Common Questions Library ───
+export interface BankListItem {
+  id: string; slug: string | null; text: string; shortAnswer: string | null;
+  subcategory: string | null; questionType: string | null; difficulty: string | null;
+  isMisconception: boolean; isDisputed: boolean; isSensitive: boolean; featured: boolean; views: number;
+  category?: { slug: string; nameEn: string; nameUr: string; nameAr: string } | null;
+  cluster?: { slug: string; titleEn: string } | null;
+  hasAnswer: boolean;
+}
+export interface BankFacets {
+  categories: { id: string; slug: string | null; nameEn: string | null; nameUr: string | null; nameAr: string | null; icon: string | null; count: number }[];
+  difficulties: { value: string | null; count: number }[];
+}
+export interface BankListResponse {
+  total: number; page: number; limit: number; pages: number;
+  questions: BankListItem[]; facets: BankFacets;
+}
+export interface BankCitation {
+  id: string; sourceType: string; volume: string | null; page: string | null; chapter: string | null;
+  quote: string | null; translation: string | null; verificationStatus: string;
+  book: { slug: string; titleEn: string } | null;
+}
+export interface BankAnswerDetail {
+  id: string; directAnswer: string; detailedAnswer: string | null; hanafiPosition: string | null;
+  aqeedahOrFiqh: string | null; otherViews: string | null; commonObjection: string | null;
+  scholarlyResponse: string | null; disputed: string | null; practicalInfo: string | null;
+  fatawaRazvia: string | null; sources: string | null; status: string; aiGenerated: boolean;
+  helpfulUp: number; helpfulDown: number; citations: BankCitation[];
+}
+export interface BankRelated {
+  slug: string; text: string; difficulty: string | null; clusterTitle: string | null;
+}
+export interface BankDetailResponse {
+  question: {
+    id: string; slug: string | null; text: string; language: string; subcategory: string | null;
+    questionType: string | null; difficulty: string | null; isMisconception: boolean; isDisputed: boolean;
+    isSensitive: boolean; shortAnswer: string | null; intent: string | null; views: number; featured: boolean;
+    category?: { slug: string; nameEn: string; nameUr: string; nameAr: string; type: string } | null;
+    cluster?: { id: string; slug: string; titleEn: string; titleUr: string | null; titleAr: string | null; descriptionEn: string | null } | null;
+    variants: string[];
+  };
+  answer: BankAnswerDetail | null;
+  related: BankRelated[];
+}
+export interface BankCluster {
+  id: string; slug: string; titleEn: string; titleUr: string | null; titleAr: string | null;
+  descriptionEn: string | null; count: number;
+  questions: { slug: string | null; text: string; difficulty: string | null }[];
 }
 
 export function parseJson<T>(s: string | null | undefined, fallback: T): T {

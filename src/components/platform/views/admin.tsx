@@ -14,6 +14,7 @@ import { useT } from "@/lib/store";
 import { apiGet, apiAdmin, ClaimRecord, Question } from "@/lib/api";
 import { ClassificationBadge, VerificationBadge } from "@/components/platform/badges";
 import { EntityEditor } from "@/components/platform/admin-editor";
+import { BankAdminTools } from "@/components/platform/bank-admin";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -295,6 +296,11 @@ export function AdminView() {
           </CardContent>
         </Card>
       </div>
+
+      <Separator />
+
+      {/* ─── Question Bank tools: analytics · suggestions · duplicates ─── */}
+      <BankAdminTools />
 
       <Separator />
 

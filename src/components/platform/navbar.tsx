@@ -20,6 +20,7 @@ import { SOURCE_TYPE_META } from "@/lib/ai.client";
 
 const NAV: { key: string; view: View }[] = [
   { key: "navKnowledge", view: "knowledge" },
+  { key: "navBank", view: "bank" },
   { key: "navMisconceptions", view: "misconceptions" },
   { key: "navClaims", view: "claims" },
   { key: "navObjections", view: "objections" },

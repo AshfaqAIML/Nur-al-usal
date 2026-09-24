@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 
 /** One-shot bootstrap payload for the SPA: stats, categories, featured content. */
 export async function GET() {
-  const [categories, stats, featuredMisconceptions, featuredQuestions, featuredBooks, objectionsTop, comparisons] =
+  const [categories, stats, featuredMisconceptions, featuredQuestions, featuredBooks, objectionsTop, comparisons, bankStats, featuredBank, bankClusters] =
     await Promise.all([
       db.category.findMany({ orderBy: { order: "asc" }, include: { topics: { orderBy: { order: "asc" } } } }),
       Promise.all([
@@ -16,11 +16,30 @@ export async function GET() {
       db.book.findMany({ where: { featured: true }, take: 8, include: { author: { select: { nameEn: true } } } }),
       db.objection.findMany({ orderBy: { views: "desc" }, take: 8 }),
       db.comparison.findMany({ take: 6, select: { id: true, issue: true } }),
+      // ─── Common Questions Library ───
+      Promise.all([
+        db.question.count({ where: { isCommon: true } }),
+        db.question.count({ where: { isCommon: true, isDisputed: true } }),
+        db.question.count({ where: { isCommon: true, isMisconception: true } }),
+        db.questionCluster.count(),
+        db.answer.count({ where: { question: { isCommon: true }, sources: { contains: "Fatawa Razvia" } } }),
+      ]),
+      db.question.findMany({
+        where: { isCommon: true, featured: true },
+        take: 6,
+        orderBy: { clusterOrder: "asc" },
+        select: { slug: true, text: true, shortAnswer: true, difficulty: true, isDisputed: true, category: { select: { nameEn: true, nameUr: true, nameAr: true } }, cluster: { select: { titleEn: true } } },
+      }),
+      db.questionCluster.findMany({
+        orderBy: { order: "asc" }, take: 12,
+        include: { _count: { select: { questions: true } } },
+      }),
     ]);
 
   const [
     topics, misconceptions, objectionCount, books, scholars, hadith, quran, fatwas, questions, comparisonCount,
   ] = stats;
+  const [bankTotal, bankDisputed, bankMisconception, bankClustersCount, bankFatawaRazvia] = bankStats;
 
   // Popular objections/featured books if featured missing
   const booksList = featuredBooks.length > 0
@@ -35,5 +54,17 @@ export async function GET() {
     featuredBooks: booksList,
     objectionsTop,
     comparisons,
+    bank: {
+      total: bankTotal,
+      disputed: bankDisputed,
+      misconceptions: bankMisconception,
+      clusters: bankClustersCount,
+      fatawaRazvia: bankFatawaRazvia,
+      featured: featuredBank,
+      topClusters: bankClusters.filter((c) => c._count.questions > 0).map((c) => ({
+        slug: c.slug, titleEn: c.titleEn, titleUr: c.titleUr, titleAr: c.titleAr,
+        descriptionEn: c.descriptionEn, count: c._count.questions,
+      })),
+    },
   });
 }

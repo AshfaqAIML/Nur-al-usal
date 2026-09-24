@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { Lang, dirOf, translate } from "@/lib/i18n";
 
 export type View =
-  | "home" | "knowledge" | "misconceptions" | "claims" | "objections" | "compare"
+  | "home" | "knowledge" | "bank" | "misconceptions" | "claims" | "objections" | "compare"
   | "sources" | "quran" | "search" | "ask" | "qa" | "admin";
 
 interface PlatformState {
@@ -27,7 +27,7 @@ function parseHash(): { view: View; param: string | null } {
   if (param) {
     try { param = decodeURIComponent(param); } catch { /* keep raw if malformed */ }
   }
-  const known: View[] = ["home", "knowledge", "misconceptions", "claims", "objections", "compare", "sources", "quran", "search", "ask", "qa", "admin"];
+  const known: View[] = ["home", "knowledge", "bank", "misconceptions", "claims", "objections", "compare", "sources", "quran", "search", "ask", "qa", "admin"];
   return { view: (known.includes(v as View) ? v : "home") as View, param };
 }
 
@@ -66,5 +66,5 @@ export const usePlatform = create<PlatformState>((set) => ({
 
 export function useT() {
   const lang = usePlatform((s) => s.lang);
-  return (key: string) => translate(lang, key);
+  return (key: string, params?: Record<string, string | number>) => translate(lang, key, params);
 }
