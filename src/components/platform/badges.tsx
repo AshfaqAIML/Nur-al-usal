@@ -1,7 +1,34 @@
 "use client";
 
+/**
+ * Platform badges — scholarly verification signals.
+ * Accessibility rule from the design brief: state is NEVER encoded by color
+ * alone — every badge carries a distinct icon + label, tone is a supplement.
+ */
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import {
+  BadgeCheck,
+  BookMarked,
+  BookOpen,
+  BookLock,
+  CircleDashed,
+  CircleX,
+  Clock3,
+  FileWarning,
+  Landmark,
+  Library,
+  Scale,
+  ScrollText,
+  ShieldAlert,
+  ShieldQuestion,
+  Sparkles,
+  Stamp,
+  TriangleAlert,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import {
   CLASSIFICATION_META,
   VERIFICATION_META,
@@ -19,10 +46,32 @@ const STATUS_STYLES: Record<string, string> = {
   rose: "bg-rose-100 text-rose-900 border-rose-300 dark:bg-rose-950 dark:text-rose-200 dark:border-rose-800",
 };
 
+/** Distinct glyph per verification status — color-blind safe by construction. */
+const VERIFICATION_ICONS: Record<string, LucideIcon> = {
+  VERIFIED: BadgeCheck,
+  PARTIALLY_VERIFIED: CircleDashed,
+  OCR_NEEDS_REVIEW: FileWarning,
+  UNVERIFIED: Clock3,
+  DISPUTED: Scale,
+  INSUFFICIENT_EVIDENCE: ShieldQuestion,
+};
+
+const CLASSIFICATION_ICONS: Record<string, LucideIcon> = {
+  CORRECTLY_ATTRIBUTED: BadgeCheck,
+  PARTIALLY_CORRECT: CircleDashed,
+  MISLEADING: TriangleAlert,
+  INCORRECTLY_ATTRIBUTED: CircleX,
+  DISPUTED: Scale,
+  UNSUPPORTED: ShieldAlert,
+  INSUFFICIENTLY_DOCUMENTED: FileWarning,
+};
+
 export function VerificationBadge({ status }: { status: string }) {
   const meta = VERIFICATION_META[status] ?? { label: status, color: "stone" };
+  const Icon = VERIFICATION_ICONS[status] ?? Clock3;
   return (
-    <Badge variant="outline" className={cn("text-[11px] font-medium", STATUS_STYLES[meta.color])}>
+    <Badge variant="outline" className={cn("gap-1 text-[11px] font-medium", STATUS_STYLES[meta.color])}>
+      <Icon className="h-3 w-3" aria-hidden />
       {meta.label}
     </Badge>
   );
@@ -30,8 +79,10 @@ export function VerificationBadge({ status }: { status: string }) {
 
 export function ClassificationBadge({ status }: { status: string }) {
   const meta = CLASSIFICATION_META[status] ?? { label: status, color: "stone" };
+  const Icon = CLASSIFICATION_ICONS[status] ?? FileWarning;
   return (
-    <Badge className={cn("text-[11px] font-semibold border", STATUS_STYLES[meta.color])}>
+    <Badge className={cn("gap-1 text-[11px] font-semibold border", STATUS_STYLES[meta.color])}>
+      <Icon className="h-3 w-3" aria-hidden />
       {meta.label}
     </Badge>
   );
@@ -45,10 +96,21 @@ const GRADE_STYLES: Record<string, string> = {
   UNRATED: "bg-stone-100 text-stone-700 border-stone-300 dark:bg-stone-900 dark:text-stone-300",
 };
 
+/** Grading glyphs follow hadith-science convention: ring = sound, dashes = weak. */
+const GRADE_ICONS: Record<string, LucideIcon> = {
+  SAHIH: BadgeCheck,
+  HASAN: CircleDashed,
+  DAIF: CircleX,
+  DISPUTED: Scale,
+  UNRATED: Clock3,
+};
+
 export function GradingBadge({ grading, disputed }: { grading: string; disputed?: boolean }) {
   const style = GRADE_STYLES[grading] ?? GRADE_STYLES.UNRATED;
+  const Icon = GRADE_ICONS[grading] ?? GRADE_ICONS.UNRATED;
   return (
-    <Badge variant="outline" className={cn("text-[11px]", style)} title={disputed ? "Grading disputed among scholars" : undefined}>
+    <Badge variant="outline" className={cn("gap-1 text-[11px]", style)} title={disputed ? "Grading disputed among scholars" : undefined}>
+      <Icon className="h-3 w-3" aria-hidden />
       {grading}
       {disputed ? " (disputed)" : ""}
     </Badge>
@@ -72,11 +134,13 @@ const CLASS_LABELS: Record<string, string> = {
 export function SourceClassBadge({ classification, isHanafi = true }: { classification: string; isHanafi?: boolean }) {
   const label = CLASS_LABELS[classification] ?? classification;
   const late = ["LATER_HANAFI", "SOUTH_ASIAN_HANAFI", "FATAWA_COLLECTION", "BARELVI", "DEOBANDI"].includes(classification);
+  // Era glyph: classical works carry a landmark (early madrasa), later works a library shelf.
+  const Icon = !isHanafi ? Library : late ? BookOpen : Landmark;
   return (
     <Badge
       variant="outline"
       className={cn(
-        "text-[11px]",
+        "gap-1 text-[11px]",
         !isHanafi
           ? "bg-stone-100 text-stone-700 border-stone-300 dark:bg-stone-900 dark:text-stone-300"
           : late
@@ -85,6 +149,7 @@ export function SourceClassBadge({ classification, isHanafi = true }: { classifi
       )}
       title={late ? "Later South Asian / later scholarly source — not an early classical work" : undefined}
     >
+      <Icon className="h-3 w-3" aria-hidden />
       {label}
     </Badge>
   );
@@ -93,10 +158,54 @@ export function SourceClassBadge({ classification, isHanafi = true }: { classifi
 export function FiqhAqeedahBadge({ value }: { value: string | null }) {
   if (!value) return null;
   if (value === "AQEEDAH")
-    return <Badge className="bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-200 text-[11px]">Aqeedah Issue</Badge>;
+    return (
+      <Badge className="gap-1 border border-amber-300 bg-amber-100 text-[11px] text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
+        <Stamp className="h-3 w-3" aria-hidden /> Aqeedah Issue
+      </Badge>
+    );
   if (value === "FIQH")
-    return <Badge className="bg-emerald-100 text-emerald-900 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-200 text-[11px]">Fiqh Issue</Badge>;
+    return (
+      <Badge className="gap-1 border border-emerald-300 bg-emerald-100 text-[11px] text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">
+        <BookMarked className="h-3 w-3" aria-hidden /> Fiqh Issue
+      </Badge>
+    );
   if (value === "BOTH")
-    return <Badge className="bg-yellow-100 text-yellow-900 border border-yellow-300 dark:bg-yellow-950 dark:text-yellow-200 text-[11px]">Aqeedah + Fiqh</Badge>;
+    return (
+      <Badge className="gap-1 border border-yellow-300 bg-yellow-100 text-[11px] text-yellow-900 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-200">
+        <ScrollText className="h-3 w-3" aria-hidden /> Aqeedah + Fiqh
+      </Badge>
+    );
   return null;
+}
+
+/** Small "AI-drafted" tag — distinct sparkles glyph so drafts never masquerade as reviewed text. */
+export function AiDraftTag({ children }: { children: React.ReactNode }) {
+  return (
+    <Badge variant="outline" className="gap-1 border-amber-300 text-[10px] text-amber-800 dark:border-amber-800 dark:text-amber-300">
+      <Sparkles className="h-3 w-3" aria-hidden />
+      {children}
+    </Badge>
+  );
+}
+
+/** Scholar chip used in lists of narrators/authors. */
+export function ScholarChip({ name }: { name: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border bg-secondary px-2 py-0.5 text-[11px] text-secondary-foreground">
+      <Users className="h-3 w-3 text-muted-foreground" aria-hidden />
+      {name}
+    </span>
+  );
+}
+
+/** Book lock tag for OCR-protected manuscripts. */
+export function OcrStatusTag({ status }: { status: string }) {
+  const pretty = status.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+  const done = status === "COMPLETED" || status === "COMPLETE";
+  return (
+    <Badge variant="outline" className={cn("gap-1 text-[10px]", done ? STATUS_STYLES.emerald : STATUS_STYLES.amber)}>
+      {done ? <BookLock className="h-3 w-3" aria-hidden /> : <FileWarning className="h-3 w-3" aria-hidden />}
+      OCR: {pretty}
+    </Badge>
+  );
 }

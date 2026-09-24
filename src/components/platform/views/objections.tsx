@@ -16,6 +16,7 @@ import { BookmarkButton } from "@/components/platform/library";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
 import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
 import { RelatedResearch, RelatedMisconception, RelatedObjection, RelatedComparison } from "@/components/platform/related-research";
+import { EmptyState } from "@/components/platform/architectural";
 import { cn } from "@/lib/utils";
 
 interface EvidenceQuote { ref: string; quote: string; translation?: string }
@@ -251,7 +252,9 @@ function ObjectionList() {
             </CardContent>
           </Card>
         ))}
-        {list && list.length === 0 && <p className="py-8 text-center text-sm text-muted-foreground">{t("noResults")}</p>}
+        {list && list.length === 0 && (
+          <EmptyState title={t("noResults")} hint="Objection entries appear as the research corpus grows." />
+        )}
       </div>
     </div>
   );

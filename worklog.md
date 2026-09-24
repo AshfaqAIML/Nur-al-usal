@@ -323,3 +323,25 @@ Stage Summary:
 - The platform now has a real architectural design system: warm ivory/parchment + charcoal-indigo-green tokens, khatam/girih textures as quiet background language, brass ornamentation reserved for dividers/frames, dome + mihrab arch silhouettes on featured panels, muqarnas footer edge, and a proper scholarly display serif — while all 12 views remain fully functional, accessible and RTL-correct.
 - Reusable primitives (architectural.tsx + CSS utilities) make the next per-view passes mechanical.
 - Remaining candidates for next design rounds: source viewer manuscript environment (book detail tabs), QA question cards with niche shapes, mega-menu nav, 404/error/loading/empty state polish, login surface (if auth added), deeper per-view pattern placement, print-style refresh.
+
+---
+Task ID: 14 (design round 2 — manuscript environments, badges, question cards, search courtyard)
+Agent: main (Z.ai Code)
+Task: Continue the Islamic architectural visual brief into the second round: source viewer manuscript environment, Qur'an/Hadith illuminated panels, icon-safe verification badges, knowledge-curation question cards, article spine, search courtyard, architectural empty/loading states.
+
+Work Log:
+- NEW PRIMITIVES (architectural.tsx): AyahMedallion (khatam-star shamsa carrying the ayah number, sr-only verse announcement), NicheMarker (mini mihrab arch for curated entries), CatalogRow (library-card metadata dt/dd), EmptyState (dome line-drawing quiet empty state with hint + children slot), CitationBlock (brass-edged suggested-citation block w/ copy), DomeLoader (self-drawing dome arcs, stroke-dasharray animation + reduced-motion off).
+- BADGES REWORK (accessibility, brief rule "never color alone"): every verification/classification/grading status now carries a distinct lucide glyph (BadgeCheck=verified/sahih, CircleDashed=partial/hasan, Scale=disputed, Clock3=unverified, ShieldQuestion=insufficient, FileWarning=OCR review, Landmark=classical, BookOpen=later, Library=non-Hanafi) + new OcrStatusTag (prettifies snake_case, emerald/amber w/ lock icons) and AiDraftTag.
+- QUR'AN & HADITH VIEW = manuscript panels: ManuscriptPanel + arch-top, Arabic passage closed by AyahMedallion (manuscript convention), translation as serif italic blockquote behind dashed brass rule, hadith panels keep grading seal; skeletons replaced with weave-textured placeholders; EmptyState for no-results.
+- SOURCE VIEWER (book detail) rebuilt as manuscript reading environment: arch dome cover band with weave texture, catalog metadata ledger (dl/CatalogRow: author/subject/school/OCR), 3 tabs — Overview | Pages/OCR (manuscript-desk preview panel, dual-column wireframe, OCR pipeline status) | Citation (CitationBlock w/ clipboard copy + toast). Scholar detail = profile chamber: arch band w/ Arabic name, works as BookSpine rows, brass-edged individual-view borders. Fatwa cards + search hit cards got BookSpine accents.
+- QA VIEW: question cards are now knowledge-curation entries (NicheMarker + font-scholarly question, meta row beneath); detail question card arch-top + girih texture; "no answer yet" + filter-empty use EmptyState; article SectionFlow rebuilt as scholarly spine — continuous axis rule + numbered khatam medallions (1..n) + brass § before each section label.
+- SEARCH VIEW = search courtyard: ManuscriptPanel arch-top with pattern-girih behind a round shadowed search input; initial state is EmptyState with bilingual try-list; hits carry BookSpine.
+- EmptyState wired into misconceptions/objections/comparison/search lists (hinted, architectural).
+- i18n fix: ar by "لـ"→"بقلم", ur "بہ"→"بہ قلم" (bidi-safe authorship phrases).
+- CSS: dome-draw keyframes (dome-loader-arc, -late, prefers-reduced-motion safe).
+- VERIFICATION: desktop light EN (quran/hadith tabs, book dialog incl. citation tab, scholar dialog, qa list, search + live "tawassul" results, article spine, footer), dark EN quran panels, mobile 390 light EN quran/sources, mobile 390 AR RTL sources/admin/home (BookSpine + niche mirror correctly via logical props). Fresh browser session error count across all 12 views = 0. Lint clean. Note: stale agent-browser error buffers (view/CountUpStat/parsed/BookMarked TDZ) were diagnosed as hot-reload artifacts — fresh sessions show zero.
+- Known dev.log warnings: 2× Fast Refresh full-reload (from editing sessions), no app errors.
+
+Stage Summary:
+- The citation-first story now has its stage: books open as manuscript reading rooms with a suggested-citation block, verses close with ayah medallions like an illuminated mushaf, every verification signal is icon+color+label (color-blind safe), Q&A entries read as curated archive items along a numbered article spine, and search is a girih-lit courtyard. All states (empty/loading/error-adjacent) speak the same architectural language.
+- Next-round candidates: localize badge/label dictionaries (SourceClassBadge labels are EN-only data strings), print stylesheet pass on citation block, mega-menu nav, admin trend sparkline, offline SW test on real device.

@@ -14,6 +14,7 @@ import { ShareBar } from "@/components/platform/share-bar";
 import { BookmarkButton } from "@/components/platform/library";
 import { ClassificationBadge, VerificationBadge } from "@/components/platform/badges";
 import { EvidenceList, SectionFlow, UrduText } from "@/components/platform/text";
+import { EmptyState } from "@/components/platform/architectural";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
 import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
 import { RelatedResearch, RelatedComparison, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
@@ -91,8 +92,8 @@ export function MisconceptionsView({ slug }: { slug?: string | null }) {
         <div className="grid gap-3 md:grid-cols-2">{[...Array(6)].map((_, i) => <Skeleton key={i} className="h-28 rounded-xl" />)}</div>
       )}
       {list && list.length === 0 && (
-        <div className="rounded-xl border border-dashed p-10 text-center">
-          <p className="text-sm text-muted-foreground">{t("noEntriesMatch")}</p>
+        <div className="rounded-xl border border-dashed">
+          <EmptyState title={t("noEntriesMatch")} hint="Try another keyword — misconception entries span aqeedah, fiqh and practice." />
         </div>
       )}
       <div className="grid gap-3 md:grid-cols-2">

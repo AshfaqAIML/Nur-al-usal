@@ -374,6 +374,24 @@ html[lang="ur"] p, html[lang="ar"] p {
   .view-enter { animation: none; }
 }
 
+/* ─── Dome loader: self-drawing dome arcs (loading states) ─── */
+@keyframes dome-draw {
+  0% { stroke-dashoffset: 120; opacity: 0.25; }
+  55% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.85; }
+}
+.dome-loader-arc {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: dome-draw 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.dome-loader-arc-late {
+  animation-delay: 0.4s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dome-loader-arc { animation: none; stroke-dashoffset: 0; opacity: 0.6; }
+}
+
 /* ─── Streaming caret (answer engine live panel) ─── */
 @keyframes caret-blink {
   0%, 45% { opacity: 1; }

@@ -54,7 +54,9 @@ export function EvidenceList({ json, emptyLabel = "No evidence recorded yet — 
   );
 }
 
-/** The Misconception vertical flow: Claim → … → Conclusion (MASTER PROMPT structure). */
+/** The Misconception vertical flow: Claim → … → Conclusion (MASTER PROMPT structure).
+ *  Rendered as a scholarly article spine: numbered khatam medallions mark each
+ *  section along a continuous rule — an iwan-axis reading path. */
 export function SectionFlow({
   sections,
 }: {
@@ -66,23 +68,32 @@ export function SectionFlow({
     rose: "border-rose-300 dark:border-rose-700",
     neutral: "border-border",
   };
-  const toneDot: Record<string, string> = {
-    emerald: "bg-emerald-500",
-    amber: "bg-amber-500",
-    rose: "bg-rose-500",
-    neutral: "bg-stone-400",
+  const toneText: Record<string, string> = {
+    emerald: "text-emerald-800 dark:text-emerald-300",
+    amber: "text-amber-800 dark:text-amber-300",
+    rose: "text-rose-800 dark:text-rose-300",
+    neutral: "text-muted-foreground",
   };
   return (
     <div className="relative space-y-6">
+      {/* continuous axis rule */}
+      <span aria-hidden className="absolute start-[15px] top-2 bottom-6 w-px bg-border" />
       {sections.map((s, i) => (
-        <div key={s.key} id={`sec-${s.key}`} className="relative scroll-mt-28 ps-8">
-          {i > 0 && <span aria-hidden className="absolute start-[11px] -top-6 h-6 w-px bg-border" />}
+        <div key={s.key} id={`sec-${s.key}`} className="relative scroll-mt-28 ps-12">
+          {/* numbered khatam medallion on the axis */}
           <span
             aria-hidden
-            className={cn("absolute start-1.5 top-1.5 h-3 w-3 rounded-full ring-4 ring-background", toneDot[s.tone ?? "neutral"])}
-          />
-          <div className={cn("rounded-xl border bg-card/60 p-5", toneRing[s.tone ?? "neutral"])}>
-            <h4 className="font-scholarly text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">
+            className={cn("absolute start-0 top-1 flex h-8 w-8 items-center justify-center ring-4 ring-background", toneText[s.tone ?? "neutral"])}
+          >
+            <svg viewBox="0 0 32 32" className="absolute inset-0 h-full w-full" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.75">
+              <rect x="8" y="8" width="16" height="16" />
+              <rect x="8" y="8" width="16" height="16" transform="rotate(45 16 16)" />
+            </svg>
+            <span className="relative z-10 bg-background text-[10px] font-bold tabular-nums">{i + 1}</span>
+          </span>
+          <div className={cn("rounded-xl border bg-card/60 p-5 shadow-subtle", toneRing[s.tone ?? "neutral"])}>
+            <h4 className="font-scholarly mb-2 text-sm font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="me-2 text-brass">§</span>
               {s.label}
             </h4>
             <CardContent className="p-0 text-sm leading-relaxed">{s.children}</CardContent>

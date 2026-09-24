@@ -10,6 +10,7 @@ import { useDocTitle } from "@/lib/use-doc-title";
 import { ComparisonTable } from "@/components/platform/views/knowledge";
 import { ShareBar } from "@/components/platform/share-bar";
 import { BookmarkButton } from "@/components/platform/library";
+import { EmptyState } from "@/components/platform/architectural";
 import { cn } from "@/lib/utils";
 
 export function ComparisonView({ focusId }: { focusId?: string | null }) {
@@ -78,7 +79,7 @@ export function ComparisonView({ focusId }: { focusId?: string | null }) {
           );
         })}
         {list && list.length === 0 && (
-          <p className="py-10 text-center text-sm text-muted-foreground">{t("noResults")}</p>
+          <EmptyState title={t("noResults")} hint="Side-by-side comparisons are curated by the editorial desk." />
         )}
       </div>
     </div>

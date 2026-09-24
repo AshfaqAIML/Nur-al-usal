@@ -15,6 +15,7 @@ import { ShareBar } from "@/components/platform/share-bar";
 import { BookmarkButton } from "@/components/platform/library";
 import { FiqhAqeedahBadge } from "@/components/platform/badges";
 import { EvidenceList, ScholarlyCard } from "@/components/platform/text";
+import { EmptyState, NicheMarker } from "@/components/platform/architectural";
 import { getVote, setVote, AnswerVote } from "@/lib/answer-votes";
 import { cn } from "@/lib/utils";
 
@@ -144,8 +145,9 @@ export function QuestionsView({ id }: { id?: string | null }) {
         {!question && <Skeleton className="h-96 w-full rounded-xl" />}
         {question && (
           <div className="space-y-6">
-            <Card className="border-emerald-200 dark:border-emerald-900">
-              <CardContent className="p-6">
+            <Card className="arch-top relative overflow-hidden border-emerald-200 dark:border-emerald-900">
+              <div aria-hidden className="pointer-events-none absolute inset-0 pattern-girih opacity-70" />
+              <CardContent className="relative p-6 pt-8">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="outline">{STATUS_LABELS[question.status] ?? question.status}</Badge>
                   {question.category && <Badge variant="outline">{question.category.nameEn}</Badge>}
@@ -187,14 +189,16 @@ export function QuestionsView({ id }: { id?: string | null }) {
 
             {answers.length === 0 && !question.isSensitive && stage === "idle" && (
               <Card className="border-dashed">
-                <CardContent className="p-6 text-center">
-                  <p className="text-sm text-muted-foreground">
-                    No answer yet. The RAG engine can produce a citation-checked draft for editorial review — streamed live as it works:
-                  </p>
-                  <Button onClick={generateStream} disabled={busy || stage !== "idle"} className="mt-3 bg-emerald-700 hover:bg-emerald-800 text-white">
-                    <Sparkles className="me-2 h-4 w-4" />
-                    {t("generateAnswer")}
-                  </Button>
+                <CardContent className="p-2">
+                  <EmptyState
+                    title="No answer yet"
+                    hint="The RAG engine can produce a citation-checked draft for editorial review — streamed live as it works."
+                  >
+                    <Button onClick={generateStream} disabled={busy || stage !== "idle"} className="bg-emerald-700 hover:bg-emerald-800 text-white">
+                      <Sparkles className="me-2 h-4 w-4" />
+                      {t("generateAnswer")}
+                    </Button>
+                  </EmptyState>
                 </CardContent>
               </Card>
             )}
@@ -248,8 +252,8 @@ export function QuestionsView({ id }: { id?: string | null }) {
 
       {!list && <div className="space-y-3">{[...Array(5)].map((_, i) => <Skeleton key={i} className="h-24 rounded-xl" />)}</div>}
       {list && visibleList && visibleList.length === 0 && (
-        <div className="rounded-xl border border-dashed p-10 text-center">
-          <p className="text-sm text-muted-foreground">{t("noEntriesMatch")}</p>
+        <div className="rounded-xl border border-dashed">
+          <EmptyState title={t("noEntriesMatch")} hint="Adjust the status filter or search text — the archive is deep." />
         </div>
       )}
       {list && visibleList && visibleList.length > 0 && (
@@ -260,15 +264,17 @@ export function QuestionsView({ id }: { id?: string | null }) {
       <div className="space-y-3">
         {(visibleList ?? []).map((q) => (
           <Card key={q.id} className="card-lift cursor-pointer border-border/70" onClick={() => setView("qa", q.id)}>
-            <CardContent className="p-5">
-              <div className="flex flex-wrap items-start justify-between gap-2">
-                <p className="max-w-xl text-sm font-semibold leading-snug">{q.text}</p>
-                <Badge variant="outline" className="shrink-0 text-[10px]">{STATUS_LABELS[q.status] ?? q.status}</Badge>
-              </div>
-              <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
-                {q.category && <Badge variant="outline" className="text-[10px]">{q.category.nameEn}</Badge>}
-                <span><Eye className="me-1 inline h-3 w-3" />{q.views}</span>
-                {q.featured && <Badge className="bg-emerald-700 text-white text-[10px]">{t("featured")}</Badge>}
+            <CardContent className="flex items-stretch gap-2 p-4">
+              {/* Curated-entry niche marker */}
+              <NicheMarker className="self-center" />
+              <div className="min-w-0 flex-1 py-0.5">
+                <p className="font-scholarly text-[15px] font-semibold leading-snug">{q.text}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+                  {q.category && <Badge variant="outline" className="text-[10px]">{q.category.nameEn}</Badge>}
+                  <span><Eye className="me-1 inline h-3 w-3" />{q.views}</span>
+                  <Badge variant="outline" className="text-[10px]">{STATUS_LABELS[q.status] ?? q.status}</Badge>
+                  {q.featured && <Badge className="bg-emerald-700 text-white text-[10px]">{t("featured")}</Badge>}
+                </div>
               </div>
             </CardContent>
           </Card>

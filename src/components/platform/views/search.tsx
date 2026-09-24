@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { usePlatform, useT } from "@/lib/store";
 import { apiGet, SearchHit } from "@/lib/api";
 import { SOURCE_TYPE_META } from "@/lib/ai.client";
+import { EmptyState, ManuscriptPanel, BookSpine } from "@/components/platform/architectural";
 import { cn } from "@/lib/utils";
 
 export function SearchView({ param }: { param?: string | null }) {
@@ -66,23 +67,25 @@ export function SearchView({ param }: { param?: string | null }) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
-      <header className="mb-6">
-        <div className="flex items-center gap-2">
-          <Search className="h-6 w-6 text-emerald-700 dark:text-emerald-400" aria-hidden />
-          <h1 className="font-scholarly text-3xl font-bold">Global Search</h1>
+      {/* Search courtyard — girih-lit focus band */}
+      <ManuscriptPanel className="arch-top pattern-girih">
+        <div className="px-6 pb-6 pt-9">
+          <div className="flex items-center gap-2">
+            <Search className="h-6 w-6 text-emerald-700 dark:text-emerald-400" aria-hidden />
+            <h1 className="font-scholarly text-3xl font-bold">Global Search</h1>
+          </div>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            Search across questions, answers, books, scholars, hadith, Qur&apos;an, claims, misconceptions, topics — in
+            English, Arabic and Urdu (keyword + typo-tolerant matching).
+          </p>
+          <div className="relative mt-5">
+            <Search className="absolute start-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden />
+            <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("searchPlaceholder")} className="h-12 rounded-full bg-card/90 ps-11 text-base shadow-subtle" autoFocus />
+          </div>
         </div>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Search across questions, answers, books, scholars, hadith, Qur&apos;an, claims, misconceptions, topics — in
-          English, Arabic and Urdu (keyword + typo-tolerant matching).
-        </p>
-      </header>
+      </ManuscriptPanel>
 
-      <div className="relative">
-        <Search className="absolute start-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden />
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("searchPlaceholder")} className="h-12 ps-10 text-base" autoFocus />
-      </div>
-
-      <div className="mt-3 flex flex-wrap gap-1.5">
+      <div className="mt-4 flex flex-wrap gap-1.5">
         {TYPES.map((tp) => (
           <button
             key={tp.v}
@@ -106,8 +109,9 @@ export function SearchView({ param }: { param?: string | null }) {
               {hits.map((h) => {
                 const meta = SOURCE_TYPE_META[h.entityType];
                 return (
-                  <Card key={`${h.entityType}-${h.entityId}`} className="card-lift cursor-pointer border-border/70" onClick={() => openHit(h)}>
-                    <CardContent className="p-4">
+                  <Card key={`${h.entityType}-${h.entityId}`} className="card-lift relative cursor-pointer overflow-hidden border-border/70" onClick={() => openHit(h)}>
+                    <BookSpine />
+                    <CardContent className="p-4 ps-5">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <span className="text-sm font-semibold">{h.title}</span>
                         <div className="flex items-center gap-1.5">
@@ -120,13 +124,25 @@ export function SearchView({ param }: { param?: string | null }) {
                   </Card>
                 );
               })}
-              {hits.length === 0 && <p className="py-10 text-center text-sm text-muted-foreground">{t("noResults")}</p>}
+              {hits.length === 0 && (
+                <EmptyState
+                  title={t("noResults")}
+                  hint="Search spans books, fatwas, Qur'an, hadith, misconceptions, objections and answers."
+                />
+              )}
             </div>
           </>
         )}
         {!loading && !hits && (
-          <div className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">
-            Try: <em>tawassul</em> · <em>توسل</em> · <em>raf al-yadayn</em> · <em>mawlid</em> · <em>Ibn Abidin</em> · <em>Fatawa Razvia</em>
+          <div className="rounded-xl border border-dashed">
+            <EmptyState
+              title="Search the whole library"
+              hint="Bilingual and typo-tolerant: Arabic, Urdu and English all resolve."
+            >
+              <p className="text-xs text-muted-foreground">
+                Try: <em>tawassul</em> · <em>توسل</em> · <em>raf al-yadayn</em> · <em>mawlid</em> · <em>Ibn Abidin</em> · <em>Fatawa Razvia</em>
+              </p>
+            </EmptyState>
           </div>
         )}
       </div>
