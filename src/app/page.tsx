@@ -42,6 +42,7 @@ function CurrentView() {
 
 export default function Page() {
   const hydrateFromHash = usePlatform((s) => s.hydrateFromHash);
+  const view = usePlatform((s) => s.view);
 
   useEffect(() => {
     hydrateFromHash();
@@ -65,7 +66,11 @@ export default function Page() {
       </a>
       <Navbar />
       <main id="main-content" className="flex-1">
-        <CurrentView />
+        {/* Keyed by view → subtle fade+rise transition between views (CSS .view-enter).
+            Param changes within a view keep state (no remount), preserving list caches. */}
+        <div key={view} className="view-enter">
+          <CurrentView />
+        </div>
       </main>
       <Footer />
       <BackToTop />

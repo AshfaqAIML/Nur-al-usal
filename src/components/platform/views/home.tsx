@@ -11,6 +11,7 @@ import { apiGet, BootstrapData, QuranVerse } from "@/lib/api";
 import { ClassificationBadge, SourceClassBadge, VerificationBadge } from "@/components/platform/badges";
 import { UrduText } from "@/components/platform/text";
 import { clearReadingHistory, loadReadingHistory, ReadingItem, timeAgo } from "@/lib/reading-history";
+import { useCountUp } from "@/lib/use-count-up";
 import { cn } from "@/lib/utils";
 
 export function HomeView() {
@@ -199,7 +200,9 @@ export function HomeView() {
                 className="h-4 w-4 text-emerald-700 transition-transform duration-200 group-hover:-translate-y-0.5 dark:text-emerald-400"
                 aria-hidden
               />
-              <span className="font-scholarly text-2xl font-bold tabular-nums">{s.value}</span>
+              <span className="font-scholarly text-2xl font-bold tabular-nums">
+                <CountUpStat value={s.value} />
+              </span>
               <span className="text-[11px] uppercase tracking-wide text-muted-foreground">{s.label}</span>
             </div>
           ))}
@@ -362,4 +365,10 @@ export function coverClass(color: string): string {
     rose: "bg-rose-100 border-rose-200 dark:bg-rose-950 dark:border-rose-800",
   };
   return map[color] ?? map.emerald;
+}
+
+/** Stat number that counts up from 0 on mount (ease-out, reduced-motion aware). */
+function CountUpStat({ value }: { value: number }) {
+  const n = useCountUp(value, 900);
+  return <>{n}</>;
 }

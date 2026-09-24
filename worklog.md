@@ -162,3 +162,30 @@ Stage Summary:
 - Admin editor reaches bulk-ops maturity: select page → bulk delete with confirm + per-record failure reporting.
 - Q&A listing becomes filterable/searchable — completes the public Q&A experience (list → filter → detail → generate).
 - Remaining candidates: real-device offline SW test, comparison chips from detail pages, admin bulk feature/publish toggles, question attach-image storage, stream answers via SSE.
+
+---
+Task ID: 8 (cron round — SSE streaming answers, related comparisons, admin expansion + bulk workflow)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; implement live-streaming AI answers (flagship), related madhhab comparisons on objection detail, admin editor +5 entities with bulk set-status; styling details (view transitions, count-up stats).
+
+Work Log:
+- QA smoke: 12-view tour, deep-links, meta descriptions — zero errors, no pre-existing bugs; platform stable → new-feature round.
+- SSE streaming answers (flagship):
+  * NEW src/lib/llm-stream.ts: wraps z-ai-web-dev-sdk `stream: true` (yields raw SSE Uint8Array frames) — newline-safe buffering, `data:` frame parsing, [DONE]/keep-alive tolerance, delta extraction, onDelta callback. Capability confirmed with standalone bun probe first (SDK stream = raw byte frames, not parsed chunks).
+  * NEW /api/answers/stream: POST {questionId} → text/event-stream with status (retrieving/generating/saving) → delta (streamed text) → done {answer, kbEvidence, confidence} / error events. Rate-limited 6/min (answers-stream scope). Model writes a readable draft with fixed `##` sections + typed evidence bullets ([Q]/[H]/[C]); parser maps sections → structured Answer model (directAnswer, hanafiPosition, evidence JSON, objection/response split on ** markers, sources, confidence heuristic, aqeedahOrFiqh heuristic) and persists status AI_ASSISTED + question → AI_ANSWERED. Single LLM call serves both live UX and persistence.
+  * qa.tsx: generateStream() fetch+ReadableStream SSE consumer; LiveStreamPanel (pulsing live dot, 3-step stepper with done/current/pending states, auto-scroll green-tinted stream box, ## headings styled live incl. inline-heading split, blinking .stream-caret, aria-live) replaces spinner; panel swaps to structured AnswerCard on done.
+  * E2E verified twice: stage stepper progression, 32→476 chars growth sampling, 589-delta stream, answer persisted, question status updated, structured card renders (Direct Answer/Hanafi Position/Classical Evidence/Common Objection/Response/Practical/Sources).
+  * BUGFIX found in E2E: model emitted "## Sources" inline at end of a line → line-start regex leaked it into practicalInfo. Parser now matches the known heading vocabulary ANYWHERE (case-insensitive) + filters bare heading echoes from sources; live panel splits inline headings too. Re-tested clean.
+- Related madhhab comparisons (objection detail): /api/objections?id= related payload + comparisons (same topicId, take 3); RelatedResearch renders third group (amber Scale-icon cards, "Open comparison →" CTA, lg:grid-cols-3 adaptive); click-through deep-links #/compare/{id} with focus badge verified. DATA FIX: comparisons had NULL topicId in seed — backfilled all 7 (raf-al-yadayn, ameen, qiraah-behind-imam ×2, taraweeh, witr, qunut) in DB AND seed.ts (fresh installs now linked).
+- Admin editor expansion (now 10 entities): + Question (status/language/featured), Claim check (classification/status), Hadith (collection/number/narrator/translation/arabic/grading±disputed), Qur'an verse (surah/ayah Int fields, Arabic + 2 translations), Madhhab comparison (5 madhhab columns + notes). New "number" field type with NaN validation + Number coercion. Bulk workflow: bulkStatus schema flag → "Set status" select + Apply in selection toolbar (PATCH per id; applied to question/claim/misconception/fatwa) — verified: 2 questions → REVIEWED badges after apply. API: +quran/hadith/comparison whitelist, entity validation on PATCH/DELETE.
+  * BUGFIX: GET /api/admin/resource crashed 500 for quran (QuranVerse has no createdAt) → per-entity ORDER_BY map (quran → surah asc).
+- Styling details: .view-enter fade+rise transition keyed by view in page.tsx (respects prefers-reduced-motion; param changes within a view keep state/caches); home stat cells count up 0→N via new src/lib/use-count-up.ts (rAF ease-out-cubic, reduced-motion aware); .stream-caret blink keyframes.
+- i18n: 16 new keys ×3 languages (engine*, stage*, relatedComparisons, compareCta, bulkApply, bulkStatusLabel, hadithLabel, quranLabel).
+- Cleanup: all ZZTEST records removed (questions/hadith/verse); tawassul question keeps its 2 AI drafts (legit editorial state).
+- lint clean; full tour 0 runtime errors; Urdu RTL (TOC flip + comparison cards + CTA) and dark mode verified via screenshot.
+
+Stage Summary:
+- The answer engine is now WATCHABLE: users see retrieval → live drafting → save, then receive the structured citation-checked card — the platform's most complex AI pipeline becomes transparent UX.
+- Objection detail pages now complete the research triangle (misconceptions ↔ objections ↔ comparisons) with deep-linked madhhab comparisons.
+- Admin editor covers every major content type with bulk editorial workflow (delete + status transitions), scaling the publish pipeline.
+- Remaining candidates: claim-checker streaming, comparison chips on misconception detail, admin attachment display, real-device SW offline test, answer revision history UI.

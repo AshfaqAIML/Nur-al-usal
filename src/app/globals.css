@@ -251,3 +251,34 @@
   --font-geist-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
+
+/* ─── View transition: fade + rise on SPA view switch ─── */
+@keyframes view-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.view-enter {
+  animation: view-in 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .view-enter { animation: none; }
+}
+
+/* ─── Streaming caret (answer engine live panel) ─── */
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.stream-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-inline-start: 2px;
+  vertical-align: text-bottom;
+  border-radius: 1px;
+  background: oklch(0.55 0.13 160);
+  animation: caret-blink 0.9s steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stream-caret { animation: none; }
+}

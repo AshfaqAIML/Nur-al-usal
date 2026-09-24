@@ -221,6 +221,19 @@ const en: Dict = {
   bulkSelected: "{n} selected",
   bulkDelete: "Delete selected",
   clearSelection: "Clear",
+  engineTitle: "Answer engine",
+  engineLive: "Live",
+  engineHint: "Connecting to the answer engine…",
+  engineParsing: "Parsing sections → saving draft for review…",
+  stageRetrieving: "Retrieving evidence",
+  stageGenerating: "Generating answer",
+  stageSaving: "Saving draft",
+  relatedComparisons: "Madhhab comparisons",
+  compareCta: "Open comparison →",
+  bulkApply: "Apply",
+  bulkStatusLabel: "Set status",
+  hadithLabel: "Hadith",
+  quranLabel: "Qur'an verses",
 };
 
 const ur: Dict = {
@@ -431,6 +444,19 @@ const ur: Dict = {
   bulkSelected: "{n} منتخب",
   bulkDelete: "منتخب شدہ حذف کریں",
   clearSelection: "صاف کریں",
+  engineTitle: "جوابی انجن",
+  engineLive: "لائیو",
+  engineHint: "جوابی انجن سے رابطہ جاری ہے…",
+  engineParsing: "حصوں کی ترتیب → نظرِ ثانی کے لیے مسودہ محفوظ ہو رہا ہے…",
+  stageRetrieving: "شواہد کی تلاش",
+  stageGenerating: "جواب تیار ہو رہا ہے",
+  stageSaving: "مسودہ محفوظ ہو رہا ہے",
+  relatedComparisons: "مذہبی تقابل",
+  compareCta: "تقابل کھولیں →",
+  bulkApply: "لاگو کریں",
+  bulkStatusLabel: "حیثیت مقرر کریں",
+  hadithLabel: "حدیث",
+  quranLabel: "قرآنی آیات",
 };
 
 const ar: Dict = {
@@ -641,6 +667,19 @@ const ar: Dict = {
   bulkSelected: "تم تحديد {n}",
   bulkDelete: "حذف المحدد",
   clearSelection: "مسح",
+  engineTitle: "محرك الإجابات",
+  engineLive: "مباشر",
+  engineHint: "جارٍ الاتصال بمحرك الإجابات…",
+  engineParsing: "ترتيب الأقسام ← حفظ المسودة للمراجعة…",
+  stageRetrieving: "استخراج الأدلة",
+  stageGenerating: "صياغة الإجابة",
+  stageSaving: "حفظ المسودة",
+  relatedComparisons: "مقارنات المذاهب",
+  compareCta: "افتح المقارنة ←",
+  bulkApply: "تطبيق",
+  bulkStatusLabel: "تعيين الحالة",
+  hadithLabel: "حديث",
+  quranLabel: "آيات القرآن",
 };
 
 export const DICTS: Record<Lang, Dict> = { en, ur, ar };

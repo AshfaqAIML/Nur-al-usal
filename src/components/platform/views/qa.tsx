@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { ChevronRight, Eye, Loader2, Search, Sparkles } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { BookOpenCheck, Check, ChevronRight, Eye, Loader2, Radio, Search, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { usePlatform, useT } from "@/lib/store";
-import { apiGet, apiPost, Answer, parseJson, Question } from "@/lib/api";
+import { apiGet, Answer, parseJson, Question } from "@/lib/api";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { FiqhAqeedahBadge } from "@/components/platform/badges";
@@ -20,6 +20,20 @@ const STATUS_LABELS: Record<string, string> = {
   ANSWERED: "Answered", REJECTED: "Rejected",
 };
 
+type StreamStage = "idle" | "connecting" | "retrieving" | "generating" | "saving";
+
+/** Parse one SSE frame (event/data pair) from the stream. */
+function parseSseFrame(frame: string): { event: string; data: string } | null {
+  let event = "message";
+  const dataLines: string[] = [];
+  for (const line of frame.split("\n")) {
+    if (line.startsWith("event:")) event = line.slice(6).trim();
+    else if (line.startsWith("data:")) dataLines.push(line.slice(5).trim());
+  }
+  if (dataLines.length === 0) return null;
+  return { event, data: dataLines.join("\n") };
+}
+
 export function QuestionsView({ id }: { id?: string | null }) {
   const t = useT();
   const { setView } = usePlatform();
@@ -28,6 +42,8 @@ export function QuestionsView({ id }: { id?: string | null }) {
   const [question, setQuestion] = useState<Question | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [busy, setBusy] = useState(false);
+  const [stage, setStage] = useState<StreamStage>("idle");
+  const [streamText, setStreamText] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [search, setSearch] = useState("");
   useDocTitle(id ? (question?.text ?? null) : t("navQA"));
@@ -61,17 +77,57 @@ export function QuestionsView({ id }: { id?: string | null }) {
     return () => { cancelled = true; };
   }, [id]);
 
-  async function generate() {
-    if (!question) return;
-    setBusy(true);
+  /** Streaming generation: watch the RAG engine retrieve, draft, and save live. */
+  async function generateStream() {
+    if (!question || stage !== "idle") return;
+    setStage("connecting");
+    setStreamText("");
     try {
-      const res = await apiPost<{ answer: Answer }>("/api/answers/generate", { questionId: question.id });
-      setAnswers((prev) => [res.answer, ...prev]);
-      toast({ title: "AI draft generated", description: "Citation-checked answer created — requires scholarly review." });
+      const res = await fetch("/api/answers/stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ questionId: question.id }),
+      });
+      if (!res.ok || !res.body) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error((j as { error?: string }).error || `Stream failed: ${res.status}`);
+      }
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let buf = "";
+      let streamError: string | null = null;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        let idx: number;
+        while ((idx = buf.indexOf("\n\n")) >= 0) {
+          const frame = buf.slice(0, idx);
+          buf = buf.slice(idx + 2);
+          const parsed = parseSseFrame(frame);
+          if (!parsed) continue;
+          try {
+            const payload = JSON.parse(parsed.data) as Record<string, unknown>;
+            if (parsed.event === "status") setStage(payload.stage as StreamStage);
+            else if (parsed.event === "delta") setStreamText((p) => p + String(payload.text ?? ""));
+            else if (parsed.event === "done") {
+              setAnswers((prev) => [payload.answer as Answer, ...prev]);
+              toast({
+                title: "AI draft generated",
+                description: "Citation-checked answer created — requires scholarly review.",
+              });
+            } else if (parsed.event === "error") {
+              streamError = String(payload.error ?? "Answer engine error.");
+            }
+          } catch { /* tolerate malformed frame */ }
+        }
+      }
+      if (streamError) throw new Error(streamError);
     } catch (e) {
       toast({ title: e instanceof Error ? e.message : t("error"), variant: "destructive" });
     } finally {
-      setBusy(false);
+      setStage("idle");
+      setStreamText("");
     }
   }
 
@@ -109,15 +165,19 @@ export function QuestionsView({ id }: { id?: string | null }) {
 
             {answers.map((a) => <AnswerCard key={a.id} answer={a} />)}
 
-            {answers.length === 0 && !question.isSensitive && (
+            {stage !== "idle" && (
+              <LiveStreamPanel stage={stage} text={streamText} />
+            )}
+
+            {answers.length === 0 && !question.isSensitive && stage === "idle" && (
               <Card className="border-dashed">
                 <CardContent className="p-6 text-center">
                   <p className="text-sm text-muted-foreground">
-                    No answer yet. The RAG engine can produce a citation-checked draft for editorial review:
+                    No answer yet. The RAG engine can produce a citation-checked draft for editorial review — streamed live as it works:
                   </p>
-                  <Button onClick={generate} disabled={busy} className="mt-3 bg-emerald-700 hover:bg-emerald-800 text-white">
-                    {busy ? <Loader2 className="me-2 h-4 w-4 animate-spin" /> : <Sparkles className="me-2 h-4 w-4" />}
-                    {busy ? t("generatingAnswer") : t("generateAnswer")}
+                  <Button onClick={generateStream} disabled={busy || stage !== "idle"} className="mt-3 bg-emerald-700 hover:bg-emerald-800 text-white">
+                    <Sparkles className="me-2 h-4 w-4" />
+                    {t("generateAnswer")}
                   </Button>
                 </CardContent>
               </Card>
@@ -199,6 +259,113 @@ export function QuestionsView({ id }: { id?: string | null }) {
         ))}
       </div>
     </div>
+  );
+}
+
+const STREAM_STEPS: { stage: Exclude<StreamStage, "idle" | "connecting">; labelKey: string; icon: typeof Radio }[] = [
+  { stage: "retrieving", labelKey: "stageRetrieving", icon: BookOpenCheck },
+  { stage: "generating", labelKey: "stageGenerating", icon: Sparkles },
+  { stage: "saving", labelKey: "stageSaving", icon: Check },
+];
+
+/** Live view of the answer engine at work (SSE stream consumer). */
+export function LiveStreamPanel({ stage, text }: { stage: StreamStage; text: string }) {
+  const t = useT();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [text]);
+
+  const stepIndex = STREAM_STEPS.findIndex((s) => s.stage === stage);
+  const lines = text.split("\n");
+
+  return (
+    <Card className="border-emerald-300 shadow-[0_0_0_4px_rgba(16,185,129,0.06)] dark:border-emerald-800">
+      <CardContent className="p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2.5 w-2.5" aria-hidden>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-600" />
+            </span>
+            <h3 className="font-scholarly text-sm font-bold">{t("engineTitle")}</h3>
+            <Badge variant="outline" className="border-emerald-300 text-[9px] uppercase tracking-wider text-emerald-800 dark:border-emerald-800 dark:text-emerald-300">
+              <Radio className="me-1 h-2.5 w-2.5" aria-hidden /> {t("engineLive")}
+            </Badge>
+          </div>
+        </div>
+
+        {/* Stage stepper */}
+        <ol className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5" aria-label="Engine stages">
+          {STREAM_STEPS.map((s, i) => {
+            const isDone = stepIndex > i;
+            const isCurrent = stepIndex === i;
+            const Icon = s.icon;
+            return (
+              <li
+                key={s.stage}
+                aria-current={isCurrent ? "step" : undefined}
+                className={cn(
+                  "flex items-center gap-1.5 text-[11px] font-medium transition-colors",
+                  isDone ? "text-emerald-700 dark:text-emerald-400" : isCurrent ? "text-foreground" : "text-muted-foreground/60"
+                )}
+              >
+                {isDone ? (
+                  <Check className="h-3.5 w-3.5" aria-hidden />
+                ) : isCurrent ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
+                ) : (
+                  <Icon className="h-3.5 w-3.5" aria-hidden />
+                )}
+                {t(s.labelKey as never)}
+              </li>
+            );
+          })}
+        </ol>
+
+        {/* Streaming text */}
+        <div
+          ref={scrollRef}
+          className="mt-3 max-h-80 overflow-y-auto rounded-lg border bg-emerald-50/40 p-3 dark:bg-emerald-950/20"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          {text ? (
+            <div className="space-y-1 text-sm leading-relaxed">
+              {lines.map((line, i) => {
+                // Models may emit a heading inline ("…framing. ## Sources") — split it out.
+                const hi = line.indexOf("## ");
+                if (hi >= 0) {
+                  const before = line.slice(0, hi);
+                  const heading = line.slice(hi + 3);
+                  return (
+                    <p key={i} className="whitespace-pre-wrap">
+                      {before}
+                      <span className="block pt-2 text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                        {heading}
+                      </span>
+                    </p>
+                  );
+                }
+                if (line.startsWith("## ")) {
+                  return (
+                    <p key={i} className="pt-2 text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                      {line.slice(3)}
+                    </p>
+                  );
+                }
+                return <p key={i} className="whitespace-pre-wrap">{line}</p>;
+              })}
+              {stage === "generating" && <span className="stream-caret" aria-hidden />}
+            </div>
+          ) : (
+            <p className="text-sm italic text-muted-foreground">{stage === "saving" ? t("engineParsing") : t("engineHint")}</p>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 

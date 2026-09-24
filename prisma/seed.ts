@@ -660,7 +660,19 @@ async function main() {
       notes: null },
   ];
   for (const c of comparisons) {
-    await prisma.comparison.create({ data: { ...c, topicId: null } });
+    // Link each comparison to its topical home (same mapping as the DB backfill).
+    const topicSlugByIssue: Record<string, string> = {
+      "Raf' al-Yadayn (raising hands before ruku' and rising)": "raf-al-yadayn",
+      "Ameen — aloud or quietly": "ameen",
+      "Recitation behind the imam": "qiraah-behind-imam",
+      "Taraweeh rak'ah count": "taraweeh",
+      "Witr status": "witr",
+      "Qunut in Fajr": "qunut",
+      "Bismillah aloud in Fatiha": "qiraah-behind-imam",
+    };
+    const t = topicSlugByIssue[c.issue];
+    const topicId = t ? (await prisma.topic.findUnique({ where: { slug: t } }))?.id ?? null : null;
+    await prisma.comparison.create({ data: { ...c, topicId } });
   }
 
   // ─────────────────────────── FATWAS ───────────────────────────

@@ -14,11 +14,11 @@ import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
 import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
-import { RelatedResearch, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
+import { RelatedResearch, RelatedMisconception, RelatedObjection, RelatedComparison } from "@/components/platform/related-research";
 import { cn } from "@/lib/utils";
 
 interface EvidenceQuote { ref: string; quote: string; translation?: string }
-interface RelatedPayload { objections: RelatedObjection[]; misconceptions: RelatedMisconception[] }
+interface RelatedPayload { objections: RelatedObjection[]; misconceptions: RelatedMisconception[]; comparisons: RelatedComparison[] }
 
 export function ObjectionsView({ id }: { id?: string | null }) {
   const { detail, related } = useObjectionDetail(id);
@@ -160,7 +160,7 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
       </article>
 
       <div className="mt-8">
-        <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} />
+        <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} comparisons={related?.comparisons} />
       </div>
       </div>
 

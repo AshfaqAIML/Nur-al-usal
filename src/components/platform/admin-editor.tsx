@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, Plus, Search, Trash2, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,15 +25,20 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
 /* ─── Entity field schemas (drives the generic form) ─── */
-type FieldType = "text" | "textarea" | "checkbox" | "select";
+type FieldType = "text" | "number" | "textarea" | "checkbox" | "select";
 interface FieldDef { key: string; label: string; type: FieldType; options?: string[]; required?: boolean }
+interface BulkStatus { key: string; options: string[] }
 
 const CLASSIFICATIONS = ["CLASSICAL_HANAFI", "LATER_HANAFI", "SOUTH_ASIAN_HANAFI", "FATAWA_COLLECTION", "AQEEDAH", "TAFSIR", "HADITH", "OTHER_SUNNI", "REFERENCE"];
 const SCHOLAR_CLASSIFICATIONS = ["CLASSICAL_HANAFI", "LATER_HANAFI", "SOUTH_ASIAN_HANAFI", "BARELVI", "DEOBANDI", "AHL_E_HADITH", "SALAFI", "OTHER_SUNNI", "COMPANION"];
 const VERIFICATION = ["VERIFIED", "PARTIALLY_VERIFIED", "OCR_NEEDS_REVIEW", "UNVERIFIED", "DISPUTED", "INSUFFICIENT_EVIDENCE"];
 const MISC_STATUS = ["CORRECTLY_ATTRIBUTED", "PARTIALLY_CORRECT", "MISLEADING", "INCORRECTLY_ATTRIBUTED", "DISPUTED", "UNSUPPORTED", "INSUFFICIENTLY_DOCUMENTED"];
+const QUESTION_STATUS = ["PENDING", "AI_ANSWERED", "REVIEWED", "ANSWERED", "REJECTED"];
+const CLAIM_STATUS = ["PENDING", "REVIEWED", "PUBLISHED", "REJECTED"];
+const GRADINGS = ["SAHIH", "HASAN", "DAIF", "MAWQUF", "MARFU", "DISPUTED", "UNRATED"];
+const Q_LANGUAGES = ["EN", "UR", "AR"];
 
-const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldDef[]; titleKey: string; statusKey?: string }[] = [
+const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldDef[]; titleKey: string; statusKey?: string; bulkStatus?: BulkStatus }[] = [
   {
     value: "misconception", label: "Misconception", labelKey: "misconceptionsLabel", titleKey: "claim", statusKey: "verificationStatus",
     fields: [
@@ -80,12 +85,72 @@ const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldD
   },
   {
     value: "fatwa", label: "Fatwa", labelKey: "fatwas", titleKey: "question", statusKey: "verificationStatus",
+    bulkStatus: { key: "verificationStatus", options: VERIFICATION },
     fields: [
       { key: "question", label: "Question", type: "text", required: true },
       { key: "answer", label: "Answer", type: "textarea", required: true },
       { key: "volume", label: "Volume", type: "text" },
       { key: "page", label: "Page", type: "text" },
       { key: "verificationStatus", label: "Verification status", type: "select", options: VERIFICATION },
+    ],
+  },
+  {
+    value: "question", label: "Question", labelKey: "questions", titleKey: "text", statusKey: "status",
+    bulkStatus: { key: "status", options: QUESTION_STATUS },
+    fields: [
+      { key: "text", label: "Question text", type: "text", required: true },
+      { key: "claim", label: "Claim within question", type: "text" },
+      { key: "context", label: "Context", type: "textarea" },
+      { key: "language", label: "Language", type: "select", options: Q_LANGUAGES },
+      { key: "status", label: "Status", type: "select", options: QUESTION_STATUS },
+      { key: "featured", label: "Featured", type: "checkbox" },
+    ],
+  },
+  {
+    value: "claim", label: "Claim check", labelKey: "claimsLabel", titleKey: "claim", statusKey: "status",
+    bulkStatus: { key: "status", options: CLAIM_STATUS },
+    fields: [
+      { key: "claim", label: "Claim", type: "text", required: true },
+      { key: "classification", label: "Classification", type: "select", options: MISC_STATUS },
+      { key: "explanation", label: "Explanation", type: "textarea", required: true },
+      { key: "context", label: "Context", type: "textarea" },
+      { key: "status", label: "Status", type: "select", options: CLAIM_STATUS },
+    ],
+  },
+  {
+    value: "hadith", label: "Hadith", labelKey: "hadithLabel", titleKey: "collection", statusKey: "grading",
+    fields: [
+      { key: "collection", label: "Collection (e.g. Bukhari)", type: "text", required: true },
+      { key: "number", label: "Hadith number", type: "text" },
+      { key: "narrator", label: "Narrator", type: "text" },
+      { key: "translationEn", label: "Translation (English)", type: "textarea", required: true },
+      { key: "arabic", label: "Arabic text", type: "textarea" },
+      { key: "grading", label: "Grading", type: "select", options: GRADINGS },
+      { key: "gradingDisputed", label: "Grading disputed", type: "checkbox" },
+    ],
+  },
+  {
+    value: "quran", label: "Qur'an verse", labelKey: "quranLabel", titleKey: "surahNameEn",
+    fields: [
+      { key: "surah", label: "Surah number", type: "number", required: true },
+      { key: "ayah", label: "Ayah number", type: "number", required: true },
+      { key: "surahNameEn", label: "Surah name (English)", type: "text", required: true },
+      { key: "surahNameAr", label: "Surah name (Arabic)", type: "text" },
+      { key: "arabic", label: "Arabic text", type: "textarea", required: true },
+      { key: "translationEn", label: "Translation (English)", type: "textarea", required: true },
+      { key: "translationUr", label: "Translation (Urdu)", type: "textarea" },
+    ],
+  },
+  {
+    value: "comparison", label: "Madhhab comparison", labelKey: "comparisonsLabel", titleKey: "issue",
+    fields: [
+      { key: "issue", label: "Issue", type: "text", required: true },
+      { key: "hanafi", label: "Hanafi position", type: "textarea" },
+      { key: "shafii", label: "Shafi'i position", type: "textarea" },
+      { key: "maliki", label: "Maliki position", type: "textarea" },
+      { key: "hanbali", label: "Hanbali position", type: "textarea" },
+      { key: "other", label: "Other (Ahl-e-Hadith etc.)", type: "textarea" },
+      { key: "notes", label: "Notes", type: "textarea" },
     ],
   },
 ];
@@ -105,6 +170,7 @@ export function EntityEditor() {
   const [editing, setEditing] = useState<{ mode: "create" | "edit"; rec?: Rec } | null>(null);
   const [deleting, setDeleting] = useState<Rec | null>(null);
   const [bulkConfirm, setBulkConfirm] = useState(false);
+  const [bulkStatusValue, setBulkStatusValue] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [busy, setBusy] = useState(false);
 
@@ -123,7 +189,7 @@ export function EntityEditor() {
   useEffect(() => { load(); }, [load]);
 
   // Reset selection when switching entities.
-  useEffect(() => { setSelected(new Set()); }, [entity]);
+  useEffect(() => { setSelected(new Set()); setBulkStatusValue(""); }, [entity]);
 
   const filtered = useMemo(() => {
     if (!records) return null;
@@ -197,6 +263,31 @@ export function EntityEditor() {
     setBusy(false);
   };
 
+  /** Bulk workflow action: set the same status field on every selected record. */
+  const onBulkStatus = async () => {
+    if (selected.size === 0 || !entity.bulkStatus || !bulkStatusValue) return;
+    setBusy(true);
+    let done = 0;
+    let failed = 0;
+    for (const id of selected) {
+      try {
+        await apiAdmin("/api/admin/resource", { entity: entity.value, id, data: { [entity.bulkStatus.key]: bulkStatusValue } }, "PATCH");
+        done += 1;
+      } catch {
+        failed += 1;
+      }
+    }
+    toast({
+      title: failed === 0
+        ? `${done} updated → ${bulkStatusValue.replaceAll("_", " ").toLowerCase()}`
+        : `${done} updated · ${failed} failed`,
+      variant: failed === 0 ? "default" : "destructive",
+    });
+    if (failed === 0) setSelected(new Set());
+    await load();
+    setBusy(false);
+  };
+
   return (
     <Card>
       <CardHeader className="pb-3">
@@ -246,7 +337,29 @@ export function EntityEditor() {
                 : "Select page"}
             </label>
             {selected.size > 0 && (
-              <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {entity.bulkStatus && (
+                  <div className="flex items-center gap-1">
+                    <Select value={bulkStatusValue} onValueChange={setBulkStatusValue}>
+                      <SelectTrigger className="h-7 w-36 text-[11px]" aria-label={t("bulkStatusLabel")}>
+                        <SelectValue placeholder={t("bulkStatusLabel")} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {entity.bulkStatus.options.map((o) => (
+                          <SelectItem key={o} value={o}>{o.replaceAll("_", " ")}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <Button
+                      size="sm"
+                      className="h-7 gap-1.5 bg-emerald-700 px-2.5 text-[11px] text-white hover:bg-emerald-800 disabled:opacity-50"
+                      disabled={!bulkStatusValue || busy}
+                      onClick={onBulkStatus}
+                    >
+                      <Workflow className="h-3 w-3" /> {t("bulkApply")}
+                    </Button>
+                  </div>
+                )}
                 <Button
                   size="sm"
                   variant="ghost"
@@ -426,10 +539,18 @@ function EntityForm({
         toast({ title: `${f.label} is required`, variant: "destructive" });
         return;
       }
+      if (f.type === "number" && String(values[f.key] ?? "").trim() && Number.isNaN(Number(values[f.key]))) {
+        toast({ title: `${f.label} must be a number`, variant: "destructive" });
+        return;
+      }
     }
-    // Only send changed/own fields; strip relational noise
+    // Only send changed/own fields; strip relational noise; coerce numbers.
     const data: Record<string, unknown> = {};
-    for (const f of entity.fields) data[f.key] = values[f.key];
+    for (const f of entity.fields) {
+      data[f.key] = f.type === "number"
+        ? (String(values[f.key] ?? "").trim() === "" ? undefined : Number(values[f.key]))
+        : values[f.key];
+    }
     setBusy(true);
     try {
       if (rec) {
@@ -481,6 +602,14 @@ function EntityForm({
                   </p>
                   {f.type === "textarea" ? (
                     <Textarea value={String(values[f.key] ?? "")} onChange={(e) => set(f.key, e.target.value)} rows={4} className="text-sm" />
+                  ) : f.type === "number" ? (
+                    <Input
+                      type="number"
+                      value={String(values[f.key] ?? "")}
+                      onChange={(e) => set(f.key, e.target.value)}
+                      className="text-sm"
+                      inputMode="numeric"
+                    />
                   ) : (
                     <Input value={String(values[f.key] ?? "")} onChange={(e) => set(f.key, e.target.value)} className="text-sm" />
                   )}

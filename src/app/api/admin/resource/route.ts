@@ -3,12 +3,14 @@ import { db } from "@/lib/db";
 
 /**
  * Generic admin CRUD + editorial workflow.
- * entity: misconception | objection | book | scholar | fatwa | question | claim | answer | review
+ * entity: misconception | objection | book | scholar | fatwa | question | claim | answer | review |
+ *         quran | hadith | comparison
  * Admin authorization: sandbox demo uses a shared admin key header
  * (production would use NextAuth roles — documented modular swap).
  */
 const ENTITIES = [
   "misconception", "objection", "book", "scholar", "fatwa", "question", "claim", "answer", "review",
+  "quran", "hadith", "comparison",
 ] as const;
 type Entity = (typeof ENTITIES)[number];
 
@@ -23,6 +25,9 @@ function model(entity: Entity) {
     case "claim": return db.claimCheck;
     case "answer": return db.answer;
     case "review": return db.review;
+    case "quran": return db.quranVerse;
+    case "hadith": return db.hadith;
+    case "comparison": return db.comparison;
   }
 }
 
@@ -31,6 +36,11 @@ function checkAdmin(req: NextRequest) {
   const key = req.headers.get("x-admin-key");
   return key === "nur-al-usul-admin";
 }
+
+/** QuranVerse has no createdAt — order the verse library by surah/ayah instead. */
+const ORDER_BY: Partial<Record<Entity, Record<string, string>>> = {
+  quran: { surah: "asc" },
+};
 
 export async function GET(req: NextRequest) {
   const entity = req.nextUrl.searchParams.get("entity") as Entity | null;
@@ -44,7 +54,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ record: rec });
   }
   const [records, total] = await Promise.all([
-    (m as unknown as { findMany: (a?: unknown) => Promise<unknown[]> }).findMany({ take: 100, orderBy: { createdAt: "desc" } }),
+    (m as unknown as { findMany: (a?: unknown) => Promise<unknown[]> }).findMany({
+      take: 100,
+      orderBy: ORDER_BY[entity] ?? { createdAt: "desc" },
+    }),
     (m as unknown as { count: (a?: unknown) => Promise<number> }).count({}),
   ]);
   return NextResponse.json({ records, total });
@@ -87,6 +100,9 @@ export async function PATCH(req: NextRequest) {
   try {
     const { entity, id, data } = await req.json();
     if (!entity || !id) return NextResponse.json({ error: "entity and id required" }, { status: 400 });
+    if (!(ENTITIES as readonly string[]).includes(entity)) {
+      return NextResponse.json({ error: "Invalid entity" }, { status: 400 });
+    }
     const m = model(entity as Entity);
     const rec = await (m as unknown as { update: (a: unknown) => unknown }).update({ where: { id }, data });
     return NextResponse.json({ record: rec });
@@ -101,6 +117,9 @@ export async function DELETE(req: NextRequest) {
   try {
     const { entity, id } = await req.json();
     if (!entity || !id) return NextResponse.json({ error: "entity and id required" }, { status: 400 });
+    if (!(ENTITIES as readonly string[]).includes(entity)) {
+      return NextResponse.json({ error: "Invalid entity" }, { status: 400 });
+    }
     const m = model(entity as Entity);
     await (m as unknown as { delete: (a: unknown) => unknown }).delete({ where: { id } });
     return NextResponse.json({ ok: true });

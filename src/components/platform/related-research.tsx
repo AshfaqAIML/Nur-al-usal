@@ -6,7 +6,7 @@
  * can continue their research trail (MASTER PROMPT: citation chain).
  */
 
-import { Eye } from "lucide-react";
+import { Eye, Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { usePlatform, useT } from "@/lib/store";
@@ -20,27 +20,35 @@ export interface RelatedMisconception {
 export interface RelatedObjection {
   id: string; question: string; isAqeedah: boolean; views: number;
 }
+export interface RelatedComparison {
+  id: string; issue: string;
+}
 
 export function RelatedResearch({
   misconceptions,
   objections,
+  comparisons,
 }: {
   misconceptions?: RelatedMisconception[];
   objections?: RelatedObjection[];
+  comparisons?: RelatedComparison[];
 }) {
   const t = useT();
   const { setView } = usePlatform();
 
   const hasMis = (misconceptions?.length ?? 0) > 0;
   const hasObj = (objections?.length ?? 0) > 0;
-  if (!hasMis && !hasObj) return null;
+  const hasCmp = (comparisons?.length ?? 0) > 0;
+  if (!hasMis && !hasObj && !hasCmp) return null;
+
+  const colCount = [hasMis, hasObj, hasCmp].filter(Boolean).length;
 
   return (
     <section aria-label={t("relatedResearch")} className="no-print">
       <OrnamentDivider className="mb-5" />
       <h2 className="mb-3 font-scholarly text-lg font-bold">{t("relatedResearch")}</h2>
 
-      <div className={cn("grid gap-2.5", hasMis && hasObj ? "lg:grid-cols-2" : "")}>
+      <div className={cn("grid gap-2.5", colCount === 2 ? "lg:grid-cols-2" : colCount >= 3 ? "lg:grid-cols-3" : "")}>
         {hasMis && (
           <div>
             <h3 className="mb-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
@@ -98,6 +106,35 @@ export function RelatedResearch({
                         <Eye className="h-3 w-3" aria-hidden /> {o.views}
                       </span>
                     </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {hasCmp && (
+          <div>
+            <h3 className="mb-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+              {t("relatedComparisons")}
+            </h3>
+            <div className="space-y-2">
+              {comparisons!.map((c) => (
+                <Card
+                  key={c.id}
+                  className="card-lift cursor-pointer border-border/70 transition-colors hover:border-amber-600/50"
+                  onClick={() => setView("compare", c.id)}
+                >
+                  <CardContent className="p-3.5">
+                    <div className="flex items-start gap-2">
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                        <Scale className="h-3.5 w-3.5" aria-hidden />
+                      </span>
+                      <p className="line-clamp-2 text-[13px] font-medium leading-snug">{c.issue}</p>
+                    </div>
+                    <p className="mt-2 text-[10px] font-medium uppercase tracking-wider text-amber-700 dark:text-amber-400">
+                      {t("compareCta")}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
