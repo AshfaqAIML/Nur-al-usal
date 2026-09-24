@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlatform, useT } from "@/lib/store";
 import { apiGet, Misconception } from "@/lib/api";
+import { pushReadingItem } from "@/lib/reading-history";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { ClassificationBadge, VerificationBadge } from "@/components/platform/badges";
@@ -126,6 +127,10 @@ function MisconceptionDetail({
   const t = useT();
   const { setView } = usePlatform();
   useDocTitle(detail ? `“${detail.claim}”` : null, detail?.actualPosition ?? null);
+
+  useEffect(() => {
+    if (detail) pushReadingItem({ kind: "misconception", key: detail.slug, title: detail.claim });
+  }, [detail?.slug]);
 
   const tocItems: TocItem[] = detail
     ? [

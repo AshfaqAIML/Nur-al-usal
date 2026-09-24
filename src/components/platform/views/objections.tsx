@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlatform, useT } from "@/lib/store";
 import { apiGet, Objection, parseJson } from "@/lib/api";
+import { pushReadingItem } from "@/lib/reading-history";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
@@ -47,6 +48,10 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
   const t = useT();
   const { setView } = usePlatform();
   useDocTitle(detail?.question ?? null, detail?.answer ?? null);
+
+  useEffect(() => {
+    if (detail) pushReadingItem({ kind: "objection", key: detail.id, title: detail.question });
+  }, [detail?.id]);
 
   if (detail === undefined) {
     return (

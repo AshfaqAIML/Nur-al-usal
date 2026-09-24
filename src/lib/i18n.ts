@@ -208,6 +208,16 @@ const en: Dict = {
   langUr: "Urdu",
   langEn: "English",
   langMixed: "Mixed",
+  attachScan: "Attach a scanned page",
+  attachScanHint: "A book photo can be read with OCR — the extracted text gets quoted into your question.",
+  quoteIntoQuestion: "Quote into question",
+  quotedToast: "OCR text quoted into your question.",
+  scanTextPreview: "Extracted text",
+  continueReading: "Continue reading",
+  clearHistory: "Clear",
+  justNow: "just now",
+  hoursAgo: "{n}h ago",
+  daysAgo: "{n}d ago",
 };
 
 const ur: Dict = {
@@ -405,6 +415,16 @@ const ur: Dict = {
   langUr: "اردو",
   langEn: "انگریزی",
   langMixed: "مخلوط",
+  attachScan: "اسکین شدہ صفحہ منسلک کریں",
+  attachScanHint: "کتاب کی تصویر OCR سے پڑھی جا سکتی ہے — نکالا گیا متن آپ کے سوال میں شامل ہو جائے گا۔",
+  quoteIntoQuestion: "سوال میں شامل کریں",
+  quotedToast: "OCR متن آپ کے سوال میں شامل کر دیا گیا۔",
+  scanTextPreview: "نکالا گیا متن",
+  continueReading: "مطالعہ جاری رکھیں",
+  clearHistory: "ہٹائیں",
+  justNow: "ابھی ابھی",
+  hoursAgo: "{n} گھنٹے پہلے",
+  daysAgo: "{n} دن پہلے",
 };
 
 const ar: Dict = {
@@ -602,6 +622,16 @@ const ar: Dict = {
   langUr: "الأردية",
   langEn: "الإنجليزية",
   langMixed: "مختلطة",
+  attachScan: "أرفق صفحة ممسوحة",
+  attachScanHint: "يمكن قراءة صورة الكتاب بالتعرّف الضوئي — يُدرج النص المستخرج في سؤالك.",
+  quoteIntoQuestion: "أدرج في السؤال",
+  quotedToast: "تم إدراج النص المستخرج في سؤالك.",
+  scanTextPreview: "النص المستخرج",
+  continueReading: "أكمل القراءة",
+  clearHistory: "مسح",
+  justNow: "الآن",
+  hoursAgo: "قبل {n} ساعة",
+  daysAgo: "قبل {n} يوم",
 };
 
 export const DICTS: Record<Lang, Dict> = { en, ur, ar };

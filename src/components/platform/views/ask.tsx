@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { usePlatform, useT } from "@/lib/store";
 import { apiPost, Question } from "@/lib/api";
+import { OcrAttach } from "@/components/platform/ocr-attach";
 
 const SENSITIVE_TOPICS = "talaq · nikah · inheritance · financial contracts · oaths · kaffarah · custody";
 
@@ -100,6 +101,16 @@ export function AskView() {
             <label htmlFor="q-context" className="text-xs font-medium text-muted-foreground">{t("optionalContext")}</label>
             <Input id="q-context" value={context} onChange={(e) => setContext(e.target.value)} className="mt-1" placeholder="book, URL, screenshot reference…" maxLength={500} />
           </div>
+          <OcrAttach
+            onQuote={(ocrText, claimSummary) => {
+              const block = `[Scanned page — OCR]\n“${ocrText}”`;
+              setText((prev) => {
+                const joined = prev.trim() ? `${prev.trim()}\n\n${block}` : block;
+                return joined.slice(0, 3000);
+              });
+              if (!claim.trim() && claimSummary) setClaim(claimSummary.slice(0, 500));
+            }}
+          />
           <div className="flex flex-wrap gap-2">
             <Button onClick={submit} disabled={busy} className="bg-emerald-700 hover:bg-emerald-800 text-white">
               {busy ? <Loader2 className="me-2 h-4 w-4 animate-spin" /> : <Send className="me-2 h-4 w-4 rtl-flip" />}

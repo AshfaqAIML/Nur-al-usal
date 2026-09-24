@@ -17,6 +17,7 @@ import { AskView } from "@/components/platform/views/ask";
 import { QuestionsView } from "@/components/platform/views/qa";
 import { AdminView } from "@/components/platform/views/admin";
 import { BackToTop } from "@/components/platform/detail-chrome";
+import { ServiceWorkerRegister } from "@/components/platform/sw-register";
 
 function CurrentView() {
   const view = usePlatform((s) => s.view);
@@ -68,6 +69,7 @@ export default function Page() {
       </main>
       <Footer />
       <BackToTop />
+      <ServiceWorkerRegister />
     </div>
   );
 }

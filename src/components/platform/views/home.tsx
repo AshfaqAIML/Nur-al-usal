@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ArrowRight, BookMarked, Building2, CheckCircle2, GitCompare, Landmark, RefreshCw, ScrollText, Sparkles, Users } from "lucide-react";
+import { ArrowRight, BookMarked, Building2, CheckCircle2, GitCompare, History, Landmark, RefreshCw, ScrollText, Sparkles, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +10,7 @@ import { usePlatform, useT } from "@/lib/store";
 import { apiGet, BootstrapData, QuranVerse } from "@/lib/api";
 import { ClassificationBadge, SourceClassBadge, VerificationBadge } from "@/components/platform/badges";
 import { UrduText } from "@/components/platform/text";
+import { clearReadingHistory, loadReadingHistory, ReadingItem, timeAgo } from "@/lib/reading-history";
 import { cn } from "@/lib/utils";
 
 export function HomeView() {
@@ -18,9 +19,12 @@ export function HomeView() {
   const [data, setData] = useState<BootstrapData | null>(null);
   const [ayah, setAyah] = useState<QuranVerse | null>(null);
   const [ayahLoading, setAyahLoading] = useState(true);
+  const [history, setHistory] = useState<ReadingItem[]>([]);
 
   useEffect(() => {
     apiGet<BootstrapData>("/api/bootstrap").then(setData).catch(() => setData(null));
+    const id = setTimeout(() => setHistory(loadReadingHistory()), 0);
+    return () => clearTimeout(id);
   }, []);
 
   const loadAyah = useCallback(() => {
@@ -134,6 +138,54 @@ export function HomeView() {
           </Card>
         </div>
       </section>
+
+      {/* ─── CONTINUE READING (personal trail) ─── */}
+      {history.length > 0 && (
+        <section aria-label={t("continueReading")} className="border-b bg-muted/20">
+          <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
+            <div className="mb-2.5 flex items-center justify-between gap-3">
+              <h2 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <History className="h-3.5 w-3.5 text-emerald-700 dark:text-emerald-400" aria-hidden />
+                {t("continueReading")}
+              </h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 gap-1 px-2 text-[11px] text-muted-foreground"
+                onClick={() => { clearReadingHistory(); setHistory([]); }}
+              >
+                <X className="h-3 w-3" aria-hidden /> {t("clearHistory")}
+              </Button>
+            </div>
+            <div className="flex gap-2.5 overflow-x-auto pb-1 [scrollbar-width:thin]">
+              {history.map((h) => (
+                <button
+                  key={`${h.kind}-${h.key}`}
+                  onClick={() => setView(h.kind === "misconception" ? "misconceptions" : "objections", h.key)}
+                  className="card-lift flex w-60 shrink-0 items-start gap-2.5 rounded-xl border bg-card p-3 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                >
+                  <span
+                    className={cn(
+                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
+                      h.kind === "misconception"
+                        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
+                        : "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300"
+                    )}
+                  >
+                    {h.kind === "misconception" ? <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> : <ScrollText className="h-3.5 w-3.5" aria-hidden />}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="line-clamp-2 text-xs font-medium leading-snug">{h.title}</span>
+                    <span className="mt-1 block text-[10px] text-muted-foreground">
+                      {timeAgo(h.ts, t)} · {h.kind === "misconception" ? t("misconceptionsLabel") : t("objectionsLabel")}
+                    </span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── STATS ─── */}
       <section aria-label={t("stats")} className="border-b bg-muted/30">
