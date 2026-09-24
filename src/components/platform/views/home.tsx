@@ -11,16 +11,19 @@ import { apiGet, BootstrapData, QuranVerse } from "@/lib/api";
 import { ClassificationBadge, SourceClassBadge, VerificationBadge } from "@/components/platform/badges";
 import { UrduText } from "@/components/platform/text";
 import { clearReadingHistory, loadReadingHistory, ReadingItem, timeAgo } from "@/lib/reading-history";
+import { libraryRoute } from "@/lib/bookmarks";
+import { LIBRARY_KIND_META, useLibrary } from "@/components/platform/library";
 import { useCountUp } from "@/lib/use-count-up";
 import { cn } from "@/lib/utils";
 
 export function HomeView() {
   const t = useT();
-  const { setView } = usePlatform();
+  const { setView, setLibraryOpen } = usePlatform();
   const [data, setData] = useState<BootstrapData | null>(null);
   const [ayah, setAyah] = useState<QuranVerse | null>(null);
   const [ayahLoading, setAyahLoading] = useState(true);
   const [history, setHistory] = useState<ReadingItem[]>([]);
+  const library = useLibrary();
 
   useEffect(() => {
     apiGet<BootstrapData>("/api/bootstrap").then(setData).catch(() => setData(null));
@@ -139,6 +142,54 @@ export function HomeView() {
           </Card>
         </div>
       </section>
+
+      {/* ─── MY LIBRARY (saved research) ─── */}
+      {library.length > 0 && (
+        <section aria-label={t("myLibrary")} className="border-b bg-amber-50/40 dark:bg-amber-950/10">
+          <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
+            <div className="mb-2.5 flex items-center justify-between gap-3">
+              <h2 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <BookMarked className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" aria-hidden />
+                {t("myLibrary")}
+                <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                  {library.length}
+                </span>
+              </h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 gap-1 px-2 text-[11px] text-muted-foreground"
+                onClick={() => setLibraryOpen(true)}
+              >
+                {t("viewAll")} <ArrowRight className="h-3 w-3 rtl-flip" aria-hidden />
+              </Button>
+            </div>
+            <div className="flex gap-2.5 overflow-x-auto pb-1 [scrollbar-width:thin]">
+              {library.map((item) => {
+                const meta = LIBRARY_KIND_META[item.kind];
+                const Icon = meta.icon;
+                return (
+                  <button
+                    key={`${item.kind}-${item.key}`}
+                    onClick={() => { const r = libraryRoute(item); setView(r.view, r.param); }}
+                    className="card-lift flex w-60 shrink-0 items-start gap-2.5 rounded-xl border bg-card p-3 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600"
+                  >
+                    <span className={cn("mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full", meta.chip)}>
+                      <Icon className="h-3.5 w-3.5" aria-hidden />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="line-clamp-2 text-xs font-medium leading-snug">{item.title}</span>
+                      <span className="mt-1 block text-[10px] text-muted-foreground">
+                        {timeAgo(item.ts, t)} · {t(meta.labelKey)}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── CONTINUE READING (personal trail) ─── */}
       {history.length > 0 && (

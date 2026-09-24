@@ -57,6 +57,10 @@ export async function GET(req: NextRequest) {
     (m as unknown as { findMany: (a?: unknown) => Promise<unknown[]> }).findMany({
       take: 100,
       orderBy: ORDER_BY[entity] ?? { createdAt: "desc" },
+      // Feedback triage: questions carry their answers' reader-vote tallies.
+      ...(entity === "question"
+        ? { include: { answers: { select: { id: true, status: true, revision: true, helpfulUp: true, helpfulDown: true, createdAt: true } }, _count: { select: { answers: true } } } }
+        : {}),
     }),
     (m as unknown as { count: (a?: unknown) => Promise<number> }).count({}),
   ]);

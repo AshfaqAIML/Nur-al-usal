@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BookOpenCheck, Check, ChevronRight, Eye, Loader2, Radio, Search, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
+import { BookOpenCheck, Check, ChevronDown, ChevronRight, Eye, Loader2, Radio, Search, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -166,7 +166,20 @@ export function QuestionsView({ id }: { id?: string | null }) {
               </CardContent>
             </Card>
 
-            {answers.map((a) => <AnswerCard key={a.id} answer={a} questionTitle={question.text} />)}
+            {/* Latest answer prominent; older revisions collapsed below it */}
+            {answers.slice(0, 1).map((a) => <AnswerCard key={a.id} answer={a} questionTitle={question.text} />)}
+            {answers.length > 1 && (
+              <details className="group border-t pt-3">
+                <summary className="flex cursor-pointer list-none items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground [&::-webkit-details-marker]:hidden">
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" aria-hidden />
+                  {t("earlierDrafts").replace("{n}", String(answers.length - 1))}
+                  <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium tabular-nums">{answers.length - 1}</span>
+                </summary>
+                <div className="mt-3 space-y-4">
+                  {answers.slice(1).map((a) => <AnswerCard key={a.id} answer={a} questionTitle={question.text} />)}
+                </div>
+              </details>
+            )}
 
             {stage !== "idle" && (
               <LiveStreamPanel stage={stage} text={streamText} />

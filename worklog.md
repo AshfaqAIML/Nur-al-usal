@@ -242,3 +242,27 @@ Stage Summary:
 - Verdicts became first-class deep-linkable records (shareable URLs + bookmarkable), closing the last gap in the citation story.
 - Reader feedback introduces the first user-signal loop into the editorial pipeline (which AI drafts deserve scholarly review first).
 - Remaining candidates: admin feedback column (surface helpfulUp/Down in admin question list), claim-verdict print target id, home "My Library" strip, mobile nav library entry, real-device SW offline test, answer revision history UI.
+
+---
+Task ID: 11 (cron round — home library strip, mobile library entry, admin feedback triage, earlier-drafts collapse)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; complete the feedback loop and library surfaces from Task 10 — home My Library strip, mobile-menu library entry (store-driven dialog), admin feedback triage (vote tallies + triage sorts), earlier-drafts collapse on multi-draft answers.
+
+Work Log:
+- QA smoke: 12-view tour zero errors → feature round.
+- Store-driven library dialog: platform store gains libraryOpen/setLibraryOpen (setView closes it); LibraryDialog now reads store (single instance mounted in Navbar header); exported useLibrary() hook + LIBRARY_KIND_META (icon/chip/labelKey per kind) from library.tsx for reuse.
+- Mobile menu library entry: sheet nav gains "My Library" item (BookMarked icon, amber) → closes sheet + opens dialog via store. Same code path as navbar button.
+- Home My Library strip: section between verse + Continue Reading (amber-tinted bg, count pill), horizontally scrollable saved-item cards (kind chip + 2-line title + timeAgo · section label), View all → opens library dialog; cards deep-link via libraryRoute(). Renders only when non-empty. E2E (Urdu RTL dark): strip + count 3, سب دیکھیں opens dialog, card click → #/compare/{id}.
+- Admin feedback triage (closes the votes→editorial loop):
+  * /api/admin/resource GET: question entity now includes answers {id,status,revision,helpfulUp,helpfulDown,createdAt} + _count.answers; other entities unchanged.
+  * admin-editor: question entity flag feedback:true → toolbar Sort select (Newest / Most disputed / Most helpful — i18n sortLabel/sortNewest/sortDisputed/sortHelpful, reset on entity switch) + per-row triage badges (emerald ↑sum, rose ↓sum, muted answers-count, title tooltip). Sort applies after search filter (down desc then up; up desc then down).
+  * E2E: seeded test votes (3↑ tawassul, 2↓ raf-al-yadayn, 1↓ Ameen, 1↑ recitation) → badges render; disputed sort ranks 2↓→1↓→3↑; helpful sort ranks 3↑→1↑→0↑. (Test-methodology note: clicking a row's checkbox by ref selects it — refs land on the checkbox, not the row.)
+- Earlier-drafts collapse (qa.tsx): questions with >1 answers now show the latest AnswerCard prominent + a <details> "Earlier drafts ({n})" (chevron rotates via group-open, count pill) containing older revisions as full cards; single-answer questions unchanged. E2E: tawassul question (2 answers) → collapsed by default, expand → 2 Answer cards + 2 feedback rows.
+- i18n: 6 new keys ×3 (earlierDrafts {n}, viewAll, sortLabel, sortNewest, sortDisputed, sortHelpful).
+- Cleanup: seeded test votes reset to 0 (DB pristine); lint clean; full tour 0 errors; dev.log clean.
+
+Stage Summary:
+- The reader-feedback loop is now actionable end-to-end: users vote → editors sort by "Most disputed / Most helpful" → triage which AI drafts need scholarly review first.
+- My Library now has three entry points (navbar badge button, mobile menu, home strip) sharing one store-driven dialog — personal research continuity is a first-class surface.
+- Multi-draft answers present an editorial story (latest = authoritative, earlier = auditable history) instead of a confusing stack.
+- Remaining candidates: admin row click→edit, feedback trend widget on admin dashboard, library export (copy list as citations), real-device SW offline test, claim-verdict print target id.

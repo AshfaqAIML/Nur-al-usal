@@ -24,7 +24,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
 /** Shared subscription: re-read localStorage whenever anything toggles. */
-function useLibrarySync(): LibraryItem[] {
+export function useLibrary(): LibraryItem[] {
   const [items, setItems] = useState<LibraryItem[]>([]);
   const refresh = useCallback(() => setItems(loadLibrary()), []);
   useEffect(() => {
@@ -41,29 +41,26 @@ function useLibrarySync(): LibraryItem[] {
   return items;
 }
 
-const KIND_ICON: Record<LibraryKind, typeof CheckCircle2> = {
-  misconception: CheckCircle2,
-  objection: ScrollText,
-  comparison: GitCompare,
-  question: MessageSquareText,
-  claim: ScanSearch,
+/** Shared kind metadata for library UIs (dialog rows, home strip). */
+export const LIBRARY_KIND_META: Record<LibraryKind, { icon: typeof CheckCircle2; chip: string; labelKey: string }> = {
+  misconception: { icon: CheckCircle2, chip: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300", labelKey: "misconceptionsLabel" },
+  objection: { icon: ScrollText, chip: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300", labelKey: "objectionsLabel" },
+  comparison: { icon: GitCompare, chip: "bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300", labelKey: "comparisonsLabel" },
+  question: { icon: MessageSquareText, chip: "bg-stone-100 text-stone-700 dark:bg-stone-900 dark:text-stone-300", labelKey: "navQA" },
+  claim: { icon: ScanSearch, chip: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300", labelKey: "navClaims" },
 };
 
-const KIND_CHIP: Record<LibraryKind, string> = {
-  misconception: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
-  objection: "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
-  comparison: "bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300",
-  question: "bg-stone-100 text-stone-700 dark:bg-stone-900 dark:text-stone-300",
-  claim: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
-};
+const KIND_ICON = Object.fromEntries(
+  Object.entries(LIBRARY_KIND_META).map(([k, v]) => [k, v.icon]),
+) as Record<LibraryKind, typeof CheckCircle2>;
 
-const KIND_LABEL: Record<LibraryKind, string> = {
-  misconception: "misconceptionsLabel",
-  objection: "objectionsLabel",
-  comparison: "comparisonsLabel",
-  question: "navQA",
-  claim: "navClaims",
-};
+const KIND_CHIP = Object.fromEntries(
+  Object.entries(LIBRARY_KIND_META).map(([k, v]) => [k, v.chip]),
+) as Record<LibraryKind, string>;
+
+const KIND_LABEL = Object.fromEntries(
+  Object.entries(LIBRARY_KIND_META).map(([k, v]) => [k, v.labelKey]),
+) as Record<LibraryKind, string>;
 
 /* ─── Bookmark toggle button ─── */
 export function BookmarkButton({
@@ -137,18 +134,14 @@ export function BookmarkButton({
   );
 }
 
-/* ─── Personal reference shelf ─── */
-export function LibraryDialog({
-  open,
-  onOpenChange,
-}: {
-  open: boolean;
-  onOpenChange: (v: boolean) => void;
-}) {
+/* ─── Personal reference shelf (dialog state lives in the platform store) ─── */
+export function LibraryDialog() {
   const t = useT();
-  const { setView } = usePlatform();
+  const { setView, libraryOpen, setLibraryOpen } = usePlatform();
   const { toast } = useToast();
-  const items = useLibrarySync();
+  const items = useLibrary();
+  const open = libraryOpen;
+  const onOpenChange = setLibraryOpen;
 
   const openItem = (item: LibraryItem) => {
     const route = libraryRoute(item);
@@ -231,30 +224,27 @@ export function LibraryDialog({
 /* ─── Navbar trigger with saved-count badge ─── */
 export function LibraryNavButton() {
   const t = useT();
-  const [open, setOpen] = useState(false);
-  const items = useLibrarySync();
+  const { setLibraryOpen } = usePlatform();
+  const items = useLibrary();
 
   return (
-    <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="relative h-9 w-9"
-        aria-label={t("myLibrary")}
-        title={t("myLibrary")}
-        onClick={() => setOpen(true)}
-      >
-        <BookMarked className="h-4 w-4" aria-hidden />
-        {items.length > 0 && (
-          <span
-            className="absolute -end-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-emerald-700 px-1 text-[9px] font-bold tabular-nums text-white"
-            aria-hidden
-          >
-            {items.length > 9 ? "9+" : items.length}
-          </span>
-        )}
-      </Button>
-      <LibraryDialog open={open} onOpenChange={setOpen} />
-    </>
+    <Button
+      variant="ghost"
+      size="icon"
+      className="relative h-9 w-9"
+      aria-label={t("myLibrary")}
+      title={t("myLibrary")}
+      onClick={() => setLibraryOpen(true)}
+    >
+      <BookMarked className="h-4 w-4" aria-hidden />
+      {items.length > 0 && (
+        <span
+          className="absolute -end-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-emerald-700 px-1 text-[9px] font-bold tabular-nums text-white"
+          aria-hidden
+        >
+          {items.length > 9 ? "9+" : items.length}
+        </span>
+      )}
+    </Button>
   );
 }

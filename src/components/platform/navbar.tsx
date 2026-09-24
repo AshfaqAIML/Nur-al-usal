@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { BookOpenText, Command, Globe, Menu, Moon, Search, Sun, X } from "lucide-react";
+import { BookMarked, BookOpenText, Command, Globe, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,7 +14,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { usePlatform, useT, View } from "@/lib/store";
 import { LANGS } from "@/lib/i18n";
 import { apiGet, SearchHit } from "@/lib/api";
-import { LibraryNavButton } from "@/components/platform/library";
+import { LibraryNavButton, LibraryDialog } from "@/components/platform/library";
 import { cn } from "@/lib/utils";
 import { SOURCE_TYPE_META } from "@/lib/ai.client";
 
@@ -183,6 +183,13 @@ export function Navbar() {
                       {t(n.key)}
                     </button>
                   ))}
+                  <button
+                    onClick={() => { setMobileOpen(false); usePlatform.getState().setLibraryOpen(true); }}
+                    className="mt-1 flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-medium text-start hover:bg-accent"
+                  >
+                    <BookMarked className="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden />
+                    {t("myLibrary")}
+                  </button>
                 </nav>
               </SheetContent>
             </Sheet>
@@ -190,6 +197,7 @@ export function Navbar() {
         </div>
       </div>
       {searchOpen && <SearchDialog />}
+      <LibraryDialog />
     </header>
   );
 }

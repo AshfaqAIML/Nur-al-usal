@@ -11,9 +11,11 @@ interface PlatformState {
   param: string | null; // slug / id / query payload
   lang: Lang;
   searchOpen: boolean;
+  libraryOpen: boolean; // My Library dialog (navbar, mobile menu, home strip)
   setView: (v: View, param?: string | null) => void;
   setLang: (l: Lang) => void;
   setSearchOpen: (open: boolean) => void;
+  setLibraryOpen: (open: boolean) => void;
   hydrateFromHash: () => void;
 }
 
@@ -34,9 +36,10 @@ export const usePlatform = create<PlatformState>((set) => ({
   param: null,
   lang: "en",
   searchOpen: false,
+  libraryOpen: false,
   setView: (v, param = null) => {
     window.location.hash = param ? `#/${v}/${param}` : `#/${v}`;
-    set({ view: v, param, searchOpen: false });
+    set({ view: v, param, searchOpen: false, libraryOpen: false });
     window.scrollTo({ top: 0 });
   },
   setLang: (l) => {
@@ -46,6 +49,7 @@ export const usePlatform = create<PlatformState>((set) => ({
     try { localStorage.setItem("nur-lang", l); } catch { /* noop */ }
   },
   setSearchOpen: (open) => set({ searchOpen: open }),
+  setLibraryOpen: (open) => set({ libraryOpen: open }),
   hydrateFromHash: () => {
     const { view, param } = parseHash();
     set({ view, param });

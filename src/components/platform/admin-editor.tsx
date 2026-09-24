@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Pencil, Plus, Search, Trash2, Workflow } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, Plus, Search, ThumbsDown, ThumbsUp, Trash2, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +38,7 @@ const CLAIM_STATUS = ["PENDING", "REVIEWED", "PUBLISHED", "REJECTED"];
 const GRADINGS = ["SAHIH", "HASAN", "DAIF", "MAWQUF", "MARFU", "DISPUTED", "UNRATED"];
 const Q_LANGUAGES = ["EN", "UR", "AR"];
 
-const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldDef[]; titleKey: string; statusKey?: string; bulkStatus?: BulkStatus }[] = [
+const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldDef[]; titleKey: string; statusKey?: string; bulkStatus?: BulkStatus; feedback?: boolean }[] = [
   {
     value: "misconception", label: "Misconception", labelKey: "misconceptionsLabel", titleKey: "claim", statusKey: "verificationStatus",
     fields: [
@@ -97,6 +97,7 @@ const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldD
   {
     value: "question", label: "Question", labelKey: "questions", titleKey: "text", statusKey: "status",
     bulkStatus: { key: "status", options: QUESTION_STATUS },
+    feedback: true, // answers carry reader helpfulUp/Down tallies (triage loop)
     fields: [
       { key: "text", label: "Question text", type: "text", required: true },
       { key: "claim", label: "Claim within question", type: "text" },
@@ -173,6 +174,7 @@ export function EntityEditor() {
   const [bulkStatusValue, setBulkStatusValue] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [busy, setBusy] = useState(false);
+  const [sort, setSort] = useState<"newest" | "disputed" | "helpful">("newest");
 
   const load = useCallback(async () => {
     setRecords(null);
@@ -189,14 +191,33 @@ export function EntityEditor() {
   useEffect(() => { load(); }, [load]);
 
   // Reset selection when switching entities.
-  useEffect(() => { setSelected(new Set()); setBulkStatusValue(""); }, [entity]);
+  useEffect(() => { setSelected(new Set()); setBulkStatusValue(""); setSort("newest"); }, [entity]);
+
+  /** Summed reader-vote tallies across a question's answers. */
+  const voteSums = (r: Rec): { up: number; down: number; count: number } => {
+    const answers = (r.answers as { helpfulUp?: number; helpfulDown?: number }[] | undefined) ?? [];
+    return {
+      up: answers.reduce((s, a) => s + (a.helpfulUp ?? 0), 0),
+      down: answers.reduce((s, a) => s + (a.helpfulDown ?? 0), 0),
+      count: answers.length,
+    };
+  };
 
   const filtered = useMemo(() => {
     if (!records) return null;
     const needle = q.trim().toLowerCase();
-    if (!needle) return records;
-    return records.filter((r) => JSON.stringify(r).toLowerCase().includes(needle));
-  }, [records, q]);
+    const matched = needle
+      ? records.filter((r) => JSON.stringify(r).toLowerCase().includes(needle))
+      : records;
+    if (entity.feedback && sort !== "newest") {
+      const scored = [...matched].sort((a, b) => {
+        const va = voteSums(a), vb = voteSums(b);
+        return sort === "disputed" ? vb.down - va.down || vb.up - va.up : vb.up - va.up || vb.down - va.down;
+      });
+      return scored;
+    }
+    return matched;
+  }, [records, q, entity, sort]);
 
   const pageCount = Math.max(1, Math.ceil((filtered?.length ?? 0) / PAGE_SIZE));
   const safePage = Math.min(page, pageCount);
@@ -308,6 +329,18 @@ export function EntityEditor() {
               <Search className="absolute start-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
               <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("search") + "…"} className="h-9 w-40 ps-8 text-xs" />
             </div>
+            {entity.feedback && (
+              <Select value={sort} onValueChange={(v) => setSort(v as typeof sort)}>
+                <SelectTrigger className="h-9 w-40 text-xs" aria-label={t("sortLabel")}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="newest">{t("sortLabel")}: {t("sortNewest")}</SelectItem>
+                  <SelectItem value="disputed">{t("sortLabel")}: {t("sortDisputed")}</SelectItem>
+                  <SelectItem value="helpful">{t("sortLabel")}: {t("sortHelpful")}</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
             <Button size="sm" className="h-9 gap-1.5 bg-emerald-700 text-white hover:bg-emerald-800" onClick={() => setEditing({ mode: "create" })}>
               <Plus className="h-4 w-4" /> {t("createNew")}
             </Button>
@@ -403,6 +436,25 @@ export function EntityEditor() {
                       {String(r[entity.fields.find((f) => f.type === "textarea")?.key ?? ""] ?? "")}
                     </p>
                   </div>
+                  {entity.feedback && (() => {
+                    const v = voteSums(r);
+                    return (
+                      <span
+                        className="flex shrink-0 items-center gap-1"
+                        title={`${t("sortHelpful")}: ${v.up} · ${t("notHelpful")}: ${v.down}`}
+                      >
+                        <span className="inline-flex items-center gap-0.5 rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                          <ThumbsUp className="h-2.5 w-2.5" aria-hidden />{v.up}
+                        </span>
+                        <span className="inline-flex items-center gap-0.5 rounded-full border border-rose-200 bg-rose-50 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-rose-800 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-300">
+                          <ThumbsDown className="h-2.5 w-2.5" aria-hidden />{v.down}
+                        </span>
+                        <span className="inline-flex items-center rounded-full border bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-muted-foreground">
+                          {v.count}
+                        </span>
+                      </span>
+                    );
+                  })()}
                   {status && (
                     <Badge variant="outline" className="shrink-0 text-[9px]">{status.replaceAll("_", " ")}</Badge>
                   )}
