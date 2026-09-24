@@ -1,6 +1,27 @@
 import type { Metadata } from "next";
+import { Amiri, Noto_Naskh_Arabic, Noto_Nastaliq_Urdu } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+
+const amiri = Amiri({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-amiri",
+  display: "swap",
+});
+const naskh = Noto_Naskh_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "600"],
+  variable: "--font-naskh",
+  display: "swap",
+});
+const nastaliq = Noto_Nastaliq_Urdu({
+  subsets: ["arabic"],
+  weight: ["400", "600"],
+  variable: "--font-nastaliq",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Nur al-Usul — Hanafi Aqeedah, Fiqh & Misconception Research Platform",
@@ -18,10 +39,17 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html
+      lang="en"
+      dir="ltr"
+      suppressHydrationWarning
+      className={`${amiri.variable} ${naskh.variable} ${nastaliq.variable}`}
+    >
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col">
-        {children}
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

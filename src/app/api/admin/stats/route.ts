@@ -25,7 +25,10 @@ export async function GET() {
   const byStatus = await db.misconception.groupBy({ by: ["verificationStatus"], _count: { _all: true } });
   const recentQuestions = await db.question.findMany({
     take: 8, orderBy: { createdAt: "desc" },
-    include: { category: { select: { nameEn: true } } },
+    include: {
+      category: { select: { nameEn: true } },
+      answers: { select: { id: true, status: true, aiGenerated: true }, orderBy: { createdAt: "desc" } },
+    },
   });
   const recentClaims = await db.claimCheck.findMany({ take: 8, orderBy: { createdAt: "desc" } });
 

@@ -1,31 +1,66 @@
-'use client'
+"use client";
 
-export default function Home() {
+import { useEffect } from "react";
+import { usePlatform, View } from "@/lib/store";
+import { Navbar } from "@/components/platform/navbar";
+import { Footer } from "@/components/platform/footer";
+import { HomeView } from "@/components/platform/views/home";
+import { KnowledgeView } from "@/components/platform/views/knowledge";
+import { MisconceptionsView } from "@/components/platform/views/misconceptions";
+import { ClaimsView } from "@/components/platform/views/claims";
+import { ObjectionsView } from "@/components/platform/views/objections";
+import { ComparisonView } from "@/components/platform/views/comparison";
+import { SourcesView } from "@/components/platform/views/sources";
+import { QuranHadithView } from "@/components/platform/views/quran-hadith";
+import { SearchView } from "@/components/platform/views/search";
+import { AskView } from "@/components/platform/views/ask";
+import { QuestionsView } from "@/components/platform/views/qa";
+import { AdminView } from "@/components/platform/views/admin";
+
+function CurrentView() {
+  const view = usePlatform((s) => s.view);
+  const param = usePlatform((s) => s.param);
+
+  switch (view) {
+    case "knowledge": return <KnowledgeView slug={param} />;
+    case "misconceptions": return <MisconceptionsView slug={param} />;
+    case "claims": return <ClaimsView />;
+    case "objections": return <ObjectionsView />;
+    case "compare": return <ComparisonView />;
+    case "sources": return <SourcesView param={param} />;
+    case "quran": return <QuranHadithView />;
+    case "search": return <SearchView param={param} />;
+    case "ask": return <AskView />;
+    case "qa": return <QuestionsView id={param} />;
+    case "admin": return <AdminView />;
+    case "home":
+    default: return <HomeView />;
+  }
+}
+
+export default function Page() {
+  const hydrateFromHash = usePlatform((s) => s.hydrateFromHash);
+
+  useEffect(() => {
+    hydrateFromHash();
+    const onHash = () => hydrateFromHash();
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, [hydrateFromHash]);
+
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '100vh',
-      gap: '2rem',
-      padding: '1rem'
-    }}>
-      <div style={{
-        position: 'relative',
-        width: '6rem',
-        height: '6rem'
-      }}>
-        <img
-          src="/logo.svg"
-          alt="Z.ai Logo"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain'
-          }}
-        />
-      </div>
+    <div className="flex min-h-screen flex-col">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-emerald-700 focus:px-3 focus:py-2 focus:text-sm focus:text-white"
+      >
+        Skip to main content
+      </a>
+      <Navbar />
+      <main id="main-content" className="flex-1">
+        <CurrentView />
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }

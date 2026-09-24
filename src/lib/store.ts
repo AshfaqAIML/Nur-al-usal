@@ -21,7 +21,10 @@ function parseHash(): { view: View; param: string | null } {
   const raw = window.location.hash.replace(/^#\/?/, "");
   if (!raw) return { view: "home", param: null };
   const [v, ...rest] = raw.split("/");
-  const param = rest.join("/") || null;
+  let param = rest.join("/") || null;
+  if (param) {
+    try { param = decodeURIComponent(param); } catch { /* keep raw if malformed */ }
+  }
   const known: View[] = ["home", "knowledge", "misconceptions", "claims", "objections", "compare", "sources", "quran", "search", "ask", "qa", "admin"];
   return { view: (known.includes(v as View) ? v : "home") as View, param };
 }

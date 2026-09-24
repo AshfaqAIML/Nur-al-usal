@@ -122,16 +122,15 @@
 }
 
 /* ─── Nur al-Usul scholarly theme extensions ─── */
-@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap");
 
 .font-arabic {
-  font-family: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", "Scheherazade New", serif;
+  font-family: var(--font-amiri), "Amiri", "Noto Naskh Arabic", "Traditional Arabic", "Scheherazade New", var(--font-naskh), serif;
   direction: rtl;
   line-height: 2;
   letter-spacing: 0;
 }
 .font-urdu {
-  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Amiri", serif;
+  font-family: var(--font-nastaliq), "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Amiri", serif;
   direction: rtl;
   line-height: 2.3;
   letter-spacing: 0;
@@ -139,7 +138,7 @@
 
 /* Scholarly serif display for headings */
 .font-scholarly {
-  font-family: Georgia, "Times New Roman", "Amiri", serif;
+  font-family: Georgia, "Times New Roman", var(--font-amiri), "Amiri", serif;
 }
 
 /* Custom scrollbar */

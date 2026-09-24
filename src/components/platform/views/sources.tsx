@@ -27,15 +27,19 @@ export function SourcesView({ param }: { param?: string | null }) {
 
   // Deep links: book/slug or scholar/slug
   useEffect(() => {
-    if (!param) { setBook(null); setScholar(null); return; }
-    const [kind, slug] = param.split("/");
-    if (kind === "book" && slug) {
-      apiGet<{ book: Book }>(`/api/books?slug=${encodeURIComponent(slug)}`).then((d) => setBook(d.book)).catch(() => setBook(null));
-    } else if (kind === "scholar" && slug) {
-      apiGet<{ scholar: Scholar }>(`/api/scholars?slug=${encodeURIComponent(slug)}`).then((d) => setScholar(d.scholar)).catch(() => setScholar(null));
-    } else if (kind === "fatwa") {
-      setTab("fatwas");
-    }
+    let cancelled = false;
+    (async () => {
+      if (!param) { if (!cancelled) { setBook(null); setScholar(null); } return; }
+      const [kind, slug] = param.split("/");
+      if (kind === "book" && slug) {
+        await apiGet<{ book: Book }>(`/api/books?slug=${encodeURIComponent(slug)}`).then((d) => { if (!cancelled) setBook(d.book); }).catch(() => { if (!cancelled) setBook(null); });
+      } else if (kind === "scholar" && slug) {
+        await apiGet<{ scholar: Scholar }>(`/api/scholars?slug=${encodeURIComponent(slug)}`).then((d) => { if (!cancelled) setScholar(d.scholar); }).catch(() => { if (!cancelled) setScholar(null); });
+      } else if (kind === "fatwa") {
+        if (!cancelled) setTab("fatwas");
+      }
+    })();
+    return () => { cancelled = true; };
   }, [param]);
 
   useEffect(() => {

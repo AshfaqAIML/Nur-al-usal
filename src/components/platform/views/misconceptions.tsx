@@ -25,10 +25,15 @@ export function MisconceptionsView({ slug }: { slug?: string | null }) {
   }, [statusFilter]);
 
   useEffect(() => {
-    if (!slug) { setDetail(null); return; }
-    apiGet<{ misconception: Misconception }>(`/api/misconceptions?slug=${encodeURIComponent(slug)}`)
-      .then((d) => setDetail(d.misconception))
-      .catch(() => setDetail(null));
+    let cancelled = false;
+    (async () => {
+      if (!slug) { if (!cancelled) setDetail(null); return; }
+      try {
+        const d = await apiGet<{ misconception: Misconception }>(`/api/misconceptions?slug=${encodeURIComponent(slug)}`);
+        if (!cancelled) setDetail(d.misconception);
+      } catch { if (!cancelled) setDetail(null); }
+    })();
+    return () => { cancelled = true; };
   }, [slug]);
 
   // ─── Detail ───

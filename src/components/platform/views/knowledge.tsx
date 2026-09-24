@@ -32,12 +32,17 @@ export function KnowledgeView({ slug }: { slug?: string | null }) {
   }, []);
 
   useEffect(() => {
-    if (!slug) { setTopic(null); return; }
-    setLoading(true);
-    apiGet<{ topic: TopicDetail }>(`/api/topics?slug=${encodeURIComponent(slug)}`)
-      .then((d) => setTopic(d.topic))
-      .catch(() => setTopic(null))
-      .finally(() => setLoading(false));
+    let cancelled = false;
+    (async () => {
+      if (!slug) { if (!cancelled) setTopic(null); return; }
+      if (!cancelled) setLoading(true);
+      try {
+        const d = await apiGet<{ topic: TopicDetail }>(`/api/topics?slug=${encodeURIComponent(slug)}`);
+        if (!cancelled) setTopic(d.topic);
+      } catch { if (!cancelled) setTopic(null); }
+      finally { if (!cancelled) setLoading(false); }
+    })();
+    return () => { cancelled = true; };
   }, [slug]);
 
   // ─── Topic detail ───
