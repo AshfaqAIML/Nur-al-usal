@@ -15,7 +15,10 @@ import { apiGet, apiPost, ClaimRecord } from "@/lib/api";
 import { ClassificationBadge } from "@/components/platform/badges";
 import { OrnamentDivider } from "@/components/platform/detail-chrome";
 import { LiveStreamPanel, parseSseFrame, StreamStage } from "@/components/platform/views/qa";
+import { ShareBar } from "@/components/platform/share-bar";
+import { BookmarkButton } from "@/components/platform/library";
 import { parseJson } from "@/lib/api";
+import { useDocTitle } from "@/lib/use-doc-title";
 import { cn } from "@/lib/utils";
 
 interface ClaimResult extends ClaimRecord {
@@ -64,7 +67,7 @@ function VerdictIcon({ classification }: { classification: string }) {
   return <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden />;
 }
 
-export function ClaimsView() {
+export function ClaimsView({ id }: { id?: string | null }) {
   const t = useT();
   const { toast } = useToast();
   const { setView } = usePlatform();
@@ -87,6 +90,18 @@ export function ClaimsView() {
 
   const loadRecent = () => apiGet<{ claims: ClaimRecord[] }>("/api/claims?take=8").then((d) => setRecent(d.claims)).catch(() => setRecent([]));
   useEffect(() => { loadRecent(); }, []);
+
+  useDocTitle(result?.claim ? `“${result.claim.slice(0, 64)}…”` : t("navClaims"));
+
+  // Deep link (#/claims/{id}) — restore a previously saved verdict.
+  useEffect(() => {
+    if (!id) return;
+    let cancelled = false;
+    apiGet<{ claim: ClaimRecord }>(`/api/claims?id=${encodeURIComponent(id)}`)
+      .then((d) => { if (!cancelled) setResult({ ...d.claim }); })
+      .catch(() => { if (!cancelled) toast({ title: "Saved verdict not found.", variant: "destructive" }); });
+    return () => { cancelled = true; };
+  }, [id]);
 
   /** Streaming verification: watch the engine retrieve, analyze, and cite live. */
   async function submit() {
@@ -417,6 +432,10 @@ export function ClaimsView() {
               {evidencePayload.disagreement && (
                 <p className="mt-3 text-xs text-muted-foreground"><strong>{t("disputed")}:</strong> {evidencePayload.disagreement}</p>
               )}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t pt-3">
+                <BookmarkButton kind="claim" keyId={result.id} title={result.claim} withLabel />
+                <ShareBar title={result.claim} section={t("navClaims")} compact />
+              </div>
             </CardContent>
           </Card>
 
@@ -474,7 +493,7 @@ export function ClaimsView() {
           <h2 className="font-scholarly text-lg font-bold">{t("recentClaims")}</h2>
           <div className="mt-3 space-y-2">
             {recent.map((r) => (
-              <button key={r.id} onClick={() => { setResult({ ...r }); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex w-full items-center justify-between gap-3 rounded-lg border bg-card px-4 py-2.5 text-start transition-colors hover:border-emerald-300 hover:bg-accent/50">
+              <button key={r.id} onClick={() => setView("claims", r.id)} className="flex w-full items-center justify-between gap-3 rounded-lg border bg-card px-4 py-2.5 text-start transition-colors hover:border-emerald-300 hover:bg-accent/50">
                 <span className="truncate text-xs">“{r.claim}”</span>
                 <ClassificationBadge status={r.classification} />
               </button>

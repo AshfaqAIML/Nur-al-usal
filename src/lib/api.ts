@@ -112,6 +112,7 @@ export interface Answer {
   otherViews: string | null; commonObjection: string | null; scholarlyResponse: string | null;
   disputed: string | null; misconceptionNote: string | null; practicalInfo: string | null;
   sources: string | null; status: string; aiGenerated: boolean; createdAt: string;
+  helpfulUp: number; helpfulDown: number;
 }
 export interface ClaimRecord {
   id: string; claim: string; classification: string; explanation: string;

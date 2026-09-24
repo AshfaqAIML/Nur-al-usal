@@ -213,3 +213,32 @@ Stage Summary:
 - Claim-check verdicts keep the anti-hallucination guarantee end-to-end (no evidence → explicit disclaimer, no invented citations).
 - Research triangle fully bidirectional on detail pages.
 - Remaining candidates: admin attachment display, claim-check verdict share/citation (ShareBar), question attach-image storage, real-device SW offline test, answer revision history UI.
+
+---
+Task ID: 10 (cron round — My Library bookmarks, claim deep-links, answer feedback votes)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; add personal bookmark library (flagship), verdict deep-links (#/claims/{id}), reader feedback votes on answers, ShareBar completion (claims + comparison cards); styling details.
+
+Work Log:
+- QA smoke first: 12-view tour + detail flows — zero runtime errors, dev.log clean, platform stable → feature round.
+- My Library (flagship):
+  * src/lib/bookmarks.ts: localStorage store (nur-library-v1, cap 40) for 5 kinds — misconception(slug)/objection(id)/comparison(id)/question(id)/claim(id); toggle/remove/clear + CustomEvent sync (LIBRARY_EVENT) + libraryRoute() mapping to setView targets.
+  * src/components/platform/library.tsx: BookmarkButton (icon + withLabel variants, amber filled BookmarkCheck when saved, aria-pressed, active:scale-90 pop, toast) + LibraryDialog (count pill, per-item kind-icon chips emerald/amber/teal/stone, title 2-line clamp, timeAgo · section label, hover-reveal per-item Remove, footer Clear all, empty state with hint) + LibraryNavButton (navbar icon with emerald count badge, 9+ overflow).
+  * Placement: misconception detail footer, objection detail footer, AnswerCard footer (kind=question, title=question.text), all 7 comparison cards, claim verdict card. Navbar: LibraryNavButton between search and language. i18n: 17 new keys ×3 (myLibrary, libraryHint/Empty/EmptyHint/Count/Cleared, saveToLibrary, savedInLibrary, savedToLibrary, removedFromLibrary, removeFromLibrary, clearLibrary, saved, feedbackLabel, helpful, notHelpful, thanksFeedback).
+  * E2E: save from misconception detail → toast + filled icon → navbar badge 1 → dialog lists "just now · Misconceptions" → click-through deep-links + closes → badge/Urdu "میری لائبریری 3 محفوظ" RTL + dark mode verified via screenshots.
+- Claim verdict deep-links: GET /api/claims now supports ?id= (404 JSON when missing); page.tsx routes param → ClaimsView({id}); view fetches saved verdict on mount (cancelled-flag effect) + useDocTitle from verdict claim; recent-claims rows now deep-link via setView("claims", id) instead of ephemeral inline render. Verdict card gains action row: BookmarkButton(kind=claim, withLabel) + compact ShareBar. E2E: recent row click → #/claims/{id} → verdict restored from server → hard reload re-restores; bookmark survives reload.
+- Reader feedback votes on answers:
+  * Schema: Answer.helpfulUp/helpfulDown Int @default(0) → db:push.
+  * DATA BUG found: SQLite ALTER TABLE left NULLs on existing rows (default not backfilled) → one lost vote + missing keys until dev-server restart reloaded the Prisma client; fixed via prisma db execute backfill UPDATE ... WHERE IS NULL (and final cleanup reset to 0).
+  * NEW /api/answers/feedback POST {answerId, vote} → atomic increment, rate-limited feedback 20/min, 400/404 validation.
+  * src/lib/answer-votes.ts: localStorage one-vote-per-answer (nur-answer-votes-v1); qa.tsx FeedbackRow: optimistic update + server reconcile + rollback on failure, same-vote guard, tabular-nums counts, emerald/rose active states, active:scale-90; AnswerCard footer now feedback | bookmark+share split row; Answer type extended.
+  * E2E: UI click → server 1 (curl-verified), vote switch up→down persists, fresh load renders server counts (learned: same-hash "open" doesn't refetch SPA data — test via about:blank first).
+- ShareBar completion: new compact prop (drops Print for card placement) + pathOverride prop (citation/link target) → all 7 comparison cards get BookmarkButton + compact ShareBar citing #/compare/{id}; claim verdict gets compact bar. E2E: 7 bookmarks + 7 Copy Citation + 0 Print on compare view.
+- Styling details: amber save-state with fill-current icon + scale pop; vote pills with aria-pressed; library dialog count pill (tabular-nums); hover-reveal destructive remove; navbar badge 9+ clamp; consistent border-t action footers across all 5 surfaces.
+- Cleanup: test votes reset to 0 (DB back to pre-session state); bookmarks live client-side only (headless profile, harmless). lint clean; full 12-view tour 0 errors.
+
+Stage Summary:
+- Every research surface is now both CITABLE and KEEPABLE: cite/print/share existed; My Library adds persistent personal collection across 5 content kinds with one-tap return.
+- Verdicts became first-class deep-linkable records (shareable URLs + bookmarkable), closing the last gap in the citation story.
+- Reader feedback introduces the first user-signal loop into the editorial pipeline (which AI drafts deserve scholarly review first).
+- Remaining candidates: admin feedback column (surface helpfulUp/Down in admin question list), claim-verdict print target id, home "My Library" strip, mobile nav library entry, real-device SW offline test, answer revision history UI.

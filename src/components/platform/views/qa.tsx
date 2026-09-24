@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BookOpenCheck, Check, ChevronRight, Eye, Loader2, Radio, Search, Sparkles } from "lucide-react";
+import { BookOpenCheck, Check, ChevronRight, Eye, Loader2, Radio, Search, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,11 +9,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { usePlatform, useT } from "@/lib/store";
-import { apiGet, Answer, parseJson, Question } from "@/lib/api";
+import { apiGet, apiPost, Answer, parseJson, Question } from "@/lib/api";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
+import { BookmarkButton } from "@/components/platform/library";
 import { FiqhAqeedahBadge } from "@/components/platform/badges";
 import { EvidenceList, ScholarlyCard } from "@/components/platform/text";
+import { getVote, setVote, AnswerVote } from "@/lib/answer-votes";
 import { cn } from "@/lib/utils";
 
 const STATUS_LABELS: Record<string, string> = {
@@ -164,7 +166,7 @@ export function QuestionsView({ id }: { id?: string | null }) {
               </CardContent>
             </Card>
 
-            {answers.map((a) => <AnswerCard key={a.id} answer={a} />)}
+            {answers.map((a) => <AnswerCard key={a.id} answer={a} questionTitle={question.text} />)}
 
             {stage !== "idle" && (
               <LiveStreamPanel stage={stage} text={streamText} />
@@ -383,7 +385,76 @@ export function LiveStreamPanel({
   );
 }
 
-export function AnswerCard({ answer }: { answer: Answer }) {
+/** Helpful / not-helpful voting — one vote per browser per answer. */
+export function FeedbackRow({ answerId, up, down }: { answerId: string; up: number; down: number }) {
+  const t = useT();
+  const { toast } = useToast();
+  const [mine, setMine] = useState<AnswerVote | null>(null);
+  const [counts, setCounts] = useState({ up, down });
+  const [pending, setPending] = useState(false);
+
+  useEffect(() => {
+    setMine(getVote(answerId));
+    setCounts({ up, down });
+  }, [answerId, up, down]);
+
+  const vote = async (v: Exclude<AnswerVote, null>) => {
+    if (pending || mine === v) return;
+    setPending(true);
+    const next = { up: counts.up + (v === "up" ? 1 : 0), down: counts.down + (v === "down" ? 1 : 0) };
+    setCounts(next); // optimistic
+    setVote(answerId, v);
+    setMine(v);
+    try {
+      const res = await apiPost<{ helpfulUp: number; helpfulDown: number }>("/api/answers/feedback", { answerId, vote: v });
+      setCounts({ up: res.helpfulUp, down: res.helpfulDown });
+      if (v === "up") toast({ title: t("thanksFeedback") });
+    } catch {
+      setCounts({ up, down }); // rollback on failure
+      setMine(getVote(answerId));
+    } finally {
+      setPending(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-1.5" role="group" aria-label={t("feedbackLabel")}>
+      <span className="me-1 hidden text-[11px] font-medium text-muted-foreground sm:inline">{t("helpful")}?</span>
+      <button
+        onClick={() => vote("up")}
+        disabled={pending}
+        aria-pressed={mine === "up"}
+        aria-label={t("helpful")}
+        title={t("helpful")}
+        className={cn(
+          "flex h-7 items-center gap-1 rounded-full border px-2.5 text-[11px] font-medium tabular-nums transition-all active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600",
+          mine === "up"
+            ? "border-emerald-500 bg-emerald-50 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
+            : "border-border text-muted-foreground hover:border-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300"
+        )}
+      >
+        <ThumbsUp className="h-3 w-3" aria-hidden /> {counts.up}
+      </button>
+      <button
+        onClick={() => vote("down")}
+        disabled={pending}
+        aria-pressed={mine === "down"}
+        aria-label={t("notHelpful")}
+        title={t("notHelpful")}
+        className={cn(
+          "flex h-7 items-center gap-1 rounded-full border px-2.5 text-[11px] font-medium tabular-nums transition-all active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600",
+          mine === "down"
+            ? "border-rose-400 bg-rose-50 text-rose-800 dark:border-rose-800 dark:bg-rose-950 dark:text-rose-300"
+            : "border-border text-muted-foreground hover:border-rose-400 hover:text-rose-700 dark:hover:text-rose-300"
+        )}
+      >
+        <ThumbsDown className="h-3 w-3" aria-hidden /> {counts.down}
+      </button>
+    </div>
+  );
+}
+
+export function AnswerCard({ answer, questionTitle }: { answer: Answer; questionTitle?: string }) {
   const t = useT();
   return (
     <ScholarlyCard
@@ -489,12 +560,20 @@ export function AnswerCard({ answer }: { answer: Answer }) {
           </section>
         )}
 
-        <div className="border-t pt-3">
-          <ShareBar
-            title={answer.directAnswer.length > 80 ? answer.directAnswer.slice(0, 80) + "…" : answer.directAnswer}
-            section={t("navQA")}
-            printTargetId="answer-card"
-          />
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-3">
+          <FeedbackRow answerId={answer.id} up={answer.helpfulUp} down={answer.helpfulDown} />
+          <div className="flex flex-wrap items-center gap-2">
+            <BookmarkButton
+              kind="question"
+              keyId={answer.questionId}
+              title={questionTitle ?? (answer.directAnswer.length > 80 ? answer.directAnswer.slice(0, 80) + "…" : answer.directAnswer)}
+            />
+            <ShareBar
+              title={answer.directAnswer.length > 80 ? answer.directAnswer.slice(0, 80) + "…" : answer.directAnswer}
+              section={t("navQA")}
+              printTargetId="answer-card"
+            />
+          </div>
         </div>
       </div>
     </ScholarlyCard>

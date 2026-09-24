@@ -12,6 +12,7 @@ import { apiGet, Objection, parseJson } from "@/lib/api";
 import { pushReadingItem } from "@/lib/reading-history";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
+import { BookmarkButton } from "@/components/platform/library";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
 import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
 import { RelatedResearch, RelatedMisconception, RelatedObjection, RelatedComparison } from "@/components/platform/related-research";
@@ -152,7 +153,8 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
               </button>
             )}
 
-            <div className="mt-6 border-t pt-4">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t pt-4">
+              <BookmarkButton kind="objection" keyId={detail.id} title={detail.question} />
               <ShareBar title={detail.question} section={t("objectionsTitle")} printTargetId="objection-article" />
             </div>
           </CardContent>

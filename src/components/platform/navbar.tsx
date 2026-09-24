@@ -14,6 +14,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { usePlatform, useT, View } from "@/lib/store";
 import { LANGS } from "@/lib/i18n";
 import { apiGet, SearchHit } from "@/lib/api";
+import { LibraryNavButton } from "@/components/platform/library";
 import { cn } from "@/lib/utils";
 import { SOURCE_TYPE_META } from "@/lib/ai.client";
 
@@ -105,6 +106,8 @@ export function Navbar() {
                 <Command className="h-3 w-3 me-0.5" />K
               </kbd>
             </Button>
+
+            <LibraryNavButton />
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

@@ -5,6 +5,13 @@ import { retrieveEvidence } from "@/lib/retrieval";
 import { rateLimitByIp, tooMany } from "@/lib/rate-limit";
 
 export async function GET(req: NextRequest) {
+  // ?id= → single record (deep links: #/claims/{id}, bookmarks, shared verdicts)
+  const id = req.nextUrl.searchParams.get("id");
+  if (id) {
+    const claim = await db.claimCheck.findUnique({ where: { id } });
+    if (!claim) return NextResponse.json({ error: "Claim check not found." }, { status: 404 });
+    return NextResponse.json({ claim });
+  }
   const take = Math.min(parseInt(req.nextUrl.searchParams.get("take") ?? "12"), 50);
   const claims = await db.claimCheck.findMany({ orderBy: { createdAt: "desc" }, take });
   return NextResponse.json({ claims });

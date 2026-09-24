@@ -8,6 +8,8 @@ import { useT } from "@/lib/store";
 import { apiGet, Comparison } from "@/lib/api";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ComparisonTable } from "@/components/platform/views/knowledge";
+import { ShareBar } from "@/components/platform/share-bar";
+import { BookmarkButton } from "@/components/platform/library";
 import { cn } from "@/lib/utils";
 
 export function ComparisonView({ focusId }: { focusId?: string | null }) {
@@ -56,11 +58,19 @@ export function ComparisonView({ focusId }: { focusId?: string | null }) {
             <div key={c.id} ref={isFocus ? focusRef : undefined} className={cn("rounded-xl ring-emerald-600/60 transition-shadow duration-700", isFocus && flash && "ring-4")}>
               <Card className={cn("border-border/70", isFocus && "border-emerald-400 dark:border-emerald-700")}>
                 <CardContent className="p-6">
-                  {isFocus && (
-                    <p className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-                      {t("focusedComparison")}
-                    </p>
-                  )}
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                    {isFocus ? (
+                      <p className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+                        {t("focusedComparison")}
+                      </p>
+                    ) : (
+                      <span />
+                    )}
+                    <div className="flex items-center gap-2">
+                      <BookmarkButton kind="comparison" keyId={c.id} title={c.issue} />
+                      <ShareBar title={c.issue} section={t("comparisonsLabel")} compact pathOverride={`/compare/${c.id}`} />
+                    </div>
+                  </div>
                   <ComparisonTable comparison={c} />
                 </CardContent>
               </Card>

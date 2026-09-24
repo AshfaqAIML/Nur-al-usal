@@ -11,6 +11,7 @@ import { apiGet, Misconception } from "@/lib/api";
 import { pushReadingItem } from "@/lib/reading-history";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
+import { BookmarkButton } from "@/components/platform/library";
 import { ClassificationBadge, VerificationBadge } from "@/components/platform/badges";
 import { EvidenceList, SectionFlow, UrduText } from "@/components/platform/text";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
@@ -208,7 +209,10 @@ function MisconceptionDetail({
             <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
               <Eye className="h-3.5 w-3.5" aria-hidden /> {detail.views} {t("views")}
             </span>
-            <ShareBar title={detail.claim} section={t("misconceptionsLabel")} printTargetId="misconception-article" />
+            <div className="flex flex-wrap items-center gap-2">
+              <BookmarkButton kind="misconception" keyId={detail.slug} title={detail.claim} />
+              <ShareBar title={detail.claim} section={t("misconceptionsLabel")} printTargetId="misconception-article" />
+            </div>
           </div>
           </article>
 

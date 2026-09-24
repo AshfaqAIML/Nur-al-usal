@@ -374,6 +374,8 @@ model Answer {
   status            String     @default("AI_ASSISTED")
   revision          Int        @default(1)
   aiGenerated       Boolean    @default(true)
+  helpfulUp         Int        @default(0) // reader feedback: found this answer useful
+  helpfulDown       Int        @default(0) // reader feedback: needs improvement / unclear
   userId            String?
   user              User?      @relation(fields: [userId], references: [id])
   citations         Citation[]
