@@ -13,6 +13,7 @@ import { apiGet, Book, Fatwa, Scholar } from "@/lib/api";
 import { SourceClassBadge, VerificationBadge } from "@/components/platform/badges";
 import { ScholarlyCard, UrduText } from "@/components/platform/text";
 import { coverClass } from "@/components/platform/views/home";
+import { BookSpine } from "@/components/platform/architectural";
 import { cn } from "@/lib/utils";
 
 export function SourcesView({ param }: { param?: string | null }) {
@@ -65,14 +66,19 @@ export function SourcesView({ param }: { param?: string | null }) {
           <TabsTrigger value="fatwas" className="gap-1.5 text-xs"><ScrollText className="h-3.5 w-3.5" /> {t("fatwas")}</TabsTrigger>
         </TabsList>
 
-        {/* ─── BOOKS ─── */}
+        {/* ─── BOOKS — library catalog entries ─── */}
         <TabsContent value="books" className="mt-5">
           {!books && <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[...Array(8)].map((_, i) => <Skeleton key={i} className="h-56 rounded-xl" />)}</div>}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {(books ?? []).map((b) => (
-              <Card key={b.id} className="cursor-pointer border-border/70 transition-shadow hover:shadow-md" onClick={() => setView("sources", `book/${b.slug}`)}>
-                <CardContent className="p-4">
-                  <div className={cn("flex h-28 items-center justify-center rounded-lg border", coverClass(b.coverColor))}>
+              <Card
+                key={b.id}
+                className="card-lift relative cursor-pointer overflow-hidden border-border/70"
+                onClick={() => setView("sources", `book/${b.slug}`)}
+              >
+                <BookSpine />
+                <CardContent className="p-4 ps-5">
+                  <div className={cn("flex h-28 items-center justify-center rounded-lg border pattern-weave", coverClass(b.coverColor))}>
                     <span className="font-arabic px-3 text-center text-lg leading-snug" dir="rtl">{b.titleAr ?? b.titleEn}</span>
                   </div>
                   <h3 className="mt-3 line-clamp-2 text-sm font-semibold leading-snug">{b.titleEn}</h3>

@@ -292,3 +292,34 @@ Stage Summary:
 - My Library becomes a portable research output: saved items export as formatted scholarly citations (clipboard or .txt file) with deep-linkable paths — the citation-first story now extends to the personal collection.
 - Admin editor is fully localized + faster: one click on any row opens the edit form (keyboard accessible), and the dashboard gains a ranked reader-feedback visualization (up/down split bars) that makes triage decisions instant.
 - Remaining candidates: real-device SW offline test, claim-verdict print target id, question attach-image storage, admin dashboard trend sparkline over time (needs timestamped data), library sort/search for large collections.
+
+---
+Task ID: 13 (design round — Islamic architectural visual identity system)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: User design brief — transform the visual identity toward Islamic architectural aesthetics (mosque/madrasa/khanqah/library): design tokens, geometric patterns, arch geometry, script-aware typography, manuscript panels, courtyard hero, muqarnas footer. 70% usability / 20% character / 10% ornament.
+
+Work Log:
+- DESIGN TOKENS (globals.css, full palette overhaul):
+  * Light = "illuminated manuscript + marble interior": warm ivory background (oklch 0.972 h90), elevated paper cards, ink-charcoal foreground, aged-stone borders, limestone secondary surfaces. No more sterile pure white.
+  * Dark = "quiet mosque at night": deep charcoal w/ green-stone warmth (0.172 h160), warm parchment foreground (not pure white), candlelight borders (93/12% alpha), raised stone-ledge cards.
+  * --primary now emerald-800 (light) / illuminated emerald (dark) → default shadcn buttons platform-wide align with the architectural accent.
+  * NEW tokens: --brass/--brass-soft (antique gold, ornaments only), --elevation-subtle/--elevation-elevated (warm stone shadows) registered to Tailwind as shadow-subtle/shadow-elevated utilities + color-brass.
+  * --radius 0.625→0.5rem (more structured geometry per brief).
+- PATTERNS (all inline SVG data-URIs, zero network cost, very low contrast): .pattern-girih (khatam interlocking 8-point stars, hero/featured), .pattern-weave (diagonal stone lattice, stat band/book covers), .muqarnas-edge (repeating arcade niche arcs, footer crown).
+- ARCH GEOMETRY: .arch-top (soft dome-top silhouette for featured panels), .arch-mihrab (inset brass arch outline drawn behind hero badge — mihrab niche framing).
+- DIVIDERS: .geometric-divider (brass rules + rotated-square diamond) + GeometricDivider/SectionHeading components (src/components/platform/architectural.tsx) replacing plain h2s on home; ornament-divider kept as brass-toned legacy alias.
+- TYPOGRAPHY: layout.tsx adds Cormorant Garamond (500/600/700, --font-display) → .font-scholarly is now a genuine Ottoman-elegant display serif (was Georgia). Script-aware rhythm: html[lang=ur] body line-height 1.85 + headings 1.9 (Nastaliq needs vertical room), html[lang=ar] 1.75, text-wrap pretty on paragraphs.
+- COMPONENT WORK:
+  * Hero recomposed as a courtyard entrance: girih lattice bg, mihrab-arched badge, display-serif title (emerald-950/50), geometric divider under title, buttons w/ subtle hover-lift (-translate-y-0.5) + shadow-subtle.
+  * Verse of the Visit → illuminated manuscript panel: arch-top dome silhouette, brass 8-point star corner ornament, geometric divider label.
+  * Footer = "closing courtyard": muqarnas arcade edge crowning the wall, identity block, knowledge-category nav (2-col, brass underline hovers) with divider heading, policies + language line, all RTL-aware.
+  * NEW architectural.tsx primitives: GeometricDivider, SectionHeading (divider under every home section), ManuscriptPanel (framed quotation block w/ mirrored khatam corners), BookSpine (brass vertical spine rule).
+  * Book cards → library catalog entries: BookSpine accent + weave-textured covers + card-lift.
+  * Stats strip → stone band with weave texture.
+- ITERATIVE VERIFICATION (per brief cycle): screenshots at each step — EN/UR/AR × light/dark × desktop/mobile(390px): home, sources, misconception detail, admin, search dialog, footer. Zero console errors across 14-view tour; lint clean. (Fast Refresh full-reload warnings in dev.log are from hot edits, not app errors.)
+- Key insight documented: agent-browser open to a different hash on the same page does NOT reload (SPA) — theme/lang changes need about:blank hop for full reload.
+
+Stage Summary:
+- The platform now has a real architectural design system: warm ivory/parchment + charcoal-indigo-green tokens, khatam/girih textures as quiet background language, brass ornamentation reserved for dividers/frames, dome + mihrab arch silhouettes on featured panels, muqarnas footer edge, and a proper scholarly display serif — while all 12 views remain fully functional, accessible and RTL-correct.
+- Reusable primitives (architectural.tsx + CSS utilities) make the next per-view passes mechanical.
+- Remaining candidates for next design rounds: source viewer manuscript environment (book detail tabs), QA question cards with niche shapes, mega-menu nav, 404/error/loading/empty state polish, login surface (if auth added), deeper per-view pattern placement, print-style refresh.

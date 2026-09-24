@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Amiri, Noto_Naskh_Arabic, Noto_Nastaliq_Urdu } from "next/font/google";
+import { Amiri, Cormorant_Garamond, Noto_Naskh_Arabic, Noto_Nastaliq_Urdu } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
@@ -8,6 +8,12 @@ const amiri = Amiri({
   subsets: ["arabic"],
   weight: ["400", "700"],
   variable: "--font-amiri",
+  display: "swap",
+});
+const display = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
   display: "swap",
 });
 const naskh = Noto_Naskh_Arabic({
@@ -58,7 +64,7 @@ export default function RootLayout({
       lang="en"
       dir="ltr"
       suppressHydrationWarning
-      className={`${amiri.variable} ${naskh.variable} ${nastaliq.variable}`}
+      className={`${amiri.variable} ${naskh.variable} ${nastaliq.variable} ${display.variable}`}
     >
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

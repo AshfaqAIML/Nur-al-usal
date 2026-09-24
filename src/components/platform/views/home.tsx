@@ -13,6 +13,7 @@ import { UrduText } from "@/components/platform/text";
 import { clearReadingHistory, loadReadingHistory, ReadingItem, timeAgo } from "@/lib/reading-history";
 import { libraryRoute } from "@/lib/bookmarks";
 import { LIBRARY_KIND_META, useLibrary } from "@/components/platform/library";
+import { SectionHeading } from "@/components/platform/architectural";
 import { useCountUp } from "@/lib/use-count-up";
 import { cn } from "@/lib/utils";
 
@@ -69,31 +70,36 @@ export function HomeView() {
 
   return (
     <div className="flex flex-col">
-      {/* ─── HERO ─── */}
-      <section className="hero-pattern border-b bg-gradient-to-b from-emerald-50/70 to-background dark:from-emerald-950/30">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-20">
+      {/* ─── HERO — the courtyard entrance ─── */}
+      <section className="pattern-girih border-b bg-gradient-to-b from-emerald-50/80 via-background to-background dark:from-emerald-950/40 dark:via-background">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="outline" className="mb-4 border-emerald-300 bg-white/60 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-200">
-              <Sparkles className="me-1 h-3 w-3" /> Source-first · Citation-first
-            </Badge>
-            <h1 className="font-scholarly text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+            <div className="arch-mihrab mx-auto mb-5 w-fit px-10 pb-4 pt-1">
+              <Badge variant="outline" className="border-brass/40 bg-background/60 text-emerald-900 dark:border-brass/30 dark:bg-emerald-950/60 dark:text-emerald-200">
+                <Sparkles className="me-1 h-3 w-3" /> Source-first · Citation-first
+              </Badge>
+            </div>
+            <h1 className="font-scholarly text-4xl font-semibold leading-[1.15] tracking-tight text-emerald-950 dark:text-emerald-50 sm:text-5xl md:text-[3.4rem]">
               {t("heroTitle")}
             </h1>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <div className="geometric-divider mx-auto mt-6 max-w-md">
+              <span className="divider-diamond" aria-hidden />
+            </div>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               {t("heroSubtitle")}
             </p>
             <UrduText text="عقیدہ، فقہ، کلاسیکی علما، دلائل اور غلط فہمیوں کی تحقیق — ہر حوالہ مصدر کے ساتھ" className="mt-3 hidden text-emerald-900/80 dark:text-emerald-200/80 md:block" />
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button size="lg" className="bg-emerald-700 hover:bg-emerald-800 text-white" onClick={() => setView("ask")}>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <Button size="lg" className="shadow-subtle bg-emerald-800 text-white transition-all hover:-translate-y-0.5 hover:bg-emerald-900 dark:bg-emerald-600 dark:hover:bg-emerald-500" onClick={() => setView("ask")}>
                 {t("askQuestion")} <ArrowRight className="ms-1 h-4 w-4 rtl-flip" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => setView("search", "focus")}>
+              <Button size="lg" variant="outline" className="bg-background/70 transition-all hover:-translate-y-0.5" onClick={() => setView("search", "focus")}>
                 <Sparkles className="me-1 h-4 w-4" /> {t("searchKB")}
               </Button>
-              <Button size="lg" variant="outline" onClick={() => setView("sources")}>
+              <Button size="lg" variant="outline" className="bg-background/70 transition-all hover:-translate-y-0.5" onClick={() => setView("sources")}>
                 <BookMarked className="me-1 h-4 w-4" /> {t("exploreSources")}
               </Button>
-              <Button size="lg" variant="outline" onClick={() => setView("misconceptions")}>
+              <Button size="lg" variant="outline" className="bg-background/70 transition-all hover:-translate-y-0.5" onClick={() => setView("misconceptions")}>
                 <CheckCircle2 className="me-1 h-4 w-4" /> {t("browseMisconceptions")}
               </Button>
             </div>
@@ -101,15 +107,16 @@ export function HomeView() {
         </div>
       </section>
 
-      {/* ─── VERSE OF THE VISIT ─── */}
+      {/* ─── VERSE OF THE VISIT — illuminated manuscript panel ─── */}
       <section aria-label={t("verseOfVisit")} className="border-b bg-background">
         <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-          <Card className="ayah-card border-emerald-200/70 bg-gradient-to-b from-emerald-50/60 to-background dark:border-emerald-900/70 dark:from-emerald-950/30">
-            <CardContent className="p-6 text-center sm:p-8">
-              <div className="ornament-divider justify-center">
+          <Card className="ayah-card arch-top border-emerald-200/70 bg-gradient-to-b from-emerald-50/70 to-card shadow-subtle dark:border-emerald-900/70 dark:from-emerald-950/40">
+            <CardContent className="p-6 pt-9 text-center sm:p-8 sm:pt-11">
+              <div className="geometric-divider justify-center">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-emerald-800 dark:text-emerald-300">
                   {t("verseOfVisit")}
                 </span>
+                <span className="divider-diamond" aria-hidden />
               </div>
               {ayahLoading ? (
                 <div className="space-y-3 py-2">
@@ -239,8 +246,8 @@ export function HomeView() {
         </section>
       )}
 
-      {/* ─── STATS ─── */}
-      <section aria-label={t("stats")} className="border-b bg-muted/30">
+      {/* ─── STATS — stone band with lattice texture ─── */}
+      <section aria-label={t("stats")} className="pattern-weave border-b bg-secondary/50">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px overflow-hidden px-4 py-6 sm:grid-cols-4 sm:px-6 lg:grid-cols-8">
           {stats.map((s) => (
             <div
@@ -396,14 +403,7 @@ export function HomeView() {
 function SectionHeader({ title, onMore }: { title: string; onMore?: () => void }) {
   const t = useT();
   return (
-    <div className="mb-4 flex items-center justify-between gap-3">
-      <h2 className="font-scholarly text-xl font-bold tracking-tight">{title}</h2>
-      {onMore && (
-        <Button variant="ghost" size="sm" className="gap-1 text-emerald-800 dark:text-emerald-300" onClick={onMore}>
-          {t("readMore")} <ArrowRight className="h-3.5 w-3.5 rtl-flip" />
-        </Button>
-      )}
-    </div>
+    <SectionHeading title={title} onMore={onMore} />
   );
 }
 
