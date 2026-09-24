@@ -123,3 +123,22 @@ Stage Summary:
 - Long research articles are navigable (TOC + scrollspy) on desktop rail + mobile collapsible, in all 3 languages incl. RTL flip.
 - Per-view meta descriptions complete the SEO story started by per-view titles.
 - Remaining candidates: service worker offline shell, question attach-image using same OCR pipeline, comparison chips from objection detail, admin bulk-verify actions.
+
+---
+Task ID: 6 (cron round — Ask-view OCR attach, PWA offline shell, continue-reading trail)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA smoke; extend OCR pipeline into Ask flow; add PWA offline shell + reading-history widget; styling details.
+
+Work Log:
+- QA smoke: toured all 12 views — zero browser errors, dev.log clean, no fixes needed this round.
+- Ask-view OCR attach (src/components/platform/ocr-attach.tsx): compact paperclip row → pick/drop image (validation toasts) → thumbnail + Extract → result (language badge, AI claimSummary, collapsible extracted-text preview) → "Quote into question" appends `[Scanned page — OCR] "…"` block into the question textarea (3000-char safe) and auto-fills the empty claim field with the AI claim summary. E2E verified: same test-scan.png → extracted → quoted → SUBMITTED card; question text + claim visible.
+- PWA offline shell: public/sw.js (VERSION-bumped caches; navigations network-first → page-cache → /offline.html; cache-first + background refresh for icons/fonts/manifest; network-first + cache fallback for /_next/*; /api network-only returning JSON 503 offline; HMR paths excluded) + styled public/offline.html (emerald/amber star, trilingual note, Try-again) + ServiceWorkerRegister in page.tsx (load-time register, silent no-op). Verified: registration active scope=/, caches populated (v1-static 34 assets, v1-pages 3 docs), sw.js + offline.html 200. NOTE: agent-browser offline emulation does not reach SW network layer in this harness (fresh path while "offline" still hit server) — fallback logic verified by cache inspection + code review, not E2E; flagged for future real-device test.
+- Continue Reading trail: src/lib/reading-history.ts (localStorage v1 key, push dedupe by kind+key, cap 12, timeAgo justNow/{n}h/{n}d localized); recorded on misconception detail (slug) + objection detail (id); home section between ayah + stats: History icon header, Clear button, horizontally scrollable cards (kind-icon chip emerald/amber, 2-line title, timeAgo · section label, card-lift, focus rings). Verified: 2 visits → home widget (Urdu RTL right-aligned, "ابھی ابھی" timestamps), click-through deep-links to detail, Clear removes widget; lazy setTimeout read avoids setState-in-effect lint error + hydration mismatch.
+- i18n: 10 new keys ×3 languages (attachScan, attachScanHint, quoteIntoQuestion, quotedToast, scanTextPreview, continueReading, clearHistory, justNow, hoursAgo {n}, daysAgo {n}).
+- lint clean (fixed setState-in-effect error in home + removed 3 stale eslint-disable directives); regression: claims Scan&Verify card intact, compare view intact, zero console errors.
+
+Stage Summary:
+- The OCR pipeline now serves BOTH research flows: fact-checking (Scan & Verify) and question intake (Ask attach) — a scanned book page can become quoted context in a submitted, trackable question.
+- PWA completes its offline story: installable (manifest/icons) + offline shell with trilingual fallback page; safe-by-default caching strategy that keeps dev/HMR healthy.
+- Home now carries a personal research trail (Continue Reading) — citation-first platform gains session continuity.
+- Remaining candidates: real-device offline test, admin attachment display (if attachmentUrl ever stored), comparison chips from objection detail, admin bulk actions, question answered-count badges on home cards.
