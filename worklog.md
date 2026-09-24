@@ -189,3 +189,27 @@ Stage Summary:
 - Objection detail pages now complete the research triangle (misconceptions ↔ objections ↔ comparisons) with deep-linked madhhab comparisons.
 - Admin editor covers every major content type with bulk editorial workflow (delete + status transitions), scaling the publish pipeline.
 - Remaining candidates: claim-checker streaming, comparison chips on misconception detail, admin attachment display, real-device SW offline test, answer revision history UI.
+
+---
+Task ID: 9 (cron round — live-streaming claim checker, misconception↔comparison links, verdict UX)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; implement SSE streaming for the claim checker; related comparisons on misconception detail; styling details.
+
+Work Log:
+- QA smoke: 12-view tour, detail flows (title/meta/TOC/related), QA filters, admin editor, OCR card, all API endpoints — zero runtime errors, dev.log clean, no pre-existing bugs. (agent-browser "errors" shows 2-3 EMPTY ✗ lines even on fresh open — harness artifact, not app errors; console log shows only HMR/info.)
+- SSE streaming claim checker (flagship, mirrors Task 8's answer streaming):
+  * NEW /api/claims/stream: POST {claim, context} → SSE status (retrieving|analyzing|verifying) → delta (streamed verdict draft) → done {result, kbEvidence} / error. Model writes a readable draft with fixed `##` sections (Verdict with enum on first line, Hanafi Position, Evidence as typed [Q]/[H]/[C]/[F]/[M] bullets, Disagreement); parser (headings matched anywhere, tolerant enum normalization incl. embedded-in-prose fallback) maps to the EXACT result shape of POST /api/claims and persists the same ClaimCheck record. Confidence heuristic: LOW if insufficient-language, HIGH if bullets parsed. Rate-limited 8/min (claims-stream scope). Old JSON /api/claims kept intact for compatibility.
+  * qa.tsx: LiveStreamPanel generalized — exported StreamStage type (+analyzing|verifying), exported parseSseFrame, panel now takes optional `steps` + `title` props (defaults = answer-engine); QA flow regression-tested E2E (answer generated + persisted, anti-hallucination honest on no-evidence question: "could not be verified" + (none) sources, no fabrication).
+  * claims.tsx: submit() → SSE consumer (same frame-parsing pattern); LiveStreamPanel with VERIFY_STEPS stepper (Retrieving evidence → Analyzing the claim → Cross-checking citations) + "Verification engine" title; verdict card reveals with animate-in fade/slide + new VerdictIcon (color-coded per classification family: emerald check / amber triangle / red X / stone question).
+  * BUGFIX found in E2E: stream `done` emits evidence as ARRAY + kbEvidence as sibling of result, but the view expected the DB-record JSON-string shape → evidence panel rendered empty ("could not be verified" shown despite HIGH confidence). Fixed: view normalizes string|array evidence + merges sibling kbEvidence into result; re-tested — 3 evidence bullets + 6 KB chips render; recent-claim (string) path and KB chip deep-link also verified.
+- Related comparisons on misconception detail: /api/misconceptions?slug= related payload + comparisons (same topicId, take 3); RelatedResearch already renders the group (amber Scale cards, compareCta) — misconceptions view now passes it. E2E: amin-loudly-not-accepted → "Madhhab comparisons" group → click → #/compare/{id} with Focused-comparison badge. Research triangle (misconceptions ↔ objections ↔ comparisons) now complete from BOTH sides.
+- i18n: 4 new keys ×3 languages (verifyEngineTitle, stageAnalyzing, stageVerifying, verdictReady).
+- Data hygiene: deleted 5 session-generated ClaimCheck test records (DB back to pre-session state); ZZTEST question + answer removed after QA-stream regression.
+- Styling: verdict reveal animation, VerdictIcon strip, stream panel reuse (emerald glow + pulsing live dot); Urdu RTL verified on verdict card (icon/badges/evidence borders mirror correctly), dark mode screenshot verified.
+- lint clean; full tour 0 errors.
+
+Stage Summary:
+- BOTH AI engines are now watchable: fact-checking (claims) and answer generation (Q&A) stream live with stage steppers, then resolve into structured, citation-checked cards — the platform's two flagship AI flows share one transparent UX language.
+- Claim-check verdicts keep the anti-hallucination guarantee end-to-end (no evidence → explicit disclaimer, no invented citations).
+- Research triangle fully bidirectional on detail pages.
+- Remaining candidates: admin attachment display, claim-check verdict share/citation (ShareBar), question attach-image storage, real-device SW offline test, answer revision history UI.

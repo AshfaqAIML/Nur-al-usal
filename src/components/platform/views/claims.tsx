@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  CheckCircle2, FileText, Languages, Loader2, ScanLine, ScanSearch,
-  ShieldCheck, Upload, X,
+  AlertTriangle, BookOpenCheck, CheckCircle2, FileQuestion, FileText, Languages, Loader2,
+  ScanLine, ScanSearch, ShieldCheck, Upload, X, XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,12 +14,15 @@ import { usePlatform, useT } from "@/lib/store";
 import { apiGet, apiPost, ClaimRecord } from "@/lib/api";
 import { ClassificationBadge } from "@/components/platform/badges";
 import { OrnamentDivider } from "@/components/platform/detail-chrome";
+import { LiveStreamPanel, parseSseFrame, StreamStage } from "@/components/platform/views/qa";
 import { parseJson } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 interface ClaimResult extends ClaimRecord {
   kbEvidence?: { entityType: string; title: string; body: string; route: string }[];
   confidence?: string;
+  /** Streaming endpoint emits parsed evidence as an array (DB stores a JSON string). */
+  evidence?: string | ClaimEvidence["evidence"] | null;
 }
 
 interface ClaimEvidence {
@@ -39,6 +42,28 @@ interface ScanResult {
 const SCAN_MIME_OK = ["image/png", "image/jpeg", "image/webp"];
 const SCAN_MAX_BYTES = 4 * 1024 * 1024;
 
+/** Verification-engine stepper (retrieval → analysis → citation check). */
+const VERIFY_STEPS = [
+  { stage: "retrieving" as const, labelKey: "stageRetrieving", icon: BookOpenCheck },
+  { stage: "analyzing" as const, labelKey: "stageAnalyzing", icon: ScanSearch },
+  { stage: "verifying" as const, labelKey: "stageVerifying", icon: ShieldCheck },
+];
+
+/** Verdict icon + tone per classification family. */
+function VerdictIcon({ classification }: { classification: string }) {
+  const cls = classification ?? "";
+  if (cls === "CORRECTLY_ATTRIBUTED" || cls === "PARTIALLY_CORRECT") {
+    return <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" aria-hidden />;
+  }
+  if (cls === "UNSUPPORTED" || cls === "INCORRECTLY_ATTRIBUTED") {
+    return <XCircle className="h-5 w-5 text-red-600 dark:text-red-400" aria-hidden />;
+  }
+  if (cls === "INSUFFICIENTLY_DOCUMENTED") {
+    return <FileQuestion className="h-5 w-5 text-stone-500 dark:text-stone-400" aria-hidden />;
+  }
+  return <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" aria-hidden />;
+}
+
 export function ClaimsView() {
   const t = useT();
   const { toast } = useToast();
@@ -46,6 +71,8 @@ export function ClaimsView() {
   const [claim, setClaim] = useState("");
   const [context, setContext] = useState("");
   const [busy, setBusy] = useState(false);
+  const [stage, setStage] = useState<StreamStage>("idle");
+  const [streamText, setStreamText] = useState("");
   const [result, setResult] = useState<ClaimResult | null>(null);
   const [recent, setRecent] = useState<ClaimRecord[]>([]);
 
@@ -61,21 +88,64 @@ export function ClaimsView() {
   const loadRecent = () => apiGet<{ claims: ClaimRecord[] }>("/api/claims?take=8").then((d) => setRecent(d.claims)).catch(() => setRecent([]));
   useEffect(() => { loadRecent(); }, []);
 
+  /** Streaming verification: watch the engine retrieve, analyze, and cite live. */
   async function submit() {
     if (claim.trim().length < 8) {
       toast({ title: "Please write the claim you were told.", variant: "destructive" });
       return;
     }
+    if (stage !== "idle") return;
     setBusy(true);
     setResult(null);
+    setStage("connecting");
+    setStreamText("");
     try {
-      const res = await apiPost<ClaimResult>("/api/claims", { claim, context });
-      setResult(res);
-      loadRecent();
+      const res = await fetch("/api/claims/stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ claim, context }),
+      });
+      if (!res.ok || !res.body) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error((j as { error?: string }).error || `Stream failed: ${res.status}`);
+      }
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let buf = "";
+      let streamError: string | null = null;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        let idx: number;
+        while ((idx = buf.indexOf("\n\n")) >= 0) {
+          const frame = buf.slice(0, idx);
+          buf = buf.slice(idx + 2);
+          const parsed = parseSseFrame(frame);
+          if (!parsed) continue;
+          try {
+            const payload = JSON.parse(parsed.data) as Record<string, unknown>;
+            if (parsed.event === "status") setStage(payload.stage as StreamStage);
+            else if (parsed.event === "delta") setStreamText((p) => p + String(payload.text ?? ""));
+            else if (parsed.event === "done") {
+              const r = payload.result as ClaimResult;
+              // kbEvidence arrives as a sibling of result in the stream payload.
+              setResult({ ...r, kbEvidence: (payload.kbEvidence as ClaimResult["kbEvidence"]) ?? r.kbEvidence });
+              toast({ title: t("verdictReady") });
+              loadRecent();
+            } else if (parsed.event === "error") {
+              streamError = String(payload.error ?? "Verification engine error.");
+            }
+          } catch { /* tolerate malformed frame */ }
+        }
+      }
+      if (streamError) throw new Error(streamError);
     } catch (e) {
       toast({ title: e instanceof Error ? e.message : t("error"), variant: "destructive" });
     } finally {
       setBusy(false);
+      setStage("idle");
+      setStreamText("");
     }
   }
 
@@ -137,7 +207,18 @@ export function ClaimsView() {
     lang === "ar" ? t("langAr") : lang === "ur" ? t("langUr") : lang === "en" ? t("langEn") : t("langMixed");
   const rtlLang = scanResult?.language === "ar" || scanResult?.language === "ur";
 
-  const parsed: ClaimEvidence = parseJson<ClaimEvidence>(result?.evidence ?? null, {});
+  // Evidence payload: DB records store a JSON string; the stream emits arrays.
+  const evidencePayload: ClaimEvidence = (() => {
+    if (typeof result?.evidence === "string" || result?.evidence === null || result?.evidence === undefined) {
+      return parseJson<ClaimEvidence>(result?.evidence ?? null, {});
+    }
+    return {
+      evidence: result.evidence,
+      hanafiPosition: result.hanafiPosition ?? null,
+      disagreement: result.disagreement ?? null,
+      confidence: result.confidence,
+    };
+  })();
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
@@ -306,17 +387,15 @@ export function ClaimsView() {
         </CardContent>
       </Card>
 
-      {/* ─── RESULT ─── */}
-      {busy && (
-        <Card className="mt-6 animate-pulse border-dashed">
-          <CardContent className="p-6 text-center text-sm text-muted-foreground">
-            Retrieving knowledge-base evidence → classifying → attaching citations…
-          </CardContent>
-        </Card>
+      {/* ─── LIVE STREAM: watch the verification engine work ─── */}
+      {stage !== "idle" && (
+        <div className="mt-6">
+          <LiveStreamPanel stage={stage} text={streamText} steps={VERIFY_STEPS} title={t("verifyEngineTitle")} />
+        </div>
       )}
 
       {result && !busy && (
-        <div className="mt-6 space-y-4">
+        <div className="animate-in fade-in slide-in-from-bottom-2 mt-6 space-y-4 duration-500">
           <Card className="border-2 border-emerald-300 dark:border-emerald-800">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">“{result.claim}”</p>
@@ -326,16 +405,17 @@ export function ClaimsView() {
                 {result.confidence && (
                   <Badge variant="outline" className="text-[11px]">{t("confidence")}: {result.confidence}</Badge>
                 )}
+                <span className="ms-auto" aria-hidden><VerdictIcon classification={result.classification} /></span>
               </div>
               <p className="mt-3 text-sm leading-relaxed">{result.explanation}</p>
-              {parsed.hanafiPosition && (
+              {evidencePayload.hanafiPosition && (
                 <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3 dark:border-emerald-900 dark:bg-emerald-950/40">
                   <p className="text-xs font-bold uppercase tracking-wide text-emerald-800 dark:text-emerald-300">{t("actualHanafiPosition")}</p>
-                  <p className="mt-1 text-sm">{parsed.hanafiPosition}</p>
+                  <p className="mt-1 text-sm">{evidencePayload.hanafiPosition}</p>
                 </div>
               )}
-              {parsed.disagreement && (
-                <p className="mt-3 text-xs text-muted-foreground"><strong>{t("disputed")}:</strong> {parsed.disagreement}</p>
+              {evidencePayload.disagreement && (
+                <p className="mt-3 text-xs text-muted-foreground"><strong>{t("disputed")}:</strong> {evidencePayload.disagreement}</p>
               )}
             </CardContent>
           </Card>
@@ -345,13 +425,13 @@ export function ClaimsView() {
             <CardContent className="p-6">
               <h3 className="font-scholarly text-base font-bold">{t("theEvidence")}</h3>
               <OrnamentDivider className="my-3" />
-              {(!parsed.evidence || parsed.evidence.length === 0) && (
+              {(!evidencePayload.evidence || evidencePayload.evidence.length === 0) && (
                 <p className="mt-2 text-sm italic text-muted-foreground">
                   This attribution could not be verified from the available sources — no fabricated citations are shown.
                 </p>
               )}
               <ul className="mt-3 space-y-2.5">
-                {(parsed.evidence ?? []).map((ev, i) => (
+                {(evidencePayload.evidence ?? []).map((ev, i) => (
                   <li key={i} className="border-s-2 border-emerald-400 ps-3 transition-colors hover:border-amber-500">
                     <p className="text-sm font-semibold">{ev.title}{ev.ref ? ` — ${ev.ref}` : ""}{ev.source ? ` (${ev.source})` : ""}</p>
                     {ev.quote && <p className="mt-0.5 text-xs text-muted-foreground">“{ev.quote}”</p>}

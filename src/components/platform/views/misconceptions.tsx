@@ -15,10 +15,10 @@ import { ClassificationBadge, VerificationBadge } from "@/components/platform/ba
 import { EvidenceList, SectionFlow, UrduText } from "@/components/platform/text";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
 import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
-import { RelatedResearch, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
+import { RelatedResearch, RelatedComparison, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
 import { cn } from "@/lib/utils";
 
-interface RelatedPayload { misconceptions: RelatedMisconception[]; objections: RelatedObjection[] }
+interface RelatedPayload { misconceptions: RelatedMisconception[]; objections: RelatedObjection[]; comparisons?: RelatedComparison[] }
 
 export function MisconceptionsView({ slug }: { slug?: string | null }) {
   const t = useT();
@@ -213,7 +213,7 @@ function MisconceptionDetail({
           </article>
 
           <div className="mt-8">
-            <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} />
+            <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} comparisons={related?.comparisons} />
           </div>
         </>
       )}

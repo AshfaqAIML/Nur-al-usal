@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BookOpenCheck, Check, ChevronRight, Eye, Loader2, Radio, Search, Sparkles } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,10 +21,10 @@ const STATUS_LABELS: Record<string, string> = {
   ANSWERED: "Answered", REJECTED: "Rejected",
 };
 
-type StreamStage = "idle" | "connecting" | "retrieving" | "generating" | "saving";
+export type StreamStage = "idle" | "connecting" | "retrieving" | "generating" | "saving" | "analyzing" | "verifying";
 
 /** Parse one SSE frame (event/data pair) from the stream. */
-function parseSseFrame(frame: string): { event: string; data: string } | null {
+export function parseSseFrame(frame: string): { event: string; data: string } | null {
   let event = "message";
   const dataLines: string[] = [];
   for (const line of frame.split("\n")) {
@@ -262,14 +263,26 @@ export function QuestionsView({ id }: { id?: string | null }) {
   );
 }
 
-const STREAM_STEPS: { stage: Exclude<StreamStage, "idle" | "connecting">; labelKey: string; icon: typeof Radio }[] = [
+export const STREAM_STEPS: { stage: Exclude<StreamStage, "idle" | "connecting">; labelKey: string; icon: LucideIcon }[] = [
   { stage: "retrieving", labelKey: "stageRetrieving", icon: BookOpenCheck },
   { stage: "generating", labelKey: "stageGenerating", icon: Sparkles },
   { stage: "saving", labelKey: "stageSaving", icon: Check },
 ];
 
-/** Live view of the answer engine at work (SSE stream consumer). */
-export function LiveStreamPanel({ stage, text }: { stage: StreamStage; text: string }) {
+/** Live view of a streaming engine at work (SSE stream consumer). */
+export function LiveStreamPanel({
+  stage,
+  text,
+  steps,
+  title,
+}: {
+  stage: StreamStage;
+  text: string;
+  /** Custom stage stepper (defaults to the answer-engine steps). */
+  steps?: { stage: Exclude<StreamStage, "idle" | "connecting">; labelKey: string; icon: LucideIcon }[];
+  /** Panel title (i18n key or literal); defaults to the answer-engine title. */
+  title?: string;
+}) {
   const t = useT();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -278,7 +291,8 @@ export function LiveStreamPanel({ stage, text }: { stage: StreamStage; text: str
     if (el) el.scrollTop = el.scrollHeight;
   }, [text]);
 
-  const stepIndex = STREAM_STEPS.findIndex((s) => s.stage === stage);
+  const activeSteps = steps ?? STREAM_STEPS;
+  const stepIndex = activeSteps.findIndex((s) => s.stage === stage);
   const lines = text.split("\n");
 
   return (
@@ -290,7 +304,7 @@ export function LiveStreamPanel({ stage, text }: { stage: StreamStage; text: str
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-600" />
             </span>
-            <h3 className="font-scholarly text-sm font-bold">{t("engineTitle")}</h3>
+            <h3 className="font-scholarly text-sm font-bold">{title ?? t("engineTitle")}</h3>
             <Badge variant="outline" className="border-emerald-300 text-[9px] uppercase tracking-wider text-emerald-800 dark:border-emerald-800 dark:text-emerald-300">
               <Radio className="me-1 h-2.5 w-2.5" aria-hidden /> {t("engineLive")}
             </Badge>
@@ -299,7 +313,7 @@ export function LiveStreamPanel({ stage, text }: { stage: StreamStage; text: str
 
         {/* Stage stepper */}
         <ol className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5" aria-label="Engine stages">
-          {STREAM_STEPS.map((s, i) => {
+          {activeSteps.map((s, i) => {
             const isDone = stepIndex > i;
             const isCurrent = stepIndex === i;
             const Icon = s.icon;

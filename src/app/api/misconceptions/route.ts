@@ -11,8 +11,8 @@ export async function GET(req: NextRequest) {
     const m = await db.misconception.findUnique({ where: { slug }, include: { topic: true } });
     if (!m) return NextResponse.json({ error: "Not found" }, { status: 404 });
     await db.misconception.update({ where: { id: m.id }, data: { views: { increment: 1 } } });
-    // Related research trail: same-topic misconceptions + objections.
-    const [relMisconceptions, relObjections] = await Promise.all([
+    // Related research trail: same-topic misconceptions + objections + comparisons.
+    const [relMisconceptions, relObjections, relComparisons] = await Promise.all([
       m.topicId
         ? db.misconception.findMany({
             where: { topicId: m.topicId, id: { not: m.id } },
@@ -29,8 +29,16 @@ export async function GET(req: NextRequest) {
             select: { id: true, question: true, isAqeedah: true, views: true },
           })
         : Promise.resolve([]),
+      m.topicId
+        ? db.comparison.findMany({
+            where: { topicId: m.topicId },
+            take: 3,
+            orderBy: { id: "asc" },
+            select: { id: true, issue: true },
+          })
+        : Promise.resolve([]),
     ]);
-    return NextResponse.json({ misconception: m, related: { misconceptions: relMisconceptions, objections: relObjections } });
+    return NextResponse.json({ misconception: m, related: { misconceptions: relMisconceptions, objections: relObjections, comparisons: relComparisons } });
   }
 
   const where: Record<string, unknown> = {};
