@@ -75,7 +75,7 @@ export function SectionFlow({
   return (
     <div className="relative space-y-6">
       {sections.map((s, i) => (
-        <div key={s.key} className="relative ps-8">
+        <div key={s.key} id={`sec-${s.key}`} className="relative scroll-mt-28 ps-8">
           {i > 0 && <span aria-hidden className="absolute start-[11px] -top-6 h-6 w-px bg-border" />}
           <span
             aria-hidden

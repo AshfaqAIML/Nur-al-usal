@@ -12,6 +12,7 @@ import { apiGet, Objection, parseJson } from "@/lib/api";
 import { useDocTitle } from "@/lib/use-doc-title";
 import { ShareBar } from "@/components/platform/share-bar";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
+import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
 import { RelatedResearch, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
 import { cn } from "@/lib/utils";
 
@@ -45,7 +46,7 @@ function useObjectionDetail(id?: string | null) {
 function ObjectionDetail({ id, detail, related }: { id: string; detail: Objection | null | undefined; related: RelatedPayload | null }) {
   const t = useT();
   const { setView } = usePlatform();
-  useDocTitle(detail?.question ?? null);
+  useDocTitle(detail?.question ?? null, detail?.answer ?? null);
 
   if (detail === undefined) {
     return (
@@ -70,13 +71,22 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
 
   const evidence = parseJson<EvidenceQuote[]>(detail.evidence, []);
 
+  const tocItems: TocItem[] = [
+    { key: "answer", label: t("answer") },
+    ...(detail.hanafiPosition ? [{ key: "position", label: t("hanafiPositionLabel") }] : []),
+    ...(evidence.length > 0 ? [{ key: "evidence", label: t("evidence") }] : []),
+    ...(detail.disputed ? [{ key: "disputed", label: t("disputed") }] : []),
+  ];
+
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 xl:grid xl:grid-cols-[minmax(0,1fr)_220px] xl:gap-10">
+      <div className="min-w-0">
       <ReadingProgress targetId="objection-article" />
 
       <DetailBreadcrumb sectionLabel={t("objectionsTitle")} sectionView="objections" current={detail.question} />
 
       <article id="objection-article" className="print-area">
+        <TocMobile items={tocItems} />
         <Card className="border-border/70">
           <CardContent className="p-6">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -94,10 +104,10 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
               {detail.question}
             </h1>
 
-            <p className="prose-scholarly mt-4 text-[15px] leading-relaxed text-foreground/90">{detail.answer}</p>
+            <p id="sec-answer" className="prose-scholarly mt-4 scroll-mt-28 text-[15px] leading-relaxed text-foreground/90">{detail.answer}</p>
 
             {detail.hanafiPosition && (
-              <div className="mt-5 rounded-lg border border-emerald-200 bg-emerald-50/60 p-4 dark:border-emerald-900 dark:bg-emerald-950/40">
+              <div id="sec-position" className="mt-5 scroll-mt-28 rounded-lg border border-emerald-200 bg-emerald-50/60 p-4 dark:border-emerald-900 dark:bg-emerald-950/40">
                 <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
                   {t("hanafiPositionLabel")}
                 </h2>
@@ -106,7 +116,7 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
             )}
 
             {evidence.length > 0 && (
-              <div className="mt-6">
+              <div id="sec-evidence" className="mt-6 scroll-mt-28">
                 <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("evidence")}</h2>
                 <div className="mt-2 space-y-3">
                   {evidence.map((ev, i) => (
@@ -126,7 +136,7 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
             )}
 
             {detail.disputed && (
-              <p className="mt-5 rounded-md bg-muted/50 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+              <p id="sec-disputed" className="mt-5 scroll-mt-28 rounded-md bg-muted/50 px-3 py-2 text-xs leading-relaxed text-muted-foreground">
                 <strong>{t("disputed")}:</strong> {detail.disputed}
               </p>
             )}
@@ -147,6 +157,11 @@ function ObjectionDetail({ id, detail, related }: { id: string; detail: Objectio
       <div className="mt-8">
         <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} />
       </div>
+      </div>
+
+      <aside className="hidden no-print xl:block" aria-label={t("onThisPage")}>
+        <TocRail items={tocItems} />
+      </aside>
     </div>
   );
 }

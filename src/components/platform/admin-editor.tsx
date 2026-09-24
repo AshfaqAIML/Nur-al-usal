@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle,
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -333,6 +333,9 @@ function EntityForm({
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{rec ? t("editRecord") : t("createNew")} — {entity.label}</DialogTitle>
+          <DialogDescription>
+            {rec ? t("editRecordHint") : t("createNewHint")}
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-3.5 py-1">
           {entity.fields.map((f) => (

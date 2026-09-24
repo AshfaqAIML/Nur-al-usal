@@ -13,6 +13,7 @@ import { ShareBar } from "@/components/platform/share-bar";
 import { ClassificationBadge, VerificationBadge } from "@/components/platform/badges";
 import { EvidenceList, SectionFlow, UrduText } from "@/components/platform/text";
 import { DetailBreadcrumb, ReadingProgress } from "@/components/platform/detail-chrome";
+import { TocMobile, TocRail, TocItem } from "@/components/platform/article-toc";
 import { RelatedResearch, RelatedMisconception, RelatedObjection } from "@/components/platform/related-research";
 import { cn } from "@/lib/utils";
 
@@ -87,6 +88,11 @@ export function MisconceptionsView({ slug }: { slug?: string | null }) {
       {!list && (
         <div className="grid gap-3 md:grid-cols-2">{[...Array(6)].map((_, i) => <Skeleton key={i} className="h-28 rounded-xl" />)}</div>
       )}
+      {list && list.length === 0 && (
+        <div className="rounded-xl border border-dashed p-10 text-center">
+          <p className="text-sm text-muted-foreground">{t("noEntriesMatch")}</p>
+        </div>
+      )}
       <div className="grid gap-3 md:grid-cols-2">
         {(list ?? []).map((m) => (
           <Card key={m.id} className="card-lift cursor-pointer border-border/70" onClick={() => setView("misconceptions", m.slug)}>
@@ -119,10 +125,26 @@ function MisconceptionDetail({
 }) {
   const t = useT();
   const { setView } = usePlatform();
-  useDocTitle(detail ? `“${detail.claim}”` : null);
+  useDocTitle(detail ? `“${detail.claim}”` : null, detail?.actualPosition ?? null);
+
+  const tocItems: TocItem[] = detail
+    ? [
+        { key: "claim", label: t("claim") },
+        { key: "status", label: t("verificationStatus") },
+        { key: "actual", label: t("actualHanafiPosition") },
+        { key: "primary", label: t("primaryEvidence") },
+        { key: "classical", label: t("classicalEvidence") },
+        { key: "later", label: t("laterHanafiEvidence") },
+        { key: "counter", label: t("counterargument") },
+        { key: "response", label: t("scholarlyResponse") },
+        { key: "disagree", label: t("areasOfDisagreement") },
+        { key: "conclusion", label: t("conclusion") },
+      ]
+    : [];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 xl:grid xl:grid-cols-[minmax(0,1fr)_220px] xl:gap-10">
+      <div className="min-w-0">
       <ReadingProgress targetId="misconception-article" />
       {!detail && (
         <Button variant="ghost" size="sm" className="mb-4 no-print" onClick={() => setView("misconceptions")}>
@@ -141,6 +163,7 @@ function MisconceptionDetail({
       {detail && (
         <>
           <DetailBreadcrumb sectionLabel={t("misconceptionsLabel")} sectionView="misconceptions" current={detail.claim} />
+          <TocMobile items={tocItems} />
           <article id="misconception-article" className="print-area space-y-6">
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -188,6 +211,13 @@ function MisconceptionDetail({
             <RelatedResearch misconceptions={related?.misconceptions} objections={related?.objections} />
           </div>
         </>
+      )}
+      </div>
+
+      {detail && (
+        <aside className="hidden no-print xl:block" aria-label={t("onThisPage")}>
+          <TocRail items={tocItems} />
+        </aside>
       )}
     </div>
   );

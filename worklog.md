@@ -99,3 +99,27 @@ Stage Summary:
 - Keyboard UX complete: ⌘K anywhere, Enter submits to search view, Esc closes.
 - Admin scales past 100 records with pagination + honest total counts.
 - Remaining candidates: OCR upload flow (book PDF ingest), service worker offline shell, per-view meta descriptions, "on this page" TOC for long answers, comparison chips from objection detail.
+
+---
+Task ID: 5 (cron round — OCR Scan & Verify, on-this-page TOC, per-view meta descriptions)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA smoke pass; implement OCR upload flow, article TOC, meta descriptions, a11y + styling details.
+
+Work Log:
+- QA smoke: GET / 200, home 8 sections, zero console errors. Found + fixed: admin editor create/edit dialog had DialogTitle but no DialogDescription (Radix a11y warning) → added DialogDescription with new i18n keys editRecordHint/createNewHint ×3 langs.
+- OCR "Scan & Verify" flow (new AI capability, claims view):
+  * NEW /api/ocr: POST {imageBase64, mimeType} → z-ai-web-dev-sdk createVision OCR with verbatim-extraction prompt (Arabic/Urdu Nastaliq/English aware, [illegible] markers); returns {text ≤8000 chars, language ar|ur|en|mixed, claimSummary, chars}; validates mime (png/jpeg/webp), size (~4 MB), strips dataURL prefix, tolerant JSON match; distinct errors 400/413/415/422/502.
+  * ClaimsView rebuilt with scan card: sr-only file input + styled dropzone (click or drag&drop, dragOver emerald highlight), client-side type/size validation with toasts, FileReader preview with remove affordance, Extract-text button w/ spinner, result panel (detected-language badge, claimSummary, scrollable verbatim text pre — rtl+font-arabic for ar/ur), "Use extracted text" fills the claim textarea then smooth-scrolls to it; scanNote citation-caution line.
+  * E2E verified: PIL-generated book page → browser upload → extraction ("From the book… page 112", lang=en, accurate claimSummary) → Use-text → textarea filled.
+- On-this-page TOC (new src/components/platform/article-toc.tsx): TocRail (desktop sticky rail: top-24, ON THIS PAGE header, scrollspy active = amber dot + emerald bg + aria-current=location) + TocMobile (collapsible details with chevron rotate); shared rAF-throttled scrollspy (top≤150 detection, bottom-of-doc → last section). SectionFlow sections now carry id=sec-{key} + scroll-mt-28; objection detail blocks got ids too (answer/position/evidence/disputed, items adapt to present sections).
+  * Detail layouts upgraded to xl:grid xl:grid-cols-[minmax(0,1fr)_220px] xl:gap-10 with hidden xl:block aside (no-print); verified jump lands at 112px below sticky header; Urdu RTL flips rail to left with translated labels.
+- Per-view meta descriptions: useDocTitle(title, description?) now swaps meta[name=description] (remembers original in data-default-description, restores on unmount); wired misconception detail (actualPosition) + objection detail (answer). Verified live swap + restore.
+- Styling details: claims evidence list items get hover border emerald→amber + KB evidence chips get hover shadow/focus ring; OrnamentDivider added above evidence section; recent-claims rows hover emerald border; empty-state box for misconceptions list with i18n noEntriesMatch; dropzone focus-visible ring; scan preview remove button hover-destructive.
+- i18n: 24 new keys ×3 languages (scan*, onThisPage, noEntriesMatch, lang*, edit/create hints).
+- lint clean; dev.log clean; browser-verified: OCR E2E (dark+light, EN+UR), TOC desktop/mobile/RTL, scrollspy, meta swap, admin dialog a11y, home regression.
+
+Stage Summary:
+- Platform now ingests scanned evidence: photo of a book page → OCR → one click into the fact-check engine — closing the loop the MASTER PROMPT's "OCR / verification" book-card hinted at.
+- Long research articles are navigable (TOC + scrollspy) on desktop rail + mobile collapsible, in all 3 languages incl. RTL flip.
+- Per-view meta descriptions complete the SEO story started by per-view titles.
+- Remaining candidates: service worker offline shell, question attach-image using same OCR pipeline, comparison chips from objection detail, admin bulk-verify actions.
