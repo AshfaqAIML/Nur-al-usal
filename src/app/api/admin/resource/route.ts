@@ -47,6 +47,15 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ records });
 }
 
+/** URL-safe slug generator — required (unique) on Misconception / Book / Scholar. */
+function slugify(s: string): string {
+  const base = s.toLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-+|-+$/g, "").slice(0, 56);
+  return base || "item";
+}
+
+const SLUGGED_ENTITIES = new Set(["misconception", "book", "scholar"]);
+const SLUG_SOURCE_KEYS = ["titleEn", "nameEn", "claim", "question"] as const;
+
 export async function POST(req: NextRequest) {
   if (!checkAdmin(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   try {
@@ -55,11 +64,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid entity" }, { status: 400 });
     }
     const m = model(entity as Entity);
-    const rec = await (m as unknown as { create: (a: unknown) => unknown }).create({ data });
+    const payload = { ...(data ?? {}) } as Record<string, unknown>;
+    // Auto-generate the unique slug when the model requires one and it is missing.
+    if (SLUGGED_ENTITIES.has(entity as string) && !payload.slug) {
+      const source = SLUG_SOURCE_KEYS.map((k) => String(payload[k] ?? "")).find((s) => s.trim()) ?? "item";
+      payload.slug = `${slugify(source)}-${Math.random().toString(36).slice(2, 6)}`;
+    }
+    const rec = await (m as unknown as { create: (a: unknown) => unknown }).create({ data: payload });
     return NextResponse.json({ record: rec }, { status: 201 });
   } catch (err) {
     console.error("admin resource POST error:", err);
-    return NextResponse.json({ error: "Create failed — check required fields." }, { status: 400 });
+    const detail = err instanceof Error ? err.message.slice(0, 180) : "check required fields";
+    return NextResponse.json({ error: `Create failed — ${detail}` }, { status: 400 });
   }
 }
 

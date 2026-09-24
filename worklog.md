@@ -56,3 +56,24 @@ Stage Summary:
 - Every major entity now has a shareable, printable, citable detail page — the "citation-first" requirement of the MASTER PROMPT is now fully realized in UX.
 - PWA installable (manifest + icons + theme color); per-view titles improve SEO/UX.
 - Remaining candidates: admin entity CRUD editor UI, OCR upload flow, comparison deep-links from home chips (currently all go to compare view top), pagination for large lists, service-worker offline shell, per-view meta description updates.
+
+---
+Task ID: 3 (cron round — comparison deep-links, admin entity editor)
+Agent: main (Z.ai Code, cron webDevReview)
+Task: QA pass; implement comparison deep-links + admin entity CRUD editor; fix slug blocker.
+
+Work Log:
+- Comparison deep-links: ComparisonView now takes focusId (#/compare/{id}); focused card gets emerald border + "Focused comparison" badge + smooth scroll + 2.2s ring flash; home comparison chips deep-link with id; per-view doc title set to the comparison issue (verified "Taraweeh rak'ah count · Nur al-Usul").
+- Admin Entity Editor (src/components/platform/admin-editor.tsx, wired into AdminView below stats):
+  * Entity selector: Misconception / Objection / Book / Scholar / Fatwa
+  * Records list (100 cap) with title + first-textarea preview + status badge + edit/delete actions + search filter + scrollable (max-h-28rem)
+  * Generic create/edit dialog driven by per-entity field schemas (text/textarea/checkbox/select; select options sourced from schema comment enums: classifications, verification statuses)
+  * Required-field validation, toasts, AlertDialog delete confirm; full cycle UI-tested (create→PATCH→DELETE) against live API
+- BUGFIX: admin POST failed for Misconception (unique slug required) → /api/admin/resource now auto-generates URL-safe slug (slugify from titleEn/nameEn/claim/question + random suffix) for misconception/book/scholar; error messages now include Prisma detail (truncated) for admin debugging.
+- i18n: 11 new keys x3 languages (entityEditor/createNew/editRecord/deleteConfirmTitle/deleteConfirmBody/cancel/delete/save/saving/focusedComparison).
+- lint clean; browser-verified: editor CRUD cycle, entity switch (16 books), comparison focus, doc titles.
+
+Stage Summary:
+- Admin can now fully manage content from the UI: editorial workflow cards + publish/unpublish + featured toggles + generic entity CRUD. No more DB-seed-only editing.
+- Deep-linked comparisons make home chips context-preserving (MASTER PROMPT: language/context preserved during navigation).
+- Remaining candidates: OCR upload flow (book PDF ingest), pagination for 100+ records, service worker offline shell, related-content cross-links on detail pages, meta description per view.

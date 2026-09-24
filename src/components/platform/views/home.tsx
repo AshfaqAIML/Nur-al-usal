@@ -212,7 +212,7 @@ export function HomeView() {
           <SectionHeader title={t("comparePositions")} onMore={() => setView("compare")} />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {data.comparisons.map((c) => (
-              <button key={c.id} onClick={() => setView("compare")} className="card-lift rounded-xl border bg-card p-4 text-start">
+              <button key={c.id} onClick={() => setView("compare", c.id)} className="card-lift rounded-xl border bg-card p-4 text-start">
                 <GitCompare className="h-4 w-4 text-emerald-700 dark:text-emerald-400" aria-hidden />
                 <p className="mt-2 text-sm font-semibold leading-snug">{c.issue}</p>
                 <p className="mt-1 text-[11px] text-muted-foreground">Hanafi · Shafi'i · Maliki · Hanbali · Other</p>

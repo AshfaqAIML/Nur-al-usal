@@ -26,7 +26,7 @@ function CurrentView() {
     case "misconceptions": return <MisconceptionsView slug={param} />;
     case "claims": return <ClaimsView />;
     case "objections": return <ObjectionsView id={param} />;
-    case "compare": return <ComparisonView />;
+    case "compare": return <ComparisonView focusId={param} />;
     case "sources": return <SourcesView param={param} />;
     case "quran": return <QuranHadithView />;
     case "search": return <SearchView param={param} />;
