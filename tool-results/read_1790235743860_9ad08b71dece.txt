@@ -1,0 +1,683 @@
+     1→"use client";
+     2→
+     3→import { useCallback, useEffect, useMemo, useState } from "react";
+     4→import { ChevronLeft, ChevronRight, Pencil, Plus, Search, ThumbsDown, ThumbsUp, Trash2, Workflow } from "lucide-react";
+     5→import { Button } from "@/components/ui/button";
+     6→import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+     7→import { Badge } from "@/components/ui/badge";
+     8→import { Input } from "@/components/ui/input";
+     9→import { Textarea } from "@/components/ui/textarea";
+    10→import { Skeleton } from "@/components/ui/skeleton";
+    11→import { Checkbox } from "@/components/ui/checkbox";
+    12→import {
+    13→  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
+    14→} from "@/components/ui/dialog";
+    15→import {
+    16→  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+    17→  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+    18→} from "@/components/ui/alert-dialog";
+    19→import {
+    20→  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+    21→} from "@/components/ui/select";
+    22→import { useT } from "@/lib/store";
+    23→import { apiAdmin, apiGet } from "@/lib/api";
+    24→import { useToast } from "@/hooks/use-toast";
+    25→import { cn } from "@/lib/utils";
+    26→
+    27→/* ─── Entity field schemas (drives the generic form) ─── */
+    28→type FieldType = "text" | "number" | "textarea" | "checkbox" | "select";
+    29→interface FieldDef { key: string; label: string; type: FieldType; options?: string[]; required?: boolean }
+    30→interface BulkStatus { key: string; options: string[] }
+    31→
+    32→const CLASSIFICATIONS = ["CLASSICAL_HANAFI", "LATER_HANAFI", "SOUTH_ASIAN_HANAFI", "FATAWA_COLLECTION", "AQEEDAH", "TAFSIR", "HADITH", "OTHER_SUNNI", "REFERENCE"];
+    33→const SCHOLAR_CLASSIFICATIONS = ["CLASSICAL_HANAFI", "LATER_HANAFI", "SOUTH_ASIAN_HANAFI", "BARELVI", "DEOBANDI", "AHL_E_HADITH", "SALAFI", "OTHER_SUNNI", "COMPANION"];
+    34→const VERIFICATION = ["VERIFIED", "PARTIALLY_VERIFIED", "OCR_NEEDS_REVIEW", "UNVERIFIED", "DISPUTED", "INSUFFICIENT_EVIDENCE"];
+    35→const MISC_STATUS = ["CORRECTLY_ATTRIBUTED", "PARTIALLY_CORRECT", "MISLEADING", "INCORRECTLY_ATTRIBUTED", "DISPUTED", "UNSUPPORTED", "INSUFFICIENTLY_DOCUMENTED"];
+    36→const QUESTION_STATUS = ["PENDING", "AI_ANSWERED", "REVIEWED", "ANSWERED", "REJECTED"];
+    37→const CLAIM_STATUS = ["PENDING", "REVIEWED", "PUBLISHED", "REJECTED"];
+    38→const GRADINGS = ["SAHIH", "HASAN", "DAIF", "MAWQUF", "MARFU", "DISPUTED", "UNRATED"];
+    39→const Q_LANGUAGES = ["EN", "UR", "AR"];
+    40→
+    41→const ENTITIES: { value: string; label: string; labelKey: string; fields: FieldDef[]; titleKey: string; statusKey?: string; bulkStatus?: BulkStatus; feedback?: boolean }[] = [
+    42→  {
+    43→    value: "misconception", label: "Misconception", labelKey: "misconceptionsLabel", titleKey: "claim", statusKey: "verificationStatus",
+    44→    fields: [
+    45→      { key: "claim", label: "Claim", type: "text", required: true },
+    46→      { key: "claimUr", label: "Claim (Urdu)", type: "text" },
+    47→      { key: "verificationStatus", label: "Verification status", type: "select", options: MISC_STATUS },
+    48→      { key: "actualPosition", label: "Actual Hanafi position", type: "textarea" },
+    49→      { key: "scholarlyResponse", label: "Scholarly response", type: "textarea" },
+    50→      { key: "conclusion", label: "Conclusion", type: "textarea" },
+    51→      { key: "featured", label: "Featured", type: "checkbox" },
+    52→    ],
+    53→  },
+    54→  {
+    55→    value: "objection", label: "Objection", labelKey: "objectionsLabel", titleKey: "question", statusKey: undefined,
+    56→    fields: [
+    57→      { key: "question", label: "Objection question", type: "text", required: true },
+    58→      { key: "answer", label: "Answer", type: "textarea", required: true },
+    59→      { key: "hanafiPosition", label: "Hanafi position", type: "textarea" },
+    60→      { key: "disputed", label: "What is actually disputed", type: "textarea" },
+    61→      { key: "isAqeedah", label: "Aqeedah matter", type: "checkbox" },
+    62→    ],
+    63→  },
+    64→  {
+    65→    value: "book", label: "Book", labelKey: "books", titleKey: "titleEn", statusKey: "classification",
+    66→    fields: [
+    67→      { key: "titleEn", label: "Title (English)", type: "text", required: true },
+    68→      { key: "titleAr", label: "Title (Arabic)", type: "text" },
+    69→      { key: "titleUr", label: "Title (Urdu)", type: "text" },
+    70→      { key: "classification", label: "Classification", type: "select", options: CLASSIFICATIONS },
+    71→      { key: "descriptionEn", label: "Description", type: "textarea" },
+    72→      { key: "verified", label: "Verified", type: "checkbox" },
+    73→      { key: "featured", label: "Featured", type: "checkbox" },
+    74→    ],
+    75→  },
+    76→  {
+    77→    value: "scholar", label: "Scholar", labelKey: "scholarsLabel", titleKey: "nameEn", statusKey: "classification",
+    78→    fields: [
+    79→      { key: "nameEn", label: "Name (English)", type: "text", required: true },
+    80→      { key: "nameAr", label: "Name (Arabic)", type: "text" },
+    81→      { key: "classification", label: "Classification", type: "select", options: SCHOLAR_CLASSIFICATIONS },
+    82→      { key: "biographyEn", label: "Biography", type: "textarea" },
+    83→      { key: "isHanafi", label: "Hanafi", type: "checkbox" },
+    84→    ],
+    85→  },
+    86→  {
+    87→    value: "fatwa", label: "Fatwa", labelKey: "fatwas", titleKey: "question", statusKey: "verificationStatus",
+    88→    bulkStatus: { key: "verificationStatus", options: VERIFICATION },
+    89→    fields: [
+    90→      { key: "question", label: "Question", type: "text", required: true },
+    91→      { key: "answer", label: "Answer", type: "textarea", required: true },
+    92→      { key: "volume", label: "Volume", type: "text" },
+    93→      { key: "page", label: "Page", type: "text" },
+    94→      { key: "verificationStatus", label: "Verification status", type: "select", options: VERIFICATION },
+    95→    ],
+    96→  },
+    97→  {
+    98→    value: "question", label: "Question", labelKey: "questions", titleKey: "text", statusKey: "status",
+    99→    bulkStatus: { key: "status", options: QUESTION_STATUS },
+   100→    feedback: true, // answers carry reader helpfulUp/Down tallies (triage loop)
+   101→    fields: [
+   102→      { key: "text", label: "Question text", type: "text", required: true },
+   103→      { key: "claim", label: "Claim within question", type: "text" },
+   104→      { key: "context", label: "Context", type: "textarea" },
+   105→      { key: "language", label: "Language", type: "select", options: Q_LANGUAGES },
+   106→      { key: "status", label: "Status", type: "select", options: QUESTION_STATUS },
+   107→      { key: "featured", label: "Featured", type: "checkbox" },
+   108→    ],
+   109→  },
+   110→  {
+   111→    value: "claim", label: "Claim check", labelKey: "claimsLabel", titleKey: "claim", statusKey: "status",
+   112→    bulkStatus: { key: "status", options: CLAIM_STATUS },
+   113→    fields: [
+   114→      { key: "claim", label: "Claim", type: "text", required: true },
+   115→      { key: "classification", label: "Classification", type: "select", options: MISC_STATUS },
+   116→      { key: "explanation", label: "Explanation", type: "textarea", required: true },
+   117→      { key: "context", label: "Context", type: "textarea" },
+   118→      { key: "status", label: "Status", type: "select", options: CLAIM_STATUS },
+   119→    ],
+   120→  },
+   121→  {
+   122→    value: "hadith", label: "Hadith", labelKey: "hadithLabel", titleKey: "collection", statusKey: "grading",
+   123→    fields: [
+   124→      { key: "collection", label: "Collection (e.g. Bukhari)", type: "text", required: true },
+   125→      { key: "number", label: "Hadith number", type: "text" },
+   126→      { key: "narrator", label: "Narrator", type: "text" },
+   127→      { key: "translationEn", label: "Translation (English)", type: "textarea", required: true },
+   128→      { key: "arabic", label: "Arabic text", type: "textarea" },
+   129→      { key: "grading", label: "Grading", type: "select", options: GRADINGS },
+   130→      { key: "gradingDisputed", label: "Grading disputed", type: "checkbox" },
+   131→    ],
+   132→  },
+   133→  {
+   134→    value: "quran", label: "Qur'an verse", labelKey: "quranLabel", titleKey: "surahNameEn",
+   135→    fields: [
+   136→      { key: "surah", label: "Surah number", type: "number", required: true },
+   137→      { key: "ayah", label: "Ayah number", type: "number", required: true },
+   138→      { key: "surahNameEn", label: "Surah name (English)", type: "text", required: true },
+   139→      { key: "surahNameAr", label: "Surah name (Arabic)", type: "text" },
+   140→      { key: "arabic", label: "Arabic text", type: "textarea", required: true },
+   141→      { key: "translationEn", label: "Translation (English)", type: "textarea", required: true },
+   142→      { key: "translationUr", label: "Translation (Urdu)", type: "textarea" },
+   143→    ],
+   144→  },
+   145→  {
+   146→    value: "comparison", label: "Madhhab comparison", labelKey: "comparisonsLabel", titleKey: "issue",
+   147→    fields: [
+   148→      { key: "issue", label: "Issue", type: "text", required: true },
+   149→      { key: "hanafi", label: "Hanafi position", type: "textarea" },
+   150→      { key: "shafii", label: "Shafi'i position", type: "textarea" },
+   151→      { key: "maliki", label: "Maliki position", type: "textarea" },
+   152→      { key: "hanbali", label: "Hanbali position", type: "textarea" },
+   153→      { key: "other", label: "Other (Ahl-e-Hadith etc.)", type: "textarea" },
+   154→      { key: "notes", label: "Notes", type: "textarea" },
+   155→    ],
+   156→  },
+   157→];
+   158→
+   159→const PAGE_SIZE = 15;
+   160→
+   161→type Rec = Record<string, unknown> & { id: string };
+   162→
+   163→export function EntityEditor() {
+   164→  const t = useT();
+   165→  const { toast } = useToast();
+   166→  const [entity, setEntity] = useState(ENTITIES[0]);
+   167→  const [records, setRecords] = useState<Rec[] | null>(null);
+   168→  const [total, setTotal] = useState(0);
+   169→  const [q, setQ] = useState("");
+   170→  const [page, setPage] = useState(1);
+   171→  const [editing, setEditing] = useState<{ mode: "create" | "edit"; rec?: Rec } | null>(null);
+   172→  const [deleting, setDeleting] = useState<Rec | null>(null);
+   173→  const [bulkConfirm, setBulkConfirm] = useState(false);
+   174→  const [bulkStatusValue, setBulkStatusValue] = useState("");
+   175→  const [selected, setSelected] = useState<Set<string>>(new Set());
+   176→  const [busy, setBusy] = useState(false);
+   177→  const [sort, setSort] = useState<"newest" | "disputed" | "helpful">("newest");
+   178→
+   179→  const load = useCallback(async () => {
+   180→    setRecords(null);
+   181→    try {
+   182→      const d = await apiGet<{ records: Rec[]; total?: number }>(`/api/admin/resource?entity=${entity.value}`);
+   183→      setRecords(d.records);
+   184→      setTotal(d.total ?? d.records.length);
+   185→    } catch {
+   186→      setRecords([]);
+   187→      setTotal(0);
+   188→    }
+   189→  }, [entity]);
+   190→
+   191→  useEffect(() => { load(); }, [load]);
+   192→
+   193→  // Reset selection when switching entities.
+   194→  useEffect(() => { setSelected(new Set()); setBulkStatusValue(""); setSort("newest"); }, [entity]);
+   195→
+   196→  /** Summed reader-vote tallies across a question's answers. */
+   197→  const voteSums = (r: Rec): { up: number; down: number; count: number } => {
+   198→    const answers = (r.answers as { helpfulUp?: number; helpfulDown?: number }[] | undefined) ?? [];
+   199→    return {
+   200→      up: answers.reduce((s, a) => s + (a.helpfulUp ?? 0), 0),
+   201→      down: answers.reduce((s, a) => s + (a.helpfulDown ?? 0), 0),
+   202→      count: answers.length,
+   203→    };
+   204→  };
+   205→
+   206→  const filtered = useMemo(() => {
+   207→    if (!records) return null;
+   208→    const needle = q.trim().toLowerCase();
+   209→    const matched = needle
+   210→      ? records.filter((r) => JSON.stringify(r).toLowerCase().includes(needle))
+   211→      : records;
+   212→    if (entity.feedback && sort !== "newest") {
+   213→      const scored = [...matched].sort((a, b) => {
+   214→        const va = voteSums(a), vb = voteSums(b);
+   215→        return sort === "disputed" ? vb.down - va.down || vb.up - va.up : vb.up - va.up || vb.down - va.down;
+   216→      });
+   217→      return scored;
+   218→    }
+   219→    return matched;
+   220→  }, [records, q, entity, sort]);
+   221→
+   222→  const pageCount = Math.max(1, Math.ceil((filtered?.length ?? 0) / PAGE_SIZE));
+   223→  const safePage = Math.min(page, pageCount);
+   224→  const pageRecords = useMemo(
+   225→    () => filtered?.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE) ?? null,
+   226→    [filtered, safePage]
+   227→  );
+   228→
+   229→  // Reset to first page whenever entity or query changes.
+   230→  useEffect(() => { setPage(1); }, [entity, q]);
+   231→
+   232→  const onDelete = async () => {
+   233→    if (!deleting) return;
+   234→    setBusy(true);
+   235→    try {
+   236→      await apiAdmin("/api/admin/resource", { entity: entity.value, id: deleting.id }, "DELETE");
+   237→      toast({ title: `${entity.label} deleted` });
+   238→      setDeleting(null);
+   239→      await load();
+   240→    } catch (e) {
+   241→      toast({ title: e instanceof Error ? e.message : "Delete failed", variant: "destructive" });
+   242→    } finally { setBusy(false); }
+   243→  };
+   244→
+   245→  const toggleSelect = (id: string, on: boolean) => {
+   246→    setSelected((prev) => {
+   247→      const next = new Set(prev);
+   248→      if (on) next.add(id);
+   249→      else next.delete(id);
+   250→      return next;
+   251→    });
+   252→  };
+   253→
+   254→  const allPageSelected = !!pageRecords && pageRecords.length > 0 && pageRecords.every((r) => selected.has(r.id));
+   255→  const toggleSelectPage = () => {
+   256→    setSelected((prev) => {
+   257→      const next = new Set(prev);
+   258→      if (pageRecords && !allPageSelected) pageRecords.forEach((r) => next.add(r.id));
+   259→      else if (pageRecords) pageRecords.forEach((r) => next.delete(r.id));
+   260→      return next;
+   261→    });
+   262→  };
+   263→
+   264→  const onBulkDelete = async () => {
+   265→    if (selected.size === 0) return;
+   266→    setBusy(true);
+   267→    let done = 0;
+   268→    let failed = 0;
+   269→    for (const id of selected) {
+   270→      try {
+   271→        await apiAdmin("/api/admin/resource", { entity: entity.value, id }, "DELETE");
+   272→        done += 1;
+   273→      } catch {
+   274→        failed += 1;
+   275→      }
+   276→    }
+   277→    setBulkConfirm(false);
+   278→    setSelected(new Set());
+   279→    toast({
+   280→      title: failed === 0 ? `${done} ${entity.label} records deleted` : `${done} deleted · ${failed} failed`,
+   281→      variant: failed === 0 ? "default" : "destructive",
+   282→    });
+   283→    await load();
+   284→    setBusy(false);
+   285→  };
+   286→
+   287→  /** Bulk workflow action: set the same status field on every selected record. */
+   288→  const onBulkStatus = async () => {
+   289→    if (selected.size === 0 || !entity.bulkStatus || !bulkStatusValue) return;
+   290→    setBusy(true);
+   291→    let done = 0;
+   292→    let failed = 0;
+   293→    for (const id of selected) {
+   294→      try {
+   295→        await apiAdmin("/api/admin/resource", { entity: entity.value, id, data: { [entity.bulkStatus.key]: bulkStatusValue } }, "PATCH");
+   296→        done += 1;
+   297→      } catch {
+   298→        failed += 1;
+   299→      }
+   300→    }
+   301→    toast({
+   302→      title: failed === 0
+   303→        ? `${done} updated → ${bulkStatusValue.replaceAll("_", " ").toLowerCase()}`
+   304→        : `${done} updated · ${failed} failed`,
+   305→      variant: failed === 0 ? "default" : "destructive",
+   306→    });
+   307→    if (failed === 0) setSelected(new Set());
+   308→    await load();
+   309→    setBusy(false);
+   310→  };
+   311→
+   312→  return (
+   313→    <Card>
+   314→      <CardHeader className="pb-3">
+   315→        <div className="flex flex-wrap items-center justify-between gap-3">
+   316→          <CardTitle className="text-base">{t("entityEditor")}</CardTitle>
+   317→          <div className="flex flex-wrap items-center gap-2">
+   318→            <Select value={entity.value} onValueChange={(v) => setEntity(ENTITIES.find((e) => e.value === v) ?? ENTITIES[0])}>
+   319→              <SelectTrigger className="h-9 w-44 text-xs" aria-label="Entity">
+   320→                <SelectValue />
+   321→              </SelectTrigger>
+   322→              <SelectContent>
+   323→                {ENTITIES.map((e) => (
+   324→                  <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
+   325→                ))}
+   326→              </SelectContent>
+   327→            </Select>
+   328→            <div className="relative">
+   329→              <Search className="absolute start-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
+   330→              <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("search") + "…"} className="h-9 w-40 ps-8 text-xs" />
+   331→            </div>
+   332→            {entity.feedback && (
+   333→              <Select value={sort} onValueChange={(v) => setSort(v as typeof sort)}>
+   334→                <SelectTrigger className="h-9 w-40 text-xs" aria-label={t("sortLabel")}>
+   335→                  <SelectValue />
+   336→                </SelectTrigger>
+   337→                <SelectContent>
+   338→                  <SelectItem value="newest">{t("sortLabel")}: {t("sortNewest")}</SelectItem>
+   339→                  <SelectItem value="disputed">{t("sortLabel")}: {t("sortDisputed")}</SelectItem>
+   340→                  <SelectItem value="helpful">{t("sortLabel")}: {t("sortHelpful")}</SelectItem>
+   341→                </SelectContent>
+   342→              </Select>
+   343→            )}
+   344→            <Button size="sm" className="h-9 gap-1.5 bg-emerald-700 text-white hover:bg-emerald-800" onClick={() => setEditing({ mode: "create" })}>
+   345→              <Plus className="h-4 w-4" /> {t("createNew")}
+   346→            </Button>
+   347→          </div>
+   348→        </div>
+   349→      </CardHeader>
+   350→      <CardContent>
+   351→        {!pageRecords && (
+   352→          <div className="space-y-2">{[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 rounded-lg" />)}</div>
+   353→        )}
+   354→        {pageRecords && pageRecords.length === 0 && (
+   355→          <p className="py-8 text-center text-sm text-muted-foreground">{t("noResults")}</p>
+   356→        )}
+   357→        {pageRecords && pageRecords.length > 0 && (
+   358→          <div
+   359→            className={cn(
+   360→              "mb-2 flex min-h-9 flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-1.5 text-xs transition-colors",
+   361→              selected.size > 0
+   362→                ? "border-emerald-300 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/40"
+   363→                : "bg-muted/40"
+   364→            )}
+   365→          >
+   366→            <label className="flex cursor-pointer items-center gap-2 font-medium">
+   367→              <Checkbox checked={allPageSelected} onCheckedChange={() => toggleSelectPage()} aria-label="Select page" />
+   368→              {selected.size > 0
+   369→                ? t("bulkSelected").replace("{n}", String(selected.size))
+   370→                : "Select page"}
+   371→            </label>
+   372→            {selected.size > 0 && (
+   373→              <div className="flex flex-wrap items-center gap-1.5">
+   374→                {entity.bulkStatus && (
+   375→                  <div className="flex items-center gap-1">
+   376→                    <Select value={bulkStatusValue} onValueChange={setBulkStatusValue}>
+   377→                      <SelectTrigger className="h-7 w-36 text-[11px]" aria-label={t("bulkStatusLabel")}>
+   378→                        <SelectValue placeholder={t("bulkStatusLabel")} />
+   379→                      </SelectTrigger>
+   380→                      <SelectContent>
+   381→                        {entity.bulkStatus.options.map((o) => (
+   382→                          <SelectItem key={o} value={o}>{o.replaceAll("_", " ")}</SelectItem>
+   383→                        ))}
+   384→                      </SelectContent>
+   385→                    </Select>
+   386→                    <Button
+   387→                      size="sm"
+   388→                      className="h-7 gap-1.5 bg-emerald-700 px-2.5 text-[11px] text-white hover:bg-emerald-800 disabled:opacity-50"
+   389→                      disabled={!bulkStatusValue || busy}
+   390→                      onClick={onBulkStatus}
+   391→                    >
+   392→                      <Workflow className="h-3 w-3" /> {t("bulkApply")}
+   393→                    </Button>
+   394→                  </div>
+   395→                )}
+   396→                <Button
+   397→                  size="sm"
+   398→                  variant="ghost"
+   399→                  className="h-7 px-2 text-[11px] text-muted-foreground"
+   400→                  onClick={() => setSelected(new Set())}
+   401→                >
+   402→                  {t("clearSelection")}
+   403→                </Button>
+   404→                <Button
+   405→                  size="sm"
+   406→                  className="h-7 gap-1.5 bg-red-700 px-2.5 text-[11px] text-white hover:bg-red-800"
+   407→                  onClick={() => setBulkConfirm(true)}
+   408→                >
+   409→                  <Trash2 className="h-3 w-3" /> {t("bulkDelete")}
+   410→                </Button>
+   411→              </div>
+   412→            )}
+   413→          </div>
+   414→        )}
+   415→        {pageRecords && pageRecords.length > 0 && (
+   416→          <div className="max-h-[28rem] divide-y overflow-y-auto rounded-lg border">
+   417→            {pageRecords.map((r) => {
+   418→              const status = entity.statusKey ? String(r[entity.statusKey] ?? "") : null;
+   419→              const isSelected = selected.has(r.id);
+   420→              return (
+   421→                <div
+   422→                  key={r.id}
+   423→                  className={cn(
+   424→                    "flex items-center gap-3 p-3 transition-colors",
+   425→                    isSelected ? "bg-emerald-50/60 dark:bg-emerald-950/30" : "hover:bg-accent/40"
+   426→                  )}
+   427→                >
+   428→                  <Checkbox
+   429→                    checked={isSelected}
+   430→                    onCheckedChange={(c) => toggleSelect(r.id, c === true)}
+   431→                    aria-label={`Select ${String(r[entity.titleKey] ?? r.id)}`}
+   432→                  />
+   433→                  <div className="min-w-0 flex-1">
+   434→                    <p className="truncate text-sm font-medium">{String(r[entity.titleKey] ?? r.id)}</p>
+   435→                    <p className="mt-0.5 line-clamp-1 text-[11px] text-muted-foreground">
+   436→                      {String(r[entity.fields.find((f) => f.type === "textarea")?.key ?? ""] ?? "")}
+   437→                    </p>
+   438→                  </div>
+   439→                  {entity.feedback && (() => {
+   440→                    const v = voteSums(r);
+   441→                    return (
+   442→                      <span
+   443→                        className="flex shrink-0 items-center gap-1"
+   444→                        title={`${t("sortHelpful")}: ${v.up} · ${t("notHelpful")}: ${v.down}`}
+   445→                      >
+   446→                        <span className="inline-flex items-center gap-0.5 rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+   447→                          <ThumbsUp className="h-2.5 w-2.5" aria-hidden />{v.up}
+   448→                        </span>
+   449→                        <span className="inline-flex items-center gap-0.5 rounded-full border border-rose-200 bg-rose-50 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-rose-800 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-300">
+   450→                          <ThumbsDown className="h-2.5 w-2.5" aria-hidden />{v.down}
+   451→                        </span>
+   452→                        <span className="inline-flex items-center rounded-full border bg-muted/60 px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-muted-foreground">
+   453→                          {v.count}
+   454→                        </span>
+   455→                      </span>
+   456→                    );
+   457→                  })()}
+   458→                  {status && (
+   459→                    <Badge variant="outline" className="shrink-0 text-[9px]">{status.replaceAll("_", " ")}</Badge>
+   460→                  )}
+   461→                  <div className="flex shrink-0 gap-1">
+   462→                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setEditing({ mode: "edit", rec: r })} aria-label="Edit">
+   463→                      <Pencil className="h-3.5 w-3.5" />
+   464→                    </Button>
+   465→                    <Button variant="ghost" size="icon" className="h-8 w-8 text-red-700 hover:text-red-800 dark:text-red-400" onClick={() => setDeleting(r)} aria-label="Delete">
+   466→                      <Trash2 className="h-3.5 w-3.5" />
+   467→                    </Button>
+   468→                  </div>
+   469→                </div>
+   470→              );
+   471→            })}
+   472→          </div>
+   473→        )}
+   474→        {pageRecords && pageRecords.length > 0 && (
+   475→          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+   476→            <span>
+   477→              {t("recordsTotal")}: <strong className="font-semibold text-foreground">{total}</strong>
+   478→              {q.trim() && <> · {t("matching")}: {filtered?.length}</>}
+   479→            </span>
+   480→            <div className="flex items-center gap-1.5">
+   481→              <Button
+   482→                variant="outline"
+   483→                size="icon"
+   484→                className="h-7 w-7"
+   485→                disabled={safePage <= 1}
+   486→                onClick={() => setPage((p) => Math.max(1, p - 1))}
+   487→                aria-label={t("prev")}
+   488→              >
+   489→                <ChevronLeft className="h-3.5 w-3.5 rtl:rotate-180" />
+   490→              </Button>
+   491→              <span className="px-1 tabular-nums">
+   492→                {t("pageLabel")} {safePage} / {pageCount}
+   493→              </span>
+   494→              <Button
+   495→                variant="outline"
+   496→                size="icon"
+   497→                className="h-7 w-7"
+   498→                disabled={safePage >= pageCount}
+   499→                onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+   500→                aria-label={t("next")}
+   501→              >
+   502→                <ChevronRight className="h-3.5 w-3.5 rtl:rotate-180" />
+   503→              </Button>
+   504→            </div>
+   505→          </div>
+   506→        )}
+   507→      </CardContent>
+   508→
+   509→      {/* Create / Edit dialog */}
+   510→      {editing && (
+   511→        <EntityForm
+   512→          entity={entity}
+   513→          rec={editing.mode === "edit" ? editing.rec : undefined}
+   514→          onClose={() => setEditing(null)}
+   515→          onSaved={async () => { setEditing(null); await load(); }}
+   516→        />
+   517→      )}
+   518→
+   519→      {/* Delete confirm */}
+   520→      <AlertDialog open={!!deleting} onOpenChange={(o) => !o && setDeleting(null)}>
+   521→        <AlertDialogContent>
+   522→          <AlertDialogHeader>
+   523→            <AlertDialogTitle>{t("deleteConfirmTitle")}</AlertDialogTitle>
+   524→            <AlertDialogDescription>
+   525→              {deleting ? String(deleting[entity.titleKey] ?? deleting.id) : ""} — {t("deleteConfirmBody")}
+   526→            </AlertDialogDescription>
+   527→          </AlertDialogHeader>
+   528→          <AlertDialogFooter>
+   529→            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+   530→            <AlertDialogAction
+   531→              className={cn("bg-red-700 text-white hover:bg-red-800")}
+   532→              disabled={busy}
+   533→              onClick={(e) => { e.preventDefault(); onDelete(); }}
+   534→            >
+   535→              {t("delete")}
+   536→            </AlertDialogAction>
+   537→          </AlertDialogFooter>
+   538→        </AlertDialogContent>
+   539→      </AlertDialog>
+   540→
+   541→      {/* Bulk delete confirm */}
+   542→      <AlertDialog open={bulkConfirm} onOpenChange={setBulkConfirm}>
+   543→        <AlertDialogContent>
+   544→          <AlertDialogHeader>
+   545→            <AlertDialogTitle>
+   546→              {t("bulkSelected").replace("{n}", String(selected.size))} — {t("deleteConfirmTitle")}
+   547→            </AlertDialogTitle>
+   548→            <AlertDialogDescription>{t("deleteConfirmBody")}</AlertDialogDescription>
+   549→          </AlertDialogHeader>
+   550→          <AlertDialogFooter>
+   551→            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+   552→            <AlertDialogAction
+   553→              className="bg-red-700 text-white hover:bg-red-800"
+   554→              disabled={busy}
+   555→              onClick={(e) => { e.preventDefault(); onBulkDelete(); }}
+   556→            >
+   557→              {busy ? t("saving") : t("bulkDelete")}
+   558→            </AlertDialogAction>
+   559→          </AlertDialogFooter>
+   560→        </AlertDialogContent>
+   561→      </AlertDialog>
+   562→    </Card>
+   563→  );
+   564→}
+   565→
+   566→/* ─── Dynamic create/edit form ─── */
+   567→function EntityForm({
+   568→  entity, rec, onClose, onSaved,
+   569→}: {
+   570→  entity: (typeof ENTITIES)[number];
+   571→  rec?: Rec;
+   572→  onClose: () => void;
+   573→  onSaved: () => Promise<void>;
+   574→}) {
+   575→  const t = useT();
+   576→  const { toast } = useToast();
+   577→  const [values, setValues] = useState<Record<string, unknown>>(() => {
+   578→    const init: Record<string, unknown> = {};
+   579→    for (const f of entity.fields) {
+   580→      init[f.key] = rec ? (rec[f.key] ?? (f.type === "checkbox" ? false : "")) : (f.type === "checkbox" ? false : "");
+   581→    }
+   582→    return init;
+   583→  });
+   584→  const [busy, setBusy] = useState(false);
+   585→
+   586→  const set = (k: string, v: unknown) => setValues((p) => ({ ...p, [k]: v }));
+   587→
+   588→  const save = async () => {
+   589→    for (const f of entity.fields) {
+   590→      if (f.required && !String(values[f.key] ?? "").trim()) {
+   591→        toast({ title: `${f.label} is required`, variant: "destructive" });
+   592→        return;
+   593→      }
+   594→      if (f.type === "number" && String(values[f.key] ?? "").trim() && Number.isNaN(Number(values[f.key]))) {
+   595→        toast({ title: `${f.label} must be a number`, variant: "destructive" });
+   596→        return;
+   597→      }
+   598→    }
+   599→    // Only send changed/own fields; strip relational noise; coerce numbers.
+   600→    const data: Record<string, unknown> = {};
+   601→    for (const f of entity.fields) {
+   602→      data[f.key] = f.type === "number"
+   603→        ? (String(values[f.key] ?? "").trim() === "" ? undefined : Number(values[f.key]))
+   604→        : values[f.key];
+   605→    }
+   606→    setBusy(true);
+   607→    try {
+   608→      if (rec) {
+   609→        await apiAdmin("/api/admin/resource", { entity: entity.value, id: rec.id, data }, "PATCH");
+   610→        toast({ title: `${entity.label} updated` });
+   611→      } else {
+   612→        await apiAdmin("/api/admin/resource", { entity: entity.value, data }, "POST");
+   613→        toast({ title: `${entity.label} created` });
+   614→      }
+   615→      await onSaved();
+   616→    } catch (e) {
+   617→      toast({ title: e instanceof Error ? e.message : "Save failed", variant: "destructive" });
+   618→    } finally { setBusy(false); }
+   619→  };
+   620→
+   621→  return (
+   622→    <Dialog open onOpenChange={(o) => !o && onClose()}>
+   623→      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+   624→        <DialogHeader>
+   625→          <DialogTitle>{rec ? t("editRecord") : t("createNew")} — {entity.label}</DialogTitle>
+   626→          <DialogDescription>
+   627→            {rec ? t("editRecordHint") : t("createNewHint")}
+   628→          </DialogDescription>
+   629→        </DialogHeader>
+   630→        <div className="space-y-3.5 py-1">
+   631→          {entity.fields.map((f) => (
+   632→            <div key={f.key}>
+   633→              {f.type === "checkbox" ? (
+   634→                <label className="flex cursor-pointer items-center gap-2 text-sm">
+   635→                  <Checkbox checked={!!values[f.key]} onCheckedChange={(c) => set(f.key, c === true)} />
+   636→                  {f.label}
+   637→                </label>
+   638→              ) : f.type === "select" ? (
+   639→                <div>
+   640→                  <p className="mb-1.5 text-xs font-medium text-muted-foreground">{f.label}</p>
+   641→                  <Select value={String(values[f.key] ?? "")} onValueChange={(v) => set(f.key, v)}>
+   642→                    <SelectTrigger className="text-sm"><SelectValue placeholder={f.label} /></SelectTrigger>
+   643→                    <SelectContent>
+   644→                      {(f.options ?? []).map((o) => (
+   645→                        <SelectItem key={o} value={o}>{o.replaceAll("_", " ")}</SelectItem>
+   646→                      ))}
+   647→                    </SelectContent>
+   648→                  </Select>
+   649→                </div>
+   650→              ) : (
+   651→                <div>
+   652→                  <p className="mb-1.5 text-xs font-medium text-muted-foreground">
+   653→                    {f.label}{f.required && <span className="text-red-600"> *</span>}
+   654→                  </p>
+   655→                  {f.type === "textarea" ? (
+   656→                    <Textarea value={String(values[f.key] ?? "")} onChange={(e) => set(f.key, e.target.value)} rows={4} className="text-sm" />
+   657→                  ) : f.type === "number" ? (
+   658→                    <Input
+   659→                      type="number"
+   660→                      value={String(values[f.key] ?? "")}
+   661→                      onChange={(e) => set(f.key, e.target.value)}
+   662→                      className="text-sm"
+   663→                      inputMode="numeric"
+   664→                    />
+   665→                  ) : (
+   666→                    <Input value={String(values[f.key] ?? "")} onChange={(e) => set(f.key, e.target.value)} className="text-sm" />
+   667→                  )}
+   668→                </div>
+   669→              )}
+   670→            </div>
+   671→          ))}
+   672→        </div>
+   673→        <DialogFooter className="gap-2">
+   674→          <Button variant="outline" onClick={onClose} disabled={busy}>{t("cancel")}</Button>
+   675→          <Button className="bg-emerald-700 text-white hover:bg-emerald-800" onClick={save} disabled={busy}>
+   676→            {busy ? t("saving") : t("save")}
+   677→          </Button>
+   678→        </DialogFooter>
+   679→      </DialogContent>
+   680→    </Dialog>
+   681→  );
+   682→}
+   683→
