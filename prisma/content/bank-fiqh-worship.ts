@@ -49,6 +49,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "No — the authenticity of the raising narrations is agreed upon; the Hanafi school differs over their interpretation and reconciliation, not over their authenticity.",
     shortAnswerUr: "نہیں — رفع یدین کی روایات کی صحت پر سب کا اتفاق ہے؛ حنفی مذہب ان کی تاویل اور تدارک میں اختلاف رکھتا ہے، ان کی صحت میں نہیں۔",
     shortAnswerAr: "لا — صحت روايات الرفع محل اتفاق؛ واختلاف المدرسة الحنفية في تأويلها وجمعها بينها، لا في صحتها.",
+    detailedAnswer:
+      "The charge conflates two different questions: is the narration authentic (thubut), and what does it establish legally (dalalah and application)? The school answers 'yes' to the first without hesitation — its hadith masters graded the raising reports sound and wrote commentary on Bukhari's Sahih itself. What it disputes is the second step: the inference that an authentic report of raising at ruku' automatically fixes permanent practice when read in isolation from the corpus.\n\nHanafi usul reads narrations as a whole. The raising reports stand beside the full description-cluster of the Prophet's ﷺ settled prayer — Bara's complete description (in Muslim's Sahih) mentions the opening raising only — and beside reports of the Companions' transmitted form. The school's jurists, al-Tahawi modelling the method in Sharh Ma'ani al-Athar, reconcile the families: the settled-practice descriptions outweigh or are read as superseding the additional raisings — an intra-evidential judgment (tarjih and naskh reasoning), not a rejection of Bukhari.\n\nThe school's later jurists documented the reconciliation openly rather than hiding it, and the reading of the disagreement as intra-evidential is precisely what the platform's raf'-al-yadayn cluster records. Both schools pray validly; the dispute is a method disagreement inside a shared commitment to the Sunnah — which is why the objection's premise (rejection) misdescribes its object (reconciliation).",
     commonObjection: "\"Hanafis reject Bukhari because they don't raise their hands.\"",
     scholarlyResponse:
       "Abu Hanifa was a hadith scholar a century before Bukhari compiled his Sahih; Hanafi hadith masters (like Mulla Ali al-Qari in Umdat al-Qari) wrote commentaries on Bukhari itself. The raf' al-yadayn difference is an intra-evidential reading.",
@@ -100,6 +102,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "Yes — all four schools agree the hands are raised to the shoulders/ears at takbir al-tahrimah (the opening takbir); the dispute is only about later raising.",
     shortAnswerUr: "جی ہاں — چاروں مکاتبِ فکر متفق ہیں کہ تکبیرِ تحریمیہ (ابتدائی تکبیر) پر ہاتھ کندھوں/کانوں تک اٹھائے جاتے ہیں؛ اختلاف صرف اس کے بعد کے رفع یدین میں ہے۔",
     shortAnswerAr: "نعم — اتفقت المذاهب الأربعة على أن اليدين ترفعان إلى الكتفين/الأذنين عند تكبيرة الإحرام (التكبيرة الأولى)، والنزاع فقط في الرفع بعد ذلك.",
+    detailedAnswer:
+      "The unanimity is itself instructive: every school's evidence-cluster contains the opening raising. Wa'il ibn Hujr's report ties the gesture explicitly to the commencement — raising opposite the ears as the prayer begins — and none of the complete prayer-descriptions omits it, so no school has grounds to deny the first raising. The divergence begins at the next movement, ruku', which is why this question sits at the dispute's unanimous edge.\n\nThe school's manuals fix the form: the hands are raised to the ears (the men's measure; women raise to the shoulders) and then folded below the navel after the takbir. The gesture carries meaning the books name: takbir al-tahrimah is salah's entrance — by the school's enumeration it is one of the pillars (faraid) — and with it the ordinary world's speech and action are prohibited; the raised hands enact the putting-off of worldly concerns at the threshold of standing before Allah.\n\nThis is why even the beginners' manuals (Nur al-Idah) state the opening raising plainly while the later-raisings question was left to the evidence-books: the first raising is transmission-fixed and agreed; only the repetitions afterwards required weighing.",
     hanafiPosition: "Raised to the ears at the opening takbir, then lowered.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari", number: "739", translation: "paraphrased translation — raising opposite the ears at the commencement of prayer (Wa'il ibn Hujr)", status: "PARTIALLY_VERIFIED", note: "authenticity agreed" },
@@ -125,9 +129,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "عمل المدرسة أن ترفع اليدين عند تكبيرة الإحرام فقط؛ وتكبيرات صلاة العيد مذكورة في كتب المدرسة، والغالب في العمل رفع اليدين دون تمام ما في التكبيرة الأولى.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Salah — Eid prayer", translation: "The Eid takbirs are discussed within the prayer manual.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah — Eid prayer", translation: "The Eid takbirs and the hand-raising question within the school's discussion.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Raising hands in Eid takbirs Hanafi", "Do Hanafis raise hands for takbir?"],
     related: ["salah-takbir-opening", "salah-raf-yadayn-why"],
+    detailedAnswer:
+      "The school ties the raised-hand gesture to the entrance into prayer (takbir al-tahrimah) rather than to takbir words as such: once the prayer has begun, the school's transmitted descriptions of the Prophet's ﷺ prayer show no further hand-raising, so the Eid takbirs are said without the opening-style motion. The Eid takbir structure itself (twelve takbirs in the first rak'ah and seven in the second, per the school's manuals) is codified alongside a discussion of whether the hands accompany them; the dominant transmitted practice keeps the raising at the opening only, while some school texts record the alternative. The reasoning mirrors the school's raf' al-yadayn framework: the gesture belongs to the entrance, and worship gestures follow the settled description-cluster rather than occasional reports. Shafi'i jurists read the raising reports as continuous practice and raise at each Eid takbir — a documented difference in gesture, not in the takbir structure itself.",
+    hanafiPosition: "No full opening-style raising during the Eid takbirs; the school's dominant practice raises without the full motion, and its manuals note the transmission difference.",
+    otherViews: "Shafi'i/Hanbali: the hands are raised at each Eid takbir, reading the raising reports as the Prophet's ﷺ settled practice; the takbir counts and placements otherwise agree.",
   },
   {
     slug: "salah-ameen-quiet",
@@ -177,9 +186,19 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Adhan (Ameen hadiths)", translation: "The command hadiths are engaged and applied to followers.", status: "PARTIALLY_VERIFIED", note: "number per common edition: Bukhari 780" },
       { kind: "BOOK", ref: "Sharh Ma'ani al-Athar (al-Tahawi)", translation: "Hadith-reconciliation chapters covering the Ameen dispute.", status: "PARTIALLY_VERIFIED" },
       { kind: "BOOK", ref: "Al-Ikhtiyar li-Ta'lil al-Mukhtar (al-Mawsili), Kitab al-Salah", translation: "The evidence-carrying discussion of Ameen's status (sunnah, quiet).", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari", number: "780", translation: "paraphrased translation — 'when the imam says Ameen, say Ameen' (Abu Huraira)", status: "VERIFIED", note: "whitelisted number; authenticity agreed, application disputed" },
+      { kind: "HADITH", ref: "Sahih Muslim", number: "410", translation: "paraphrased translation — the Ameen command with the imam/reciter", status: "VERIFIED", note: "whitelisted number; authenticity agreed, application disputed" },
+      { kind: "HADITH", ref: "The school's evidence works (narration of 'Ali — the Companions' Ameen not audible two rows away)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at narrator level" },
     ],
     variants: ["Proof for quiet Ameen", "Hanafi daleel for silent Ameen"],
     related: ["salah-ameen-quiet", "salah-ameen-loud-invalid"],
+    detailedAnswer:
+      "The school begins by accepting the command reports whole: 'when the imam says Ameen, say Ameen' (Bukhari 780; Muslim 410) and the angels' Ameen with the reciter are part of its own evidence. The dispute is the reading of the command's occasion: the Hanafi jurists read the followers' Ameen as a response to the recitation they hear — the same category as saying 'ameen' to a supplication outside prayer, which is said quietly — so the response follows the quietness of invocation in salah. To this the school adds the report that the Companions' Ameen was not audible two rows away (narrated from 'Ali, cited at narrator level in the school's evidence works), and the settled quiet practice of the Kufan generations. Al-Tahawi's reconciliation chapters model the method: the command reports and the quietness indicators both stand; the jurist reads the command within its situation rather than extracting a volume-level from a single wording.",
+    hanafiPosition: "Ameen is a sunnah said quietly; the command reports address the follower responding after the imam's recitation, and responses are quiet.",
+    otherViews: "Shafi'i/Hanbali: the commands encourage an audible Ameen in the loud prayers, and their manuals codify jahr; Maliki practice is quiet.",
+    commonObjection: "\"Quiet Ameen has no evidence — the authentic hadith commands Ameen after the imam raises his voice.\"",
+    scholarlyResponse:
+      "The command reports are the school's evidence too; what differs is the grammatical-situational reading (response to recitation versus independent loud utterance), supported by the two-rows report and the quietness of all invocations in salah. This is an intra-evidential disagreement, not a dismissal of the hadith.",
   },
   {
     slug: "salah-ameen-loud-invalid",
@@ -196,6 +215,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "No — loud Ameen does not invalidate salah; the school classifies it as contrary to its preferred practice (makruh tanzihi in its framework) and prayers across the madhhabs remain valid by the scholars' agreement.",
     shortAnswerUr: "نہیں — بلند آمین نماز کو باطل نہیں کرتا؛ مذہب اسے اپنے مرغوب عمل کے خلاف قرار دیتا ہے (اپنے نظام میں مکروہ تنزیہاً) اور علما کے اتفاق سے تمام مذہبوں کی نمازیں صحیح رہتی ہیں۔",
     shortAnswerAr: "لا — الجهر بالآمين لا يبطل الصلاة؛ وتصنفه المدرسة خلافًا لعملها المرغوب (كروه تنزيهًا في نظامها)، وتبقى صلوات المذاهب كلها صحيحة باتفاق العلماء.",
+    detailedAnswer:
+      "The school's legal architecture separates fixed invalidators from graded dislikes. The nullifier-list — loss of purity, loud laughter, deliberate turning from the qiblah and their siblings — is closed and source-derived; audible Ameen is not on it, and the books say plainly that the prayer of one who says it aloud is sound. The category is principled: Ameen is an act of dhikr whose sunnah-status both schools affirm, and the school does not convert an agreed devotional act into a prayer-breaker.\n\nThe grading makruh tanzihi does precise work: it marks conduct contrary to the school's preferred practice without approaching prohibition — the milder of the two dislike-grades — and it is exactly the grade a school assigns to another school's validated practice when measured on its own scale. Ibn Abidin's discussion places loud Ameen among the disliked-but-not-invalidating matters, keeping the taxonomy coherent.\n\nThe practical upshot: a Hanafi worshipper says Ameen quietly behind his own imam; behind an imam of another practice he follows the imam's visible method; and because the scholars agree that salah across the madhhabs is valid, the difference never divides a congregation — the tradition's disagreement-management working as designed.",
     hanafiPosition: "Quiet Ameen is the school's practice; loud Ameen is not an invalidator.",
     practicalInfo: "Followers follow their imam; validity is not affected by the madhhab difference.",
     sources: [
@@ -249,6 +270,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "In the Hanafi framework the follower's recitation obligation in loud prayers is discharged by the imam's recitation; in silent prayers the follower recites Fatiha himself. In the Shafi'i framework Fatiha remains personally wajib behind the imam.",
     shortAnswerUr: "حنفی نظام میں جہری نمازوں میں مقتدی کی تلاوت کی ذمہ داری امام کی تلاوت سے ادا ہو جاتی ہے؛ سری نمازوں میں مقتدی خود فاتحہ پڑھتا ہے۔ شافعی نظام میں امام کے پیچھے بھی فاتحہ شخصاً واجب رہتی ہے۔",
     shortAnswerAr: "في النظام الحنفي تؤدَّى واجب تلاوة المأموم في الصلوات الجهرية بتلاوة الإمام؛ وفي السرية يقرأ المأموم الفاتحة بنفسه. وفي النظام الشافعي تبقى الفاتحة واجبة شخصًا خلف الإمام.",
+    detailedAnswer:
+      "The school distributes recitation between imam and congregation rather than duplicating it. Al-A'raf 7:204 — 'when the Qur'an is recited, listen and be silent' — together with the reports describing the imam's recitation as the follower's own, yields the governing rule: where the imam's recitation is actually heard (Fajr, Maghrib, 'Isha and the other jahri prayers), the follower listens; where nothing reaches him (Zuhr, 'Asr), the obligation returns and he recites Fatiha himself.\n\nThe 'no prayer without Fatiha' reports are fully accepted in the school — the reconciliation is one of application, not authenticity. The listening-command specifies the congregational case, the way commands about private and congregational worship interlock rather than collide; al-Tahawi's chapters on these narrations remain the classical demonstration of the method, and the school's manuals carry the resulting practice into the prayer-forms themselves.\n\nThe Shafi'i reading treats the Fatiha reports as a personal pillar operative behind the imam as well, taking the listening verses outside that frame. Each system is internally consistent; the platform records both. The school's asymmetry — silent in loud prayer, reciting in silent prayer — is the practical fingerprint of its evidence-reading, which is also why the manuals emphasize stillness and attentive listening as the follower's active duty in the jahri prayers.",
     hanafiPosition: "Fatiha behind a reciting imam is not an independent obligation; listening replaces it.",
     otherViews: "Shafi'i/Hanbali: Fatiha is required personally in every rak'ah.",
     sources: [
@@ -275,9 +298,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "القراءة جهرية في الفجر والمغرب والعشاء (والجمعة/العيد) وسرية في الظهر والعصر — وهذا محل اتفاق المذاهب؛ والخاص بالحنفية أن المأموم يستمع في الجهريات.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "Loud vs silent prayer distribution.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah", translation: "The loud/silent distribution and the follower's recitation rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Ikhtiyar li-Ta'lil al-Mukhtar (al-Mawsili), Kitab al-Salah", translation: "The discussion of the follower listening in the loud prayers.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Which prayers are loud?", "When is recitation silent in salah?"],
     related: ["salah-recitation-behind-imam"],
+    detailedAnswer:
+      "The distribution itself is agreed from the description reports of the Prophet's ﷺ practice: recitation aloud in Fajr, Maghrib and 'Isha (and in Jumu'ah and the Eids), silent in Zuhr and 'Asr. The Hanafi distinctive lies one step further: in the loud prayers the follower LISTENS, because the school reads Al-A'raf 7:204 and the 'imam's recitation is his recitation' report as transferring the recitation to the imam for the listening congregation; in the silent prayers nothing is heard, so recitation returns to each worshipper (Fatiha per the school's mu'tamad, with the surah question discussed in the manuals). The manuals also clarify that 'silent' recitation is not inaudible lip-motion but a voiced whisper one hears oneself. This is where the schools' follower-rules fork: the Shafi'i follower recites Fatiha even behind a reciting imam, reading the Fatiha reports as a personal obligation — the same evidential fork documented in the recitation-behind-imam questions.",
+    hanafiPosition: "Aloud in Fajr/Maghrib/'Isha (and Jumu'ah/Eid), whispered in Zuhr/'Asr; the follower listens in the loud prayers and recites in the silent ones.",
+    otherViews: "Shafi'i/Hanbali: the follower recites Fatiha personally even behind a reciting imam.",
   },
   {
     slug: "salah-hands-below-navel",
@@ -325,9 +354,17 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah (al-Fatawa al-'Alamgiriyyah), Kitab al-Salah", translation: "Below-navel placement recorded as the madhhab position.", status: "PARTIALLY_VERIFIED" },
       { kind: "BOOK", ref: "Maraqi al-Falah (al-Shurunbulali)", translation: "Prayer manual records the placement.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Musannaf Ibn Abi Shaybah, Kitab al-Salah (placement reports including from 'Ali)", translation: "Multiple athar on where the hands were placed in qiyam.", status: "PARTIALLY_VERIFIED", note: "kitab-level citation; athar collection" },
     ],
     variants: ["Evidence for hands below navel", "Is below navel placement authentic?"],
     related: ["salah-hands-below-navel"],
+    detailedAnswer:
+      "The mu'tamad manuals (Maraqi al-Falah; Fatawa Hindiyyah) record below-navel placement as the school's settled position, and the school's evidence works draw on the placement reports transmitted in Musannaf Ibn Abi Shaybah's Kitab al-Salah — several athar attributed to 'Ali (RA) describing the practice of placing the right hand over the left below the navel. The hand-HOLDING itself rests on agreed reports (right over left); the location is where the transmissions diverge. Honest bookkeeping: later hadith specialists examined the chains of the below-navel reports and voiced degrees of criticism, and the Shafi'i manuals rest on Wa'il's chest wording — the school's fiqh nonetheless kept the below-navel position as its transmitted practice, and the platform records both layers (the fiqh stability and the hadith-level discussion) rather than collapsing them. The school's rationale includes the modesty of posture in standing before Allah, with the practical agreement that placement is not an invalidating matter.",
+    hanafiPosition: "Below the navel, right over left — recorded as the settled position in the school's manuals.",
+    otherViews: "Shafi'i/Hanbali: on the chest, from Wa'il ibn Hujr's description; Maliki: hands at the sides (sadl). All schools agree on right-over-left.",
+    commonObjection: "\"The below-navel reports are weak — the practice has no authentic basis.\"",
+    scholarlyResponse:
+      "The school rests on the placement reports in the athar corpus (Musannaf Ibn Abi Shaybah) together with the transmitted practice of its jurists, holding that the agreed core — right over left — requires a fixed place, its transmission selecting below the navel. The chain-level debate is documented; the fiqh position is stable within the school. The disagreement is over transmission-weighing, not over the obligation of holding the hands.",
   },
   {
     slug: "salah-hands-chest",
@@ -347,9 +384,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari? — the Wa'il report on chest placement is transmitted in the raising narration corpus", translation: "The Wa'il description mentions the chest placement in some transmissions.", status: "UNVERIFIED", note: "transmission wording varies by edition" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "Discussion of placement reports and the school's selection.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Fath al-Qadir (Ibn al-Humam), Kitab al-Salah", translation: "The placement reports surveyed within the school's evidence discussion.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Do Hanafi scholars accept chest placement?", "Why do Salafis place hands on chest?"],
     related: ["salah-hands-below-navel", "madhhab-pray-behind-other-imam"],
+    detailedAnswer:
+      "Chest-placement wordings exist in the report corpus — chiefly within Wa'il ibn Hujr's prayer description, whose transmissions include placing the hands over the chest — and later Hanafi-era discussion (e.g. Radd al-Muhtar) acknowledges these reports while keeping the school's codified position below the navel. The school reads the chest wordings inside the same reconciliation framework applied to Wa'il's raising wordings: an early or occasional practice read against the settled description-cluster. Two further layers matter: (1) the evidential weight is low-stakes by the fiqh's own ranking — placement is a transmitted-posture question, not a pillar; (2) the agreed core (right over left, hands held) is universal. The respectful conclusion of the school's books: the difference is a legitimate one among the imams' followers, and neither posture invalidates salah.",
+    hanafiPosition: "The school's codified position stays below the navel; chest reports are acknowledged and treated within the school's reconciliation framework.",
+    otherViews: "Shafi'i/Hanbali: chest placement is the operative practice from Wa'il's description; the difference is a recognised madhhab divergence, with no invalidation claim either way.",
   },
   {
     slug: "salah-witr-wajib",
@@ -395,9 +437,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Witr (narration of 'Aisha on the Prophet's ﷺ three-rak'ah Witr)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Witr", translation: "Three-rak'ah Witr with one salam recorded as the school's method.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Witr", translation: "The connected Witr form and the school's reading of the divided forms.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Why is hanafi witr 3 rakats together?", "Witr method difference between madhhabs"],
     related: ["salah-witr-wajib", "salah-witr-method", "salah-witr-shafii-difference"],
+    detailedAnswer:
+      "The school's codified form — three rak'ahs performed together with a single salam, qunut before the ruku' of the third — rests on the description reports of the Prophet's ﷺ Witr, chiefly 'Aisha's report (in Bukhari's Witr chapter, cited at chapter level) that he prayed Witr three and did not salam until the last of them, together with the qunut reports. The school reads the two-then-one wordings (which other schools codify) as descriptions of how the night-prayer's odd number was divided on particular nights, and keeps the connected three as the transmitted, settled form — the same weighing-by-settled-practice method the school applies across salah. The status question is separate: for the school Witr is wajib (its distinctive tier), which is why its omission requires qada. Shafi'i jurists derive the 2+1 form from the night-practice reports and the Prophet's ﷺ division of his personal qiyam; both forms are old, documented, and internally evidenced.",
+    hanafiPosition: "Three connected rak'ahs with one salam and qunut before the third's ruku'; wajib status; missed Witr is made up.",
+    otherViews: "Shafi'i/Hanbali: two rak'ahs then a separate single rak'ah with two salams; Shafi'i qunut only in the second half of Ramadan, after rising from ruku'; Maliki practice spreads the odd number across the night.",
   },
   {
     slug: "salah-witr-method",
@@ -414,6 +461,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "Three rak'ahs performed together: after tashahhud of the third rak'ah, stand for the third, recite Fatiha + surah, then raise hands and say Allahu Akbar, recite du'a al-qunut, bow, complete with one salam.",
     shortAnswerUr: "تین رکعتیں باہم ادا کی جاتی ہیں: تیسری رکعت کے تشہد کے بعد تیسری رکعت کے لیے کھڑے ہوں، فاتحہ اور سورہ پڑھیں، پھر ہاتھ اٹھا کر اللہ اکبر کہیں، دعائے قنوت پڑھیں، رکوع کریں اور ایک سلام سے نماز مکمل کریں۔",
     shortAnswerAr: "ثلاث ركعات تؤدى متصلة: بعد تشهد الركعة الثالثة يُقوم للثالثة، فتُقرأ الفاتحة وسورة، ثم تُرفع اليدين ويقال الله أكبر، وتُقرأ دعاء القنوت، ثم يُركع، ويُختم بسلمة واحدة.",
+    detailedAnswer:
+      "The school's form encodes its reading of the transmitted witr-practice. Three rak'ahs joined continuously, with only a brief sitting (tawassut) after the second rak'ah's tashahhud, because the reports the school weighs — the 'Aisha-family witr descriptions among them — present a connected threefold witr, and the school reads the three rak'ahs as one continuous unit closed by a single salam; a deliberately prolonged sitting in that place is disliked, since it gestures toward the split form the school does not adopt.\n\nThe third rak'ah carries the qunut before ruku': after Fatiha and surah, the hands are raised (as at the opening takbir), the du'a al-qunut is said, then takbir into ruku' — the school's year-round placement, whose contrast with the Shafi'i form has its own question. One salam ends the prayer; the two-salam division is precisely the other transmitted practice the school declines.\n\nTime and status complete the frame. Witr runs from after the Isha fard until dawn, and the books prefer delaying it to the night's last part for one confident of waking, else praying before sleep. And because the school grades witr wajib, a missed witr is itself made up — the practical consequence of the status-grading treated in the wajib question.",
     practicalInfo: "This is the school's codified method; those following other imams/practices should follow their own school's books — both prayers are valid.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Witr", translation: "Step-by-step Witr method of the school.", status: "PARTIALLY_VERIFIED" },
@@ -438,9 +487,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "الحنفي: ثلاث ركعات متصلة، سلمة واحدة، القنوت قبل الركوع، والحكم الوجوب. الشافعي: ركعتان ثم ركعة منفصلة (سلمتان)، القنوت بعد الرفع من الركوع في النصف الثاني من رمضان، والحكم السنة.",
     sources: [
       { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Witr", translation: "The school's Witr framework and its contrast with other transmitted methods.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Witr", translation: "The school's Witr chapter as the comparative baseline.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Witr two salams vs one salam", "Which witr method is correct?"],
     related: ["salah-witr-wajib", "salah-witr-three", "salah-qunut-witr"],
+    detailedAnswer:
+      "The comparison runs along four axes. STATUS: the school grades Witr wajib (missed Witr owed qada); the Shafi'i school grades it sunnah mu'akkadah. FORM: the school codifies three connected rak'ahs with one salam; the Shafi'i school codifies two rak'ahs (with salam) plus a single separate rak'ah — each reading its own cluster of description reports. QUNUT: the school places qunut before the third rak'ah's ruku' year-round; the Shafi'i school places it after rising from ruku' and confines it to the second half of Ramadan. The reasoning difference is evidential: the school weighs the settled-practice descriptions ('Aisha's connected-Witr report) and the wajib-tier commands, while the Shafi'i school weighs the Prophet's ﷺ personal night-division reports and reads the qunut reports as Ramadan-tied. Historically both forms circulated in the Salaf's practice; each school codified a different emphasis. Neither school treats the other's Witr as invalid, and a follower prays Witr behind an imam according to the imam's visible practice.",
+    hanafiPosition: "Wajib; three connected rak'ahs; qunut before ruku' all year; one salam.",
+    otherViews: "Shafi'i: sunnah mu'akkadah; two salams (the 2+1 form); qunut after rising from ruku' in the second half of Ramadan; the Hanbali school shares the two-salam family of forms; Maliki practice allows the odd count across the night.",
+    practicalInfo: "In a mixed congregation, follow the imam's visible method — both forms are valid prayers; one's personal Witr follows one's own school's manual.",
   },
   {
     slug: "salah-qunut-witr",
@@ -485,9 +540,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "دعاء القنوت المنقول الذي يبدأ باللهم إنا نستعينك — الذي عُلّم الحسن بن علي رضي الله عنهما؛ ويجوز عند كتب المدرسة قنوت أوجز أو بديل.",
     sources: [
       { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Witr (Hasan ibn 'Ali)", translation: "The du'a text the Prophet ﷺ taught.", status: "UNVERIFIED", note: "number pending verification" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Witr", translation: "The qunut text and the permissibility of alternative transmitted du'as.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Qunut dua text Hanafi", "What to say in qunut?"],
     related: ["salah-qunut-witr"],
+    detailedAnswer:
+      "The school's transmitted text is the du'a taught to Hasan ibn 'Ali (RA) — 'Allahumma inna nasta'inuka wa nastaghfiruka wa nu'minu bika wa natawakkalu 'alayka wa nuthni 'alayka al-khayra kullahu wa nashkuruka wa la nakfuruka wa nakhla'u wa natruku man yafjuruk…' — recorded in Sunan Abi Dawud's Witr chapter and cited at collection/narrator level. The school's books add that the qunut is du'a, and any authentic transmitted du'a may replace it (or be shortened/lengthened), since the operative category is supplication rather than fixed scripture; the manuals note that the imam recites it quietly with the followers saying Ameen. The qunut is the imam's wajib in Witr — omitting it triggers sahw repair — while the follower's qunut is graded sunnah in the school's discussion. Shafi'i manuals transmit a different family of qunut wordings (their qunut al-nazilah texts); the difference is over which transmitted texts bind where, not over the lawfulness of du'a in salah.",
+    hanafiPosition: "The Hasan ibn 'Ali wording is the school's transmitted qunut; another authentic du'a may substitute; the imam's qunut is wajib in Witr.",
+    otherViews: "Shafi'i: their manuals codify the qunut al-nazilah wording family, placed after ruku' in the second half of Ramadan; the text-choices are a documented transmission difference.",
   },
   {
     slug: "salah-qunut-fajr",
@@ -506,9 +566,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "تفهم المدرسة روايات القنوت على أنها تثبت قنوت الوتر، وتجعل قنوت النازلة موقوفًا على الحادثة؛ أما قنوت الفجر المعتاد عند المذاهب الأخرى فلا يؤخذ لأن رواية المدرسة تقرن القنوت بالوتر.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "Qunut placements across prayers compared within the school.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Witr (Anas ibn Malik — the Fajr qunut after the calamity)", translation: "paraphrased translation — the Prophet ﷺ prayed Fajr with qunut following the Dhil Majaz incident", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Qunut in fajr Hanafi", "Do Hanafis do qunut in fajr?"],
     related: ["salah-qunut-witr"],
+    detailedAnswer:
+      "The school's transmission pairs qunut with Witr (before the ruku' of the third rak'ah, all year). The Fajr-qunut reports — chiefly Anas's (RA) accounts of the Prophet ﷺ praying Fajr with qunut after a calamity (the Dhil Majaz incident, recorded in the Sunan collections) — are read by the school as the case-based qunut al-nazilah (the calamity du'a), which the school permits in any prayer when a genuine calamity arises; they do not establish a fixed, recurring Fajr qunut. Shafi'i jurists read the same reports, together with their qunut corpus, as establishing a regular Fajr qunut (in their framework, in the second half of Ramadan, after rising from ruku') — their reasoning treats the reports as precedent for a standing practice rather than a one-time response. The disagreement is thus over the reports' application class (incident-response versus standing practice), and both readings are documented; neither school treats the other's qunut as invalidating.",
+    hanafiPosition: "No fixed Fajr qunut; Witr qunut before ruku' year-round; qunut al-nazilah permitted case-by-case.",
+    otherViews: "Shafi'i: regular Fajr qunut in the second half of Ramadan (after ruku'); Hanbali: second half of Ramadan (before ruku'); both rest on the Anas qunut reports.",
   },
   {
     slug: "salah-sajdah-sahw",
@@ -528,9 +593,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Sahw", translation: "The Prophet ﷺ performed two prostrations for forgetfulness in prayer.", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Sahw", translation: "The dedicated chapter on forgetfulness prostration.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari (report of Ibn Buhaynah within the eclipse-prayer material)", translation: "paraphrased translation — the Prophet ﷺ forgot a ruku', was reminded, and prostrated twice before salam", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
     ],
     variants: ["What is prostration of forgetfulness?", "How do I do sajdah sahw?"],
     related: ["salah-sajdah-sahw-when", "salah-wajib-forgotten"],
+    detailedAnswer:
+      "The institution descends from the Prophet's ﷺ own practice: the reports in Bukhari's Kitab al-Sahw (cited at chapter level) describe him forgetting within salah, completing, and then prostrating twice before the salam — and the report of Ibn Buhaynah within the eclipse-prayer material shows the pattern in action (he forgot a ruku', was reminded, completed, then performed two prostrations). The school organises the triggers into three: taqdim (acting early), ta'khir (delaying a wajib, e.g. rising without the first sitting) and tark (omitting a wajib, e.g. missing qunut) — each repaired by the two prostrations, while a missed fard cannot be repaired this way (the rak'ah or prayer is rebuilt instead, per the school's detail). Method per the school's manuals: in the final sitting, after tashahhud, two sajdahs, then tashahhud and salam. The mechanism's logic is dignity-preserving: forgetfulness is human, the prayer's structure is repaired, and the worshipper is not forced to restart for a wajib-level slip.",
+    hanafiPosition: "Two sahw prostrations before the salam, in the final sitting, repairing wajib-omissions and timing faults; fard-omissions are not repaired by them.",
+    otherViews: "Shafi'i/Hanbali: the prostrations are placed before the salam for some faults and after it for others (omission/delay distinctions); their trigger-lists are organised by their own taxonomy rather than the fard/wajib tier.",
+    practicalInfo: "When a fault occurs, complete the prayer and add the two sajdahs before salam; when unsure whether a fault occurred, the school's manuals advise performing them. For a specific prayer's case, ask your imam or a qualified teacher.",
   },
   {
     slug: "salah-sajdah-sahw-when",
@@ -573,9 +644,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "لا — جبر نسيان الواجب سجود السهو؛ ولا تبطل الصلاة إلا بترك فرض (ركن)، وعندها تُعاد الصلاة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Sahw", translation: "Wajib omission compensated; fard omission invalidates.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Sahw", translation: "The repair/void boundary between wajib and fard omissions.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Did my salah break if I forgot qunut?", "Forgot surah after fatiha"],
     related: ["salah-sajdah-sahw-when", "salah-fard-wajib-sunnah"],
+    detailedAnswer:
+      "The answer follows the school's tiered repair logic. A forgotten WAJIB is compensated: two sahw prostrations repair a missed qunut, a missed first sitting, a missed surah after Fatiha, and the like — the prayer remains intact after repair. A forgotten FARD is never compensated by prostrations: the affected rak'ah is rebuilt (the school's books detail how the worshipper repeats the rak'ah in place and continues, with the final sitting marking where rebuilding ends), and a prayer whose structure cannot be rebuilt is repeated from the start. The doubt-cases are governed by the certainty rule: suspicion that a fard or wajib was missed — without certainty — leaves the prayer standing (certainty is not removed by doubt), while certainty of a fard's omission triggers rebuilding and certainty of a wajib's omission triggers sahw. A deliberately omitted wajib is a different moral category: the prayer is flawed in the school's books and repetition is warranted, since the prostrations 'repair' only the forgetful case.",
+    hanafiPosition: "Forgotten wajib: repaired by two sahw prostrations. Forgotten fard: the affected rak'ah is rebuilt; the prayer is repeated where rebuilding is impossible. Mere doubt changes nothing.",
+    otherViews: "The other schools do not carry the fard/wajib tier; Shafi'i manuals organise sahw triggers by omission/delay/advance of their own graded elements, so the same slip can fall under different trigger-lists across schools.",
+    practicalInfo: "Quick triage: forgot a surah or the first sitting → continue and add sahw; certain you missed a sajdah → rebuild that rak'ah; only suspicious → continue. For a specific case, consult a qualified imam.",
   },
   {
     slug: "salah-masbuq",
@@ -618,9 +695,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "تُعد الركعة إذا انحنى المأموم للركوع قبل أن يرفع الإمام منها — ولو فاته بعض القيام والتلاوة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "The ruku'-catch rule for followers.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Salah — following the imam", translation: "The masbuq's completion rules in the school's manual.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Do I catch a rakah if I bow before imam rises?"],
     related: ["salah-masbuq"],
+    detailedAnswer:
+      "The school's rule set for the late joiner: (1) the catch-rule — a rak'ah counts only if the follower bows before the imam rises from ruku'; (2) completion — when the imam salams, the masbuq does not salam with him but completes the rak'ahs he missed, standing and praying them as his own; (3) recitation — the first rak'ah he prays alone stands in the place of a 'standing' rak'ah, so if he missed the opening rak'ah of a loud prayer he recites Fatiha and surah aloud; (4) sahw — if a wajib was missed within his own completed rak'ahs, he adds two sahw prostrations at the end; (5) the sitting question — the school's manuals detail whether he sits when the imam enters his final sitting (the mu'tamad keeps him standing where he owes a standing rak'ah). The manuals walk through each joining point (mid-standing, mid-ruku', the second rak'ah, and so on), because the masbuq's counting drives his recitation and sitting rulings.",
+    hanafiPosition: "Catch = bowing before the imam rises; complete missed rak'ahs after the imam's salam; recite aloud in a loud prayer's rak'ahs; add sahw prostrations at the end if a wajib was missed.",
+    otherViews: "The ruku'-catch rule is broadly shared across the schools; differences appear in the details — e.g. the Shafi'i treatment of a rak'ah caught mid-ruku' and the recitation rules for the masbuq's completion.",
+    practicalInfo: "Count only the rak'ahs you bowed into; when the imam salams, rise and finish what you owe; if unsure what you caught, finish the remainder and ask your imam afterwards.",
   },
   {
     slug: "salah-faraid",
@@ -639,9 +722,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "ستة: تكبيرة الإحرام، والقيام، والقراءة، والركوع، والسجود، ومدة الجلوس الأخير — وترك أيٍّ منها يبطل الصلاة.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah", translation: "The six pillars listed in the school's manuals.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Maraqi al-Falah (al-Shurunbulali)", translation: "The seven-fold pillar enumeration (with khuruj bi sun'ihi).", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "The fara'id/wajibat boundary and its repair consequences.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Pillars of prayer Hanafi", "What are the arkan of salah?"],
     related: ["salah-wajibat", "salah-fard-wajib-sunnah"],
+    detailedAnswer:
+      "The school's manuals enumerate the pillars either as six (Nur al-Idah's count, taking the final sitting together with its duration) or as seven (Maraqi al-Falah, which separates the final sitting from the intentional departure — khuruj bi sun'ihi — that closes the prayer); the difference is in counting, not substance. The list's design is protective: whatever sits among the fara'id may not be repaired or excused — a missed pillar voids the rak'ah or prayer. Two design choices mark the school's reading. First, Fatiha is not a pillar here: recitation of Qur'an (any amount, per the mu'tamad) is the pillar, while Fatiha specifically is wajib — so a forgotten Fatiha triggers sahw, while a wholly absent recitation voids. Second, intention is a condition for the prayer's validity but is not enumerated among the bodily pillars. This taxonomy is the machinery behind sajdah sahw: the school can grade every element, repair the lower tier, and void only on the upper.",
+    hanafiPosition: "Six pillars per the mu'tamad manuals (seven by Maraqi's count); a pillar's omission voids the prayer and demands repetition.",
+    otherViews: "Shafi'i: seven pillars including intention and Fatiha itself; Maliki: intention among the pillars. The lists differ in taxonomy more than in practice, but the repair-consequences follow each school's own grading.",
   },
   {
     slug: "salah-wajibat",
@@ -660,9 +749,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "نحو ثمانية عشر — منها قراءة الفاتحة، ووصل سورة بها، والترتيب، والطمأنينة، والتشهد، وقنوت الإمام في الوتر والعيدين، وتكبيرات العيد، والإسرار والجهر في صلواتهما؛ وجبر الواجب المنسي سجود السهو.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Salah", translation: "The wajibat list and its repair mechanism.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah — wajibat section", translation: "The wajibat enumerated in the school's manual.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["What must I not forget in salah?", "Wajib elements of prayer"],
     related: ["salah-faraid", "salah-sajdah-sahw-when"],
+    detailedAnswer:
+      "The school's manuals (Nur al-Idah; Maraqi al-Falah) enumerate roughly eighteen wajibat: reciting Fatiha; joining a surah to it in the opening rak'ahs (and in witr and the sunnah/nafl prayers); the wajib order between the prayer's elements; calm (tuma'ninah) in ruku', sujud and the sitting; the first sitting and the tashahhud of both sittings; the imam's loud/silent recitation in their proper prayers; the qunut of witr; the Eid takbirs; and their like — the full list is codified in the manuals and analysed in Radd al-Muhtar. The wajib tier's whole point is its repair mechanism: every item on it, when forgotten, is mended by two sahw prostrations — the prayer survives, corrected. Deliberate omission is treated differently (the books regard the prayer as flawed and warrant repetition). The school's opponents in taxonomy note that items the Hanafis call wajib sit at other grades in other schools (Fatiha is a pillar for the Shafi'i school; calmness a validity-condition) — the practical conduct overlaps even where the machinery differs.",
+    hanafiPosition: "The wajibat are the repairable middle tier: forgotten wajib → two sahw prostrations; the full list is codified in the school's manuals.",
+    otherViews: "Shafi'i: no wajib tier — Fatiha is a pillar, calmness a validity-condition; the same acts carry different grades and different repair rules across schools.",
   },
   {
     slug: "salah-fard-wajib-sunnah",
@@ -731,9 +825,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "يطابق المأموم إمامه في الأفعال الكبرى (بأن لا يتقدمه في الركوع والسجود)، وتغني تلاوة الإمام في الجهريات، ونية الاقتداء (للمأموم) محل كلام في المدرسة — وتفصّل الكتب كلًّا منها.",
     sources: [
       { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Salah", translation: "Iqtida' (following) rules chapter.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Adhan (Malik ibn Huwayrith — pray as you saw me pray; follow the imam's motions)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
     ],
     variants: ["How to follow the imam correctly?", "Can I move before the imam?"],
     related: ["salah-masbuq", "madhhab-pray-behind-other-imam"],
+    detailedAnswer:
+      "The school's core rules for the follower: he does not precede the imam in ruku', sujud or rising (a small inadvertent advance is disliked; the manuals grade the thresholds); he follows the imam's major actions, adding the sunnah adhkar that belong to his own station quietly; in loud prayers his recitation is covered by listening (see the recitation questions); and he completes behind a valid imam even where their fiqh details differ, with the case-rules in the manuals. On the intention of following: the mu'tamad does not require a separate 'I intend to follow this imam' intention — the intention of salah with presence behind the imam suffices — while some school texts encourage intending following as a perfection. The hadith basis includes Malik ibn Huwayrith's report (Bukhari's Adhan chapter, cited at chapter level) to pray as one saw the Prophet ﷺ pray and to follow the imam's motions — the school reads it as the follower's alignment rule. The Shafi'i school requires the following-intention as a condition, and their follower recites Fatiha — the fork points again to the schools' evidential methods.",
+    hanafiPosition: "Follow the imam's major actions without preceding him; listen in the loud prayers; an explicit following-intention is not required by the mu'tamad (encouraged by some texts).",
+    otherViews: "Shafi'i: the follower's intention to follow is a validity-condition, and he recites Fatiha behind the imam.",
   },
   {
     slug: "salah-invalidates",
@@ -752,9 +851,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "ترك ركن، وحدوث الحدث، والكلام مع الناس، والأكل والشرب، والحركة الزائدة، وتحويل الصدر عن القبلة، والضحك الجهر، وزوال النية — تعدّد الكتب هذه المبطلات.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah (mubtilat)", translation: "The invalidators list.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "The invalidators in the school's core manual.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["What breaks my prayer?", "Does laughing break salah?"],
     related: ["salah-faraid", "taharah-laughing-salah"],
+    detailedAnswer:
+      "The manuals' invalidator-list (mubtilat) is not arbitrary: each entry voids the prayer by negating one of its supporting conditions. Losing purity (hadath) removes the prayer's validity-condition; intentional speech removes the stillness and solemnity; eating or drinking — even a small amount per the mu'tamad — removes the worship-posture; excessive movement (roughly what observers would deem non-worship motion) removes the body's stillness for the pillars; turning the chest away from the qiblah removes direction, while head-turning is graded makruh, not voiding; loud laughter voids the prayer and — in the school's distinctive ruling — the wudu too; and the decisive loss of intention voids from that point. The thresholds are codified precisely because 'how much is too much' is where worship discipline lives: the school's books grade borderline movements case by case. The Shafi'i school's list overlaps, with notable divergences (loud laughter does not break their wudu; their motion-threshold is keyed to the ruku' posture).",
+    hanafiPosition: "The school's codified mubtilat list governs: pillar-omission, hadath, speech, eating/drinking, excess movement, chest-turn, loud laughter (also breaking wudu), loss of intention.",
+    otherViews: "Shafi'i: loud laughter voids the prayer but not wudu; motion-thresholds and speech-rulings are graded by their own conditions. The overlap is broad; the edge-cases differ.",
+    practicalInfo: "If salah breaks, begin again (with fresh wudu if purity was lost). Small head-turns or minor adjustments do not void; when in doubt, ask a qualified imam rather than repeating reflexively.",
   },
   {
     slug: "salah-taraweeh-20",
@@ -803,9 +908,20 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Musannaf Ibn Abi Shaybah (Sa'ib ibn Yazid)", translation: "Congregational 20 rak'ahs under 'Umar.", status: "PARTIALLY_VERIFIED" },
       { kind: "BOOK", ref: "Fath al-Qadir (Ibn al-Humam), Kitab al-Salah — Taraweeh", translation: "The evidence assembly for the congregational practice.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Tarawih (Abu Huraira — the Prophet's ﷺ night prayer and 'Umar's organization)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
+      { kind: "FATWA", ref: "Fatawa Razvia — discussion of the twenty rak'ahs of Taraweeh", translation: "The collection upholds the twenty-rak'ah congregational practice as the Ahl-e-Sunnat position and answers the opposing case.", status: "PARTIALLY_VERIFIED", note: "volume-level citation; the salah volumes of the collection treat taraweeh" },
     ],
     variants: ["Proof of 20 taraweeh", "Did Umar organize taraweeh?"],
     related: ["salah-taraweeh-20"],
+    detailedAnswer:
+      "The school's case assembles three layers. (1) The report-corpus: Sa'ib ibn Yazid's accounts (in Musannaf Ibn Abi Shaybah) document 'Umar's organization of the Ramadan congregation at twenty rak'ahs, and the Bukhari Tarawih chapter (Abu Huraira) records the practice's start under the Prophet ﷺ (briefly, out of fear of obligation) and its establishment by 'Umar — who called it 'an excellent innovation' in the report's wording. (2) The usul: the school holds that a settled congregational practice of the Companions' generation, without dissent recorded, carries binding weight — the same evidential tier by which qira'ah forms and other worship formats were fixed. (3) The Prophet's ﷺ personal night-length varied across the reports (eight, eleven, more), so the individual counts cannot serve as the fixed standard the congregation transmits. The Shafi'i reply takes Aisha's 'eleven rak'ahs' report as the sunnah's measure while acknowledging the historical twenty; the school replies that the community's settled worship-form is precisely what the ummah was commanded to hold. Both sides agree the other's prayer is valid; the dispute is over what binds.",
+    hanafiPosition: "Twenty rak'ahs in congregation after 'Isha in Ramadan, established by the Companions' settled practice and codified by the school.",
+    otherViews: "Shafi'i/Hanbali and Ahl-e-Hadith: eight/eleven per the Prophet's ﷺ personal nightly practice (Aisha's report), while acknowledging the historical twenty-rak'ah congregation.",
+    commonObjection: "\"Twenty rak'ahs has no hadith basis — it contradicts the authentic reports of the Prophet's ﷺ eleven.\"",
+    scholarlyResponse:
+      "The school does not claim a prophetic count of twenty; it claims the Companions' settled congregational form — documented in the report corpus ('Umar's organization) — binds as the transmitted worship-format, the same tier by which the ummah fixed its qira'ah. The Prophet's personal length varied across reports, so it cannot serve as the congregation's fixed measure. The disagreement is over which transmission binds, not over hadith authenticity.",
+    fatawaRazvia:
+      "Fatawa Razvia treats Taraweeh's twenty rak'ahs as the settled Ahl-e-Sunnat congregational practice, citing the report-corpus of 'Umar's organization and the Companions' settled practice, and answering the eight/eleven case by distinguishing the Prophet's ﷺ personal night-prayer from the congregation's established form.",
   },
   {
     slug: "salah-taraweeh-witr",
@@ -824,9 +940,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "نعم — يضع عمل المدرسة الوتر بعد جماعة التراويح في رمضان، ويبقى الوتر واجبًا في تصنيف المدرسة.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Salah", translation: "Ramadan night-prayer sequence.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah — Tarawih and Witr sequence", translation: "The Ramadan night-prayer order in the school's manual.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Witr after taraweeh?", "Do I pray witr if I prayed taraweeh?"],
     related: ["salah-witr-wajib", "salah-taraweeh-20"],
+    detailedAnswer:
+      "The school's Ramadan sequence: the 'Isha fard, then the twenty-rak'ah taraweeh congregation, then Witr — the order transmitted in the school's books and practised in the mosques of the school. The sequence has a jurisprudential point: taraweeh is a sunnah prayer, but Witr's wajib status does not defer to it; rather the transmitted order places the sunnah congregation before the wajib closing, as the night's seal. The manuals also treat the practical cases: one who prayed Witr early and then joins taraweeh does not repeat Witr (the school's books discuss the repeat-Witr case); one who arrives late joins wherever he catches and completes taraweeh before Witr; and Witr outside Ramadan keeps its place after the night prayers. The qunut of Witr remains before the ruku' of the third rak'ah in Ramadan as outside it — the school's placement is not season-dependent (the contrast with the Shafi'i Ramadan qunut is treated under the qunut questions).",
+    hanafiPosition: "Witr follows the taraweeh congregation as the night's closing wajib; its qunut placement is unchanged in Ramadan.",
+    practicalInfo: "In congregation: remain after taraweeh for Witr with the imam. Praying at home: close your night with the three connected rak'ahs after your qiyam.",
   },
   {
     slug: "salah-istiftah-dua",
@@ -845,9 +966,16 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "هو الثناء المهموس الذي يقال بعد تكبيرة الإحرام (كـ: سبحانك اللهم...)؛ وهو في المدرسة سنة لا ركن — وتركه لا يستلزم جبرًا.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Salah", translation: "The istiftah as sunnah element.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Adhan (Abu Musa al-Ash'ari — the istiftah 'Subhanaka Allahumma…')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Salah (Ibn Mas'ud — the several transmitted istiftah wordings)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Opening dua of salah", "Subhanaka Allahumma in prayer"],
     related: ["salah-faraid"],
+    detailedAnswer:
+      "The du'a al-istiftah is the quiet opening praise between the takbir al-tahrimah and the ta'awwudh/Fatiha. Its status in the school is sunnah — supported by the report of Ibn Mas'ud (RA) listing the Prophet's ﷺ several transmitted openings (recorded in the Sunan's salah chapters) and by Abu Musa's report of 'Subhanaka Allahumma wa bihamdika wa tabarakasmuka wa ta'ala jadduka wa la ilaha ghayruk' (Bukhari's Adhan chapter, cited at chapter level). Because the transmitted wordings are several, the school's books allow any of them and note that varying them across prayers is the fuller practice; they also clarify that the istiftah belongs to the worshipper's own station (imam and follower alike, said quietly). Structurally, the school's grading explains its repair-rule: as a sunnah element the istiftah needs no sahw repair when forgotten — the contrast with Fatiha (wajib) shows the tiering at work. All four schools hold the istiftah to be sunnah; they differ only over which transmitted wordings carry weight.",
+    hanafiPosition: "Sunnah element of the opening standing; any transmitted wording may be used; no repair when omitted.",
+    otherViews: "All schools grade the istiftah as sunnah; Shafi'i manuals likewise list multiple transmitted openings — the difference is textual weight, not status.",
+    practicalInfo: "A widely-used opening: 'Subhanaka Allahumma wa bihamdika wa tabarakasmuka wa ta'ala jadduka wa la ilaha ghayruk', said quietly after takbir, before ta'awwudh and Fatiha.",
   },
 
   // ─────────────────────────── TAHARAH ───────────────────────────
@@ -894,6 +1022,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "Intention is a condition (for the salah to be valid), not one of the four bodily pillars — so a wudu done without intention is defective for prayer but the school does not require intention at the very first wash specifically.",
     shortAnswerUr: "نیت شرط ہے (نماز کی صحت کے لیے)، چاروں جسمانی ارکان میں سے نہیں — لہٰذا بغیر نیت کیے وضو نماز کے لیے ناقص ہے مگر مذہب نیت کو خاص طور پر پہلی ہی دھلائی کے وقت طے نہیں کرتا۔",
     shortAnswerAr: "النية شرط (لصحة الصلاة)، وليست من الأركان الأربعة الجسمانية — فالوضوء بلا نية ناقص للصلاة، لكن المدرسة لا تقيّد النية بأول الغسلة على الخصوص.",
+    detailedAnswer:
+      "The school's framework separates two layers. The four bodily faraid — the face, the arms to the elbows, wiping a portion of the head, the feet to the ankles — define the act's substance; niyyah belongs to the layer of worship-validity: a wash done purely as hygiene lacks the devotion that makes it legally a wudu for prayer. That is how the school can call intention a condition of the prayer's validity while keeping it out of the body's four pillars.\n\nOn timing, the school's transmitted views divide: Abu Yusuf tied the intention to the first wash, Muhammad al-Shaybani allowed it anywhere before completion — and the later books give fatwa on the flexible view. Hence the school's distinctive looseness: a worshipper who begins rinsing absent-minded and forms the intention mid-act has a valid wudu. The Shafi'i school fixes the intention at the very first wash as a pillar — exactly the contrast the dispute-note records.\n\nThe rationale the books offer is pastoral: the intention's essence is directing the heart to Allah's command, not mechanics of the first handful of water, and the intention of removing hadath (qasd raf' al-hadath) suffices — the separate intention for the salah remains its own act, made in the prayer itself.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Intention's place in the school's wudu framework.", status: "PARTIALLY_VERIFIED" },
     ],
@@ -917,11 +1047,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "No — in the school's fiqh touching a woman does not break wudu; the school reads the verse's phrase 'or touching women' as euphemism for intercourse (a reading discussed by the classical commentators).",
     shortAnswerUr: "نہیں — مذہب کی فقہ میں عورت کو چھونے سے وضو نہیں ٹوٹتا؛ مذہب آیت کے اس اشارے کو کہ عورتوں کا چھونا ذکر ہوا ہے، جماع کے کنایے کے طور پر لیتا ہے (یہ تاویل متقدم مفسرین میں بحث شدہ ہے)۔",
     shortAnswerAr: "لا — في فقه المدرسة لا ينتقض الوضوء بلمس المرأة؛ وتحمل المدرسة قوله تعالى في الآية أو لامستم النساء على أنه كناية عن الجماع (وهو وجه ذكره المفسرون المتقدمون).",
+    detailedAnswer:
+      "The clause 'aw lamastum al-nisa' sits inside the Qur'anic list of states requiring purification before prayer (Al-Nisa 4:43), and the entire disagreement is its interpretation. The school reads it through the Arabic idiom in which 'touching a woman' denotes intercourse — the classical exegetical literature records early authorities reading the clause exactly so — and al-Marghinani's Taharah chapter carries that reading into the school's fiqh. On this reading the nullifier is the event of intimacy, not incidental contact of hands.\n\nThe reading harmonizes with the school's closed nullifier-list — discharge from either passage, sleep, unconsciousness and their siblings — in which simple touch has no place. Practically: a handshake, a bump in a crowd, or a spouse's touch does not void wudu in the school; the wudu-breaking event would be an actual discharge, which is a separate mechanism (the madhi question).\n\nThe Shafi'i school reads the clause as literal skin-contact, supported by its own reading of the reports; each school's nullifier-list coheres with its clause-reading, and the scholars agree both frameworks produce valid prayer. The platform records the fork as a documented interpretive difference over a single Qur'anic phrase — the kind of case where madhhab identity is really exegetical identity.",
     hanafiPosition: "Skin contact with women does not nullify wudu.",
     otherViews: "Shafi'i/Hanbali: skin-to-skin contact with a marriageable woman nullifies wudu.",
     sources: [
       { kind: "QURAN", ref: "Al-Nisa 4:43", translation: "The wudu-breaking contexts verse — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "'Touching women' interpreted as intercourse.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Tafsir al-Tabari, discussion of Al-Nisa 4:43", translation: "The exegete records early readings of 'or touching women', including the sense of intercourse.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Does touching my wife break wudu?", "Does shaking hands break wudu?"],
     related: ["taharah-wudu-faraid", "taharah-madhi"],
@@ -943,9 +1076,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "في الموقف الغالب للمدرسة لا ينتقض الوضوء بلمس العورة بالكف المجرد؛ وتوفق المدرسة روايات اللمس بتقييدها أو بترجيح الروايات المخالفة.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The private-part touching discussion.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Taharah (Busrah bint Safwan — the touching report)", translation: "paraphrased translation — 'whoever touches his private part should perform wudu'", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level; application disputed across schools" },
     ],
     variants: ["Does touching private parts break wudu Hanafi?"],
     related: ["taharah-wudu-faraid"],
+    detailedAnswer:
+      "The question divides the schools sharply. The touching-reports include Busrah bint Safwan's narration ('whoever touches his private part should do wudu') recorded in the Sunan's taharah chapters; Shafi'i and Hanbali jurists apply it literally — bare-palm touching breaks wudu. The Hanafi school reconciles rather than rejects: its jurists restrict the touching-narrations (to touching with desire, or to direct palm-contact of the specific type described) and weigh the counter-reports of Companions' practice, arriving at the dominant position that bare-palm touching does not break wudu. The school's texts record the internal discussion openly — some school jurists held the stricter reading — and the mu'tamad manuals settle the operative rule for the school. Two adjacent clarifications: the ruling concerns ritual purity, not modesty (modesty-rules are separate), and touching WITH desire engages different rulings (the books treat desire-contact separately).",
+    hanafiPosition: "Bare-palm touching of the private part does not nullify wudu in the school's dominant position; desire-based touching is treated separately.",
+    otherViews: "Shafi'i/Hanbali: touching the private part nullifies wudu, applying Busrah's narration literally; Maliki: it does not nullify — the three readings are all documented.",
   },
   {
     slug: "taharah-vomiting",
@@ -964,9 +1102,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "لقمة القيء (ما لا يُكتف عليه) تنقض الوضوء في المدرسة؛ وتُعرَّف اللقمة بأنها ما يفيض دون كد.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Vomit quantity rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "The vomit-quantity thresholds and the induced cases.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Does throwing up break wudu?", "Small vomit wudu"],
     related: ["taharah-nosebleed", "taharah-wudu-faraid"],
+    detailedAnswer:
+      "The school grades vomit by quantity: a mouthful (what pours out without being held back) breaks wudu; less than a mouthful does not. The threshold belongs to the school's broader expansion of the nullifiers beyond the four revealed exits — through its usul, the jurists extend the 'exit' categories (vomiting a mouthful, flowing blood) that share the revealed nullifiers' rationale, a move other schools decline. The induced-vomiting edge cases (deliberate forcing) are discussed in the commentaries with graded views; the mu'tamad states the quantity rule as above. The practical map: slight retching or a small amount → wudu stands; a mouthful → fresh wudu before praying; vomit on clothing is impurity handled by the najasah rules (washing the affected spot). The Shafi'i school holds vomiting never breaks wudu (their nullifier-list stays with the revealed four), while the Maliki and Hanbali schools share the mouthful threshold — the disagreement is over whether usul-extension is legitimate, a signature methodology divide.",
+    hanafiPosition: "A mouthful of vomit nullifies wudu; a lesser amount does not.",
+    otherViews: "Shafi'i: vomiting does not nullify wudu (nullifiers restricted to the revealed list); Maliki/Hanbali: a mouthful nullifies, like the school.",
   },
   {
     slug: "taharah-nosebleed",
@@ -985,9 +1128,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "الدم الجاري إلى موضع يستلزم الغسل (إلى خارج المنخر) ينقض الوضوء في المدرسة؛ أما الدم الذي يبقى في الداخل أو يخرج من غير جريان فلا.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Blood flow rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The flowing-threshold in the nullifier discussion.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Nosebleed wudu Hanafi", "Does blood break wudu?"],
     related: ["taharah-blood", "taharah-vomiting"],
+    detailedAnswer:
+      "The school's rule keys on 'flowing' (jarayan): blood that flows — out of the nostril to a place that would need cleaning — breaks wudu, while blood that dabs out without flowing (a spot one could wipe) or remains inside does not. The rationale is the school's exit-gradation: flow measures the exit's severity, the same grading applied to vomit's mouthful and to nullifiers generally. The Shafi'i school declines the extension entirely: internal exits (blood from anywhere other than the two passages) never break their wudu, so a nosebleed of any quantity leaves them pure. The Maliki school likewise does not nullify wudu by blood flow. The practical consequences follow the school's rule: a nosebleed that flowed out → fresh wudu and cleaning; a dab of blood → wudu stands, and the blood on clothing falls under the blood-rules (washing, with the small-trace excuses).",
+    hanafiPosition: "Flowing blood exiting the nostril nullifies wudu; a non-flowing dab does not.",
+    otherViews: "Shafi'i: bleeding never nullifies wudu (internal exits excluded); Maliki: likewise not nullified by blood flow.",
   },
   {
     slug: "taharah-sleep",
@@ -1006,9 +1154,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "النوم العميق (الاستلقاء أو انعدام الإحساس بالمحيط) ينقض الوضوء؛ أما التغفيق الخفيف جالسًا مع بقاء الإحساس فلا — وتدرّج المدرسة النوم بعمقه لا بمجرد وقوعه.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "Sleep grading for wudu.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "The sleep-gradation in the nullifier list.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Does a nap break wudu?", "Slept in chair wudu valid?"],
     related: ["taharah-unconscious", "taharah-wudu-faraid"],
+    detailedAnswer:
+      "The school grades sleep by depth of lost guard: deep sleep, or sleep lying down (where the body's guard is loosened), breaks wudu; light dozing while seated — with awareness of one's surroundings retained — does not. The grading rests on the school's reading of the sleep-narrations (the reports tying nullification to the loss of sleep's 'guard'), and on the rationale that only what removes control over the nullifying exits matters. The school's seating-cases are codified in the manuals (the unstable seat, the recliner). The comparative map is instructive: the Maliki school holds sleep does not break wudu at all (their reading treats the reports as concerning what exits during sleep, not sleep itself); the Shafi'i school grades like the school (deep breaks, light doesn't). So the Hanafi position sits between: stricter than the Malikis, aligned with the Shafi'is on the deep/light divide.",
+    hanafiPosition: "Deep sleep or lying-down sleep nullifies wudu; light seated dozing with awareness does not.",
+    otherViews: "Maliki: sleep does not nullify wudu at all; Shafi'i: deep sleep nullifies, light dozing does not — close to the school's grading.",
   },
   {
     slug: "taharah-doubt",
@@ -1027,9 +1180,16 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "اليقين لا يزيله الشك: من علم أن له وضوءًا وشك في انتقاضه فهو طاهر — وتضيف المدرسة مبدأ المنع من الوسواس بأن تكرار الوضوء مرارًا لشك بلا أساس مكروه.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Certainty/doubt rules and the waswas caution.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Wudu (Abu Huraira — 'leave off praying until you hear a sound or detect a smell')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
     ],
     variants: ["I forgot if I did wudu", "Waswas about wudu"],
     related: ["taharah-wudu-faraid", "taharah-sleep"],
+    detailedAnswer:
+      "The governing maxim — certainty is not removed by doubt — is anchored in the Prophet's ﷺ teaching (the report of Abu Huraira: 'leave off praying until you hear a sound or detect a smell', in Bukhari's wudu chapters, cited at chapter level). The school applies it in three pairs: one who KNOWS he had wudu and doubts breaking it remains pure; one who knows it broke and doubts having wudu must wash; one in doubt on both sides defaults to the body's base-state (impurity until washed). The school then adds its pastoral layer against waswas (obsessive doubt): repeating wudu repeatedly on baseless suspicion is discouraged, and the manuals counsel acting on one's first sound judgment — the scholars' warnings against obsessive-repetition culture are longstanding. The Shafi'i manuals run the same maxim structurally; the difference lies in the pastoral emphasis and edge-case orderings. Doubt-cases that become habitual deserve personal counsel rather than mechanical repetition.",
+    hanafiPosition: "Known wudu + doubt of breaking = still pure; known breaking + doubt of wudu = wash; doubt on both sides = wash (the base-state rule); baseless repeated wudu is discouraged.",
+    otherViews: "Shafi'i applies the same certainty/doubt maxim; the schools differ mainly in the pastoral handling of obsessive-doubt (waswas) cases.",
+    practicalInfo:
+      "General educational information — not a personalized fatwa. Consult a qualified local mufti for your personal situation. For recurring waswas: act on your first certainty, ignore the replaying suspicion, and seek counsel rather than repeating wudu.",
   },
   {
     slug: "taharah-unconscious",
@@ -1048,9 +1208,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "نعم — الإغماء الكامل يبطل الوضوء في المدرسة (وهو أبلغ من النوم العميق)؛ أما التغفيق الخفيف مع بقاء الإحساس فلا.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Unconsciousness rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Unconsciousness in the nullifier discussion.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Fainted wudu", "Anaesthesia wudu ruling"],
     related: ["taharah-sleep"],
+    detailedAnswer:
+      "Unconsciousness exceeds deep sleep in the school's grading: what removes awareness entirely removes the guard over the nullifying exits entirely, so wudu is nullified. The manuals list fainting, seizure and anesthesia under this rule, and the recovery-procedure follows: upon regaining consciousness, purity is regained by fresh wudu; anything during the unconscious interval is not imputed to the person. The chronic case (repeated unconsciousness across times) passes into the ma'dhur framework — one wudu per prayer-time (see the ma'dhur question). The schools broadly agree on the rule; their thresholds for borderline states (half-conscious dozing, medically altered awareness) are worked out with slightly different case-orders. The practical point for worshippers: an interval of unconsciousness does not need 'evidence' — the state itself is the nullifier per the school's control-based grading.",
+    hanafiPosition: "Full unconsciousness (fainting, seizure, anesthesia) nullifies wudu; brief dozing with retained awareness does not.",
+    practicalInfo: "Upon regaining consciousness, make fresh wudu before praying; prayers missed while unconscious are excused, and the resumed schedule follows the ma'dhur framework if the state recurs.",
   },
   {
     slug: "taharah-laughing-salah",
@@ -1067,6 +1232,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "Yes — this is a distinctive Hanafi position: laughing aloud in prayer breaks both the prayer and the wudu, based on the school's reconciliation of the narrations; it also requires repetition of the prayer.",
     shortAnswerUr: "جی ہاں — یہ حنفی مذہب کا امتیازی موقف ہے: نماز میں بلند آواز سے ہنسنا مذہب کی روایات کی ہم آہنگی کی بنا پر نماز اور وضو دونوں کو توڑتا ہے؛ اور اس کے ساتھ نماز دہرانا بھی لازم آتا ہے۔",
     shortAnswerAr: "نعم — هذا موقف حنفي مميز: الضحك الجهر في الصلاة يبطل الصلاة والوضوء معًا، استنادًا إلى توفق المدرسة بين الروايات؛ ويقتضي إعادة الصلاة أيضًا.",
+    detailedAnswer:
+      "The school grades the amusement-spectrum into three. A smile (tabassum) affects nothing; soundless laughter breaks the prayer but not the wudu; audible laughter (qahqahah) — the school's distinctive case — breaks both, obliging renewal of wudu and repetition of the prayer. The books condition the rule on adulthood and awareness: the child is not liable, and one overtaken by sleep or illness sits outside it.\n\nThe dual effect comes from the school's reconciliation of the laughter reports with the companions' practice, and the manuals record a telling exception: laughter does not void the janazah prayer in the school's books. The rule tracks the sanctified speech-structure of the standing prayers, which is also why mere smiling — speechless — is harmless.\n\nThe Shafi'i school voids the prayer (loss of composure) while the wudu stands; the disagreement is over the ritual consequence, not over laughter's unseemliness — all schools hold audible laughter out of place in salah. Practically: if laughter escapes, one leaves calmly, renews wudu, and repeats the prayer; the rule is a boundary-marker of salah's gravity, not a trap for the struggling.",
     hanafiPosition: "Laughing aloud in salah voids salah and wudu (adults, aware).",
     otherViews: "Shafi'i: laughter voids the prayer but not wudu.",
     sources: [
@@ -1117,9 +1284,17 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "أربعة أسباب: خروج المني (بشهوة أو بغيرها)، وإدخال الخِلاَفين، وانقطاع الحيض، وانقطاع النفاس — ويضاف إليها غسل المائت.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "The ghusl causes list.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Nisa 4:43", translation: "…or after touching women, and you find no water, then take yourselves to pure earth… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation; the janabah/tayammum verse" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "The ghusl-causes analysis and the desire/emission distinctions.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["When do I need ghusl?", "Ghusl obligations Hanafi"],
     related: ["taharah-ghusl-jumuah", "taharah-madhi"],
+    detailedAnswer:
+      "The school's four causes come from the janabah verses read with the transmitted case-reports: (1) emission of semen — with desire or without (even sleeping, even involuntary): the trigger is the EMISSION per the school, not the desire; (2) insertion of the private parts (even without emission, in the mu'tamad); (3) the end of menstruation; (4) the end of post-natal bleeding — with the deceased's ghusl added as a communal obligation (fard kifayah). Two contrasts mark the school: mere desire without emission does NOT trigger ghusl (a point of mercy for discharge-conditions — madhi needs washing and wudu, not ghusl); and emission without desire DOES (the Shafi'i school requires desire with the emission — the two schools' trigger-rules part company here). The ghusl itself has three fara'id per the school: rinsing the mouth, pouring water in the nose, and washing the whole body so no spot remains dry — the sunnahs (intention, order, and the like) surround these.",
+    hanafiPosition: "Ghusl is obligatory on the four causes; emission alone (even without desire) triggers it; the ghusl's fara'id are mouth-rinse, nose-pour, and the full-body wash.",
+    otherViews: "Shafi'i: ghusl for janabah requires desire with the emission; the schools agree on the menses/nifas causes.",
+    practicalInfo:
+      "General educational information — not a personalized fatwa. Consult a qualified local mufti for your personal situation. Medical cases (post-surgery discharge, incontinence, women's bleeding-conditions) have documented rulings — take them to a qualified mufti rather than guessing.",
   },
   {
     slug: "taharah-ghusl-jumuah",
@@ -1138,9 +1313,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "هو سنة مؤكدة في المدرسة — يُوصى بها شدة لكل من يحضرها، لكنها ليست واجبة.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Salah — Jumu'ah", translation: "Ghusl of Jumu'ah as emphasized sunnah.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Jumu'ah (Abu Huraira — 'ghusl on Friday is a duty on every Muslim')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; the school reads the 'duty' wording as emphasis rather than literal obligation" },
     ],
     variants: ["Jumuah ghusl fard or sunnah?"],
     related: ["taharah-ghusl-when", "jumuah-obligation"],
+    detailedAnswer:
+      "The school grades the Jumu'ah ghusl sunnah mu'akkadah: heavily emphasised for every adult attending, but not a condition of the prayer's validity. The key evidential move is the school's reading of Abu Huraira's wording 'ghusl on Friday is a duty (haqq) on every Muslim' (Bukhari's Jumu'ah chapter, cited at chapter level): the jurists read the command's strength as emphasis (mubalaghah in command-language) rather than literal obligation, since the prayer without the ghusl remains valid without any repair — a structural signal, in the school's usul, that the command is not obligation-grade. The report of the Prophet's ﷺ regular Friday ghusl ('Uthman's account) establishes the sunnah's content. Some Maliki jurists graded it obligatory; the Shafi'i and Hanbali schools share the emphasized-sunnah grading. The practical picture the school draws: take the ghusl, the siwak, and the best clothes — the emphasis is real — while one who prays Jumu'ah without it prays validly.",
+    hanafiPosition: "Sunnah mu'akkadah for every adult attending Jumu'ah; not obligatory and not a validity-condition.",
+    otherViews: "Some Maliki jurists: obligatory; Shafi'i/Hanbali: emphasized sunnah, like the school. The disagreement is over the command's strength-grade, not the practice itself.",
   },
   {
     slug: "taharah-tayammum-when",
@@ -1160,9 +1340,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     sources: [
       { kind: "QURAN", ref: "Al-Ma'idah 5:6", translation: "…then wipe your faces and hands with pure earth — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "Tayammum causes.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Nisa 4:43", translation: "…and you find no water, then take yourselves to pure earth and wipe your faces and hands — paraphrased translation", status: "VERIFIED", note: "paraphrased translation; tayammum's scriptural basis" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Tayammum's causes, the search-rule, and the substitute's lifetime.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["When can I do tayammum?", "Can I do tayammum if water is cold?"],
     related: ["taharah-tayammum-surface", "taharah-tayammum-covers"],
+    detailedAnswer:
+      "The verse's two triggers — no water, or harm in using it — the school expands into its documented case-list: water absent within the search-distance (the books' roughly-a-mile benchmark); using it would harm (illness, or severe cold without heating); fear of enemy or animal on the path; and water needed for drinking (one's own or animals'). The search-rule grades by signs: no obligation to search where there are no signs of water; where signs exist (moisture, habitation, a river's sound), seeking is required. The substitute's lifetime: tayammum stands until water (or the harm's removal) appears — it does not expire with the prayer's time in the school, one of the sharpest contrasts with the Shafi'i school (each tayammum there serves a single fard prayer). Upon finding water, the tayammum does not retro-invalidate the prayers prayed with it, but future prayers must use water. The tayammum's own structure per the school: intention, then two strikes on the earthen surface (face, then hands).",
+    hanafiPosition: "Tayammum is valid on absence/harm/fear/drinking-need grounds; it substitutes fully until water appears and does not expire by time.",
+    otherViews: "Shafi'i: one tayammum serves one fard prayer only, and water-search is required whenever water is likely within reach — materially stricter trigger-mechanics.",
   },
   {
     slug: "taharah-tayammum-surface",
@@ -1181,9 +1367,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "كل ما في مرتبة تراب الأرض: التراب والرمل والحجر، وحتى الغبار على الحيطان والأشياء — تُبيح المدرسة ضرب الكفين على أي سطح ترابي؛ لا على الخشب ولا المعدن ولا القماش ولا الطعام.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Tayammum surfaces.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The tayammum-surface rules and the striking-method.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Can I do tayammum on a wall?", "Tayammum with dust"],
     related: ["taharah-tayammum-when"],
+    detailedAnswer:
+      "The school's category is 'the earth's dust-class' (turab): anything of the earth's substance — soil, sand, stone — counts, and dust gathered on walls or objects takes the ruling of its earthen dust. Wood, metal, cloth and food do not qualify (they are not of the earth's class). The reading comes from the verse's 'sa'idan tayyiban' (pure earth) — the school reads it as the earth-category rather than requiring loose soil specifically, which is why bare stone qualifies per the mu'tamad. The striking-method is codified: strike the surface once and wipe the face, strike again and wipe the hands (the 'Ammar report shows one-strike variants; the manuals note them). The comparative map: the Shafi'i school restricts tayammum to dust-bearing soil and excludes bare stone; the Hanbali school permits stone like the school. The differences are over the verse's category-extension, not over tayammum's legitimacy.",
+    hanafiPosition: "Any earthen surface qualifies (soil, sand, stone, gathered dust); strikes: one for the face, one for the hands.",
+    otherViews: "Shafi'i: only dust-bearing soil (bare stone excluded); Hanbali: stone permitted, like the school.",
   },
   {
     slug: "taharah-tayammum-covers",
@@ -1200,10 +1391,13 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "One tayammum covers all minor impurities (like wudu) for the obligatory prayer and everything else wudu covers — unlike the Shafi'i school which ties each tayammum to one prayer.",
     shortAnswerUr: "ایک تیمم تمام حدثِ اصغر کا قائم مقام ہوتا ہے (وضو کی طرح) فرض نماز کے لیے اور ہر اس چیز کے لیے جس کے لیے وضو کافی ہو — برخلاف شافعی مذہب کے جو ہر تیمم کو ایک نماز سے جوڑتا ہے۔",
     shortAnswerAr: "التيمم الواحد يشمل جميع الأحداث الأصغر (كالوضوء) للصلاة المفروضة وكل ما يشمله الوضوء — خلافًا للمدرسة الشافعية التي تربط كل تيمم بصلاة واحدة.",
+    detailedAnswer:
+      "The tayammum-verse (Al-Ma'idah 5:6) appoints the earth-wiping as purification's substitute when water is absent or unusable, and the school reads the substitution substantively: whatever wudu does, its substitute does. Since wudu lifts minor ritual impurity across all prayers until broken, one tayammum does the same — covering the fard prayer, the sunnah and nafl prayers, and everything else wudu suffices for, until the tayammum is broken like a wudu.\n\nThe boundaries follow the same logic. A major-impurity state takes its own tayammum, because wiping the face and hands cannot stand in for a ghusl that washes the whole body; and the school's mu'tamad ends the tayammum when usable water reappears — the excuse's lapse ends the substitute — with a second transmitted view discussed in the books. Within its window, the tayammum is broken by the same events that break wudu.\n\nThe Shafi'i school ties each tayammum to a single fard prayer, reading the excuse as prayer-time-specific rather than state-specific. Both readings honor the same verse; they differ on what the substitution transfers to. The practical difference is the traveler's: on the school's reading, one earth-wiping serves a whole stretch of a journey's prayers until water appears.",
     hanafiPosition: "One tayammum = substitute wudu, reusable until broken.",
     otherViews: "Shafi'i: one tayammum per fard prayer.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Tayammum coverage across the schools.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Ma'idah 5:6", translation: "…you find no water, then take for yourselves clean earth and wipe your faces and hands with it — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Does tayammum cover multiple prayers?", "One tayammum many prayers?"],
     related: ["taharah-tayammum-when"],
@@ -1225,9 +1419,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "أن يُلبس الخُف على طهارة تامة، وأن يكون متينًا يثبت على القدم في المشي (من غير أن يسقط)، وأن يغطي القدم إلى الكعبين — فيكون المسح عليهما مقامًا لغسل القدمين يومًا وليلة (للمقيم) أو ثلاثة (للمسافر).",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "Khuff conditions and durations.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Taharah (Hudhayfah — the Prophet ﷺ wiped over his khuffs)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
     ],
     variants: ["Masah on khuff rules", "Wiping over socks conditions"],
     related: ["taharah-khuff-duration", "taharah-masah-socks"],
+    detailedAnswer:
+      "The school's conditions for masah over khuffs: (1) they were put on in complete purity — from Hudhayfah's report (the Prophet ﷺ wiped over his khuffs after wudu; recorded in the collections' taharah chapters, cited at chapter level); (2) they are strong enough to stand walking in without slipping or tearing; (3) they cover the foot up to the ankles. The purity-condition's logic: masah is a concession replacing the foot-washing, and a concession attaches to the act it replaces. The durations (one day/night resident; three traveller) come from the transmission, not analogy — see the duration question. Non-leather thick socks are permitted per the school (treated under the socks question). The school's removal-rule: taking off a khuff breaks the wudu per the mu'tamad (fresh wudu required), a stricter detail than the Shafi'i manuals' foot-wash-only reading.",
+    hanafiPosition: "Khuffs worn in purity, firm, ankle-covering: masah replaces foot-washing for the transmitted durations; removing one khuff breaks the wudu.",
+    otherViews: "Shafi'i: only leather khuffs qualify (their purity and coverage conditions are shared); the removal-case is graded differently in their manuals.",
   },
   {
     slug: "taharah-khuff-duration",
@@ -1246,9 +1445,17 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "للمقيم: يوم وليلة (24 ساعة)؛ وللمسافر: ثلاثة أيام ولياليها (72 ساعة) — يُحسب من أول حدث بعد لبسهما على طهارة.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Masah durations.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Taharah (Safwan ibn 'Assal — the duration report)", translation: "paraphrased translation — three days and nights for the traveller, one for the resident", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
+      { kind: "FATWA", ref: "Fatawa Razvia — discussion of masah over the khuffayn", translation: "The collection presents the school's durations and conditions with its evidence.", status: "PARTIALLY_VERIFIED", note: "volume-level citation; the taharah volumes of the collection treat masah" },
     ],
     variants: ["How long masah on socks?", "72 hours khuff traveler"],
     related: ["taharah-khuff-conditions"],
+    detailedAnswer:
+      "The durations are transmission-fixed: a resident wipes for one day and night (24 hours), a traveller for three days and nights (72 hours) — counted from the FIRST breaking of wudu after the khuffs were worn in purity, not from the wearing itself. The report-basis is Safwan ibn 'Assal's narration (recorded in Muslim's purity chapters, cited at chapter level): the Prophet ﷺ instructed his companions travelling not to remove their khuffs (for three days and nights) except for janabah — and the school's books read the resident/traveller split within the same transmission family. The school stresses the measure's devotional (ta'abbudi) character: the durations are not derived by analogy but received by transmission, which is why the school resists stretching them. Traveller-status follows the qasr-threshold; one who travels and resides within the window follows his current status at each point.",
+    hanafiPosition: "24 hours for the resident, 72 for the traveller, counted from the first post-wearing nullification of wudu.",
+    otherViews: "The durations for leather khuffs are agreed across the schools; the disagreement lies over non-leather socks (see the socks question) — the Shafi'i school restricts masah to leather altogether.",
+    fatawaRazvia:
+      "Fatawa Razvia sets out masah over the khuffayn with the school's conditions and durations (a day and night for the resident; three for the traveller), grounding the measure in the transmitted reports rather than analogy, and answering the objections raised against the school's sock-rulings.",
   },
   {
     slug: "taharah-masah-socks",
@@ -1267,8 +1474,11 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "Yes — the school permits wiping over thick, opaque socks that hold to the feet like khuffs, based on the school's reading of the Companions' practice reports; thin transparent socks are excluded.",
     shortAnswerUr: "جی ہاں — مذہب ایسے موٹے، غیر شفاف موزوں پر مسح کی اجازت دیتا ہے جو خفوں کی طرح پاؤں سے لگے رہیں، صحابہ کرام کے عمل کی روایات کے مذہب کے فہم کی بنا پر؛ پتلے شفاف موزے مستثنیٰ ہیں۔",
     shortAnswerAr: "نعم — تبيح المدرسة المسح على الجوارب الغليظة الكاتمة التي تثبت على القدم كالخفين، بناءً على فهم المدرسة لروايات عمل الصحابة؛ وتستثنى الجوارب الرقيقة الشفافة.",
+    detailedAnswer:
+      "The license for masah over footwear comes from the Prophet's ﷺ practice reports, and the school's discussion turns on a textual addition: the Sunan record Companions reporting wiping over ordinary socks — the Mughira ibn Shu'ba report of wiping over the jawrabayn stands in Abu Dawud's purity chapters — so the school's books treat the operative feature as the covering-function (a thick, opaque, footwear-grade sock) rather than the leather material as such.\n\nThe conditions the school sets operationalize that feature: the sock must be thick enough that water does not seep through, must hold to the foot in walking without tying (muqil), and must reach the ankles; thin transparent socks fail the test and take no masah. Durations and breaking-events then run parallel to the khuff's (the conditions and duration questions carry those), so the sock-wiper's practice is the leather-sock-wiper's practice in another material.\n\nThe comparative map: the Shafi'i school restricts masah to leather outright; the Maliki and Hanbali texts carry their own thick-sock discussions. The school's confidence rests on the breadth of the practice reports; the platform presents restriction and extension as readings of the same evidence-base, each documented in its own school's books — a difference of material-reading, not of the license's existence.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Masah over non-leather socks — the school's evidence.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Taharah (chapter on wiping over the jawrabayn and na'layn — narration of Mughira ibn Shu'ba)", translation: "paraphrased translation — the Prophet ﷺ wiped over his socks and sandals", status: "UNVERIFIED", note: "number not asserted; cited at collection/chapter level" },
     ],
     variants: ["Masah over cotton socks", "Wipe over normal socks Hanafi"],
     related: ["taharah-khuff-conditions", "madhhab-why-differ-in-salah"],
@@ -1290,9 +1500,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "الدم الجاري من الإنسان والحيوان نجس ويجب إزالته من الثياب/الجسم؛ ويُعفى القليل من دم البرغوث ونحوه، ودم السمك/الحشرات ليس نجسًا.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "Blood impurity rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Blood's impurity grade, thresholds and washing standard.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Does blood make clothes impure?", "Blood stain prayer valid?"],
     related: ["taharah-nosebleed", "taharah-najasah-types"],
+    detailedAnswer:
+      "The school's blood-rules: flowing blood (of humans and animals) is heavy impurity (ghalizah) — it must be washed from body and clothes before prayer; excluded are the small traces below the excuse-threshold (flea-scale, the spot-size the books set), blood within fish and locusts (entirely pure per the school's reading of their reports), and blood absorbed into edible meat. The washing-standard: removing the substance suffices — the school does not require scrubbing out a residual stain once the impurity's substance is gone. The comparative note: the Shafi'i school grades all blood impure but excuses sub-dirham-weight traces on garments — a different excuse-metric for the same practical aim; the school's heavy/light taxonomy sets its own thresholds (see the impurity-types question). The nosebleed case splits into two questions — the wudu-nullifier (flow) and the clothing-impurity (substance) — which the school handles by their separate rules.",
+    hanafiPosition: "Flowing blood is heavy impurity requiring washing; sub-threshold traces, fish/locust blood and meat-absorbed blood are excluded.",
+    otherViews: "Shafi'i: blood is impure with a dirham-weight excuse on garments; the schools' excuse-metrics differ though the practice overlaps.",
   },
   {
     slug: "taharah-urine-baby-boy",
@@ -1309,6 +1524,8 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
       "The school holds a nursing boy's urine is impure but its removal is by sprinkling (nadh) rather than full washing — an ease provision from the narration of the washing/sprinkling contrast between boys and girls; the urine itself is still najis in the school's books.",
     shortAnswerUr: "مذہب کی رائے ہے کہ شیر خوار لڑکے کا پیشاب ناپاک ہے مگر اس کا ازالہ چھڑکاؤ (ندح) سے ہوتا ہے، مکمل دھلائی سے نہیں — یہ سہولت اس روایت سے ہے جس میں لڑکے اور لڑکی کے پیشاب میں دھونے اور چھڑکانے کا فرق مذکور ہے؛ مگر پیشاب خود مذہب کی کتب میں نجس ہی رہتا ہے۔",
     shortAnswerAr: "ترى المدرسة بول الغلام الرضيع نجس لكن إزالته بالرش (الندح) لا بالغسل التام — تسهيلاً مأخوذًا من رواية التفريق بين غسل بول الصبي ورش بول الصغيرة؛ ويبقى البول نفسه نجسًا في كتب المدرسة.",
+    detailedAnswer:
+      "The narration is precise in its gesture: Umm Qays brought her nursing boy to the Prophet ﷺ; he urinated on his garment; the Prophet ﷺ called for water and sprinkled (nadh) — Bukhari's purity chapters carry the report — and the paired narration material contrasts washing the girl's urine with sprinkling the boy's. The school codifies both halves as a targeted ease for the most recurring impurity-contact of family life.\n\nThe school is exact about what the ease is and is not: the urine itself remains najis in the school's books — the concession touches the removal-method (a sprinkle suffices where a wash would otherwise be demanded), not the substance's grade. The manuals add the stage-refinement the narration material records: the sprinkling ease attaches to the nursing boy, and once he takes solid food the books' dominant line returns to washing.\n\nOther frameworks read the reports differently: the Shafi'i school washes both children's urine normally, finding no removal-concession in the texts; a lenient strand recorded in some transmissions treats the boy's urine as light impurity — which the school declines to generalize, since urine's impurity is established and only the nadh-concession is textual. The case is a window into the Shari'ah's method: purity preserved, hardship lifted by a prophetic gesture of proportion.",
     hanafiPosition: "Sprinkle (nadh) suffices for a nursing boy's urine; a girl's is washed.",
     otherViews: "Shafi'i: baby boy's urine still washed normally (impurity same).",
     sources: [
@@ -1359,9 +1576,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "الماء المتصل بالأرض/السماء (الأنهار والبحار والصهاريج الكبيرة) لا ينجس ما لم تتغير إحدى صفاته الثلاث — اللون أو الطعم أو الرائحة؛ أما البرك الصغيرة الساكنة فتنجس إذا وقعت فيها نجاسة، ما لم تكن جارية.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The two-category water framework and the three-qualities test.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "The water categories (tahrur/tahir/mutahhir) and the large-water rules.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Does urine make river water impure?", "Swimming pool wudu water"],
     related: ["taharah-water-leftover", "taharah-najasah-types"],
+    detailedAnswer:
+      "The school's water-map has three categories: (1) mutlaq/tahrur — pure and purifying: rain, rivers, seas, wells, snow- and hail-melt; (2) tahir ghayr mutahhir — pure but not purifying: liquids drawn from trees and fruits (they do not serve for wudu); (3) mutahhir — the technical category of water that purifies despite being impure in itself, a famous device discussed in the commentaries (used-water's status sits here in the school's technical debates). The large-water rule then governs impurity-contact: water connected to the earth or sky (rivers, seas, large tanks) does not become impure unless one of its three qualities — colour, taste or smell — changes; small stagnant pools become impure on impurity-contact, unless flowing. The Shafi'i school's rule keys on a fixed volume (two qullahs) rather than connection, with attribute-change beneath it — the two frameworks reach close practical outcomes by different structures. The school's reading protects the practical reality of rivers and wells: contact with impurity without attribute-change leaves them usable.",
+    hanafiPosition: "Connected waters (earth/sky) resist impurity until colour, taste or smell changes; small stagnant pools spoil on contact unless flowing.",
+    otherViews: "Shafi'i: a two-qullah volume-threshold confers resistance; below it, impurity-contact spoils the water (with attribute-tests). The structures differ; outcomes often converge.",
   },
   {
     slug: "taharah-water-leftover",
@@ -1380,9 +1602,14 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "تصنف المدرسة المتبقي: متبقي الإنسان والفرس والبهائم المأكولة اللحم طاهر؛ ومتبقي الكلب والخنزير والسبع نجس؛ ومتبقي القطة طاهر بتيسير؛ ومتبقي الحمار والبغل محل كلام (مشكوك — والغسل أولى).",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Taharah", translation: "The leftover-water categories.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Taharah (Abu Qatadah — the cat report)", translation: "paraphrased translation — the cat is not impure, nor one that keeps circling away", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
     ],
     variants: ["Can I use water a cat drank from?", "Cat water wudu"],
     related: ["taharah-water-large", "taharah-dog-saliva"],
+    detailedAnswer:
+      "The school's leftover-map (ma' baqiyyah) sorts by the animal's status plus specific transmissions: pure leftovers — human, horse, and edible livestock; the cat's leftover is pure by the ease-provision from Abu Qatadah's cat-report (recorded in the collections' purity chapters, cited at chapter level); impure leftovers — the dog, the pig, and predators; and the doubtful tier — the donkey and mule (musta'bah): their leftover is not declared impure but washing is preferred, and where washing is impossible the school's books direct tayammum after using it. The rationale: edible-status tracks purity; predatory-status tracks impurity; the donkey/mule straddle the categories, hence the cautious tier. The Shafi'i school grades the donkey/mule leftover pure (their category is predator versus non-predator) — a clean example of taxonomy driving outcome. Practical upshot: water a cat drank from is usable; a donkey's trough gets a wash where possible.",
+    hanafiPosition: "Pure: human, horse, edible livestock, cat. Impure: dog, pig, predators. Doubtful (musta'bah): donkey/mule — washing preferred, tayammum where impossible.",
+    otherViews: "Shafi'i: the donkey/mule leftover is pure (predator/non-predator taxonomy); both schools agree on the dog's and pig's impurity.",
   },
   {
     slug: "taharah-toilet-etiquette",
@@ -1401,9 +1628,16 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "تنظيف الخلفين بالماء (أو بالحجارة إن تعذر الماء)، واستعمال اليسرى، وعدم الاستقبال للقبلة، والاستتار — والاستنجاء بالماء مستحب، وتجزي الحجارة (التخلي) إذا لم يبق رطوبة.",
     sources: [
       { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "Istinja rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Wudu (the privy-etiquette reports — qiblah avoidance (Abu Ayyub) and the three stones (Salman))", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Masajid (Abu Huraira — the two cursed ones)", translation: "paraphrased translation — the one who relieves himself in the qiblah-direction and the one who uses people's paths", status: "UNVERIFIED", note: "number not verified; cited at collection/chapter level" },
     ],
     variants: ["How to clean in Islam after toilet?", "Is water necessary after toilet?"],
     related: ["taharah-najasah-types"],
+    detailedAnswer:
+      "The school's istinja-rules come from the Prophet's ﷺ transmitted practice: cleaning the two exits is required for purity (water is the mustahabb standard; stones (takhalli) suffice where nothing wet remains — the school's threshold from the reports), the left hand is used, and the etiquette-points are graded: concealment (sitr), avoiding the qiblah-direction when relieving oneself (Salman's and Abu Ayyub's reports; the school grades the indoor case differently from the open field), the warnings against relieving oneself on people's paths (the two-cursed-ones report), and entering with the left foot/leaving with the right as sunnah etiquette. The school's grading hierarchy matters: some points are sunnah, some makruh-avoidances — the manuals sort them, guarding against reading every etiquette as binding. The Shafi'i manuals share the core with slightly different gradings (their stones-only rule keys on the same no-wetness threshold).",
+    hanafiPosition: "Water istinja is mustahabb; stones suffice when nothing wet remains; the etiquette-points (qiblah-avoidance, concealment, left hand) are graded sunnah/makruh by the manuals.",
+    otherViews: "Shafi'i: stones suffice only absent wetness — shared; the qiblah-rules' strength-grade differs somewhat across the schools' manuals.",
+    practicalInfo: "Core practice: conceal yourself, avoid the qiblah direction, use the left hand, prefer water, and wash the hands afterwards — the manuals' etiquette list expands from these.",
   },
   {
     slug: "taharah-najasah-types",
@@ -1422,9 +1656,17 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "تقسم المدرسة إلى نجاسة غليظة (البول والغائط والدم الجاري والخنزير ولعاب الكلب والمسكرات) تستلزم الغسل، ونجاسة خفيفة (بول الدواب المأكولة اللحم وفرث الطيور الحلال) تُعفى إذا كانت أقل من ربع الثوب.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Taharah", translation: "Heavy vs light impurity framework.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Nur al-Idah (al-Shurunbulali), Kitab al-Taharah", translation: "The ghalizah/khafifah lists and the quarter-excuse.", status: "PARTIALLY_VERIFIED" },
+      { kind: "FATWA", ref: "Fatawa Razvia — discussion of the najasat", translation: "The collection sets out the school's impurity taxonomy with its evidence.", status: "PARTIALLY_VERIFIED", note: "volume-level citation; the taharah volumes of the collection treat the najasat" },
     ],
     variants: ["Light vs heavy impurity", "Is bird dropping najis?"],
     related: ["taharah-blood", "taharah-dog-saliva", "taharah-urine-baby-boy"],
+    detailedAnswer:
+      "The school sorts impurities by weight. GHALIZAH (heavy): urine and faeces of humans, flowing blood, the pig, the dog's saliva and sweat, wine and intoxicants, carrion's moisture and the like — these must be physically removed (washed) before prayer; they admit no smallness-excuse. KHAFIFAH (light): the urine of livestock whose meat is eaten, and the droppings of lawful birds — excused when under a quarter of the garment ('the quarter' being a customary measure, not a precise ritual-count). The school also works with the 'ayn/hukmiyyah distinction: physically present impurity ('ayn) is removed by cleaning; legally-impure-but-untraceable wetness (hukmiyyah, e.g. an unknown wet spot) is handled by probability-rules — a signature Hanafi device for real life. The comparative note: the Shafi'i school has a single impurity grade excused below a dirham's weight; the Maliki school is stricter still. The school's two-tier structure is its own mercy-metric: it excuses what daily life inevitably brings, while holding the heavy class to full removal.",
+    hanafiPosition: "Heavy/light division: heavy impurity must be washed out entirely; light impurity is excused under a quarter of the garment; unknown-wetness cases run on probability.",
+    otherViews: "Shafi'i: one grade of impurity, excused below a dirham's weight; Maliki: stricter thresholds. The taxonomy differs; each school's excuse-metric is its own.",
+    fatawaRazvia:
+      "Fatawa Razvia presents the school's impurity taxonomy (ghalizah/khafifah) with the quarter-excuse for the light class, and applies it to everyday cases — clothing, vessels and prayer-space — in line with the mu'tamad manuals.",
   },
   {
     slug: "taharah-madhur",
@@ -1443,8 +1685,15 @@ export const fiqhWorshipQuestions: BankQuestion[] = [
     shortAnswerAr: "من تكرر حدثه (أو انتقاض وضوئه) باستمرار يتوضأ لكل صلاة فرض عند دخول وقتها ويصلي دون أن يُعاب عليه انتقاضه — وتسهيل المعذور مدوَّن في الكتب.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Taharah", translation: "The ma'dhur rulings.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Taharah (Anas — the Prophet's ﷺ concession to the chronic sufferer)", translation: "paraphrased translation — 'do not leave the prayer as long as it does not come anew'", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["I cannot control urine what do I do?", "Chronic excuse in salah"],
     related: ["taharah-wudu-faraid", "taharah-doubt"],
+    detailedAnswer:
+      "The ma'dhur-framework is the school's mercy for the chronic case: anyone whose nullifier (or impurity) recurs continuously — incontinence, chronic wind, unstoppable bleeding — takes one fresh wudu as each prayer's time enters, and prays that time's prayers on it; recurrence during the prayer does not break it and is not imputed. The establishment-condition: the excuse must persist through a full prayer-time (proving chronicity) — the manuals' detail prevents the framework swallowing ordinary cases. The report-basis includes the Prophet's ﷺ concession to the chronic sufferer (the Anas narration: 'do not leave the prayer as long as [the excuse] does not come [anew]', in the Sunan's taharah chapters, cited at chapter level). Recovery: when the excuse stops for a full prayer-time, normal rules resume. The practical dignity of the rule is its point: the excused worshipper prays in congregation without anxiety, and what occurs during the prayer is blameless.",
+    hanafiPosition: "One wudu per prayer-time for the excused person; the whole time's prayers stand on it; recurrence during prayer neither breaks it nor is blamable.",
+    otherViews: "Shafi'i and Maliki manuals apply the same time-based excuse structure; their thresholds for establishing chronicity differ in detail.",
+    practicalInfo:
+      "General educational information — not a personalized fatwa. Consult a qualified local mufti for your personal situation. Establish the chronicity (one full prayer-time), then take wudu when each time enters; if the condition resolves, return to the normal rules.",
   },
 ];

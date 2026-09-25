@@ -52,9 +52,14 @@ export const familyFinanceQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Nikah (narration of Khansaa bint Khidam — the previously-married woman)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Nikah", translation: "The school's wilayah framework (executive not validity-based).", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Nikah (narration of Ibn 'Abbas — the previously-married woman has more right over herself than her guardian)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Nikah (narration of Abu Musa al-Ash'ari — no nikah except with a wali)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "QURAN", ref: "Al-Nisa 4:19", translation: "…marry them with their families' permission, honourably — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Can a woman marry without a guardian?", "Is nikah valid without wali?"],
     related: ["nikah-conditions-valid", "nikah-witnesses"],
+    detailedAnswer:
+      "The wali dispute is a study in how the school weighs rival text-families. One corpus insists on the guardian: the Abu Musa al-Ash'ari narration that 'there is no nikah except with a wali' and the Prophet's ﷺ rejection of guardian-imposed marriages such as the Khansaa bint Khidam case. A second corpus empowers the woman herself: the Ibn 'Abbas narration that 'the previously-married woman has more right over herself than her guardian, and the virgin's permission is sought regarding herself.' The school reconciles the two by reading the wali-narrations as governing minors and supervision-rights, and by taking the 'more right over herself' wording at face value for the adult woman — a characteristically literal reading of an explicit text the collections grade highly.\n\nThe school-internal texture matters as much as the headline ruling. Imam Abu Hanifa held the adult woman's self-contracted nikah valid; his two students attached a qualification — her self-marriage to a man below her kafa'ah standing is defective until ratified — which is why the school's books still treat guardian consent and family parity as real rights (see the kafa'ah question). Court practice narrowed the gap further: the classical manuals assign wilayah to the sultan or qadi for the wali-less woman, so even within the school's own judicial world a marriage normally passed through guardian-like authority.\n\nThe other three schools read the wali-narrations as unconditional validity texts and relegate the 'more right over herself' narration to a rule about refusing rather than self-contracting; they also cite the Qur'anic phrase 'marry them with their families' permission' (Al-Nisa 4:19), which the school reads within its immediate context (the honourable marriage of captive women) rather than as a universal validity pillar. The disagreement, then, is over which texts govern validity and which govern process — both sides cite authentic material, which is why the platform records the difference rather than resolving it.",
   },
   {
     slug: "nikah-witnesses",
@@ -71,8 +76,17 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Two competent Muslim witnesses (male or one man + two women per the school's witness rules) are required for validity — a nikah without witnesses is invalid in the school.",
     shortAnswerUr: "صحت کے لیے دو اہل مسلمان گواہ (مرد، یا مذہب کے اصولِ شہادت کے مطابق ایک مرد اور دو عورتیں) شرط ہیں — مذہب کے نزدیک بغیر گواہوں کے نکاح باطل ہے۔",
     shortAnswerAr: "يشترط للصحة شاهدان من المسلمين أهلين (رجلان، أو رجل وامرأتان بحسب قواعد الشهادة في المذهب) — والنكاح بلا شهود باطل عند الحنفية.",
+    detailedAnswer:
+      "The school treats witnesses as a condition of validity (shart al-sihhah) of the nikah itself — distinct from the officiant and the written document, which are community customs rather than pillars. The evidence base is the Qur'anic command to take witnesses when contracting deferred obligations (Al-Baqarah 2:282 — two men, or one man and two women), which the jurists extend to the marriage contract; the reasoning is that a contract establishing lineage and long-term rights must not live in secrecy. Witness quality follows the school's testimony rules: adult, sane, Muslim (and, in the classical manuals, free), with the man-plus-two-women formula mirroring the verse's own witness ratio for debt documentation. The books also encourage announcing the marriage after the contract — publicity protects the wife's claims, anchors the child's lineage, and deters fraudulent denial, which is why an unwitnessed nikah is void even if both spouses consent.",
+    hanafiPosition:
+      "Two adult Muslim witnesses are a condition of the nikah's validity — two men, or one man with two women per the school's reading of the witness verse; a nikah without witnesses is void, and announcing the marriage is encouraged.",
+    otherViews:
+      "All four Sunni schools require witnesses for validity. The Maliki school goes further, making publicity itself essential: a genuinely secret marriage is invalid in their books even where witnesses existed, while the other schools generally treat secrecy as wrong but not invalidating. Schools also differ on fine points of witness competence (e.g. the status of a fasiq witness).",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Witness requirement.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Baqarah 2:282", translation: "…take witnesses when you contract a debt — two men, or one man and two women… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Nikah", translation: "Witness conditions and the invalidity of the unwitnessed contract.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Nikah witnesses requirements", "Is nikah valid with one witness?"],
     related: ["nikah-conditions-valid"],
@@ -92,9 +106,20 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Mahr is the wife's binding right from the verse — its minimum in the school is 10 dirhams (~30.618g silver) or its value; its amount, form and timing (immediate/deferred) are negotiated, with fairness emphasized.",
     shortAnswerUr: "مہر آیت کے مطابق زوجہ کا لازم الاداء حق ہے — مذہب میں اس کی کم از کم مقدار دس دراہم (تقریباً 30.618 گرام چاندی) یا اس کی قیمت ہے؛ اس کی مقدار، صورت اور وقت (معجّل/مؤجّل) باہم گفتگو سے طے ہوتے ہیں، اور انصاف کی رعایت پر تاکید کی گئی ہے۔",
     shortAnswerAr: "المهر حق لازم للزوجة بموجب الآية — وحدّه الأدنى في المذهب عشرة دراهم (نحو 30.618 غراماً من الفضة) أو قيمتها؛ ويُتفق في مقداره وصورته ووقته (معجّلاً أو مؤجّلاً)، مع التأكيد على العدل.",
+    detailedAnswer:
+      "The Qur'an fixes mahr as the wife's right and the husband's obligation (Al-Nisa 4:4), and 4:24 confirms it is owed whenever the contract is concluded for nikah — even where the parties stipulated nothing, in which case the school fills the gap with mahr mithl, the customary mahr of the wife's female paternal relatives. The books treat mahr as the wife's personal property — a gift to her, not a payment to her family — and as a debt on the husband from the moment of contract, waivable only by her genuine consent (4:24's 'what you mutually agree after the obligation'). The 10-dirham floor is cited in the school's manuals from reports and early practice, and the school's own books record jurists weighing the floor — one early Hanafi master suggested the 'minimum' simply tracks the customary mahr of the land. The narration of the penniless groom told to seek 'even a ring of iron' (and finally settling on teaching the Qur'an as his mahr) shows the law keeping nikah accessible while never dropping the obligation itself. Historically this made nikah structurally different from customs where wealth flows from the bride's side: here the husband's payment honours the wife.",
+    hanafiPosition:
+      "Mahr is wajib as a binding debt on the husband by the Qur'an, with a floor of 10 dirhams (about 30.618g of silver) or its value; where unstipulated, the customary mahr (mahr mithl) of her paternal female relatives applies, and only her genuine consent can waive it.",
+    otherViews:
+      "The Shafi'i and Hanbali schools share the 10-dirham minimum; the Maliki school holds any mahr is valid, however small, seeing no fixed floor in the texts. Within the Hanafi works themselves, jurists discussed the strength of the floor's evidence while agreeing on the obligation of mahr as such.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "QURAN", ref: "Al-Nisa 4:4", translation: "Give women their dowry as an obligation — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Nikah", translation: "Mahr minimums and types.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Baqarah 2:236", translation: "…provide for them — the wealthy according to his means — even where no dowry was appointed… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "QURAN", ref: "Al-Nisa 4:24", translation: "…so give them their mahr as an obligation; and there is no blame on you in what you mutually agree after the obligation… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Nikah (narration of Sahl ibn Sa'd — the groom told to seek even a ring of iron)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Mahr mithl and the minimum discussion.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Minimum mahr amount", "Is mahr required in nikah?"],
     related: ["nikah-conditions-valid", "mahr-immediate-deferred"],
@@ -117,9 +142,13 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Mahr timing categories.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Nisa 4:24", translation: "…give them their mahr as an obligation… and there is no blame on you in what you mutually agree after the obligation — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "QURAN", ref: "Al-Baqarah 2:236", translation: "…no blame on you in divorcing women before touching them or appointing a mahr for them… the appointed mahr's half — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Deferred dowry when due?", "Mahr on death of husband"],
     related: ["mahr-obligatory", "talaq-iddah"],
+    detailedAnswer:
+      "The timing question grows out of the Qur'an's latitude: the mahr is owed 'as an obligation,' yet the same verse adds 'no blame on you in what you mutually agree after the obligation' (Al-Nisa 4:24). The jurists ground the mu'ajjal/muwajjal distinction in precisely this stipulation-space. In the school's analysis the mahr becomes a debt (dayn) on the husband from the moment the contract concludes; the stipulation does not create the right but assigns its due date — an immediate portion payable at contract or consummation, a deferred portion suspended until its trigger.\n\nThe dissolution scenarios give the deferred portion its legal weight. On divorce it falls due at once; on the husband's death it is claimed from his estate as a debt outranking every heir's share — the estate's order (funeral expenses, then debts, then the bequest within one-third, then the fixed shares) places the widow's mahr ahead of the inheritance, and her iddah does not extinguish the claim. Where the wife dies first, the deferred mahr does not lapse: the books treat it as her property-receivable, passing to her own heirs. Al-Baqarah 2:236 shows the timing rules operating even in an unconsummated marriage — the appointed mahr's half falls due on a divorce before consummation.\n\nThe customary practice of splitting the mahr — a modest immediate portion, a substantial deferred portion — is the books' model of a well-designed contract: the deferred balance functions as a deterrent to hasty divorce and as the wife's financial anchor on dissolution. Where the contract is silent entirely, the customary mahr (mahr mithl) fills the gap (its basis in the mahr-obligation question), and the books' dominant treatment takes that customary mahr as falling due immediately.",
   },
   {
     slug: "talaq-triple-one-sitting",
@@ -169,9 +198,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Talaq", translation: "Anger grading in talaq.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Talaq (narration of Abu Huraira — marriage, divorce and return take effect whether serious or jesting)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["I said talaq in anger", "Talaq during fight valid?"],
     related: ["talaq-triple-one-sitting", "talaq-conditional"],
+    detailedAnswer:
+      "The school's method is to ask not 'was he angry?' but 'did legal agency (ikhtiyar) remain?' Ordinary anger — however hot — leaves a legally accountable person aware and choosing, so the books keep the pronouncement effective while attaching the sin of a reckless dissolution. The same logic explains the school's rule that marriage, divorce and return take effect 'whether serious or jesting' (the Abu Huraira narration in Sunan Abi Dawud's Talaq book): the shari'ah binds deliberate words, not passing emotional states. Only ghalabat al-hal — a seizure of rage that abolishes awareness, so the person does not know what he is saying, akin to insanity — removes the talaq's effect, because legal capacity itself has lapsed.\n\nThe jurists grade the analysis by intent (qasd) and wording. A deliberate formula (sarih) is effective; an indirect wording (kinayah — 'you are free,' 'go to your family') counts only with intent; and the angry man who deliberately pronounces a sarih formula has made an effective, if sinful, talaq — anger is a motive, not an absence of intent. The evidential machinery then protects marriages in practice: whoever claims ghalabat al-hal to escape a pronouncement carries the burden before a qadi, a bar the books deliberately set high.\n\nThe cross-school comparison is instructive rather than competitive: the Maliki school weighs compulsion and overwhelming emotion far more heavily, voiding the compelled pronouncement in their texts — they place the protection in the actor's state, while the school places it in the words' operation plus a strict evidential bar. The manuals also carry the coercion discussion as its own chapter, with transmitted differences among the school's own jurists; together with the ghalabat al-hal bar, this is why actual cases are directed to a qualified mufti rather than self-assessed.",
   },
   {
     slug: "talaq-conditional",
@@ -194,6 +226,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     ],
     variants: ["Talaq if you do X", "Threat talaq valid?"],
     related: ["talaq-triple-one-sitting", "talaq-anger"],
+    detailedAnswer:
+      "The school's treatment follows from classifying talaq-words as operative speech (insha'): the husband's formula does not describe a divorce, it enacts one. A condition attached to the enactment does not void it; it schedules the effect — 'if you do X you are divorced' takes effect when X occurs, without a second pronouncement at that moment. The books ground this in the structure of a unilateral legal act: an operative declaration runs with the terms its author himself attached, so long as those terms are not themselves unlawful.\n\nThe school's exception — talaq al-'umrah ('she is divorced when I die') — shows the method. The formula is voided because it contradicts the purposes of both marriage and divorce: death already dissolves a marriage, so a death-contingent divorce has no legal work to do except stripping the wife of her inheritance share. The jurists read the voiding as protecting the Qur'anic fixed-share system against exactly that device — the marriage stands, and she inherits.\n\nThe Hanbali school reaches the opposite result by reclassifying the formula: conditional talaq is a vow (nadhr) rather than an operative divorce — the words bind the husband, and when the condition occurs the wife receives an option to dissolve rather than a completed talaq. Their reasoning preserves the principle that talaq requires present, deliberate intent; the school's reasoning preserves the ordinary force of operative words. The jurists across the schools add the same pastoral counsel: habitual conditional threats — 'if you do that again, you are divorced' — toy with a grave dissolution and corrode the marriage's trust, and the books urge keeping talaq out of household vocabulary altogether.",
   },
   {
     slug: "talaq-iddah",
@@ -210,10 +244,19 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Three menstrual cycles (or three months for non-menstruating women), delivery for a pregnant woman, and four months and ten days for a widow — during which reconciliation is possible in revocable divorce.",
     shortAnswerUr: "تین حیض کے دور (یا حیض نہ آنے والی عورتوں کے لیے تین مہینے)، حاملہ کے لیے وضعِ حمل، اور بیوہ کے لیے چار مہینے دس دن — جس دوران رجعی طلاق میں رجوع ممکن ہے۔",
     shortAnswerAr: "ثلاثة أطوار من الحيض (أو ثلاثة أشهر لمن لا تحيض)، والوضع للحامل، وأربعة أشهر وعشرة أيام للأرملة — وخلالها يجوز الرجوع في الطلاق الرجعي.",
+    detailedAnswer:
+      "The books articulate three purposes of the iddah: establishing whether the woman is pregnant (protecting lineage), keeping a window for the husband's return in revocable divorce, and marking a period of dignified provision and restraint. The durations are text-fixed: three qur' for the divorced woman (Al-Baqarah 2:228), three months for the divorced woman who does not menstruate, delivery for the pregnant woman (Al-Talaq 65:4), and four months and ten days for the widow (2:234) — the widow's term applying even where she does not menstruate. The school reads qur' as the interval of purity between two menstruations, so the count runs in cycles of purity; during a revocable divorce the husband may take her back throughout the term and owes her maintenance because she remains a wife until it completes. After an irrevocable separation the window closes, and the pregnant woman's term ends only at delivery — a protection the jurists read directly from 65:4.",
+    hanafiPosition:
+      "Three cycles (counted as periods of purity in the school), three months for the non-menstruating divorcee, delivery for the pregnant woman — divorced or widowed — and four months and ten days for the widow; the raj'i husband may return during the term and owes maintenance.",
+    otherViews:
+      "The Shafi'i, Maliki and Hanbali schools read qur' in 2:228 as the menstruation itself rather than the purity between menstruations — same verse, different arithmetic for the three-part iddah. The widow's four months and ten days is agreed across the schools, as is delivery ending the pregnant woman's term.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "QURAN", ref: "Al-Baqarah 2:228", translation: "Divorced women wait three cycles — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "QURAN", ref: "Al-Baqarah 2:234", translation: "Widows: four months and ten days — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Talaq", translation: "Iddah durations.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Talaq 65:4", translation: "…those who are pregnant: their term is until they deliver… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Talaq", translation: "The qur'/purity reading and iddah details.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Iddah period divorce", "Waiting period after talaq"],
     related: ["talaq-triple-one-sitting", "khula-ruling"],
@@ -263,9 +306,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     sources: [
       { kind: "QURAN", ref: "Al-Baqarah 2:229", translation: "…no blame on her to redeem something — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Talaq", translation: "Khula mechanics.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Talaq (narration of Ibn 'Abbas — the wife of Thabit ibn Qays: accept the garden and divorce her once)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Khula process Islam", "Can a woman divorce her husband?"],
     related: ["talaq-iddah", "talaq-triple-one-sitting"],
+    detailedAnswer:
+      "The founding case is the Ibn 'Abbas narration in Sahih al-Bukhari's Talaq book: the wife of Thabit ibn Qays came to the Prophet ﷺ complaining, 'I do not fault him in character or religion, but I fear I would fail in his rights,' and the Prophet ﷺ asked whether she would return Thabit's garden; on her yes, he instructed Thabit: 'Accept the garden and divorce her once.' The case fixes khula's anatomy — the wife's initiative, compensation (here the garden, typically the mahr or its value), the husband's acceptance, and a single separation.\n\nThe school classifies khula as an exchange-dissolution, not a unilateral act: unlike talaq it requires the husband's consent, which is why the classical manuals give the wife no self-executing exit. The remedy for a refusing husband is the separate judicial power of tafriq — the school's courts dissolve a marriage on defined grounds (non-maintenance, impotence, ila', li'an and the like), a track distinct from khula. The cross-school contrast is real: the Maliki school empowers the qadi to dissolve on harm more broadly, while the school keeps judicial dissolution to its enumerated grounds — a difference in where the law places the exit, not whether the exit exists.\n\nThe effects follow the classification. The three-cycle iddah applies; in the dominant jurists' view no raj' operates within it — her consent, not his mere return, governs — and the books discuss whether khula enters the three-divorce ledger. On compensation, the verse 'no blame on them in what she ransoms' (2:229) sets the redemption frame, and the jurists discourage pressing an amount beyond what she can genuinely bear. Khula terms are exactly where the platform's consultation warning earns its keep: amounts, timing and documentation all shape the separation's validity.",
   },
   {
     slug: "nafaqah-maintenance",
@@ -282,9 +328,19 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Yes — food, clothing, housing, and service needs according to his means and her standard are his binding obligation while the marriage stands and during iddah of revocable divorce.",
     shortAnswerUr: "ہاں — خوراک، لباس، رہائش اور خدمت کی ضروریات، اس کی وسعت اور اس کے معیار کے مطابق، نکاح کے قائم رہنے اور رجعی طلاق کی عدت کے دوران اس پر لازم الاداء ہیں۔",
     shortAnswerAr: "نعم — الطعام والكساء والمسكن وحوائج الخدمة على قدر وسعه وعلى قدر مستواها واجبة عليه ما دام النكاح قائماً وفي عدة الطلاق الرجعي.",
+    detailedAnswer:
+      "Nafaqah is grounded in Al-Talaq 65:7 ('let the man of wealth spend according to his wealth') and the Qur'an's framing of men as maintainers (Al-Nisa 4:34), with Al-Baqarah 2:233 supplying the model duty: 'upon the father is their provision and their clothing according to what is acceptable'. The school calculates the amount by two variables — the husband's means and the wife's own social standard — so a merchant's wife is owed at her standard, not at subsistence; the duty covers food, clothing, suitable housing and (in the classical manuals) service appropriate to her standing. It remains due even if the wife is wealthy, since the obligation is marital rather than need-based and the wife's property is entirely her own under the school's financial-independence rules. Arrears accumulate as a debt on the husband; maintenance continues through the iddah of revocable divorce, and the pregnant woman is maintained until delivery even after an irrevocable separation.",
+    hanafiPosition:
+      "The husband owes nafaqah while the marriage stands and through the raj'i iddah, by his means and her standard, regardless of her own wealth; unpaid maintenance accrues as a debt enforceable against him.",
+    otherViews:
+      "The schools agree on the core duty and differ on remedies: the Maliki school permits the qadi to dissolve a marriage persistently denied maintenance, while the classical Hanafi manuals did not grant that judicial power — a difference with real historical consequences for Hanafi jurisdictions. Ibn Rushd's comparative work records the breadth of this debate across the schools.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "QURAN", ref: "Al-Talaq 65:7", translation: "Let the wealthy spend from his wealth… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nafaqat", translation: "Maintenance obligations.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Nisa 4:34", translation: "Men are maintainers of women… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "QURAN", ref: "Al-Baqarah 2:233", translation: "…upon the father of the children is their provision and their clothing… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "BOOK", ref: "Bidayat al-Mujtahid (Ibn Rushd), Kitab al-Nikah — nafaqah", translation: "Comparative discussion of maintenance and its remedies across the schools.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Husband maintenance wife", "What is nafaqah?"],
     related: ["mahr-obligatory", "talaq-iddah"],
@@ -333,9 +389,13 @@ export const familyFinanceQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Wasaya (narration of Abu Umamah? — one-third narration)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Wasaya", translation: "Bequest limits.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Baqarah 2:180", translation: "Prescribed for you, when death approaches one of you leaving wealth: a bequest for parents and relatives according to what is right — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Wasaya (narration of Sa'd ibn Abi Waqqas — a third, and a third is a lot)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Wasiyyah one third", "Can I leave inheritance to charity?"],
     related: ["inheritance-basics"],
+    detailedAnswer:
+      "The wasiyyah's history explains its rules. Al-Baqarah 2:180 prescribed bequests for parents and near relatives 'according to what is right' — revealed before Al-Nisa's fixed shares existed, when bequest was the main channel supporting vulnerable relatives at death. Once Al-Nisa 4:11-12 apportioned the estate, the school's books read the bequest's field as narrowed: the fixed shares cannot be redrawn by will, and the free one-third remains the channel for non-heirs, charity and causes.\n\nTwo prophetic limits define the frame. The one-third ceiling comes from the Sa'd ibn Abi Waqqas narration in Sahih al-Bukhari's Wasaya book — told 'a third, and a third is a lot; to leave your heirs self-sufficient is better than to leave them dependent on people' (paraphrased). The bar on bequests to heirs comes from the 'no bequest to an heir' narration (cited in the sources). The school reads that bar as protecting the divine apportionment: an heir's share is fixed by revelation and a will cannot inflate it — though heirs of full age may ratify a larger or heir-directed bequest after death, their consent converting what the will alone could not do.\n\nThe estate's order matters equally: debts are paid before the bequest is executed (the jurists prioritize actual liabilities over the voluntary bequest notwithstanding the verse's listing of wasiyyah before debt), then the bequest within its third, then the heirs. The Maliki books record a narrow exception to the heir-bar where the heir is needy among needy non-heirs — a documented divergence worth knowing when comparative practice surfaces. The school's scholars counsel a documented, witnessed wasiyyah kept within one-third, executors named for its execution, and debts disclosed — the discipline that makes the one-third a blessing rather than a family dispute.",
   },
   {
     slug: "custody-hadhanah",
@@ -355,9 +415,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: FATWA_NOTE + " Courts and muftis weigh the specific case.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Nikah — hadhanah", translation: "Custody order and durations.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sunan Abi Dawud, Kitab al-Talaq (narration of 'Abdullah ibn 'Amr — the divorced mother: you have more right to him so long as you do not remarry)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Child custody after divorce Islam", "Who keeps the children?"],
     related: ["nafaqah-maintenance", "khula-ruling"],
+    detailedAnswer:
+      "The school's framework splits two powers that modern usage blurs. Hadhanah (custody) is the child's daily care — residence, nurture, ordinary discipline; wilayah is legal representation — the child's property, contracts, weighty decisions and the marriage of a minor. The mother's custody never strips the father's guardianship, and the father's guardianship never strips the mother's custody; both remain answerable to the child's interest, the principle the books apply above the age-rules.\n\nThe ordering rules carry the school's texture. Custody begins with the mother — the 'Abdullah ibn 'Amr narration in Sunan Abi Dawud's Talaq book, where the divorced mother pleads ('my womb carried him, my breasts nursed him, my lap held him') and the Prophet ﷺ answers, 'You have more right to him so long as you do not remarry' — then passes through her female relatives in the order Radd al-Muhtar records. The boy's custody shifts to the father around age seven in the dominant texts, with Abu Yusuf's transmitted view tying the shift to the child's self-management (eating, dressing, managing his need) rather than the bare age; the girl remains with the maternal line to puberty, where the books discuss her preference. Disqualifiers — open sin, neglect, remarriage to a man unrelated to the child — are weighed by the qadi for the child's welfare rather than applied mechanically.\n\nThe schools differ on thresholds and details — the Shafi'i books mark seven years with the child's choice afterward, the Maliki books extend the maternal line's priority further — while all four agree on the mother's priority, the father's unbroken maintenance duty (the custodian does not pay for the child), and the child's interest as the operating principle. Muslim jurisdictions' modern courts draw on this spine when applying best-interest standards, which is why the question's warning routes real custody disputes to scholars and courts rather than self-help.",
   },
   {
     slug: "nikah-kufu",
@@ -374,8 +437,16 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Kafa'ah is the family-honour compatibility (lineage, piety, profession, freedom) that in the school gives male paternal relatives of equal standing a right to object to a below-their-standard match — a right of honour, not a validity condition of the contract itself.",
     shortAnswerUr: "کفاءت خاندانی عزت و وقار سے متعلق ہم سطحی ہے (نسب، تقویٰ، پیشہ، آزادی) جو مذہب میں ہم مرتبہ پُردرو (باپ کی جانب کے) رشتہ داروں کو اس سے کم درجے کی شادی پر اعتراض کا حق دیتی ہے — یہ عزت و وقار کا حق ہے، نہ کہ عقد کی صحت کی شرط۔",
     shortAnswerAr: "الكفاءة هي التوافق المرتبط بمروءة الأسرة (النسب، التقوى، المهنة، الحرية) التي تمنح في المذهب الأقارب من جهة الأب ممن هم في مستواها حق الاعتراض على الزواج دون مستواهم — وهو حق من العِرض، لا شرط من شروط صحة العقد نفسه.",
+    detailedAnswer:
+      "Kafa'ah is the school's framework for parity in marriage worthiness, enumerating lineage, religious practice (the books' examples: the imam vs the non-imam, the Qur'an-reader vs the non-reader), profession (a trader vs a craftsman), and freedom. Its stated purpose is protective of the wife's dignity — she should not be placed where her husband's household will belittle her — and of the family's honour (irz). Crucially, the doctrine is a right belonging to the wife's paternal male relatives of genuine equal standing, not an arbitrary family veto and not a validity condition: the marriage of unequal standing remains valid between the spouses because the adult woman contracts herself, while the equal kinsman retains an honour claim enforceable in the classical court system. The jurists insisted the objector be a paternal relative at the wife's own level — not any relative, and not a mere preference of status — which prevents the doctrine from collapsing into custom.",
+    hanafiPosition:
+      "Kafa'ah is a right of honour held by the wife's equally-placed paternal kinsmen, historically enforceable before a qadi — it is not a condition of the nikah's validity, which stands between the consenting spouses.",
+    otherViews:
+      "The Maliki school treats kafa'ah most robustly, giving the bride's guardian authority to block or dissolve below-parity matches; the Shafi'i and Hanbali books likewise list kafa'ah as a right of the wife's paternal relatives — so the difference is of degree and enforcement, not of kind.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Nikah", translation: "Kafa'ah framework.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Nikah — kafa'ah", translation: "The right-of-honour discussion and its judicial enforcement.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["What is kafaah in marriage?", "Can family object to my nikah?"],
     related: ["nikah-wali", "nikah-conditions-valid"],
@@ -429,6 +500,8 @@ export const familyFinanceQuestions: BankQuestion[] = [
     ],
     variants: ["Is savings account interest haram?", "Can I take bank interest?"],
     related: ["fin-riba-prohibition", "fin-mortgage"],
+    detailedAnswer:
+      "The analysis begins with the contract's nature. A conventional deposit is a qard (loan) to the bank, and the stipulated increase is riba al-nasi'ah — increase against deferral — within the school's extension of riba to all currency by analogy with gold and silver. The prohibition's two sides differ in force: taking interest is prohibited outright as consuming riba; the borrower's side involves contracting riba, which the jurists discuss under compulsion and need — a person pressed by genuine necessity into an interest-bearing loan bears a reduced burden under the duress analysis, though the riba itself remains riba.\n\nThe receiving side carries its own cleanup doctrine. Interest credited to an account — bank interest, promotional draws, any pooled arrangement paying increase — is not the recipient's lawful property; the school's fatawa direct its disposal to general charity without intention of reward (niyyat al-thawab) and without expectation of return, as purification of holdings rather than sadaqah. This disposal rule is the school's answer to the involuntary interest of modern financial life, and it is why practical guidance separates 'took it out of necessity' from 'kept it for use.'\n\nThe alternatives and the honest range: profit-sharing deposits (mudarabah-based) are the structurally sound channel the school's partnership law supports; 'Islamic banking' products require case-by-case scrutiny by qualified scholars, with contemporary boards differing in strictness; and on compelled borrowing — essential credit, interest that cannot be avoided — the documented range runs from necessity-permission with repentance framing to stricter avoidance counsel. The question stops at the map deliberately: the practical note's warning governs any personal decision.",
   },
   {
     slug: "fin-mortgage",
@@ -450,9 +523,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Buyu'", translation: "Loan/interest framework applied by contemporary councils.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Rahn", translation: "The pledge as pure security — the pledged asset's benefit remains the debtor's.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["House loan Islam Hanafi", "Halal mortgage options"],
     related: ["fin-bank-interest", "fin-riba-prohibition"],
+    detailedAnswer:
+      "The conventional mortgage's anatomy explains the debate. It is a loan bearing stipulated increase, secured by a pledge (rahn) over the house. Classical fiqh knows both parts — qard as a loan and rahn as pure security — and their combination is precisely why the product falls under the riba framework: the pledge's lawfulness does not neutralize the interest on the loan. The school's books underline the point from the pledge side: the pledged asset's benefit remains the debtor's, and rahn can never be turned into a profit device (Al-Hidayah, Kitab al-Rahn).\n\nThe live contemporary disagreement is over necessity. The permissive strand reasons from darurah and umum al-balwa (widespread hardship): where no sharia-compliant alternative exists, family housing is a genuine need bordering on necessity, and decades of rent compound the burden — on this reasoning a minimal conventional mortgage may be licensed under strict conditions (primary residence, no realistic alternative, intent to exit). The restrictive strand answers that darurah must be concrete and immediate, that renting, cooperatives and staggered purchase remain, and that licensing interest normalizes it — the exception would swallow the rule. Both strands are documented among contemporary Hanafi councils; the platform records the disagreement without a verdict.\n\nThe alternative structures are built from the school's own partnership law: diminishing musharakah — bank and client co-own the property, the client gradually buys the bank's shares while paying occupancy rent — follows the school's shirkah and ijarah mechanics, with scholars auditing each product for hidden riba (bundled insurance, late-fee handling, promised-sale clauses). Two cautions keep the analysis honest. Structural difference is what counts: a contract with halal mechanics is not invalidated by pricing similarity with conventional mortgages. And an audited structure can still be undermined by contract-specific riders — hence the case-by-case counsel and mufti consultation the practical note mandates.",
   },
   {
     slug: "fin-loans-writing",
@@ -469,9 +545,15 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Yes — the Qur'an commands documenting deferred debts (the longest verse in the Qur'an, Al-Baqarah 2:282), with ease for in-person charity-style lending; documentation protects everyone's rights.",
     shortAnswerUr: "ہاں — قرآن مجید مؤجل قرضوں کو تحریر میں لانے کا حکم دیتا ہے (قرآن کی سب سے طویل آیت، البقرہ 282)، حاضر (فوری ادائیگی والے) صدقہ طرز قرض پر رعایت ہے؛ تحریر سب کے حقوق کی حفاظت کرتی ہے۔",
     shortAnswerAr: "نعم — يأمر القرآن بتدوين الديون المؤجلة (أطول آية في القرآن، البقرة 282)، مع التخفيف في القرض الحاضر على طريقة الصدقة؛ والتدوين يحمي حقوق الجميع.",
+    detailedAnswer:
+      "Al-Baqarah 2:282 — the longest verse of the Qur'an — builds a full documentation protocol: a scribe writes the deferred debt, the debtor dictates with taqwa and fairly, two witnesses (or one man and two women) attest, and no scribe or witness may be harmed for doing his duty. The verse states its own wisdom: 'more just with Allah, more upright for testimony, and nearest to doubtlessness.' The school reads the command as obliging documentation where dispute is plausible — deferred terms, private dealings — and strongly encouraging it otherwise; the verse itself relaxes the rule for a face-to-face loan settled on the spot between trusting parties. From this the jurists drew a general evidence-policy: contracts involving delay or complexity should be written and witnessed, and the modern instruments performing that function — signed contracts, receipts, digital records — serve the same purpose the verse commanded.",
+    hanafiPosition:
+      "Documentation of deferred debt is a Qur'anic command applied by the school wherever dispute is plausible, with two just witnesses attesting; the immediate face-to-face trust loan receives the verse's explicit relaxation.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "QURAN", ref: "Al-Baqarah 2:282", translation: "Write it down… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Buyu'", translation: "Loan documentation.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Ma'idah 5:1", translation: "O you who believe, fulfil your contracts… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Should I write a loan contract?", "Quran verse on debt"],
     related: ["fin-riba-prohibition"],
@@ -491,9 +573,16 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Interest, gambling, sales of impure/harmful items (alcohol, pork), deception (ghabn fahish with concealment), and unjustly taking others' property — while ordinary trade, services, agriculture, and honest profit are fully permitted.",
     shortAnswerUr: "سود، جوا، نجس/مضر اشیاء کی فروخت (شراب، خنزیر)، فریب دہی (چھپا کر بڑا غبن — غبنِ فاحش)، اور دوسروں کی املاک کا ناحق حصول — جبکہ عام تجارت، خدمات، زراعت اور دیانتدارانہ منافع مکمل طور پر جائز ہیں۔",
     shortAnswerAr: "الربا، والقمار، وبيع النجاسات/الضارات (الخمر، الخنزير)، والغش (الغبن الفاحش مع التكتم)، وأخذ أموال الناس ظلماً — بينما التجارة العادية والخدمات والزراعة والربح الصادق مباحة تماماً.",
+    detailedAnswer:
+      "The school's baseline in mu'amalat is permissibility: an earning or transaction is valid unless a text or a documented cause removes it — riba, gambling (maysir), gharar (material uncertainty), impure or harmful goods, deception, or unjust appropriation. The named prohibitions map to the sources: riba to Al-Baqarah 2:275, gambling to Al-Ma'idah 5:90, impurities to the prohibition of khamr, deception to the ghabn fahish worked by concealment, and wrongful taking to Al-Nisa 4:29's prohibition of consuming wealth 'by falsehood, except by trade with mutual consent'. Within the halal, the frame is worship: the books' ethics literature treats honest earning for one's household as rewarded, and the hadith corpus opens with intention — the same work becomes mere labour or an act of obedience by its niyyah. The jurists also applied sadd al-dhara'i' (blocking the means): earnings that look passive but feed a prohibited core take the core's ruling.",
+    hanafiPosition:
+      "Earning is permissible by default and becomes prohibited only through a documented cause — riba, gambling, gharar, impure or harmful goods, deception, or unjust appropriation; within the halal, intention transfigures work into worship.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "QURAN", ref: "Al-Nisa 4:29", translation: "Do not consume one another's wealth unjustly, but by trade with mutual consent — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Buyu'", translation: "Sale-invalidity causes.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab Bad' al-Wahy (narration of 'Umar ibn al-Khattab — actions are by intentions)", number: "1", translation: "Actions are only by intentions…", status: "VERIFIED" },
+      { kind: "QURAN", ref: "Al-Jumu'ah 62:10", translation: "…disperse in the land and seek Allah's bounty… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Halal ways to earn money", "Is business profit haram?"],
     related: ["fin-riba-prohibition", "fin-selling-alcohol"],
@@ -517,9 +606,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     shortAnswerAr: "الموقف المدوَّن المستقر في المذهب يحظر بيع الخمر؛ ويعالج العلماء وظائف التوصيل/الدفع فيها تحت الحظر نفسه مع فروق الضرورة — والكسب منها ليس حلالاً.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Buyu'", translation: "Khamr trade discussions including the zahir al-riwaya transmissions.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Ma'idah 5:2", translation: "…and do not cooperate in sin and aggression — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Working at a liquor store Islam", "Is delivering alcohol haram?"],
     related: ["fin-halal-earning"],
+    detailedAnswer:
+      "The school's internal history is the interesting layer. A transmission from Imam Abu Hanifa permitted selling alcohol to non-Muslims in their own lands — reasoning from their commercial autonomy — against the sahibayn and the codified zahir al-riwaya prohibition. Ibn Abidin's review (cited in the sources) walks the transmissions and settles the madhhab on prohibition, aligning the school with the other three, whose prohibition is unconditional. The intra-Hanafi episode is thus a closed footnote in the school's books, not a live license.\n\nThe prohibition's logic is layered. Khamr is a prohibited impure substance, so its sale is void (batil) — no valid contract exists to license the income. The roles around it — cashiering, delivery, stocking — are weighed as i'anah 'ala al-ithm, aiding sin, within Al-Ma'idah 5:2's prohibition of cooperation in sin and aggression. Contemporary scholars extend the same analysis to direct facilitation roles in the trade, while some record a necessity-leniency for a worker unable to find alternative livelihood — the minimum necessary role, with active effort to leave — presented as a constrained excuse, not a license.\n\nThe income's status follows the contract: since the sale is void, the proceeds are not lawfully owned, and the books direct their disposal rather than personal use. The wider counsel of the school's mu'amalat ethics is occupational: earning sits next to worship (see the halal-earning discussion), and the scholar's guidance to someone trapped in the trade is to plan the exit, keep the interim minimal, and replace the income with clean earning — practical steps, not merely a ruling.",
   },
   {
     slug: "fin-credit-cards",
@@ -539,9 +631,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Buyu'", translation: "Loan frameworks applied by analogy in contemporary fatawa.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Buyu'", translation: "The school's treatment of bay' al-'inah (sale and buyback) as formally valid though disliked.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Is credit card haram?", "Credit card grace period Islam"],
     related: ["fin-bank-interest"],
+    detailedAnswer:
+      "The card's anatomy supports splitting the question into its functions: payment, grace-period settlement, riba on carried balances, and fees-and-rewards. The contemporary scholars' dominant analysis holds that using the card for payment with full settlement inside the grace period is lawful: the holder contracts a debt and repays it within term — the school's books treat a loan without stipulated increase as the lawful qard, and no riba is invoked. Carrying a balance engages the riba clause and is prohibited; the school adds the caution that deliberately living on riba-bearing arrangements is a further moral hazard beyond the bare prohibition.\n\nThe caution clause is where honest disagreement lives. The card agreement embeds a riba condition, and the stricter strand argues that knowingly entering a riba-bearing contract is implicated even if the riba is never triggered. The permissive strand answers that the contract's subject is the payment facility; the riba clause is a consequence the user neither invokes nor intends — and the school's formal-validity tradition, which judges by the structure actually used (its handling of bay' al-'inah: two formally valid contracts permitted, though disliked as purpose-built riba routing), supports assessing the facility by its actual operation. Both readings are documented among contemporary school councils; the platform records both without a verdict.\n\nThe periphery completes the picture. Rewards and cashback are treated by the permissive reading as issuer marketing incentives rather than contracted riba, with scholars cautioning against reward-driven spending; late fees are best avoided outright; and the discipline the scholars emphasize is practical — treat the card as a payment rail, never as financing. Where a specific card's terms differ, the practical note's consultation warning governs.",
   },
   {
     slug: "fin-insurance",
@@ -563,9 +658,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Buyu'", translation: "Gharar sale prohibitions applied by analogy.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Buyu'", translation: "The classical gharar/daman framework applied by contemporary councils.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Is insurance haram Islam", "Takaful vs insurance"],
     related: ["fin-bank-interest"],
+    detailedAnswer:
+      "The doctrinal critique of conventional insurance proceeds from the school's sale-law. The exchange of premiums for a contingent payout carries gharar — the payout's occurrence and amount are materially unknown, engaging the classical gharar prohibitions of Kitab al-Buyu' (applied in the cited sources) — alongside riba elements (pooled funds invested in interest; unequal and delayed monetary exchange) and a maysir coloring. The classical repertoire — daman (guarantee), ju'alah (promised reward), wadi'ah (safe deposit) — contains no contract exchanging fixed premiums for contingent large payouts, which is why modern councils had to build the analysis from first principles.\n\nTakaful is the constructive answer the scholars developed. Participants' contributions are re-characterized as tabarru' (donations) into a mutual pool; payouts are mutual assistance rather than purchased indemnity; the operator takes a fee (wakala) or a profit-share (mudarabah) instead of owning the pool; and funds are invested sharia-compliantly. The scholars' remaining debates are intra-permissive: whether some takaful products mirror conventional pricing too closely, who owns the surplus, and how the scarcity of retakaful is handled — documented critiques that keep takaful a matter of product-audit rather than blanket endorsement.\n\nThe range on conventional insurance is a documented spectrum. The prohibition strand is the councils' majority reading. The necessity applications are widely accepted: compulsory third-party motor insurance (the law compels it, and receiving claims is restitution of one's own right) and employer-provided health cover (a benefit received rather than a contract struck). A minority permissive reading for life and medical cover on need-grounds remains contested. The platform records the map without scoring it — the personal choice runs through the practical note and a qualified mufti.",
   },
   {
     slug: "fin-shirkah",
@@ -582,8 +680,14 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "The school systematizes shirkah al-milk (co-ownership), 'aqd (contractual), 'amal (labour), and wuqu' (capital-shared-both) — with profit-sharing mandatory and loss sharing proportional to capital; the modern musharakah/mudarabah products draw on these.",
     shortAnswerUr: "مذہب شرکۃ الملک (مشترکہ ملکیت)، شرکۃ العقد (معاہدہ)، شرکۃ العمل (مشترکہ کار) اور شرکۃ الوقوع (دونوں کا مشترکہ سرمایہ) کو مرتب کرتا ہے — منافع میں شراکت لازم ہے اور نقصان کی تقسیم سرمایے کے تناسب سے ہوتی ہے؛ عصر حاضر کی مشرکہ/مضاربہ مصنوعات انہی پر مبنی ہیں۔",
     shortAnswerAr: "ينظّم المذهب شركة الملك (الملكية المشتركة)، وشركة العقد، وشركة العمل، وشركة الوقوع (رأس مال مشترك من الطرفين) — وتقاسم الأرباح إلزامي وتوزيع الخسارة بنسبة رأس المال؛ وتستمد منتجات المشاركة/المضاربة الحديثة من هذه.",
+    detailedAnswer:
+      "The school's Kitab al-Shirkah opens with shirkah al-milk — co-ownership arising by purchase or involuntarily by inheritance (shirkat al-wuqu') — where shares follow the ownership itself rather than any contract. Shirkah al-'aqd then subdivides by contribution: shirkat al-a'mal/abdan (labour and skill), shirkat al-wujuh (standing and credit purchasing goods), and shirkat al-amwal (capital) — where the books validate the 'inan form (unequal capital with proportional profit) as agreed among the school's canonical transmitters. The master rules: profit follows the contract ratio; LOSS follows capital strictly, so a contract pushing all loss onto one partner while sharing profit is void — the classical critique later applied to riba-like structures; each partner is agent and guarantor for the other's dealings within the venture; and any partner may demand dissolution with accounting. The musharakah and mudarabah products of modern Islamic finance are built on these manuals, with shari'ah boards adapting the classical forms to banking reality.",
+    hanafiPosition:
+      "Partnership is valid in labour, standing and capital forms; profit shares are negotiable by contract while loss is strictly proportional to capital — the 'inan partnership being the form agreed among the school's transmitters.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Shirkah", translation: "Partnership types.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Shirkah", translation: "The profit/loss rules and partnership taxonomy in detail.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Islamic partnership types", "Mudarabah and musharakah difference"],
     related: ["fin-halal-earning"],
@@ -603,8 +707,17 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Khiyar is the right to cancel a sale — in the school: khiyar al-majlis (three-day option while still in the session, the school's distinctive position), al-shart (agreed period), and al-'ayb (defect discovery).",
     shortAnswerUr: "خیار بیع کو فسخ کرنے کا حق ہے — مذہب میں: خیارِ مجلس (تین روز کا خیار جب تک مجلس برقرار ہو، اور یہ مذہب کا امتیازی موقف ہے)، خیارِ شرط (طے شدہ مدت) اور خیارِ عیب (عیب کے ظاہر ہونے پر)۔",
     shortAnswerAr: "الخيار هو حق إفساد البيع — في المذهب: خيار المجلس (خيار ثلاثة أيام ما دام في المجلس، وهو الموقف المميز للمذهب)، وخيار الشرط (المدة المتفق عليها)، وخيار العيب (عند اكتشاف العيب).",
+    detailedAnswer:
+      "The khiyar system is the school's protective architecture for buyers and sellers. Khiyar al-majlis rests on the authentic narration 'the two parties to a sale hold the option while they have not separated' — but the school reads 'separation' distinctively, counting the session for up to three days provided the parties remain present with the ability to depart, a reading the books trace to Ibn Mas'ud's practice and adopt as the more protective view. Khiyar al-shart lets the parties stipulate a fixed option window (agreed across the four schools); khiyar al-'ayb cancels a sale when a defect emerges that the buyer neither knew nor accepted, and the fraud remedies for concealment attach to the same logic. The jurists' rationale: consent extracted in haste, pressure or ignorance is not the 'trade with mutual consent' the Qur'an anchors commerce in (Al-Nisa 4:29), so the law deliberately buys deliberation back.",
+    hanafiPosition:
+      "The school's distinctive position gives the contracting parties a session-option of up to three days (khiyar al-majlis), alongside the stipulated option period (al-shart) and the defect option (al-'ayb).",
+    otherViews:
+      "The other Sunni schools end khiyar al-majlis at physical separation, reading the narration literally — while agreeing on khiyar al-shart; the school's three-day-in-session reading is one of its celebrated distinctive positions in contract law.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Buyu'", translation: "The khiyar types.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Buyu' (narration of Hakim ibn Hizam — the two parties hold the option until they separate)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "BOOK", ref: "Bada'i' al-Sana'i' (al-Kasani), Kitab al-Buyu'", translation: "The khiyar types and the school's majlis reading.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Can I cancel a purchase Islam?", "Khiyar al majlis rule"],
     related: ["fin-halal-earning"],
@@ -624,8 +737,16 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "A gift is perfected by offer and acceptance plus (in the school) separation of hands or documented transfer — withdrawal before separation is permitted (except in reward-expecting gifts and parental gifts which are discouraged to revoke).",
     shortAnswerUr: "ہبہ ایجاب و قبول اور (مذہب کے نزدیک) مفارقہ یا دستاویزی قبضہ/منتقلی سے مکمل ہوتی ہے — مفارقے سے پہلے واپس لینا جائز ہے (سوائے ثواب کی توقع پر دیے گئے تحفوں اور والدین کے دیے ہوئے تحفوں کے، جن کی واپسی ناپسندیدہ سمجھی جاتی ہے)۔",
     shortAnswerAr: "تكتمل الهبة بالإيجاب والقبول مع (في المذهب) المفارقة أو الانتقال الموثق — والرجوع قبل المفارقة جائز (إلا في الهبة ابتغاء الأجر وهداية الوالدين اللتين يُكره الرجوع فيهما).",
+    detailedAnswer:
+      "Hibah is a contract of gratuitous ownership transfer, perfected — like any contract — by offer and acceptance, and completed in the school by taking possession (qabd), with separation of hands (mufaraqah) as the standard sign of completion. Until that separation the donor may lawfully revoke: the school reads the narration reproaching gift-revocation ('like a dog that vomits and returns to its vomit') as establishing disapproval rather than prohibition, since revocation before completion damages none of the recipient's property. The books then bar or strongly discourage specific revocations — from the father and the son (out of birr and family honour), and in gifts made seeking reward, where the spiritual purpose collapses upon revocation. Once the parties separate, the gift is the recipient's property absolutely; anything further is only his voluntary generosity.",
+    hanafiPosition:
+      "A gift completes by offer, acceptance and taking possession; before separation of hands the school permits revocation — barred toward the father and son, discouraged in reward-gifts — and after separation the recipient's ownership is absolute.",
+    otherViews:
+      "The Hanbali books read the revocation-reproach narrations as prohibition, barring the taking back of gifts to relatives generally; the schools also differ on completion mechanics. The shared ground: a completed gift is the recipient's property, and revocation after it is a moral wrong absent his consent.",
+    practicalInfo: FATWA_NOTE,
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Hibah", translation: "Gift completion rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Hibah (narration of Ibn 'Abbas — revoking a gift likened to a dog returning to its vomit)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Can I take back a gift Islam?", "Hibah rules"],
     related: ["inheritance-basics"],
@@ -650,9 +771,13 @@ export const familyFinanceQuestions: BankQuestion[] = [
     practicalInfo: "Local imams and janazah committees walk families through each step — contact your mosque.",
     sources: [
       { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Janazah", translation: "Death procedures.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Janaiz (narration of Umm Salamah — closing the deceased's eyes and the du'a at death)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (narration of Abu Huraira — hasten with the janazah)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Steps when a Muslim dies", "What to do immediately after death"],
     related: ["janazah-ghusl", "janazah-prayer-method"],
+    detailedAnswer:
+      "The immediate steps each carry evidence. Closing the eyes comes from the Umm Salamah narration in Sahih Muslim's Janaiz book ('when the soul is seized, close the eyes'), the same report teaching du'a for the deceased at that moment; covering the body honours the deceased's dignity while preparation begins; and hastening is the explicit instruction of the Abu Huraira narration in Sahih al-Bukhari's Janaiz book — hasten with the janazah, whether the deceased was honoured or otherwise; the procedure does not wait.\n\nThe books interleave the estate duties with the funeral. Funeral expenses take first claim on the estate, then debts — a priority so weighty that the manuals treat debt settlement ahead of bequests and shares, and counsel the family to announce outstanding debts so the community can help settle them. Notifying relatives is proper; the preparation then runs through ghusl, shrouding and the janazah prayer, each treated in its own question. For the family's own conduct, the books channel grief into du'a, istighfar and sabr rather than the lamentation forms the narrations prohibit (see the crying-and-wailing question).\n\nThe first days carry their own adab. Ta'ziyah (condolence) is a communal duty of kindness — brief, warm, without burdening the grieving household with requirements; the widow's iddah begins promptly under its own rules (the waiting-period question); and the recurring scholarly counsel is organization — mosque committees, the washer, the imam for debts and wills — so the sunnah procedure is executed without improvisation. No family should walk these steps alone: the local mosque's guidance noted in the practical field is the operational key.",
   },
   {
     slug: "janazah-ghusl",
@@ -669,8 +794,16 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "A same-gender relative/spouse or qualified washer performs the ghusl (with the spouse case discussed), covering the private parts, washing odd numbers of times, then shrouding in the prescribed cloths.",
     shortAnswerUr: "ہم جنس رشتہ دار/شریک حیات یا ماہر غسل دینے والا غسل دیتا ہے (شریک حیات کی صورت پر گفتگو کی گئی ہے)، ستر ڈھانپ کر، غسل طاق تعداد میں دہرائے جاتے ہوئے، پھر مقررہ کپڑوں میں کفن دیا جاتا ہے۔",
     shortAnswerAr: "يغسل الميت قريب من جنسه/الزوج أو مغسّل مؤهل (ومسألة الزوجة موضع بحث)، مع ستر العورة، والغسل عدداً فردياً من المرات، ثم التكفين بالأثواب المشروعة.",
+    detailedAnswer:
+      "The ghusl is a communal honour owed to the deceased: the books specify a same-gender washer who is knowledgeable and trustworthy, the body's 'awrah kept covered by a cloth throughout, washing with water in odd numbers with sidr (lotus) or camphor in the final wash, then the kafan — three white cloths for a man, five for a woman, with the classical details of the khimar and breast-band for the woman. Washing by the spouse is discussed in the school's books with the dominant position permitting it (the reports of companions washing their spouses are cited), and children may wash their parents. The battlefield martyr is the great exception: no ghusl and no kafan — buried in his bloodied clothes as a badge of honour. Where no qualified same-gender washer exists, the obligation shifts to whoever can perform it, and tayammum substitutes where water is unavailable.",
+    hanafiPosition:
+      "A same-gender qualified washer (the spouse permitted per the dominant position) performs the ghusl with 'awrah covered and odd-numbered washings, followed by the prescribed shroud; the battlefield martyr is buried without ghusl or shroud.",
+    practicalInfo:
+      "Most mosques operate ghusl facilities with trained washers — contact your local imam promptly and let the experienced washer lead the procedure; burial should not be delayed unnecessarily.",
     sources: [
       { kind: "BOOK", ref: "Mukhtasar al-Quduri, Kitab al-Janazah", translation: "Washing rules.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (narration of Umm 'Atiyyah — the washing of the Prophet's ﷺ daughters)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Janazah", translation: "Ghusl and kafan details.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["How to wash a dead body", "Can husband wash wife?"],
     related: ["janazah-when-someone-dies"],
@@ -717,9 +850,12 @@ export const familyFinanceQuestions: BankQuestion[] = [
     otherViews: "Shafi'i: outside the mosque.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Janazah", translation: "The mosque janazah discussion.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Masajid (narration of Abu Huraira — do not make your houses graves)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Janazah in masjid allowed?"],
     related: ["janazah-prayer-method"],
+    detailedAnswer:
+      "The school's permission rests on reading the 'houses-graves' narration by its own context. The Abu Huraira narration in Sahih Muslim's Masajid book condemns houses where no prayer and remembrance happen at all — its fuller wording likens the prayerless house to the dead. The mosque is that condition's opposite, not its instance, so the narration cannot forbid praying the janazah there; and the school's books add the documented practice of janazah prayers inside the Prophet's ﷺ mosque among the early generations.\n\nThe Shafi'i texts disapprove the mosque-janazah, reading the narration as discouraging prayer in such places and preferring the cemetery or musalla ground. The school permits and — for large gatherings — prefers the mosque for capacity, shade and ease. It attaches a condition with its own logic: the deceased must be washed and shrouded before being brought into the mosque, since bringing an unwashed body into the house of Allah is disliked in the school's books. The prayer's legal status is unchanged in either venue — a communal obligation (fard al-kifayah) wherever it is prayed.\n\nThe practical wisdom follows from how bounded the disagreement is. Some communities' mosques — particularly Shafi'i-leaning ones — use an outside musalla; Hanafi-majority congregations pray inside. The difference concerns the venue, not the prayer's validity, and the school's scholars treat it as a place-difference not to be fought over. Knowing the school's position while following the local imam's arrangement is precisely the balanced conduct the books counsel.",
   },
   {
     slug: "graves-visiting-etiquette",
@@ -736,9 +872,17 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Visit with salam and du'a for the deceased, walking respectfully — the school holds the visit benefits the visitor's remembrance and the deceased's du'a; avoid sitting on graves, stepping on them, or treating them as shrines of worship.",
     shortAnswerUr: "سلام اور میت کے لیے دعا کے ساتھ، باادب چلتے ہوئے زیارت کی جائے — مذہب کے نزدیک یہ زیارت زائر کے لیے یادِ آخرت اور میت کے لیے دعا کے اعتبار سے نفع دیتی ہے؛ قبروں پر بیٹھنے، ان پر قدم رکھنے یا انہیں عبادت کی جگہ بنانے سے بچا جائے۔",
     shortAnswerAr: "تُزار القبور بالسلام والدعاء للميت، والمشي بأدب — يرى المذهب أن الزيارة تنفع الزائر بالتذكّر والميت بالدعاء؛ فتُجتنب الجلوس على القبور والخطو عليها أو اتخاذها معابد للعبادة.",
+    detailedAnswer:
+      "The school reads the Buraydah narration — 'I had forbidden you to visit graves; visit them now' — as lifting an early ban once the visit was made a source of benefit: the visitor remembers death and the akhirah, and the deceased receives du'a. The transmitted adab: enter with the graveyard salam ('peace be upon you, abode of believing people…'), make du'a for the dead and for oneself, keep speech and conduct sober, and depart without ceremony; the adab works also describe turning toward the qiblah when supplicating. The books then protect the grave's dignity: no sitting on graves (the narrations rank such seating beneath even a burning coal), no stepping on them or between them, strong dislike of elaborate grave-structures, and above all no worshipful acts directed at the occupant — the school's scholars across the centuries insisted visitation is du'a and remembrance, never seeking from the dead.",
+    hanafiPosition:
+      "Visiting graves (especially for men) is recommended for remembrance of the akhirah; the visit consists of salam, du'a for the deceased and sober reflection — with sitting on, stepping on, or worshipping at graves prohibited.",
+    practicalInfo:
+      "Keep the visit short and purposeful — salam, du'a, a lesson for your own soul; follow your local mosque's guidance on cemetery practice and on maintaining graves respectfully.",
     sources: [
       { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Janaiz (narration of Buraydah — 'I had forbidden you from visiting graves; visit them')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Janazah", translation: "Visitation etiquette.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Janazah", translation: "Visitation and the protection of the grave's dignity.", status: "PARTIALLY_VERIFIED" },
+      { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Janazah", translation: "Compiled visitation rulings and adab.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["How to visit graves in Islam", "Grave visit dua"],
     related: ["graves-dua-fatiha", "graves-women-visit", "isal-thawab-methods"],
@@ -763,9 +907,13 @@ export const familyFinanceQuestions: BankQuestion[] = [
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Janazah", translation: "Recitation-gifting discussion.", status: "PARTIALLY_VERIFIED" },
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Janazah", translation: "Compiled rulings on gifting reward.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Janaiz (narration of Buraydah — 'I had forbidden you from visiting graves; visit them')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Wasiyyah (narration of Abu Hurayrah — when a man dies his deeds cease except three)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Reading yaseen at grave", "Can the dead hear our recitation?"],
     related: ["graves-visiting-etiquette", "isal-thawab-methods"],
+    detailedAnswer:
+      "The topic merges two questions worth separating. Reciting Qur'an at the grave, and gifting its reward (isal al-thawab) to the deceased, are analytically distinct from du'a itself — and du'a at graves is agreed across Sunni scholarship (the Buraydah lifting narrated in Sahih Muslim; see the visiting-etiquette question). On recitation-gifting, the school's scholars affirm that reward reaches the deceased by Allah's permission; their grounding reads the 'deeds cease except three' narration as naming examples of surviving benefit, not an exhaustive list — leaving room for gifted recitation alongside du'a and sadaqah.\n\nThe restricting strand within Sunni scholarship reads the three channels as exhaustive: what benefits the dead is what the texts name — du'a, sadaqah on their behalf, proxy hajj, settled debts — and recitation is neither du'a nor a wealth-act, so no evidence establishes its transfer. The question's disputedNote frames this precisely, and the school's own books add a caution about form: the permissibility of gifted recitation does not fix any specific ritual. Ibn Abidin's discussion (cited in the sources) treats the recitation itself as the channel, not a mandated ceremony of a fixed number of Fatihas or a set formula.\n\nThe pastoral consequence the scholars draw: families who differ on the custom should not fracture over it, because the agreed core — du'a for the dead and sadaqah on their behalf — is untouched by the dispute. The school's counsel keeps the practice du'a-shaped: recited as supplication and remembrance at the grave, without elevating any fixed form into a religious rite the shari'ah did not fix.",
   },
   {
     slug: "isal-thawab-methods",
@@ -782,8 +930,19 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Du'a for them, sadaqah on their behalf, paying their debts, performing Hajj/'Umrah for them, and recitation-gifting per the school's position — all reach the deceased by Allah's permission in the school's framework.",
     shortAnswerUr: "ان کے لیے دعا، ان کی طرف سے صدقہ، ان کے قرضوں کی ادائیگی، ان کے لیے حج/عمرہ ادا کرنا، اور مذہب کے موقف کے مطابق تلاوت کا ثواب پہنچانا — یہ سب اللہ کی اجازت سے میت تک پہنچتے ہیں، مذہب کے نظام میں۔",
     shortAnswerAr: "الدعاء لهم، والصدقة عنهم، وقضاء ديونهم، وحج/عمرة عنهم، وهدية الثواب بحسب موقف المذهب — كل ذلك يصل إلى الميت بإذن الله في إطار المذهب.",
+    detailedAnswer:
+      "The school's framework runs through channels the texts establish: du'a for the deceased (Al-Hashr 59:10's prayer 'forgive us and our brothers who preceded us in faith'); sadaqah performed on their behalf (the companions asked the Prophet ﷺ about gifting charity for deceased parents and were answered affirmatively in the collections); paying their debts — which the estate law treats as a binding claim preceding every other distribution; performing Hajj and 'umrah on their behalf, which the school's manuals validate; and gifted recitation, which the school's scholars affirm reaches the deceased by Allah's permission (the cross-school dispute over recitation is recorded separately — see the Fatiha question). The grounding hadith is the narration that when a man dies his deeds cease except three: flowing charity, beneficial knowledge, and a righteous child praying for him — the jurists read these as the model cases of benefit that outlives death. In every channel, it is Allah, not any automatic mechanism, who conveys the gift to the deceased.",
+    hanafiPosition:
+      "Du'a, sadaqah on behalf, debt payment, proxy Hajj/'umrah and gifted recitation all benefit the deceased by Allah's permission; the deceased's debts are a binding claim on the estate before any other distribution.",
+    otherViews:
+      "All Sunni schools agree that du'a, sadaqah and proxy Hajj reach the deceased; some Sunni scholars restrict gifted RECITATION's benefit, reading the evidence as limited to du'a and wealth-based acts — the platform records both readings in the Fatiha question.",
+    practicalInfo:
+      "Valid and common channels: du'a after salah and at the grave, sadaqah given intending the reward for the deceased, settling their debts, and regular acts of charity — practise them sincerely without treating any fixed rite as a Sharia obligation.",
     sources: [
       { kind: "BOOK", ref: "Fatawa Hindiyyah, Kitab al-Janazah", translation: "Reward-transfer channels.", status: "PARTIALLY_VERIFIED" },
+      { kind: "QURAN", ref: "Al-Hashr 59:10", translation: "…Our Lord, forgive us and our brothers who preceded us in faith… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Wasiyyah (narration of Abu Hurayrah — when a man dies his deeds cease except three)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "BOOK", ref: "Al-Hidayah (al-Marghinani), Kitab al-Janazah", translation: "The deceased's dues and proxy acts.", status: "PARTIALLY_VERIFIED" },
     ],
     variants: ["Sending rewards to dead parents", "Sadaqah jariyah for deceased"],
     related: ["graves-dua-fatiha", "graves-visiting-etiquette"],
@@ -807,9 +966,13 @@ export const familyFinanceQuestions: BankQuestion[] = [
     disputedNote: "An intra-Hanafi range: older texts restrict to elderly women; later scholars discuss wider permission with etiquette conditions.",
     sources: [
       { kind: "BOOK", ref: "Radd al-Muhtar (Ibn Abidin), Kitab al-Janazah", translation: "Women's visitation discussion.", status: "PARTIALLY_VERIFIED" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Janaiz (narration of Buraydah — 'I had forbidden you from visiting graves; visit them')", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (narration of Anas — the woman weeping at a grave consoled: fear Allah and be patient)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
     ],
     variants: ["Women grave visit Hanafi", "Can I visit my mother's grave as a woman?"],
     related: ["graves-visiting-etiquette"],
+    detailedAnswer:
+      "The texts move in two directions, and the women's question turns on which reading governs. Early reports curse grave-visitors — understood by many scholars as wailing visitors or as women's visits specifically — while the Buraydah lifting ('I had forbidden you to visit graves; visit them') narrated in Sahih Muslim establishes the visit's benefit generally. On that base the school's classical and later fatawa texts restricted women's visits to elderly women whose visits carry no trial-risk, reasoning from graveyard decorum, the history of wailing at graves, and fitnah concerns — the restriction the disputedNote documents as intra-school.\n\nThe counter-texts are real and cited by the school's own scholars. The woman the Prophet ﷺ found weeping at a grave — consoled with 'fear Allah and be patient,' narrated in Sahih al-Bukhari's Janaiz book from Anas — shows women's graveyard presence in the prophetic era passing without condemnation; and the scholars who permitted the elderly reasoned from the visit's purpose (remembrance and du'a) being available to women as to men. The contemporary strand extends permission further — with conditions of modesty, sobriety, no wailing and appropriate settings — while the Maliki books remain most restrictive and some other Sunni scholars permit generally. The range is a documented spectrum inside and beyond the school, not a single forbidden/permitted switch.\n\nThe operating principle is shared by all sides: the visit's purpose is benefit — remembrance of the akhirah and du'a for the deceased — and the boundaries are agreed everywhere: no wailing, no ritual excess, no shrine-treatment of graves. A woman weighing a visit to a family grave does so with her local imam's guidance; the school's balance is permission for the elderly in the classical texts, permission with conditions per contemporary muftis, and restriction where trial-risk is real.",
   },
   {
     slug: "barzakh-what",
@@ -826,9 +989,17 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Barzakh is the interval between death and resurrection, in which souls experience the questioning of Munkar and Nakir, comfort or pressure — affirmed in the Qur'an (Al-Mu'minun 23:100) and the Sunni creeds.",
     shortAnswerUr: "برزخ موت اور بعث کے درمیان کا وقفہ ہے، جس میں ارواح منکر و نکیر کے سوالات اور آرام یا تنگی کا تجربہ کرتی ہیں — قرآن (المؤمنون 23:100) اور سنی عقائد میں اس کی تصدیق ہے۔",
     shortAnswerAr: "البرزخ هو الفترة بين الموت والبعث، تعيش فيها الأرواح سؤال منكر ونكير والنعيم أو الضغط — وهو ثابت في القرآن (المؤمنون 23:100) وفي عقايد السنة.",
+    detailedAnswer:
+      "Barzakh (Al-Mu'minun 23:100) names the interval between individual death and the collective resurrection: the soul passes into a realm where it experiences the questioning of the two angels, the open view of Paradise or the open view of Fire, and the arrival of gifts — the deeds, du'as and sadaqah of the living — as the creeds describe. The Sunni creeds state the doctrine plainly: al-'Aqidah al-Tahawiyyah affirms the questioning in the grave by Munkar and Nakir together with the grave's comfort or punishment, and the school's theology holds the experience reaches the deceased soul in connection with the body — the creeds discuss the mechanics without disputing the reality. The Qur'an's support includes the martyrs' continuing life with their Lord (Al 'Imran 3:169) and Pharaoh's people exposed to the Fire morning and evening (Ghafir 40:46). Practically, the doctrine grounds the living's duties: du'a, sadaqah and istighfar for the dead reach them by Allah's permission (see the isal al-thawab question).",
+    hanafiPosition:
+      "The Hanafi/Sunni creed affirms the barzakh as real and enacted: questioning in the grave by the two angels, comfort or pressure experienced by the deceased (the soul in connection with the body), continuing until the resurrection.",
+    otherViews:
+      "Some early rationalist theologians (the Mu'tazila) contested the literal grave-punishment narrations or restricted their scope; the Sunni creeds received the hadith corpus as decisive and affirmed the doctrine — a historical-theological disagreement the creeds themselves record. Within Sunni ranks, the mechanics of soul and body in the grave are discussed without breaking the shared affirmation.",
     sources: [
       { kind: "QURAN", ref: "Al-Mu'minun 23:100", translation: "…behind them is a barzakh until the day they are raised — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
       { kind: "BOOK", ref: "Al-'Aqidah al-Tahawiyyah", translation: "Grave-punishment and questioning affirmed within the creed.", status: "VERIFIED" },
+      { kind: "QURAN", ref: "Al 'Imran 3:169", translation: "Do not think those killed in Allah's path are dead — rather alive with their Lord, given provision… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
+      { kind: "QURAN", ref: "Ghafir 40:46", translation: "The Fire, exposed to it morning and evening… — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["What happens after death Islam", "Life in the grave"],
     related: ["barzakh-dead-hear", "graves-visiting-etiquette"],
@@ -853,9 +1024,14 @@ export const familyFinanceQuestions: BankQuestion[] = [
     sources: [
       { kind: "HADITH", ref: "Musnad Ahmad (narration of Abu Huraira — salam returned to the Prophet ﷺ)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
       { kind: "BOOK", ref: "Al-'Aqidah al-Tahawiyyah", translation: "Creed's statements on the grave life.", status: "VERIFIED" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Jihad (narration of Ibn 'Umar — the slain of Badr: you do not hear better than they)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (the deceased hearing the departing visitors' footsteps)", translation: "paraphrased translation", status: "UNVERIFIED", note: "narrator not individually verified; cited at collection/chapter level" },
+      { kind: "QURAN", ref: "Al-Mu'minun 23:100", translation: "…behind them is a barzakh until the day they are raised — paraphrased translation", status: "VERIFIED", note: "paraphrased translation" },
     ],
     variants: ["Do the dead hear us?", "Prophet hears salam"],
     related: ["barzakh-what", "nubuwwah-alive-grave"],
+    detailedAnswer:
+      "The Prophet's ﷺ hearing is affirmed in the school's scholarship on specific textual grounds: the Abu Huraira narration in the Musnad (cited in the sources) that Allah returns his soul so that he answers the salam of those who greet him, and the salam of every tashahhud — address he receives in five daily prayers. The school's theologians read these as establishing his awareness of the salawat and salams addressed to him, while al-'Aqidah al-Tahawiyyah's discipline holds: the reality is affirmed and the mode is not specified beyond the texts.\n\nThe ordinary dead's hearing rests on its own narrational base. The Badr narration in Sahih al-Bukhari's Jihad book has the Prophet ﷺ addressing the slain of Badr — 'do you find what your Lord promised to be true?' — and, on 'Umar's query, answering: 'By Him in whose hand my soul is, you do not hear better than they.' The Janaiz-book report adds that the deceased hears the departing visitors' footsteps. The school's scholars, with the broader Sunni affirming strand, take these as establishing the dead's hearing of address directed at them — which is precisely what the graveyard salam of the visiting-etiquette question presupposes.\n\nThe restricting reading, documented among Sunni scholars, observes the barzakh barrier (Al-Mu'minun 23:100) and reads the Badr narration as a prophetic-specific or miraculous exception, guarding against any assumption of two-way conversation with the dead. The school's scholars answer that hearing salam and du'a is reception of address, not conversation — and never a source of help: the dead receive, only Allah gives. That boundary is the school's settled line: affirm the hearing the texts state, exclude seeking from the dead, and keep the documented range limited to the ordinary dead's hearing — nothing wider.",
   },
   {
     slug: "janazah-crying-wailing",
@@ -872,8 +1048,20 @@ export const familyFinanceQuestions: BankQuestion[] = [
       "Yes — natural grief and tears (including the Prophet's ﷺ tears for his son) are permitted; wailing (niyahah), loud lamentation, and tearing clothes are prohibited by the narrations.",
     shortAnswerUr: "ہاں — قدرتی غم اور آنسو (بشمول نبی کریم ﷺ کے اپنے بیٹے پر آنسو) جائز ہیں؛ نیحہ (چنگھاڑ)، بلند آواز سے نوحہ اور کپڑے پھاڑنا روایات میں منع ہیں۔",
     shortAnswerAr: "نعم — الحزن الطبيعي والدموع (منها دموع النبي ﷺ على ابنه) مباحة؛ أما النياحة والنواح بصوت عالٍ وشق الثياب فمحرّمة في الروايات.",
+    detailedAnswer:
+      "The narrations draw a precise line. Tears and a grieving heart are human compassion — the Prophet ﷺ wept for his son Ibrahim and explained: 'the eye sheds tears, the heart grieves, and we say only what pleases our Lord' — and the companions wept without censure. Niyahah is different in kind: ritualized loud lamentation — wailing, beating the cheeks, tearing clothes, eulogising in the Jahiliyyah fashion — prohibited in the books as protest against the divine decree and as a practice of the pre-Islamic mourning guilds; the pledge the Prophet ﷺ took from the women included abandoning wailing. The collections also carry the warning that the deceased is afflicted by his family's wailing, which the school's scholars read as a real (if sober) deterrence. The distinction, then, is between involuntary feeling — permitted and even rewarded as mercy — and performative speech-acts the Sharia legislates against; grief is channelled into du'a, istighfar and sabr.",
+    hanafiPosition:
+      "Natural tears and grief are permitted — the Prophet ﷺ himself wept — while niyahah (ritual wailing), loud lamentation, cheek-beating and cloth-tearing are prohibited in the school's books.",
+    commonObjection:
+      "'Crying and wailing are both grief — if tears are halal, the wailing prohibition looks arbitrary.'",
+    scholarlyResponse:
+      "The Sharia distinguishes the involuntary from the performed: tears and a grieving heart are a mercy the Prophet ﷺ himself displayed and explained, while niyahah is a ritual speech-act — loud lamentation, cheek-beating, cloth-tearing — that the narrations name and prohibit as protest against the decree. Grief itself is never condemned; it is the ritualized protest form that is.",
+    practicalInfo:
+      "Comfort grieving families — tears are human; gently guide gatherings from loud lamentation toward du'a, istighfar and patience, following your local imam's lead on mourning customs.",
     sources: [
       { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (narration of Usamah ibn Zayd — tears and the heart's grief)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number pending verification" },
+      { kind: "HADITH", ref: "Sahih al-Bukhari, Kitab al-Janaiz (narration of Umm 'Atiyyah — the pledge including abandoning wailing)", translation: "paraphrased translation", status: "UNVERIFIED", note: "number not verified; cited at collection/narrator level" },
+      { kind: "HADITH", ref: "Sahih Muslim, Kitab al-Janaiz (the deceased afflicted by the family's wailing — narrations)", translation: "paraphrased translation", status: "UNVERIFIED", note: "narrator not individually verified; cited at collection/chapter level" },
     ],
     variants: ["Is crying haram for dead?", "Wailing prohibition"],
     related: ["janazah-when-someone-dies"],
