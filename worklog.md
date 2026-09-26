@@ -643,3 +643,20 @@ Work Log:
 Stage Summary:
 - Full localization plumbing for depth content is LIVE end-to-end (sidecar → seed → DB → API → UI with per-section fallback); the remaining ~219 questions fill in progressively through the checkpointed pipeline driven by cron rounds — no further code work required for completion.
 - Residual risks: z-ai API 429 quota throttles chunk throughput; if a cron session skips the pipeline step, coverage stalls (round report should state current X/241).
+---
+Task ID: 18-r2 (pipeline resume round)
+Agent: main (Z.ai Code, resume round)
+Task: Resume the Round-18 depth-translation pipeline after session interruption. (A misdirected "book knowledge-base audit" prompt arrived mid-round and was correctly dropped — nothing was implemented for it, no docs written.)
+
+Work Log:
+- STATE CHECK: pipeline intact; progress measured 22/241 complete, 6 partial, 213 not-started. DB live counts: 249 q / 246 answers / 385 search docs / 16 books / 0 bookPages.
+- CRON: previous job 415110 LOST again (list showed 0 jobs). Recreated as job 415208 (0 */15 * * * ?, tz Asia/Calcutta) with the mandated webDevReview description + MANDATORY PIPELINE STEP (progress check → --limit 10 chunk → re-seed → report X/241).
+- CHUNKS (foreground, idempotent, checkpointed): chunk1 --limit 10 → 6 slugs (1×429 auto-backoff, 1 validation retry); chunk2 --limit 16 → 9 slugs; chunk3 --limit 16 → 9 slugs (heavy 429 throttling, all recovered via 20s backoff). Net: 22 → 43/241 COMPLETE (+21).
+- RACE NOTE: one slug reported OK but stayed missing when a cron round ran the pipeline concurrently with a manual chunk (whole-file checkpoint save, last-writer-wins). Harmless — idempotent retries recover it; avoid overlapping runs when possible.
+- RE-SEED: bun run prisma/seed-bank.ts → 241 q / 605 citations (96 Quran, 127 hadith, 379 book, 3 fatwa) / VERIFIED 140 · PARTIALLY_VERIFIED 355 · UNVERIFIED 110 / Ur+Ar question+shortAnswer 241/241 / depth translations merged into answerUr/answerAr JSON columns + search doc bodyUr/bodyAr.
+- API VERIFY: GET /api/bank/detail?slug=salah-qunut-text → answer.depthTranslations {Ur:{detailedAnswer,hanafiPosition,otherViews}, Ar:{...}} present with correct scholarly content. (Earlier probe looked for depthTranslations at the TOP level — it nests under `answer`; code was always correct.)
+- BROWSER QA (agent-browser): #/bank/salah-qunut-text with nur-lang=ur → dir=rtl, Urdu question + براہ راست جواب render, and the NEW this-round translation renders in وضاحت (EXPLANATION) section; nur-lang=ar → الشرح renders the fresh Arabic. NOTE: lang value must be lowercase (en/ur/ar) — uppercase 'UR' silently fails the hydrate allow-list (test-error, not a code bug).
+
+Stage Summary:
+- Pipeline resumed and verified end-to-end again (chunk → checkpoint → seed → DB → API → UI in Ur + Ar). Coverage now 43/241 (18%); remaining 198 questions continue via cron job 415208 rounds (~9-12 slugs per 10-min chunk under current 429 quota) or manual chunks.
+- No code changes this round; no regressions observed. Dev server healthy (health 200).
