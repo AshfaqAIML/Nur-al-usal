@@ -1,5 +1,25 @@
 import type { BankQuestion } from "./types";
 
+/** Depth-field translations (Ur/Ar) for this batch: the trilingual depth fields are
+ *  declared as a module augmentation of the BankQuestion contract — additive only,
+ *  identical members merge harmlessly if another batch file declares the same. */
+declare module "./types" {
+  interface BankQuestion {
+    /** Urdu translation of `detailedAnswer`. */
+    detailedAnswerUr?: string;
+    /** Arabic translation of `detailedAnswer`. */
+    detailedAnswerAr?: string;
+    /** Urdu translation of `hanafiPosition`. */
+    hanafiPositionUr?: string;
+    /** Arabic translation of `hanafiPosition`. */
+    hanafiPositionAr?: string;
+    /** Urdu translation of `otherViews`. */
+    otherViewsUr?: string;
+    /** Arabic translation of `otherViews`. */
+    otherViewsAr?: string;
+  }
+}
+
 /** Aqeedah, Prophethood, Tawassul/Awliya, Bid'ah, Mawlid — the theology batch.
  *  FAIRNESS RULE: contested topics record BOTH positions without scoring winners. */
 export const theologyQuestions: BankQuestion[] = [

@@ -190,7 +190,7 @@ export function LibraryDialog() {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md p-0" dir={undefined}>
+      <DialogContent className="max-w-md p-0" dir={undefined} aria-describedby={undefined}>
         <DialogHeader className="border-b px-5 pb-3 pt-5">
           <DialogTitle className="flex items-center gap-2 font-scholarly">
             <BookMarked className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400" aria-hidden />

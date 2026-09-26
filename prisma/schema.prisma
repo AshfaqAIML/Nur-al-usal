@@ -407,6 +407,8 @@ model Answer {
   misconceptionNote String?
   practicalInfo     String?
   sources           String? // JSON
+  answerUr          String? // JSON {detailedAnswer,hanafiPosition,otherViews,commonObjection,scholarlyResponse,disputed,practicalInfo}
+  answerAr          String? // JSON {same keys as answerUr}
   status            String     @default("AI_ASSISTED")
   revision          Int        @default(1)
   aiGenerated       Boolean    @default(true)

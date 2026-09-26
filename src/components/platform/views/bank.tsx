@@ -554,7 +554,7 @@ function BankDetail({ slug }: { slug: string }) {
           {answer.hanafiPosition && (
             <section className="rounded-xl border bg-card p-5" aria-labelledby="bank-position">
               <h2 id="bank-position" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{t("bankHanafiPosition")}</h2>
-              <p dir="auto" className="mt-2 font-scholarly text-[15px] leading-relaxed">{answer.hanafiPosition}</p>
+              <p dir="auto" className="mt-2 font-scholarly text-[15px] leading-relaxed">{loc.depth(answer, "hanafiPosition")}</p>
             </section>
           )}
 
@@ -562,7 +562,7 @@ function BankDetail({ slug }: { slug: string }) {
           {answer.detailedAnswer && (
             <section className="rounded-xl border bg-card p-5" aria-labelledby="bank-detail">
               <h2 id="bank-detail" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{t("bankExplanation")}</h2>
-              <p dir="auto" className="mt-2 text-sm leading-relaxed text-foreground/90" style={{ textWrap: "pretty" }}>{answer.detailedAnswer}</p>
+              <p dir="auto" className="mt-2 text-sm leading-relaxed text-foreground/90" style={{ textWrap: "pretty" }}>{loc.depth(answer, "detailedAnswer")}</p>
             </section>
           )}
 
@@ -614,7 +614,7 @@ function BankDetail({ slug }: { slug: string }) {
               <h2 id="bank-disputed" className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-yellow-800 dark:text-yellow-300">
                 <Scale className="h-3.5 w-3.5" aria-hidden /> {t("bankWhereDisagreement")}
               </h2>
-              <p dir="auto" className="mt-2 text-sm leading-relaxed">{answer.disputed}</p>
+              <p dir="auto" className="mt-2 text-sm leading-relaxed">{loc.depth(answer, "disputed")}</p>
             </section>
           )}
 
@@ -626,7 +626,7 @@ function BankDetail({ slug }: { slug: string }) {
                   <h2 id="bank-objection" className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     <MessagesSquare className="h-3.5 w-3.5" aria-hidden /> {t("bankCommonObjection")}
                   </h2>
-                  <p dir="auto" className="mt-2 text-sm leading-relaxed">{answer.commonObjection}</p>
+                  <p dir="auto" className="mt-2 text-sm leading-relaxed">{loc.depth(answer, "commonObjection")}</p>
                 </section>
               )}
               {answer.scholarlyResponse && (
@@ -634,7 +634,7 @@ function BankDetail({ slug }: { slug: string }) {
                   <h2 id="bank-response" className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     <BookOpen className="h-3.5 w-3.5" aria-hidden /> {t("bankScholarlyResponse")}
                   </h2>
-                  <p dir="auto" className="mt-2 text-sm leading-relaxed">{answer.scholarlyResponse}</p>
+                  <p dir="auto" className="mt-2 text-sm leading-relaxed">{loc.depth(answer, "scholarlyResponse")}</p>
                 </section>
               )}
             </div>
@@ -644,7 +644,7 @@ function BankDetail({ slug }: { slug: string }) {
           {answer.otherViews && (
             <section className="rounded-xl border bg-card p-5" aria-labelledby="bank-views">
               <h2 id="bank-views" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{t("bankOtherViews")}</h2>
-              <p dir="auto" className="mt-2 text-sm leading-relaxed">{answer.otherViews}</p>
+              <p dir="auto" className="mt-2 text-sm leading-relaxed">{loc.depth(answer, "otherViews")}</p>
             </section>
           )}
 
@@ -662,7 +662,7 @@ function BankDetail({ slug }: { slug: string }) {
               <h2 id="bank-practical" className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 <TriangleAlert className="h-3.5 w-3.5" aria-hidden /> {t("bankPractical")}
               </h2>
-              <p dir="auto" className="mt-2 text-sm leading-relaxed">{answer.practicalInfo}</p>
+              <p dir="auto" className="mt-2 text-sm leading-relaxed">{loc.depth(answer, "practicalInfo")}</p>
               {question.isSensitive && (
                 <p className="mt-2 flex items-start gap-1.5 text-xs font-medium text-amber-800 dark:text-amber-300">
                   <TriangleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />

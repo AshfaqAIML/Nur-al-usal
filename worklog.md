@@ -622,3 +622,24 @@ Work Log:
 Stage Summary:
 - The 241-question library is now COMPLETE per the original content contract: every question carries shortAnswer + detailedAnswer + sources + variants + related (+ tri-lingual question/shortAnswer), contested topics carry both-sides treatment, 589 citations with honest verification statuses and zero fabrication risks found by audit.
 - Remaining follow-up candidates: Urdu/Arabic translation of the new detailedAnswer/position fields (EN originals render with fallback); DialogContent aria-describedby a11y nit; expanding counts toward the aspirational ~40-category targets if ever desired.
+
+---
+Task ID: 18 (depth-field localization round)
+Agent: main (Z.ai Code, resume round)
+Task: Urdu/Arabic localization of the answer depth fields (detailedAnswer, hanafiPosition, otherViews, objection/response, practical, disputed-note) for the 241-question library.
+
+Work Log:
+- SUBAGENT INFRA UNRELIABLE this session: 5-parallel Task launches → all "context deadline exceeded"; 3-parallel retry → "stopped by user"; background processes get reaped. PIVOTED to a self-managed LLM pipeline: scripts/gen-depth-translations.ts — resumable, checkpointed (prisma/content/translations-depth.json), foreground chunk runs (429 rate limits handled with 20s backoff; ~8-15 questions per 7-min chunk).
+- SCHEMA: Answer.answerUr/answerAr (String? JSON maps keyed by depth field) — validate + db:push OK.
+- SEEDER: mergeDepthTranslations() merges sidecar into bank questions (in-file translations take precedence); writes answerUr/answerAr JSON columns; search docs now include depth translations in bodyUr/bodyAr AND fixed pre-existing q.questionUr/q.questionAr → q.textUr/q.textAr bug from Task 16.
+- API: /api/bank/detail returns depthTranslations {Ur, Ar} parsed.
+- FRONTEND: useLoc gains depth() helper (per-section EN fallback); bank detail view renders localized HANAFI POSITION / EXPLANATION / WHERE THE DISAGREEMENT LIES / objection-response / practical sections.
+- CONTRACT: BankQuestion gains 14 optional depth-translation fields (explicit, ESLint-safe).
+- A11Y: fixed pre-existing "Missing Description/aria-describedby" warning (library.tsx My Library dialog).
+- TRANSLATION PROGRESS: 22/241 questions fully Ur+Ar depth-translated at round end (quality spot-checked: proper علمی اردو + fuṣḥā register, fairness mirrored, no Latin runs, honorifics preserved). Pipeline continues autonomously via cron job 415110 (15-min webDevReview with mandatory pipeline step).
+- QA (agent-browser): taqlid-what-is Urdu → EXPLANATION renders Urdu ✓; Arabic mode → الشرح Arabic ✓; untranslated question in Urdu → graceful EN fallback ✓; dev server restarted to pick up new Prisma client (stale-client pattern again); re-seed OK (241 q / 605 citations / depth merged 22).
+- NOTES: dev server must be started via `setsid nohup bash .zscripts/dev.sh` (plain nohup bun run dev gets reaped).
+
+Stage Summary:
+- Full localization plumbing for depth content is LIVE end-to-end (sidecar → seed → DB → API → UI with per-section fallback); the remaining ~219 questions fill in progressively through the checkpointed pipeline driven by cron rounds — no further code work required for completion.
+- Residual risks: z-ai API 429 quota throttles chunk throughput; if a cron session skips the pipeline step, coverage stalls (round report should state current X/241).

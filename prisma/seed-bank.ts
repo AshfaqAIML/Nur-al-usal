@@ -14,9 +14,35 @@ import { familyFinanceQuestions } from "./content/bank-family-finance";
 import { theologyQuestions } from "./content/bank-theology";
 import { madhabMiscQuestions } from "./content/bank-madhab-misc";
 import type { BankQuestion } from "./content/types";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
 const j = (v: unknown) => JSON.stringify(v);
+
+// ─── Depth translations sidecar (from scripts/gen-depth-translations.ts) ───
+// Merges translated depth fields (Ur/Ar) into the bank questions before insert.
+const DEPTH_KEYS = ["detailedAnswer", "hanafiPosition", "otherViews", "commonObjection", "scholarlyResponse", "practicalInfo", "disputedNote"] as const;
+function loadDepthTranslations(): Record<string, Record<string, string>> {
+  try { return JSON.parse(fs.readFileSync(path.resolve("prisma/content/translations-depth.json"), "utf8")); } catch { return {}; }
+}
+function mergeDepthTranslations(qs: BankQuestion[]): void {
+  const side = loadDepthTranslations();
+  let merged = 0;
+  for (const q of qs) {
+    const t = side[q.slug];
+    if (!t) continue;
+    let touched = false;
+    for (const key of DEPTH_KEYS) {
+      for (const lang of ["Ur", "Ar"] as const) {
+        const v = t[`${key}${lang}`];
+        if (v && String(v).length > 20 && !(q as any)[`${key}${lang}`]) { (q as any)[`${key}${lang}`] = v; touched = true; }
+      }
+    }
+    if (touched) merged += 1;
+  }
+  console.log(`Depth translations merged into ${merged} questions.`);
+}
 
 const ALL_QUESTIONS: BankQuestion[] = [
   ...exemplarQuestions,
@@ -26,6 +52,7 @@ const ALL_QUESTIONS: BankQuestion[] = [
   ...theologyQuestions,
   ...madhabMiscQuestions,
 ];
+mergeDepthTranslations(ALL_QUESTIONS);
 
 // ─── Bank-owned categories (existing 4 categories are shared, never deleted) ───
 interface CatDef {
@@ -243,6 +270,15 @@ async function main() {
       },
     });
 
+    const depthUr: Record<string, string> = {};
+    const depthAr: Record<string, string> = {};
+    for (const key of DEPTH_KEYS) {
+      const ur = (q as any)[`${key}Ur`] as string | undefined;
+      const ar = (q as any)[`${key}Ar`] as string | undefined;
+      if (ur && ur.length > 20) depthUr[key] = ur;
+      if (ar && ar.length > 20) depthAr[key] = ar;
+    }
+
     await prisma.answer.create({
       data: {
         questionId: question.id,
@@ -257,6 +293,8 @@ async function main() {
         practicalInfo: q.practicalInfo ?? null,
         fatawaRazvia: q.fatawaRazvia ?? null,
         sources: j(q.sources),
+        answerUr: Object.keys(depthUr).length ? j(depthUr) : null,
+        answerAr: Object.keys(depthAr).length ? j(depthAr) : null,
         status: "PUBLISHED",
         revision: 1,
         aiGenerated: false, // curated library content, human-authored with honest citation statuses
@@ -295,14 +333,16 @@ async function main() {
   const docs = bankQuestions.map((q) => {
     const variants = ((): string[] => { try { return JSON.parse(q.variantWordings ?? "[]"); } catch { return []; } })();
     const ans = q.answers[0];
+    const depthUr = ((): string[] => { try { return Object.values(JSON.parse(ans?.answerUr ?? "{}")); } catch { return []; } })();
+    const depthAr = ((): string[] => { try { return Object.values(JSON.parse(ans?.answerAr ?? "{}")); } catch { return []; } })();
     return {
       entityType: "QUESTION", entityId: q.id,
       title: q.text,
       titleUr: q.textUr ?? null,
       titleAr: q.textAr ?? null,
-      body: `${q.shortAnswer ?? ""} ${q.shortAnswerUr ?? ""} ${q.shortAnswerAr ?? ""} ${ans?.detailedAnswer ?? ""} ${ans?.hanafiPosition ?? ""} ${variants.join(" ")} ${q.subcategory ?? ""} ${q.questionUr ?? ""} ${q.questionAr ?? ""}`.trim(),
-      bodyUr: q.shortAnswerUr ?? null,
-      bodyAr: q.shortAnswerAr ?? null,
+      body: `${q.shortAnswer ?? ""} ${q.shortAnswerUr ?? ""} ${q.shortAnswerAr ?? ""} ${ans?.detailedAnswer ?? ""} ${ans?.hanafiPosition ?? ""} ${variants.join(" ")} ${q.subcategory ?? ""} ${q.textUr ?? ""} ${q.textAr ?? ""}`.trim(),
+      bodyUr: [q.shortAnswerUr ?? "", ...depthUr].join(" ").trim() || null,
+      bodyAr: [q.shortAnswerAr ?? "", ...depthAr].join(" ").trim() || null,
       route: `bank/${q.slug}`,
       weight: q.featured ? 1.5 : 1.3,
     };

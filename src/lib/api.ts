@@ -153,12 +153,17 @@ export interface BankCitation {
   quote: string | null; translation: string | null; verificationStatus: string;
   book: { slug: string; titleEn: string } | null;
 }
+export interface BankDepthTranslations {
+  detailedAnswer?: string; hanafiPosition?: string; otherViews?: string;
+  commonObjection?: string; scholarlyResponse?: string; practicalInfo?: string; disputedNote?: string;
+}
 export interface BankAnswerDetail {
   id: string; directAnswer: string; detailedAnswer: string | null; hanafiPosition: string | null;
   aqeedahOrFiqh: string | null; otherViews: string | null; commonObjection: string | null;
   scholarlyResponse: string | null; disputed: string | null; practicalInfo: string | null;
   fatawaRazvia: string | null; sources: string | null; status: string; aiGenerated: boolean;
   helpfulUp: number; helpfulDown: number; citations: BankCitation[];
+  depthTranslations?: { Ur: BankDepthTranslations | null; Ar: BankDepthTranslations | null } | null;
 }
 export interface BankRelated {
   slug: string; text: string; textUr: string | null; textAr: string | null; difficulty: string | null; clusterTitle: string | null;

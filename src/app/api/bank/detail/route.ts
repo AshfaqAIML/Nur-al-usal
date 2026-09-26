@@ -76,6 +76,10 @@ export async function GET(req: NextRequest) {
           practicalInfo: answer.practicalInfo, fatawaRazvia: answer.fatawaRazvia,
           sources: answer.sources, status: answer.status, aiGenerated: answer.aiGenerated,
           helpfulUp: answer.helpfulUp, helpfulDown: answer.helpfulDown,
+          depthTranslations: {
+            Ur: (() => { try { return JSON.parse(answer.answerUr ?? "null"); } catch { return null; } })(),
+            Ar: (() => { try { return JSON.parse(answer.answerAr ?? "null"); } catch { return null; } })(),
+          },
           citations: citations.map((c) => ({
             id: c.id, sourceType: c.sourceType, volume: c.volume, page: c.page, chapter: c.chapter,
             quote: c.quote, translation: c.translation, verificationStatus: c.verificationStatus,

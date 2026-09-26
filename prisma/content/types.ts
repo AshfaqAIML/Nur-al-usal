@@ -89,4 +89,23 @@ export interface BankQuestion {
   cluster?: string;
   /** Search intent classification. */
   intent?: SearchIntent;
+  /* ── Depth-field translations (progressive; merged from the sidecar at seed time) ──
+   * Same register rules as questionUr/questionAr/shortAnswerUr/shortAnswerAr. The
+   * seeder merges prisma/content/translations-depth.json into these fields, then
+   * stores them in Answer.answerUr / Answer.answerAr JSON columns. The UI falls
+   * back to English per-section when a translation is missing. */
+  detailedAnswerUr?: string;
+  detailedAnswerAr?: string;
+  hanafiPositionUr?: string;
+  hanafiPositionAr?: string;
+  otherViewsUr?: string;
+  otherViewsAr?: string;
+  commonObjectionUr?: string;
+  commonObjectionAr?: string;
+  scholarlyResponseUr?: string;
+  scholarlyResponseAr?: string;
+  practicalInfoUr?: string;
+  practicalInfoAr?: string;
+  disputedNoteUr?: string;
+  disputedNoteAr?: string;
 }
